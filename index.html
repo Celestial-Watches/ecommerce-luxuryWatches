@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Celestial Watches - Exclusivity in Every Tick</title>
 
-    <!-- ============= FAVICON =============  -->
-    <link rel="stylesheet" href="./image/favicon.ico" />
-
     <!-- ============= IONICONS =============  -->
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
 
     <!-- ============= CSS =============  -->
-    <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/deskView.css"/>
 
     <!-- ============= FONTS=============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +21,60 @@
 
   </head>
   <body>
+
     
+    <!-- ============= Newsletter=============  -->
+
+    <div class="overlay" data-overlay></div>
+
+  <!-- ============= MODAL =============  -->
+
+  <div class="modal" data-modal>
+
+    <div class="modal-close-overlay" data-modal-overlay></div>
+
+    <div class="modal-content">
+
+      <button class="modal-close-btn" data-modal-close>
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <div class="newsletter-img">
+        <img src="/image/newsletter.jpg" alt="subscribe newsletter" width="400" height="450">
+      </div>
+
+      <div class="newsletter">
+
+        <form action="#">
+
+          <div class="newsletter-header">
+
+            <h3 class="newsletter-title">Subscribe Newsletter.</h3>
+
+            <p class="newsletter-desc">
+              Subscribe the <b>Celestial Watches </b> to get latest products and discount update.
+            </p>
+
+          </div>
+
+          <input type="email" name="email" class="email-field" placeholder="Email Address" required>
+
+          <button type="submit" class="btn-newsletter">Subscribe</button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================================================================ -->
+
+
+
     <!-- ============= HEADER =============  -->
     <header>
 
@@ -111,9 +160,29 @@
   
           <div class="header-user-actions">
   
-            <button class="action-btn">
+            <button class="action-btn profile-btn">
               <ion-icon name="person-outline"></ion-icon>
             </button>
+
+            <!-- Dropdown for profile -->
+
+
+
+            <!-- <ul class="profile-category">
+              <li class="profile-item"><a href="#" class="profile-link">View Profile</a></li>
+              <li class="profile-item"><a href="#" class="profile-link">Orders</a></li>
+              <li class="profile-item"><a href="#" class="profile-link">Account Settings</a></li>
+              <li class="profile-item"><a href="#" class="profile-link">Subscription Management</a></li>
+              <hr>
+              <li class="profile-item"><a href="#" class="profile-link">Help/Support</a></li>
+              <li class="profile-item"><a href="#" class="profile-link">Logout</a></li>
+            </ul> -->
+
+            
+
+
+            <!-- =========================== -->
+            
   
             <button class="action-btn">
               <ion-icon name="heart-outline"></ion-icon>
@@ -174,7 +243,7 @@
   
                   <li class="panel-list-item">
                     <a href="#">
-                      <img src="./image/electronics-banner-2.jpg" alt="headphone collection" width="250"
+                      <img src="/image/electronics-banner-2.jpg" alt="headphone collection" width="250"
                         height="119">
                     </a>
                   </li>
@@ -209,7 +278,7 @@
   
                   <li class="panel-list-item">
                     <a href="#">
-                      <img src="./image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                      <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
                     </a>
                   </li>
   
@@ -243,7 +312,7 @@
   
                   <li class="panel-list-item">
                     <a href="#">
-                      <img src="./image/womens-banner.jpg" alt="women's fashion" width="250" height="119">
+                      <img src="/image/womens-banner.jpg" alt="women's fashion" width="250" height="119">
                     </a>
                   </li>
   
@@ -277,7 +346,7 @@
   
                   <li class="panel-list-item">
                     <a href="#">
-                      <img src="./image/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119">
+                      <img src="/image/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119">
                     </a>
                   </li>
   
@@ -357,10 +426,19 @@
         </div>
   
       </nav>
+
+
   
+      <!-- /*-----------------------------------*\
+            MOBILE NAV
+          \*-----------------------------------*/
+   -->
+
+
+
       <div class="mobile-bottom-navigation">
   
-        <button class="action-btn" data-mobile-menu-open-btn>
+        <button class="action-btn has-menu-btn" data-mobile-menu-open-btn>
           <ion-icon name="menu-outline"></ion-icon>
         </button>
   
@@ -379,9 +457,9 @@
   
           <span class="count">0</span>
         </button>
-  
-        <button class="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="grid-outline"></ion-icon>
+        
+        <button class="action-btn profile-btn" data-mobile-menu-open-btn>
+          <ion-icon name="person-outline"></ion-icon>
         </button>
   
       </div>
@@ -422,21 +500,31 @@
             <ul class="submenu-category-list" data-accordion>
   
               <li class="submenu-category">
-                <a href="#" class="submenu-title">Shirt</a>
+                <a href="#" class="submenu-title">Formal</a>
               </li>
   
               <li class="submenu-category">
-                <a href="#" class="submenu-title">Shorts & Jeans</a>
+                <a href="#" class="submenu-title">Casual</a>
               </li>
   
               <li class="submenu-category">
-                <a href="#" class="submenu-title">Safety Shoes</a>
+                <a href="#" class="submenu-title">Sports</a>
               </li>
   
               <li class="submenu-category">
-                <a href="#" class="submenu-title">Wallet</a>
+                <a href="#" class="submenu-title">Jacket</a>
               </li>
-  
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Sunglasses</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">
+                  <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                </a>
+              </li>
+
             </ul>
   
           </li>
