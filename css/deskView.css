@@ -646,6 +646,21 @@
 /***************************************************
  * *** LOGIN PAGE CSS END *** *
  ***************************************************/
+
+ .alert {
+  margin-bottom: 20px;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
   
   
   

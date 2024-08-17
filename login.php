@@ -1,4 +1,5 @@
 <?php
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -644,6 +645,27 @@
 
         <div class="login-container">
             <div class="login-box">
+              <?php 
+                if (isset($_POST["login"])) {
+                  $username = $_POST["username"];
+                  $password = $_POST["password"];
+                  require_once "conn.php";
+                  $sql = "SELECT * FROM users WHERE username = '$username'";
+                  $result = mysqli_query($conn, $sql);
+                  $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                  if($user){
+                    if(password_verify($password, $user["password"])){
+                     header("Location: index.php");
+                     die();
+                    }
+                    else{
+                      echo "<div class='alert alert-danger'>Password does not match</div>";
+                    }
+                  } else {
+                    echo "<div class='alert alert-danger'>Username does not match</div>";
+                  }
+                }
+              ?>
                 <h1>Welcome to Celestial Watches</h1>
                 <form action="index.php" method="post">
                     <div class="input-group">
@@ -654,7 +676,7 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="login-button">Login</button>
+                    <button type="submit" class="login-button" name="login">Login</button>
                     <div class="login-footer">
                         <a href="#">Forgot Password?</a>
                         <a href="signin.php">Create Account</a>

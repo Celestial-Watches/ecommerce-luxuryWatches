@@ -1,4 +1,6 @@
 <?php
+session_start();
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -636,28 +638,102 @@
 
         <div class="login-container">
             <div class="login-box signin-box">
+            <?php
+                if (isset($_POST["submit"])) {
+                    $username = $_POST["username"];
+                    $email = $_POST["email"];
+                    $password = $_POST["password"];
+                    $confirmPassword = $_POST["confirm_password"];
+
+                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+                    $_SESSION['errors'] = array();
+
+                    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
+                        array_push($_SESSION['errors'], "All fields are required");
+                    }
+
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        array_push($_SESSION['errors'], "Email is not valid");
+                    }
+
+                    if (strlen($password) < 8) {
+                        array_push($_SESSION['errors'], "Password must be at least 8 characters long");
+                    }
+
+                    if ($password !== $confirmPassword) {
+                        array_push($_SESSION['errors'], "Passwords do not match");
+                    }
+
+                    require_once "conn.php";
+
+                    $sql = "SELECT * FROM users WHERE email = ?";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql)) {
+                        die("MySQL statement preparation error: " . mysqli_error($conn));
+                    }
+
+                    mysqli_stmt_bind_param($stmt, "s", $email);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    $rowCount = mysqli_num_rows($result);
+
+                    if ($rowCount > 0) {
+                        array_push($_SESSION['errors'], "Email already exists");
+                    }
+
+                    if (count($_SESSION['errors']) > 0) {
+                        header("Location: signin.php"); 
+                        exit();
+                    } else {
+                        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+                        $stmt = mysqli_stmt_init($conn);
+                        if (mysqli_stmt_prepare($stmt, $sql)) {
+                            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $passwordHash);
+                            mysqli_stmt_execute($stmt);
+                            $_SESSION['success'] = "You are registered successfully";
+                            header("Location: index.php"); 
+                            exit();
+                        } else {
+                            die("MySQL statement preparation error: " . mysqli_error($conn));
+                        }
+                    }
+                }
+
+                if (isset($_SESSION['errors']) && count($_SESSION['errors']) > 0) {
+                    foreach ($_SESSION['errors'] as $error) {
+                        echo "<div class='alert alert-danger'>$error</div>";
+                    }
+                    unset($_SESSION['errors']);
+                }
+
+                if (isset($_SESSION['success'])) {
+                    echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+                    unset($_SESSION['success']);
+                }                
+                ?>
+
                 <h1>Welcome to Celestial Watches</h1>
-                <form action="index.php" method="post">
+                <form action="signin.php" method="post">
                     <div class="input-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username">
                     </div>
                     <div class="input-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email">
                     </div>
                     <div class="input-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password">
                     </div>
                     <div class="input-group">
-                        <label for="password">Confirm Password</label>
-                        <input type="password" id="password" name="password" required>
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password">
                     </div>
-                    <button type="submit" class="login-button">Login</button>
+                    <button type="submit" class="login-button" name="submit">Create Account</button>
                     <div class="login-footer">
                         <a href="login.php">Already have a account? Login</a>
-                        <a href="signin.php">Create Account</a>
                     </div>
                 </form>
             </div>
