@@ -1,3 +1,17 @@
+/* ==========================================================================
+   File: deskView.css
+   Description: Primary stylesheet for the website.
+   Author: Ruchit Doshi
+   Date: 12-Aug-2024
+   Version: 1.0
+   ========================================================================== */
+
+
+ /***************************************************
+ * *** Important: Do Not Remove This Section! *** *
+ ***************************************************/
+
+
 /* CSS VARIABLES */
 
 :root {
@@ -98,7 +112,7 @@
   
   input::placeholder { font: inherit; }
   
-  body { background: var(--white); }
+  body { background: whitesmoke; }
   
   /**
    * scrollbar style
@@ -206,7 +220,7 @@
   visibility: hidden;
   pointer-events: none;
   z-index: 10;
-  animation: popup 1s ease-in-out 5s forwards;
+  animation: popup 1s ease-in-out 15s forwards;
 }
 
 @keyframes popup {
@@ -537,6 +551,101 @@
     border-radius: var(--border-radius-md);
   }
   
+  /***************************************************
+ * *** LOGIN PAGE CSS START *** *
+ ***************************************************/
+
+ .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.login-box {
+  background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.login-box h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  text-align: center;
+  color: #333;
+  font-weight: 700;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.input-group input:focus {
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: #555;
+}
+
+.login-footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-footer a {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+  color: #0056b3;
+}
+
+/***************************************************
+ * *** LOGIN PAGE CSS END *** *
+ ***************************************************/
   
   
   
@@ -544,13 +653,25 @@
     #RESPONSIVE
   \*-----------------------------------*/
   
+  /**
+   * responsive login page
+   */
+
+   @media (min-width: 320px) and (max-width: 570px) {
+    .login-container, .login-box {
+      padding: 10px;
+    }
+
+    .signin-box{
+      padding: 30px;
+    }
+   }
   
   /**
    * responsive larger than 480px screen
    */
   
   @media (min-width: 480px) {
-  
     /**
      * #CUSTOM PROPERTY
      */
@@ -571,12 +692,6 @@
      * #HEADER
      */
   
-    .header-top {
-      display: block;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--cultured);
-    }
-  
     .header-social-container,
     .header-top-actions { display: none; }
   
@@ -594,6 +709,7 @@
       border-top-left-radius: var(--border-radius-md);
       border-top-right-radius: var(--border-radius-md);
     }
+
   }  
   
 
@@ -714,7 +830,17 @@
   
     .header-main .container { gap: 80px; }
   
-    .header-search-container { flex-grow: 1; }
+    .header-search-container { flex-grow: 0.6; }
+
+    /**
+     * #LOGIN page 
+     */
+
+     .login-box{
+      width: 50%;
+      padding: 20px;
+     }
+
   }
   
   
@@ -754,6 +880,10 @@
      * #HEADER 
      */
   
+    .header-top {
+      display: block;
+     }
+     
     .header-social-container {
       display: flex;
       align-items: center;
@@ -930,8 +1060,18 @@
     .dropdown-list .dropdown-item a:hover { color: var(--salmon-pink); }
   
     .mobile-bottom-navigation { display: none; }
+
+    /**
+     * #LOGIN page 
+     */
+
+     .login-box{
+      width: 50%;
+     }
+  
    }
   
+
    
   
   /**
@@ -944,7 +1084,7 @@
      * #REUSED STYLE 
      */
   
-    .container { max-width: 1200px; }
+    .container { max-width: 1370px; }
   
   
   
@@ -953,6 +1093,16 @@
      */
   
     .desktop-menu-category-list { gap: 45px; }
+
+    /**
+     * #LOGIN page 
+     */
+
+     .login-box{
+      width: 25%;
+      
+     }
   }
   
-  
+
+
