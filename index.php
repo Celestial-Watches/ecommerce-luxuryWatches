@@ -1,7 +1,38 @@
 <?php
- session_start();
- 
+ date_default_timezone_set('Asia/Kolkata');
+session_start();
+
+// Set a session timeout period in seconds (e.g., 1800 seconds = 30 minutes)
+$sessionTimeout = 1800;
+
+// Regenerate session ID periodically to prevent session fixation/hijacking
+if (!isset($_SESSION['CREATED'])) {
+    $_SESSION['CREATED'] = time();
+} else if (time() - $_SESSION['CREATED'] > 600) {
+    // Regenerate session ID every 10 minutes
+    session_regenerate_id(true);
+    $_SESSION['CREATED'] = time();
+}
+
+// Check if the user is logged in
+if (isset($_SESSION['user'])) {
+    // Session expiration handling
+    if (isset($_SESSION['LAST_ACTIVITY'])) {
+        $sessionDuration = time() - $_SESSION['LAST_ACTIVITY'];
+        if ($sessionDuration > $sessionTimeout) {
+            // Session expired: unset and destroy session
+            session_unset();
+            session_destroy();
+            header("Location: login.php?timeout=true"); // Redirect to login page with timeout message
+            exit();
+        }
+    }
+
+    // Update last activity time stamp to extend the session
+    $_SESSION['LAST_ACTIVITY'] = time();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -138,9 +169,13 @@
   
             </select>
 
-            <span><a href="login.php">Log In</a></span>
-            <span>/</span>
-            <span><a href="signin.php">Sign Up</a></span>
+            <?php if (isset($_SESSION['user'])): ?>
+                <span><a href="logout.php">Logout</a></span>
+            <?php else: ?>
+                <span><a href="login.php">Log In</a></span>
+                <span>/</span>
+                <span><a href="signin.php">Sign Up</a></span>
+            <?php endif; ?>
   
           </div>
   

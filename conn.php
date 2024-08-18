@@ -1,15 +1,16 @@
 <?php
+date_default_timezone_set('Asia/Kolkata');
     $servername = "localhost";
-    $dbUser = "root";
-    $dbPassword = "";
+    $username = "root";
+    $password = ""; // Your database password
     $dbname = "celestial_watches";
     
     // Create connection
-    $conn = new mysqli($servername, $dbUser, $dbPassword, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
     
     // Check connection
-    if (!$conn) {
-      die("Connection failed: ". mysqli_error($conn));
-    }
-    echo "Connected successfully";
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }     
+    $conn->query("SET time_zone = '+05:30';");  
 ?>

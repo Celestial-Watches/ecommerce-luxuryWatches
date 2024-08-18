@@ -84,3 +84,4 @@ console.log(modalCloseBtn);
 console.log(modalCloseOverlay);
 console.log(subscribeForm);
 console.log(modalCloseFunc);
+
