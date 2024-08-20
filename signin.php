@@ -76,9 +76,11 @@ if (isset($_POST["submit"])) {
             $_SESSION['email'] = $email; // Store email in session
             $_SESSION['phone'] = $phone; // Store phone in session
             $_SESSION['password'] = $passwordHash; // Store hashed password in session
+            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // Store user agent
+            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; // Store IP address
 
             // Debugging: Check if session variables are set
-            var_dump($_SESSION); // Check session data
+            // var_dump($_SESSION); // Check session data
 
             // Generate OTP
             $otp = rand(100000, 999999);
@@ -622,13 +624,19 @@ if (isset($_POST["submit"])) {
                     <a href="#" class="menu-title">Hot Offers</a>
                 </li>
 
-                <li class="menu-category">
-                    <a href="login.php" class="menu-title">Log In</a>
-                </li>
+                <?php if (isset($_SESSION['user'])): ?>
+                    <li class="menu-category">
+                        <a href="logout.php" class="menu-title">Logout</a>
+                    </li>
+            <?php else: ?>
+                    <li class="menu-category">
+                        <a href="login.php" class="menu-title">Log In</a>
+                    </li>
 
-                <li class="menu-category">
-                    <a href="signin.php" class="menu-title">Sign Up</a>
-                </li>
+                    <li class="menu-category">
+                        <a href="signin.php" class="menu-title">Sign Up</a>
+                    </li> 
+            <?php endif; ?>
 
             </ul>
 
@@ -737,23 +745,23 @@ if (isset($_POST["submit"])) {
             <form action="signin.php" method="post">
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username">
+                    <input type="text" id="username" name="username"  autocomplete="on">
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" autocomplete="on">
                 </div>
                 <div class="input-group">
                     <label for="phone">Phone Number (with country code)</label>
-                    <input type="text" id="phone" name="phone" placeholder="+919876543210">
+                    <input type="text" id="phone" name="phone" placeholder="+919876543210" autocomplete="on">
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
+                    <input type="password" id="password" name="password" autocomplete="on">
                 </div>
                 <div class="input-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password">
+                    <input type="password" id="confirm_password" name="confirm_password" autocomplete="on">
                 </div>
                 <button type="submit" class="login-button" name="submit">Create Account</button>
                 <div class="login-footer">
@@ -763,8 +771,45 @@ if (isset($_POST["submit"])) {
         </div>
     </div>
 
+    
+    <script>
+        // ============================= NAVIGATION OPEN =============================
+
+
+    const actionBtns = document.querySelectorAll('.has-menu-btn'); // This is for the side menu for navigation
+    const menuCloseBtns = document.querySelectorAll('.menu-close-btn'); // This is for side menu closing button
+    const accordionBtns = document.querySelectorAll('[data-accordion-btn]'); // This is for side menu dropdown button
+
+    actionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const mobileNavigationMenu = document.querySelector('.mobile-navigation-menu');
+        mobileNavigationMenu.classList.toggle('active');
+    });
+    });
+
+    menuCloseBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+        const mobileNavigationMenu = document.querySelector('.mobile-navigation-menu');
+        mobileNavigationMenu.classList.remove('active');
+        });
+    });
+
+    accordionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle('active');
+        btn.classList.toggle('active'); 
+    });
+    });
+
+// ============================= NAVIGATION CLOSE =============================
+
+console.log(actionBtns);
+console.log(menuCloseBtns);
+console.log(accordionBtns);
+    </script>
     <!-- ============= JS =============  -->
-    <script src="/js/script.js"></script>
+    <script src="/js/index.js"></script>
 
 </body>
 </html>

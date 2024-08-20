@@ -633,14 +633,20 @@ if (isset($_SESSION['user'])) {
           <li class="menu-category">
             <a href="#" class="menu-title">Hot Offers</a>
           </li>
-
-          <li class="menu-category">
+          <?php if (isset($_SESSION['user'])): ?>
+            <li class="menu-category">
+            <a href="logout.php" class="menu-title">Logout</a>
+          </li>
+            <?php else: ?>
+              <li class="menu-category">
             <a href="login.php" class="menu-title">Log In</a>
           </li>
 
           <li class="menu-category">
             <a href="signin.php" class="menu-title">Sign Up</a>
           </li> 
+            <?php endif; ?>
+          
   
         </ul>
   

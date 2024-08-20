@@ -5,18 +5,18 @@ $success_message = "";
 $registration_successful = false; // Initialize the variable
 
 // Check if session is valid
-// if (!isset($_SESSION['user_agent']) || !isset($_SESSION['ip_address'])) {
-//     session_unset();
-//     header("Location: signin.php");
-//     exit();
-// }
+if (!isset($_SESSION['user_agent']) || !isset($_SESSION['ip_address'])) {
+    session_destroy();
+    header("Location: signin.php");
+    exit();
+}
 
 // Validate user agent and IP address
-// if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] || $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-//     session_unset();
-//     header("Location: signin.php");
-//     exit();
-// }
+if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] || $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
+    session_destroy();
+    header("Location: signin.php");
+    exit();
+}
 
 // Check if OTP has expired
 $otp_expiry_time = $_SESSION['otp_expiry'] ?? 0;

@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Kolkata');
-session_start();
+session_start(); // Ensure session is started
+
 require_once "conn.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10,7 +11,16 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 $errors = [];
-$success_message = ""; 
+$success_message = "";
+$reset_link = "";
+
+// Initialize variables
+$otp_sent = false; // Initialize OTP sent flag
+
+// Check if a reset link is already stored in the session
+if (isset($_SESSION['reset_link'])) {
+    $reset_link = $_SESSION['reset_link']; // Retrieve the reset link from the session
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
@@ -64,9 +74,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $mail->Body    = "Click the following link to reset your password: <a href='http://localhost:3000/reset_password.php?token=" . urlencode($token) . "'>Reset Password</a>";
                             $mail->AltBody = "Click the following link to reset your password: http://localhost:3000/reset_password.php?token=" . urlencode($token);
 
-                            // Send the email
-                            $mail->send();
-                            $success_message = "Password reset instructions have been sent to your email.";
+                            // Check if OTP has already been sent
+                            if (!isset($_SESSION['otp_sent']) || $_SESSION['otp_sent'] !== true) {
+                                // Send the email
+                                if ($mail->send()) {
+                                    $success_message = "Password reset instructions have been sent to your email.";
+                                    // Generate the reset link
+                                    $reset_link = "http://localhost:3000/reset_password.php?token=" . urlencode($token);
+                                    $_SESSION['reset_link'] = $reset_link; // Store the reset link in the session
+                                    $_SESSION['otp_sent'] = true; // Set session variable to indicate OTP has been sent
+                                } else {
+                                    $errors[] = "Failed to send password reset email. Mailer Error: {$mail->ErrorInfo}";
+                                }
+                            } else {
+                                $success_message = "Password reset instructions have already been sent. Please check your email.";
+                            }
                         } catch (Exception $e) {
                             $errors[] = "Failed to send password reset email. Mailer Error: {$mail->ErrorInfo}";
                         }
@@ -120,6 +142,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a href="login.php">Back to Login</a>
                 </div>
             </form>
+            <?php if (!empty($reset_link)): ?>
+                <div class="reset-link">
+                    <p>Your reset link is: <a href="<?php echo htmlspecialchars($reset_link); ?>">Click here to reset your password</a></p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </body>
