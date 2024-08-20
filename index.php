@@ -2,6 +2,18 @@
  date_default_timezone_set('Asia/Kolkata');
 session_start();
 
+// Set session cookie parameters (if not set in login.php)
+if (session_status() === PHP_SESSION_NONE) {
+  session_set_cookie_params([
+      'lifetime' => 86400, // 1 day
+      'path' => '/',
+      'domain' => '',
+      'secure' => false,
+      'httponly' => true,
+      'samesite' => 'Lax'
+  ]);
+}
+
 // Set a session timeout period in seconds (e.g., 1800 seconds = 30 minutes)
 $sessionTimeout = 1800;
 

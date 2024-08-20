@@ -35,11 +35,11 @@ if (isset($_SESSION['user'])) {
     }
 
     // Redirect to the login page
-    header("Location: login.php");
+    header("Location: signin.php");
     exit();
 } else {
     // If the user is not logged in, just redirect to the login page
-    header("Location: login.php");
+    header("Location: signin.php");
     exit();
 }
 ?>

@@ -645,76 +645,111 @@ if (isset($_SESSION["user"])) {
   <div class="login-container">
     <div class="login-box signin-box">
     <?php
-    $errors = array();
 
-    if (isset($_POST["submit"])) {
-        $usernamee = $_POST["username"];
-        $email = $_POST["email"];
-        $phone = $_POST["phone"];
-        $password = $_POST["password"];
-        $passwordRepeat = $_POST["confirm_password"];
+$errors = []; // Initialize an array to hold error messages
+$username_error = ""; // Initialize variable for username error
+$password_errors = []; // Initialize array for password errors
+$registration_successful = false; // Initialize the variable
 
-        // Hash the password
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+if (isset($_POST["submit"])) {
+    $usernamee = $_POST["username"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $password = $_POST["password"];
+    $passwordRepeat = $_POST["confirm_password"];
 
-        // Validation
-        if (empty($usernamee) || empty($email) || empty($phone) || empty($password) || empty($passwordRepeat)) {
-            array_push($errors, "All fields are required");
+    // Hash the password
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    // Validation
+    if (empty($usernamee) || empty($email) || empty($phone) || empty($password) || empty($passwordRepeat)) {
+        array_push($errors, "All fields are required");
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Email is not valid");
+    }
+
+    // Check if phone number starts with a '+' and has at least 10 digits
+    if (!preg_match("/^\+\d{1,3}\d{10}$/", $phone)) {
+        array_push($errors, "Phone number must include country code and be at least 10 digits long (e.g., +919876543210)");
+    }
+    require_once "conn.php";
+    // Check for unique username
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (mysqli_stmt_prepare($stmt, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $usernamee);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+            $username_error = "Username already exists!";
         }
+    }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            array_push($errors, "Email is not valid");
-        }
+    // Validate password
+    if ($password !== $passwordRepeat) {
+        $password_errors[] = "Passwords do not match";
+    }
 
-        if (strlen($phone) !== 10 || !preg_match("/^\d{10}$/", $phone)) {
-            array_push($errors, "Phone number must contain exactly 10 digits");
-        }
+    // If no errors, insert the new user into the database
+    if (empty($errors) && empty($username_error) && empty($password_errors)) {
+        $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            mysqli_stmt_bind_param($stmt, "ssss", $usernamee, $email, $phone, $passwordHash);
+            if (mysqli_stmt_execute($stmt)) {
+                $registration_successful = true; // Set to true if registration is successful
+                $_SESSION['username'] = $usernamee; // Store username
+                $_SESSION['email'] = $email; // Store email
+                $_SESSION['phone'] = $phone; // Store phone number
+                $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // Store user agent
+                $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; // Store IP address
 
-        if (strlen($password) < 8 || !preg_match("/[A-Z]/", $password) || !preg_match("/[a-z]/", $password) || !preg_match("/[0-9]/", $password) || !preg_match("/[^\w]/", $password)) {
-            array_push($errors, "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character");
-        }
+                // Generate OTP
+                $otp = rand(100000, 999999); // Generate a random 6-digit OTP
+                $_SESSION['otp'] = $otp; // Store OTP in session
+                $_SESSION['otp_expiry'] = time() + 300; // Set OTP expiry time (5 minutes)
 
-        if ($password !== $passwordRepeat) {
-            array_push($errors, "Passwords do not match");
-        }
+                // Send OTP via email
+                require 'vendor/autoload.php'; // Ensure PHPMailer is included
+                $mail = new PHPMailer\PHPMailer\PHPMailer();
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'celestialwatches69@gmail.com'; // Your email
+                    $mail->Password   = 'xvmjnggsmsnkavzt'; // Your email password or App Password
+                    $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port       = 465;
 
-        require_once "conn.php";
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable error reporting
+                    // Recipients
+                    $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
+                    $mail->addAddress($email); // Use the email stored in the session
 
-        $sql = "SELECT * FROM users WHERE email = ?";
-        $stmt = mysqli_stmt_init($conn);
-        if (mysqli_stmt_prepare($stmt, $sql)) {
-            mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            if (mysqli_num_rows($result) > 0) {
-                array_push($errors, "Email already exists!");
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Your OTP Code';
+                    $mail->Body    = "Your OTP code is: <b>$otp</b>";
+                    $mail->AltBody = "Your OTP code is: $otp";
+
+                    // Send the email
+                    $mail->send();
+
+                    // Redirect to OTP verification page
+                    header("Location: verify_otp.php");
+                    exit();
+                } catch (Exception $e) {
+                    array_push($errors, "Failed to send OTP email. Mailer Error: {$mail->ErrorInfo}");
+                }
+            } else {
+                array_push($errors, "Something went wrong. Please try again later.");
             }
         } else {
             array_push($errors, "Database preparation failed: " . mysqli_error($conn));
         }
-
-        // If no errors, insert the user into the database
-        if (empty($errors)) {
-            $status = 'NO'; // Set default status for new users
-
-            $sql = "INSERT INTO users (username, email, phone, password, status) VALUES (?, ?, ?, ?, ?)";
-            if (mysqli_stmt_prepare($stmt, $sql)) {
-                mysqli_stmt_bind_param($stmt, "sssss", $usernamee, $email, $phone, $passwordHash, $status);
-                if (mysqli_stmt_execute($stmt)) {
-                    echo "<div class='alert alert-success'>Account created successfully. You can now log in.</div>";
-                    // Redirect to the login page after a short delay
-                    echo "<script>setTimeout(function() { window.location.href = 'login.php'; }, 2000);</script>";
-                    exit();
-                } else {
-                    array_push($errors, "Something went wrong. Please try again later.");
-                }
-            } else {
-                array_push($errors, "Database preparation failed: " . mysqli_error($conn));
-            }
-        }
     }
-    
+}
     ?>
       <h1>Welcome to Celestial Watches</h1>
       <?php
@@ -732,13 +767,19 @@ if (isset($_SESSION["user"])) {
           <label for="username">Username</label>
           <input type="text" id="username" name="username">
         </div>
+        <?php
+            // Display username error separately
+            if (!empty($username_error)) {
+              echo "<div class='alert alert-danger'>$username_error</div>";
+          }
+            ?>
         <div class="input-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email">
         </div>
         <div class="input-group">
           <label for="phone">Phone Number</label>
-          <input type="text" id="phone" name="phone" pattern="[0-9]{10}"> <br>
+          <input type="text" id="phone" name="phone"> <br>
           <?php
           // Display phone number errors here
           if (!empty($errors)) {
@@ -756,13 +797,11 @@ if (isset($_SESSION["user"])) {
         </div>
         <?php
         // Display password errors here
-        if (!empty($errors)) {
-          foreach ($errors as $error) {
-            if (strpos($error, "Password") !== false) {
+        if (!empty($password_errors)) {
+          foreach ($password_errors as $error) {
               echo "<div class='alert alert-danger'>$error</div>";
-            }
           }
-        }
+      }
         ?>
         <div class="input-group">
           <label for="confirm_password">Confirm Password</label>

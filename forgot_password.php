@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 $errors = [];
-$success_message = "";
+$success_message = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
@@ -40,36 +40,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     mysqli_stmt_bind_param($update_stmt, "sss", $token, $expiry, $email);
                     
                     if (mysqli_stmt_execute($update_stmt)) {
-                        // Update the reset link to use the correct port
-                        $reset_link = "http://localhost:3000/reset_password.php?token=" . urlencode($token);
-                        
-                        // Create a new PHPMailer instance
-                        $mail = new PHPMailer(true);
+                        // Prepare to send email using PHPMailer
+                        $mail = new PHPMailer(true); // Create a new PHPMailer instance
 
                         try {
                             // Server settings
-                            $mail->isSMTP();
-                            $mail->Host       = 'smtp.gmail.com';
-                            $mail->SMTPAuth   = true;
-                            $mail->Username   = 'celestialwatches69@gmail.com'; // Your Gmail address
-                            $mail->Password   = 'zhfrjslmmeghabiw'; // Use an App Password, not your regular password
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                            $mail->Port       = 587;
+                            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                            $mail->isSMTP();                                    // Set mailer to use SMTP
+                            $mail->Host       = 'smtp.gmail.com';               // Specify main and backup SMTP servers
+                            $mail->SMTPAuth   = true;                           // Enable SMTP authentication
+                            $mail->Username   = 'celestialwatches69@gmail.com'; // SMTP username
+                            $mail->Password   = 'xvmjnggsmsnkavzt';             // Your Gmail password or App Password
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Enable TLS encryption
+                            $mail->Port       = 465;                            // TCP port to connect to
 
                             // Recipients
-                            $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
-                            $mail->addAddress($email);
+                            $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches'); // Sender's email and name
+                            $mail->addAddress($email); // Add a recipient
 
                             // Content
-                            $mail->isHTML(true);
+                            $mail->isHTML(true); // Set email format to HTML
                             $mail->Subject = 'Password Reset Request';
-                            $mail->Body    = "Click the following link to reset your password: <a href='$reset_link'>Reset Password</a>";
+                            $mail->Body    = "Click the following link to reset your password: <a href='http://localhost:3000/reset_password.php?token=" . urlencode($token) . "'>Reset Password</a>";
+                            $mail->AltBody = "Click the following link to reset your password: http://localhost:3000/reset_password.php?token=" . urlencode($token);
 
+                            // Send the email
                             $mail->send();
                             $success_message = "Password reset instructions have been sent to your email.";
                         } catch (Exception $e) {
-                            $errors[] = "Failed to send password reset email. Error: {$mail->ErrorInfo}";
-                            error_log("PHPMailer Error: " . $mail->ErrorInfo); // Log the error for debugging
+                            $errors[] = "Failed to send password reset email. Mailer Error: {$mail->ErrorInfo}";
                         }
                     } else {
                         $errors[] = "Error updating token and expiry: " . mysqli_error($conn);
