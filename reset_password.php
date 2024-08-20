@@ -19,7 +19,7 @@ if (isset($_GET['token'])) {
         mysqli_stmt_bind_param($stmt, "s", $token);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-
+        
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
             

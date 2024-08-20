@@ -2,22 +2,21 @@
 session_start();
 $errors = [];
 $success_message = "";
+$registration_successful = false; // Initialize the variable
 
 // Check if session is valid
-if (!isset($_SESSION['user_agent']) || !isset($_SESSION['ip_address'])) {
-    // Session data is missing, destroy session
-    session_destroy();
-    header("Location: signin.php");
-    exit();
-}
+// if (!isset($_SESSION['user_agent']) || !isset($_SESSION['ip_address'])) {
+//     session_unset();
+//     header("Location: signin.php");
+//     exit();
+// }
 
 // Validate user agent and IP address
-if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] || $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // User agent or IP address has changed, destroy session
-    session_destroy();
-    header("Location: signin.php");
-    exit();
-}
+// if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] || $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
+//     session_unset();
+//     header("Location: signin.php");
+//     exit();
+// }
 
 // Check if OTP has expired
 $otp_expiry_time = $_SESSION['otp_expiry'] ?? 0;
@@ -39,30 +38,49 @@ if (isset($_POST['verify'])) {
             $passwordHash = $_SESSION['password']; // Get hashed password from the session
             $phone = $_SESSION['phone']; // Get phone number from the session
 
-            // Insert the new user into the database
-            $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
-            if ($stmt = mysqli_prepare($conn, $sql)) {
-                mysqli_stmt_bind_param($stmt, "ssss", $usernamee, $email, $phone, $passwordHash);
-                if (mysqli_stmt_execute($stmt)) {
-                    $success_message = "Account created successfully. You will be redirected to the login page shortly.";
-                    // Clear session data
-                    unset($_SESSION['otp']);
-                    unset($_SESSION['email']);
-                    unset($_SESSION['username']);
-                    unset($_SESSION['password']); // Clear the password from the session
-                    unset($_SESSION['phone']); // Clear the phone number from the session
-                    unset($_SESSION['otp_expiry']); // Clear the OTP expiry time from the session
+            // Check if the user already exists
+            $checkSql = "SELECT * FROM users WHERE email = ? OR username = ?";
+            if ($checkStmt = mysqli_prepare($conn, $checkSql)) {
+                mysqli_stmt_bind_param($checkStmt, "ss", $email, $usernamee);
+                mysqli_stmt_execute($checkStmt);
+                $result = mysqli_stmt_get_result($checkStmt);
+                
+                if (mysqli_num_rows($result) == 0) { // Only insert if user does not exist
+                    // Insert the new user into the database
+                    $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
+                    if ($stmt = mysqli_prepare($conn, $sql)) {
+                        mysqli_stmt_bind_param($stmt, "ssss", $usernamee, $email, $phone, $passwordHash);
+                        if (mysqli_stmt_execute($stmt)) {
+                            $registration_successful = true; // Set to true on successful registration
+
+                            // Clear session data
+                            unset($_SESSION['otp']);
+                            unset($_SESSION['email']);
+                            unset($_SESSION['username']);
+                            unset($_SESSION['password']); // Clear the password from the session
+                            unset($_SESSION['phone']); // Clear the phone number from the session
+                            unset($_SESSION['otp_expiry']); // Clear the OTP expiry time from the session
+
+                            // Set user session
+                            $_SESSION['user'] = $usernamee; // Set user session
+                            header("Location: index.php"); // Redirect to index.php
+                            exit();
+                        } else {
+                            $errors[] = "Something went wrong. Please try again later.";
+                        }
+                    } else {
+                        $errors[] = "Database preparation failed: " . mysqli_error($conn);
+                    }
                 } else {
-                    $errors[] = "Something went wrong. Please try again later.";
+                    $errors[] = "User already exists. Please log in.";
                 }
-            } else {
-                $errors[] = "Database preparation failed: " . mysqli_error($conn);
             }
         } else {
             $errors[] = "Invalid OTP. Please try again.";
         }
     }
 }
+
 
 // Handle Resend OTP
 if (isset($_POST['resend'])) {
@@ -80,13 +98,13 @@ if (isset($_POST['resend'])) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'your_email@gmail.com'; // Your email
-        $mail->Password   = 'your_password'; // Your email password or App Password
+        $mail->Username   = 'celestialwatches69@gmail.com'; // Your email
+        $mail->Password   = 'xvmjnggsmsnkavzt'; // Your email password or App Password
         $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
         // Recipients
-        $mail->setFrom('your_email@gmail.com', 'Celestial Watches');
+        $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
         $mail->addAddress($_SESSION['email']); // Use the email stored in the session
 
         // Content

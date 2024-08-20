@@ -1,5 +1,5 @@
 <?php
- date_default_timezone_set('Asia/Kolkata');
+date_default_timezone_set('Asia/Kolkata');
 session_start();
 
 // Set session cookie parameters (if not set in login.php)

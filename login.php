@@ -697,6 +697,8 @@ if (session_status() === PHP_SESSION_NONE) {
                           $_SESSION["user"] = $usernamee; // Store username in session
                           $_SESSION["LAST_ACTIVITY"] = time(); // Update last activity time
                           $_SESSION["CREATED"] = time(); // Track session creation time
+                          $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // Store user agent
+                          $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; // Store IP address
                           header("Location: index.php");
                           exit();
                       } else {
