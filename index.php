@@ -738,8 +738,6 @@ if (isset($_SESSION['user'])) {
     <!-- ============= MAIN =============  -->
     <main class="main"></main>
 
-    <!-- ============= HOME =============  -->
-    <section class="home"></section>
 
     <!-- ============= CATEGORIES =============  -->
     <section class="categories"></section>
