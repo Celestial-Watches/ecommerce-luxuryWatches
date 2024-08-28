@@ -42,9 +42,43 @@ if (isset($_GET['token'])) {
                     $update_sql = "UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?";
                     if ($update_stmt = mysqli_prepare($conn, $update_sql)) {
                         mysqli_stmt_bind_param($update_stmt, "si", $hashed_password, $user['id']);
-                        mysqli_stmt_execute($update_stmt);
-                        mysqli_stmt_close($update_stmt);
-                        $success_message = "Your password has been successfully reset. You can now <a href='login.php'>login</a> with your new password.";
+                        if (mysqli_stmt_execute($update_stmt)) {
+                            // Send confirmation email
+                            require 'vendor/autoload.php'; // Ensure PHPMailer is included
+                            $mail = new PHPMailer\PHPMailer\PHPMailer();
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                            $mail->SMTPAuth = true;
+                            $mail->Username = 'celestialwatches69@gmail.com'; // Your email
+                            $mail->Password = 'xvmjnggsmsnkavzt'; // Your email password or App Password
+                            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+                            $mail->Port = 465;
+
+                            // Recipients
+                            $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
+                            $mail->addAddress($user['email']); // Send to the user's email
+
+                            // Content
+                            $mail->isHTML(true);
+                            $mail->Subject = 'Password Reset Confirmation';
+                            $mail->Body = 'Your password has been successfully reset. You can now log in with your new password.';
+
+                            // Send email
+                            if (!$mail->send()) {
+                                $errors[] = "Failed to send confirmation email. Mailer Error: {$mail->ErrorInfo}";
+                            } else {
+                                $success_message = "Your password has been successfully reset. A confirmation email has been sent.";
+                                
+                                // Add redirection script
+                                echo "<script>
+                                        setTimeout(function() {
+                                            window.location.href = 'login.php';
+                                        }, 2000);
+                                      </script>";
+                            }
+                        } else {
+                            $errors[] = "Something went wrong while updating the password.";
+                        }
                     } else {
                         $errors[] = "Something went wrong. Please try again later.";
                     }

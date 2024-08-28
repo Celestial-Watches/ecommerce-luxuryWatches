@@ -3,7 +3,88 @@
 session_start();
 ob_start();
 
-// Set session cookie parameters (if not set in login.php)
+// Check for the username cookie before displaying the login form
+if (isset($_COOKIE['username'])) {
+    $_SESSION['user'] = $_COOKIE['username']; 
+    header("Location: index.php"); 
+    exit();
+}
+
+// Initialize login attempts if not set
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+    $_SESSION['first_attempt_time'] = time();
+}
+
+require_once "conn.php"; 
+      
+$errors = [];
+
+if (isset($_POST["login"])) {
+    // Increment login attempts only if the login button is clicked
+    $_SESSION['login_attempts']++;
+
+    // Check for too many login attempts
+    if ($_SESSION['login_attempts'] >= 5 && (time() - $_SESSION['first_attempt_time']) < 300) {
+        $errors[] = "Too many login attempts. Please try again later.";
+    } else {
+        $usernamee = trim($_POST["username"]);
+        $password = trim($_POST["password"]);
+    
+        // Validate inputs
+        if (empty($usernamee)) {
+            $errors[] = "Username is required";
+        }
+        if (empty($password)) {
+            $errors[] = "Password is required";
+        }
+    
+        if (empty($errors)) {
+            $sql = "SELECT * FROM users WHERE username = ?";
+            if ($stmt = mysqli_prepare($conn, $sql)) {
+                mysqli_stmt_bind_param($stmt, "s", $usernamee);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+    
+                if ($user = mysqli_fetch_assoc($result)) {
+                    // Verify the password
+                    if (password_verify($password, $user["password"])) {
+                        $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+                        if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+                            mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+                            mysqli_stmt_execute($updateStmt);
+                            mysqli_stmt_close($updateStmt);
+                        }
+    
+                        // Set session variables and initialize session management
+                        $_SESSION["user"] = $usernamee; 
+                        $_SESSION["LAST_ACTIVITY"] = time(); 
+                        $_SESSION["CREATED"] = time(); 
+                        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; 
+                        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; 
+                        
+                        if (isset($_POST['remember'])) {
+                            setcookie("username", $usernamee, time() + (86400 * 30), "/", "", false, true); 
+                        } else {
+                            setcookie("username", "", time() - 3600, "/"); 
+                        }
+                        header("Location: index.php");
+                        exit();
+                    } else {
+                        $errors[] = "Incorrect password";
+                    }
+                } else {
+                    $errors[] = "Username not found";
+                }
+    
+                mysqli_stmt_close($stmt);
+            } else {
+                $errors[] = "Database query failed";
+            }
+        }
+    }
+}
+
 if (session_status() === PHP_SESSION_NONE) {
   session_set_cookie_params([
       'lifetime' => 86400, // 1 day
@@ -656,67 +737,16 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     <div class="login-container">
-      <div class="login-box">
-      <?php
-      require_once "conn.php"; // Ensure database connection is established
-
-      // Initialize an array to store any errors
-      $errors = [];
-      
-      if (isset($_POST["login"])) {
-          $usernamee = trim($_POST["username"]);
-          $password = trim($_POST["password"]);
-      
-          // Validate inputs
-          if (empty($usernamee)) {
-              $errors[] = "Username is required";
-          }
-          if (empty($password)) {
-              $errors[] = "Password is required";
-          }
-      
-          if (empty($errors)) {
-              $sql = "SELECT * FROM users WHERE username = ?";
-              if ($stmt = mysqli_prepare($conn, $sql)) {
-                  mysqli_stmt_bind_param($stmt, "s", $usernamee);
-                  mysqli_stmt_execute($stmt);
-                  $result = mysqli_stmt_get_result($stmt);
-      
-                  if ($user = mysqli_fetch_assoc($result)) {
-                      // Verify the password
-                      if (password_verify($password, $user["password"])) {
-                          // Update status to 'YES'
-                          $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
-                          if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
-                              mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-                              mysqli_stmt_execute($updateStmt);
-                              mysqli_stmt_close($updateStmt);
-                          }
-      
-                          // Set session variables and initialize session management
-                          $_SESSION["user"] = $usernamee; // Store username in session
-                          $_SESSION["LAST_ACTIVITY"] = time(); // Update last activity time
-                          $_SESSION["CREATED"] = time(); // Track session creation time
-                          $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // Store user agent
-                          $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; // Store IP address
-                          header("Location: index.php");
-                          exit();
-                      } else {
-                          $errors[] = "Incorrect password";
-                      }
-                  } else {
-                      $errors[] = "Username not found";
-                  }
-      
-                  mysqli_stmt_close($stmt);
-              } else {
-                  $errors[] = "Database query failed";
-              }
-          }
-      }
-      ob_end_flush();
-?>        
+      <div class="login-box">    
           <h1>Welcome to Celestial Watches</h1>
+          <!-- Display errors here -->
+          <?php
+                if (!empty($errors)) {
+                    foreach ($errors as $error) {
+                        echo "<div class='alert alert-danger'>$error</div>";
+                    }
+                }
+                ?>
             <form action="login.php" method="post">
                 <div class="input-group">
                     <label for="username">Username</label>
@@ -726,14 +756,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password">
                 </div>
-                <!-- Display errors here -->
-                <?php
-                if (!empty($errors)) {
-                    foreach ($errors as $error) {
-                        echo "<div class='alert alert-danger'>$error</div>";
-                    }
-                }
-                ?>
+                <div class="input-group remember-me-group">
+                    <input type="checkbox" id="remember" name="remember" class="rem">
+                    <label for="remember">Remember Me</label>
+                </div>
                 <button type="submit" class="login-button" name="login">Login</button>
                 <div class="login-footer">
                     <a href="forgot_password.php">Forgot Password?</a>
@@ -742,6 +768,10 @@ if (session_status() === PHP_SESSION_NONE) {
             </form>
         </div>
     </div>
+
+    <?php
+      ob_end_flush();
+    ?>
 
 
 

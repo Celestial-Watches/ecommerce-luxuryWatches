@@ -2,6 +2,12 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
+// Check for the username cookie to log in automatically
+if (isset($_COOKIE['username'])) {
+  $_SESSION['user'] = $_COOKIE['username']; 
+}
+
+
 // Set session cookie parameters (if not set in login.php)
 if (session_status() === PHP_SESSION_NONE) {
   session_set_cookie_params([
@@ -58,6 +64,8 @@ if (isset($_SESSION['user'])) {
 
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="/css/deskView.css"/>
+   
+   
 
     <!-- ============= FONTS=============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -262,7 +270,7 @@ if (isset($_SESSION['user'])) {
           <ul class="desktop-menu-category-list">
   
             <li class="menu-category">
-              <a href="#" class="menu-title">Home</a>
+              <a href="index.php" class="menu-title">Home</a>
             </li>
   
             <li class="menu-category">
@@ -533,7 +541,7 @@ if (isset($_SESSION['user'])) {
         <ul class="mobile-menu-category-list">
   
           <li class="menu-category">
-            <a href="#" class="menu-title">Home</a>
+            <a href="index.php" class="menu-title">Home</a>
           </li>
 
           <li class="menu-category">
@@ -621,7 +629,7 @@ if (isset($_SESSION['user'])) {
           <li class="menu-category">
   
             <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">MEMBERSHIP</p>
+              <p class="menu-title">Membership</p>
             </button>
   
           </li>
@@ -733,22 +741,10 @@ if (isset($_SESSION['user'])) {
   
     </header>
 
+    <!-- ================================ MAIN ================================  -->
+
     
-
-    <!-- ============= MAIN =============  -->
-    <main class="main"></main>
-
-
-    <!-- ============= CATEGORIES =============  -->
-    <section class="categories"></section>
-
-    <!-- ============= PRODUCTS =============  -->
-    <section class="products"></section>
-
-    <!-- ============= DEALS =============  -->
-    <section class="deals"></section>
-
-    <!-- ============= JS =============  -->
+    <!-- ================================ JS ================================  -->
     <script src="/js/index.js"></script>
   </body>
 </html>

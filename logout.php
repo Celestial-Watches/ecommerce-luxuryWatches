@@ -2,6 +2,18 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
+if (isset($_SESSION['user'])) {
+    // Destroy the session
+    session_unset();
+    session_destroy();
+
+    // Destroy the cookie
+    setcookie("username", "", time() - 3600, "/"); // Set cookie to expire in the past
+    header("Location: login.php"); // Redirect to login page
+    exit();
+}
+
+
 // Check if the user is logged in
 if (isset($_SESSION['user'])) {
     require_once "conn.php"; // Ensure database connection is established

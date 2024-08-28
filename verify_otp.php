@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Ensure session is started at the very beginning
 $errors = [];
 $success_message = "";
 $registration_successful = false; // Initialize the variable
@@ -64,7 +64,7 @@ if (isset($_POST['verify'])) {
                             // Set user session
                             $_SESSION['user'] = $usernamee; // Set user session
                             header("Location: index.php"); // Redirect to index.php
-                            exit();
+                            exit(); // Ensure no further code is executed
                         } else {
                             $errors[] = "Something went wrong. Please try again later.";
                         }
@@ -80,7 +80,6 @@ if (isset($_POST['verify'])) {
         }
     }
 }
-
 
 // Handle Resend OTP
 if (isset($_POST['resend'])) {
