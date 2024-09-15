@@ -49,17 +49,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
     const subscribeForm = document.querySelector('.newsletter form');
 
+    // Function to set a local storage item with an expiration time
+    function setLocalStorageWithExpiry(key, value, hours) {
+        const now = new Date();
+        const expiryTime = now.getTime() + hours * 60 * 60 * 1000;
+        const item = {
+            value: value,
+            expiry: expiryTime
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    // Function to get a local storage item with an expiration time
+    function getLocalStorageWithExpiry(key) {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        const now = new Date();
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return item.value;
+    }
+
     // Modal function to close the modal
     const modalCloseFunc = function () {
         if (modal) {
             modal.classList.add('closed');
-            localStorage.setItem('modalClosed', 'true'); // Set modal closed state
+            setLocalStorageWithExpiry('modalClosed', 'true', 3); // Set modal closed state with 3 hours expiry
         }
     };
 
     // Check if the user has closed the modal
     if (modal) {
-        if (localStorage.getItem('modalClosed') === 'true') {
+        if (getLocalStorageWithExpiry('modalClosed') === 'true') {
             modal.classList.add('closed'); // Hide modal if closed
         } else {
             modal.classList.remove('closed'); // Show modal if not closed
@@ -71,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault(); // Prevent form from submitting normally
 
                 // Set local storage to remember subscription
-                localStorage.setItem('subscribed', 'true');
+                setLocalStorageWithExpiry('subscribed', 'true', 3); // Set subscription state with 3 hours expiry
 
                 // Close the modal
                 modalCloseFunc(); // Call the modal close function
