@@ -101,3 +101,26 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(modalCloseFunc);
 });
 
+// ============================= PASSWORD SHOW/HIDE START =============================
+
+
+document.querySelectorAll('.password-toggle-icon i').forEach(function(toggleIcon) {
+    toggleIcon.addEventListener('click', function () {
+        const passwordField = this.closest('.input-group').querySelector('.password-field');
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.classList.remove("fa-eye-slash");
+            this.classList.add("fa-eye");
+            this.parentNode.title = 'Hide Password';
+        } else {
+            passwordField.type = "password";
+            this.classList.remove("fa-eye");
+            this.classList.add("fa-eye-slash");
+            this.parentNode.title = 'Show Password';
+        }
+    });
+});
+
+// ============================= PASSWORD SHOW/HIDE OVER =============================
+

@@ -5,6 +5,13 @@ error_reporting(E_ALL);
 
 date_default_timezone_set('Asia/Kolkata');
 session_start();
+
+// Redirect logged-in users to index.php
+if (isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit();
+}
+
 require_once "conn.php";
 
 $errors = [];

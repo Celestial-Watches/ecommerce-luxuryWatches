@@ -754,7 +754,7 @@ CREATE TABLE offers (
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
-Database go through:
+Admin Panel go through:
 
 ### 1. Dashboard
 

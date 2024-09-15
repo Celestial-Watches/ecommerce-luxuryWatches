@@ -1,98 +1,101 @@
 <?php
- date_default_timezone_set('Asia/Kolkata');
+date_default_timezone_set('Asia/Kolkata');
 session_start();
 ob_start();
 
 // Check for the username cookie before displaying the login form
-if (isset($_COOKIE['username'])) {
-    $_SESSION['user'] = $_COOKIE['username']; 
-    header("Location: index.php"); 
-    exit();
+if (isset($_SESSION['user']) || isset($_COOKIE['username'])) {
+  if (isset($_COOKIE['username'])) {
+    $_SESSION['user'] = $_COOKIE['username'];
+  }
+  header("Location: index.php");
+  exit();
 }
 
 // Initialize login attempts if not set
 if (!isset($_SESSION['login_attempts'])) {
-    $_SESSION['login_attempts'] = 0;
-    $_SESSION['first_attempt_time'] = time();
+  $_SESSION['login_attempts'] = 0;
+  $_SESSION['first_attempt_time'] = time();
 }
 
-require_once "conn.php"; 
-      
+require_once "conn.php";
+
 $errors = [];
 
 if (isset($_POST["login"])) {
-    // Increment login attempts only if the login button is clicked
-    $_SESSION['login_attempts']++;
+  // Increment login attempts only if the login button is clicked
+  $_SESSION['login_attempts']++;
 
-    // Check for too many login attempts
-    if ($_SESSION['login_attempts'] >= 5 && (time() - $_SESSION['first_attempt_time']) < 300) {
-        $errors[] = "Too many login attempts. Please try again later.";
-    } else {
-        $usernamee = trim($_POST["username"]);
-        $password = trim($_POST["password"]);
-    
-        // Validate inputs
-        if (empty($usernamee)) {
-            $errors[] = "Username is required";
-        }
-        if (empty($password)) {
-            $errors[] = "Password is required";
-        }
-    
-        if (empty($errors)) {
-            $sql = "SELECT * FROM users WHERE username = ?";
-            if ($stmt = mysqli_prepare($conn, $sql)) {
-                mysqli_stmt_bind_param($stmt, "s", $usernamee);
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-    
-                if ($user = mysqli_fetch_assoc($result)) {
-                    // Verify the password
-                    if (password_verify($password, $user["password"])) {
-                        $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
-                        if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
-                            mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-                            mysqli_stmt_execute($updateStmt);
-                            mysqli_stmt_close($updateStmt);
-                        }
-    
-                        // Set session variables and initialize session management
-                        $_SESSION["user"] = $usernamee; 
-                        $_SESSION["LAST_ACTIVITY"] = time(); 
-                        $_SESSION["CREATED"] = time(); 
-                        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; 
-                        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR']; 
-                        
-                        if (isset($_POST['remember'])) {
-                            setcookie("username", $usernamee, time() + (86400 * 30), "/", "", false, true); 
-                        } else {
-                            setcookie("username", "", time() - 3600, "/"); 
-                        }
-                        header("Location: index.php");
-                        exit();
-                    } else {
-                        $errors[] = "Incorrect password";
-                    }
-                } else {
-                    $errors[] = "Username not found";
-                }
-    
-                mysqli_stmt_close($stmt);
-            } else {
-                $errors[] = "Database query failed";
-            }
-        }
+  // Check for too many login attempts
+  if ($_SESSION['login_attempts'] >= 5 && (time() - $_SESSION['first_attempt_time']) < 300) {
+    $errors[] = "Too many login attempts. Please try again later.";
+  } else {
+    $usernamee = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
+
+    // Validate inputs
+    if (empty($usernamee)) {
+      $errors[] = "Username is required";
     }
+    if (empty($password)) {
+      $errors[] = "Password is required";
+    }
+
+    if (empty($errors)) {
+      $sql = "SELECT * FROM users WHERE username = ?";
+      if ($stmt = mysqli_prepare($conn, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $usernamee);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($user = mysqli_fetch_assoc($result)) {
+          // Verify the password
+          if (password_verify($password, $user["password"])) {
+            $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+            if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+              mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+              mysqli_stmt_execute($updateStmt);
+              mysqli_stmt_close($updateStmt);
+            }
+
+
+            // Set session variables and initialize session management
+            $_SESSION["user"] = $usernamee;
+            $_SESSION["LAST_ACTIVITY"] = time();
+            $_SESSION["CREATED"] = time();
+            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+
+            if (isset($_POST['remember'])) {
+              setcookie("username", $usernamee, time() + (86400 * 30), "/", "", false, true);
+            } else {
+              setcookie("username", "", time() - 3600, "/");
+            }
+            header("Location: index.php");
+            exit();
+          } else {
+            $errors[] = "Incorrect password";
+          }
+        } else {
+          $errors[] = "Username not found";
+        }
+
+        mysqli_stmt_close($stmt);
+      } else {
+        $errors[] = "Database query failed";
+      }
+    }
+  }
 }
 
 if (session_status() === PHP_SESSION_NONE) {
   session_set_cookie_params([
-      'lifetime' => 86400, // 1 day
-      'path' => '/',
-      'domain' => '',
-      'secure' => false,
-      'httponly' => true,
-      'samesite' => 'Lax'
+    'lifetime' => 86400, // 1 day
+    'path' => '/',
+    'domain' => '',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax'
   ]);
 }
 ?>
@@ -107,6 +110,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <!-- ============= IONICONS =============  -->
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- ============= CSS =============  -->
   <link rel="stylesheet" href="/css/deskView.css" />
@@ -736,42 +740,53 @@ if (session_status() === PHP_SESSION_NONE) {
         ***************************************************/    -->
 
 
-    <div class="login-container">
-      <div class="login-box">    
-          <h1>Welcome to Celestial Watches</h1>
-          <!-- Display errors here -->
-          <?php
-                if (!empty($errors)) {
-                    foreach ($errors as $error) {
-                        echo "<div class='alert alert-danger'>$error</div>";
-                    }
-                }
-                ?>
-            <form action="login.php" method="post">
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"value="<?php echo htmlspecialchars($usernamee ?? '', ENT_QUOTES); ?>" >
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
-                </div>
-                <div class="input-group remember-me-group">
-                    <input type="checkbox" id="remember" name="remember" class="rem">
-                    <label for="remember">Remember Me</label>
-                </div>
-                <button type="submit" class="login-button" name="login">Login</button>
-                <div class="login-footer">
-                    <a href="forgot_password.php">Forgot Password?</a>
-                    <a href="signin.php">Create Account</a>
-                </div>
-            </form>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Welcome to Celestial Watches</h1>
+      <!-- Display errors here -->
+      <?php
+      if (!empty($errors)) {
+        foreach ($errors as $error) {
+          echo "<div class='alert alert-danger'>$error</div>";
+        }
+      }
+      ?>
+      <form action="login.php" method="post">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($usernamee ?? '', ENT_QUOTES); ?>">
         </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="password-field" name="password">
+          <span class="password-toggle-icon" title="Show Passowrd"><i class="fas fa-eye-slash"></i></span>
+        </div>
+        <div class="input-group remember-me-group">
+          <input type="checkbox" id="remember" name="remember" class="rem">
+          <label for="remember">Remember Me</label>
+        </div>
+        <button type="submit" class="login-button" name="login">Login</button>
+        <div class="login-footer">
+          <a href="forgot_password.php" id="forgot-password-link">Forgot Password?</a>
+          <a href="signin.php">Create Account</a>
+        </div>
+      </form> 
     </div>
+  </div>
 
-    <?php
-      ob_end_flush();
-    ?>
+  <script>
+    document.getElementById('forgot-password-link').addEventListener('click', function(event) {
+      var username = document.getElementById('username').value.trim();
+      if (username === '') {
+        event.preventDefault();
+        alert('Please enter your username before proceeding to forgot password.');
+      }
+    });
+  </script>
+
+  <?php
+  ob_end_flush();
+  ?>
 
 
 

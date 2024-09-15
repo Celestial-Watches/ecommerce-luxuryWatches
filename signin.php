@@ -9,6 +9,12 @@ ini_set('session.cookie_samesite', 'Strict'); // Additional session security
 session_start();
 ob_start();
 
+// Redirect logged-in users to index.php
+if (isset($_SESSION['user'])) {
+  header("Location: index.php");
+  exit();
+}
+
 require_once "conn.php"; // Include database connection
 
 // Ensure CSRF token is set
@@ -112,8 +118,17 @@ if (isset($_POST["submit"])) {
 
             $mail->isHTML(true);
             $mail->Subject = 'Your OTP Code';
-            $mail->Body    = "Your OTP code is: <b>$otp</b>";
+            $mail->addEmbeddedImage(dirname(__FILE__) . '/image/newsletter.jpg', 'newsletter_image');
+            $mail->Body    = '<img src="cid:newsletter_image">'
+                .'<br>'
+                .'<h2>Email Verification Code</h2>'
+                .'<p>Hello ' . htmlspecialchars($usernamee, ENT_QUOTES, 'UTF-8') . ', Enter this code on the identity verification screen:</p>'
+                .'<br>'
+                ."Your OTP code is: <b>$otp</b>"
+                .'<br>'
+                .'<p>This code will expire shortly. If you can&#8217;t find the verification code, try signing up again.</p>';
             $mail->AltBody = "Your OTP code is: $otp";
+            
 
             if ($mail->send()) {
                 // Set a cookie for the user (e.g., for 1 week)
@@ -164,7 +179,7 @@ if (isset($_POST["submit"])) {
     <!-- ============= IONICONS =============  -->
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="/css/deskView.css"/>
    
@@ -821,11 +836,17 @@ if (isset($_POST["submit"])) {
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" autocomplete="on">
+                    <input type="password" id="password" class="password-field" name="password" autocomplete="on">
+                    <span class="password-toggle-icon" title="Show Password">
+                        <i class="fas fa-eye-slash" data-toggle="password"></i>
+                    </span>
                 </div>
                 <div class="input-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" autocomplete="on">
+                    <input type="password" id="confirm_password" class="password-field" name="confirm_password" autocomplete="on">
+                    <span class="password-toggle-icon" title="Show Password">
+                        <i class="fas fa-eye-slash" data-toggle="confirm_password"></i>
+                    </span>
                 </div>
                 <button type="submit" class="login-button" name="submit">Create Account</button>
                 <div class="login-footer">

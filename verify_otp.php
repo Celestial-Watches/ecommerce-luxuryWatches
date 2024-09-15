@@ -1,5 +1,12 @@
 <?php
 session_start(); // Ensure session is started at the very beginning
+
+// Redirect logged-in users to index.php
+if (isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit();
+}
+
 $errors = [];
 $success_message = "";
 $registration_successful = false; // Initialize the variable
@@ -52,6 +59,16 @@ if (isset($_POST['verify'])) {
                         mysqli_stmt_bind_param($stmt, "ssss", $usernamee, $email, $phone, $passwordHash);
                         if (mysqli_stmt_execute($stmt)) {
                             $registration_successful = true; // Set to true on successful registration
+
+                            // Update status to 'YES'
+                            $updateStatusSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+                            if ($updateStatusStmt = mysqli_prepare($conn, $updateStatusSql)) {
+                                mysqli_stmt_bind_param($updateStatusStmt, "s", $usernamee);
+                                mysqli_stmt_execute($updateStatusStmt);
+                                mysqli_stmt_close($updateStatusStmt);
+                            } else {
+                                $errors[] = "Failed to update status: " . mysqli_error($conn);
+                            }
 
                             // Clear session data
                             unset($_SESSION['otp']);
