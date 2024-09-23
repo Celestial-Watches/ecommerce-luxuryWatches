@@ -36,14 +36,14 @@ if (!isset($_SESSION['CREATED'])) {
 if (isset($_SESSION['user'])) {
   // Session expiration handling
   if (isset($_SESSION['LAST_ACTIVITY'])) {
-      $sessionDuration = time() - $_SESSION['LAST_ACTIVITY'];
-      if ($sessionDuration > $sessionTimeout) {
-          // Session expired: unset and destroy session
-          session_unset();
-          session_destroy();
-          header("Location: login.php?timeout=true"); // Redirect to login page with timeout message
-          exit();
-      }
+    $sessionDuration = time() - $_SESSION['LAST_ACTIVITY'];
+    if ($sessionDuration > $sessionTimeout) {
+      // Session expired: unset and destroy session
+      session_unset();
+      session_destroy();
+      header("Location: login.php?timeout=true"); // Redirect to login page with timeout message
+      exit();
+    }
   }
   // Update last activity time stamp to extend the session
   $_SESSION['LAST_ACTIVITY'] = time();
@@ -58,14 +58,17 @@ if (isset($_SESSION['user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Celestial Watches - Exclusivity in Every Tick</title>
 
-  
+
 
   <!-- ============= IONICONS =============  -->
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+
   <!-- ============= CSS =============  -->
   <link rel="stylesheet" href="/css/deskView.css" />
+  <link rel="stylesheet" href="/css/swiper-bundle.min.css">
 
 
 
@@ -138,7 +141,7 @@ if (isset($_SESSION['user'])) {
 
     <div class="header-top">
 
-      <div class="container">
+      <div class="container top-container">
 
         <ul class="header-social-container">
 
@@ -156,7 +159,7 @@ if (isset($_SESSION['user'])) {
 
           <li>
             <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
+            <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
 
@@ -192,13 +195,21 @@ if (isset($_SESSION['user'])) {
 
           </select>
 
+          <button class="logg-button">
           <?php if (isset($_SESSION['user'])): ?>
-            <span><a href="logout.php">Logout</a></span>
-          <?php else: ?>
-            <span><a href="login.php">Log In</a></span>
-            <span>/</span>
-            <span><a href="signin.php">Sign Up</a></span>
-          <?php endif; ?>
+              <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+            <?php else: ?>
+              <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
+              <span class="log-button">/</span>
+              <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
+            <?php endif; ?>
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
 
         </div>
 
@@ -746,10 +757,11 @@ if (isset($_SESSION['user'])) {
 
   <!-- ================================ MAIN ================================  -->
 
-  
 
-    <!-- ================================ JS ================================  -->
-    <script src="/js/index.js"></script>
+  <!-- ================================ JS ================================  -->
+  <script src="/js/swiper-bundle.min.js"></script>
+  <script src="/js/index.js"></script>
+  
 </body>
 
 </html>

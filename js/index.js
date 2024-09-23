@@ -150,3 +150,9 @@ document.querySelectorAll('.password-toggle-icon i').forEach(function(toggleIcon
 
 // ============================= PASSWORD SHOW/HIDE OVER =============================
 
+// ============================= SWIPER START =============================
+
+
+
+
+// ============================= SWIPER END =============================
