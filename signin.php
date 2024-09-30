@@ -38,9 +38,9 @@ if (isset($_POST["submit"])) {
     }
 
     // Sanitize user inputs
-    $usernamee = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8');
-    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $phone = htmlspecialchars($_POST["phone"], ENT_QUOTES, 'UTF-8');
+    $usernamee = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES, 'UTF-8');
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $phone = htmlspecialchars(trim($_POST["phone"]), ENT_QUOTES, 'UTF-8');
     $password = $_POST["password"];
     $passwordRepeat = $_POST["confirm_password"];
 
@@ -63,38 +63,33 @@ if (isset($_POST["submit"])) {
         $errors[] = "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
     }
 
+    if (empty($usernamee) || empty($email) || empty($phone) || empty($password) || empty($passwordRepeat)) {
+      $errors[] = "All fields are required.";
+     }
+
     // Check if username or email already exists
     if (empty($errors)) {
-        $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "ss", $usernamee, $email);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            
-            if (mysqli_num_rows($result) > 0) {
-                $errors[] = "Username or email already exists.";
-            }
-
-            mysqli_stmt_close($stmt); // Close statement
-        } else {
-            $errors[] = "An unexpected error occurred. Please try again later.";
-        }
-    }
+      $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+      if ($stmt = mysqli_prepare($conn, $sql)) {
+          mysqli_stmt_bind_param($stmt, "ss", $usernamee, $email);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+          if (mysqli_num_rows($result) > 0) {
+              $errors[] = "Username or email already exists.";
+          }
+          mysqli_stmt_close($stmt);
+      }
+  }
 
     // If no errors, proceed with OTP generation and sending
     if (empty($errors)) {
-        // Hash the password
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        // Store user data in session
-        $_SESSION['username'] = $usernamee;
-        $_SESSION['email'] = $email;
-        $_SESSION['phone'] = $phone;
-        $_SESSION['password'] = $passwordHash;
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; 
-        $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+      $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+      $_SESSION['username'] = $usernamee;
+      $_SESSION['email'] = $email;
+      $_SESSION['phone'] = $phone;
+      $_SESSION['password'] = $passwordHash;
+      $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; 
+      $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
 
         // Generate OTP
         $otp = rand(100000, 999999);
@@ -168,7 +163,6 @@ if (isset($_POST["submit"])) {
 // header("X-Frame-Options: DENY");
 // header("X-XSS-Protection: 1; mode=block");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -183,7 +177,7 @@ if (isset($_POST["submit"])) {
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="/css/deskView.css"/>
    
-   
+    <script src="/js/navigation.js"></script>
 
     <!-- ============= FONTS=============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,6 +185,11 @@ if (isset($_POST["submit"])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
+    <script>
+        if(window.history.replaceState){
+            window.history.replaceState( null, null, window.location.href);
+        }
+    </script>
 
   </head>
   <body>
@@ -851,6 +850,9 @@ if (isset($_POST["submit"])) {
                 <button type="submit" class="login-button" name="submit">Create Account</button>
                 <div class="login-footer">
                     <a href="login.php">Already have an account? Login</a>
+                </div>
+                <div class="conditons">
+                <p>By clicking on create account you agree to our <a href="">Terms & Conditions</a> and that you have read out <a href="">Privacy & Policy</a></p>
                 </div>
             </form>
         </div>

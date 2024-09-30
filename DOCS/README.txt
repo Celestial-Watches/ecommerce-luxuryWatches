@@ -66,7 +66,7 @@ User Path:
     - SEP (Specific option or feature like product color variants, size options).
     - HAS (Handling or additional services like customer services, delivery options, extended warranty).
     - Login/Logout.
-- Manage Account:
+- Manage Account aka personal dashboard:
   - Users can manage their accounts, including personal details, order history, etc.
 - Wishlist:
   - Users can add products to their Wishlist for future reference.
@@ -96,6 +96,16 @@ Admin Path:
     - Multi-Language/Currency.
     - Membership Management.
     - Listing Management.
+    - personal dashboard:
+	- NFT Customisation
+	- Sell and Exchange
+	- Rental and Lease 
+	- Active service management (care plans, resell guarantees, time capsule deliveries, 
+	   and watch authentication)
+	- Auction participation
+	- Transaction History
+	- User profile settings
+	- Manage address, payment methods, etc..	
 
 Checkout Process:
 - Register/Login:

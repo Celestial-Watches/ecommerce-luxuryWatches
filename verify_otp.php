@@ -53,6 +53,7 @@ if (isset($_POST['verify'])) {
                 $result = mysqli_stmt_get_result($checkStmt);
                 
                 if (mysqli_num_rows($result) == 0) { // Only insert if user does not exist
+
                     // Insert the new user into the database
                     $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
                     if ($stmt = mysqli_prepare($conn, $sql)) {
@@ -61,15 +62,16 @@ if (isset($_POST['verify'])) {
                             $registration_successful = true; // Set to true on successful registration
 
                             // Update status to 'YES'
-                            $updateStatusSql = "UPDATE users SET status = 'YES' WHERE username = ?";
-                            if ($updateStatusStmt = mysqli_prepare($conn, $updateStatusSql)) {
-                                mysqli_stmt_bind_param($updateStatusStmt, "s", $usernamee);
-                                mysqli_stmt_execute($updateStatusStmt);
-                                mysqli_stmt_close($updateStatusStmt);
-                            } else {
-                                $errors[] = "Failed to update status: " . mysqli_error($conn);
-                            }
+                    $updateStatusSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+                    if ($updateStatusStmt = mysqli_prepare($conn, $updateStatusSql)) {
+                        mysqli_stmt_bind_param($updateStatusStmt, "s", $usernamee);
+                        mysqli_stmt_execute($updateStatusStmt);
+                        mysqli_stmt_close($updateStatusStmt);
+                    } else {
+                        $errors[] = "Failed to update status: " . mysqli_error($conn);
+                    }
 
+                            
                             // Clear session data
                             unset($_SESSION['otp']);
                             unset($_SESSION['email']);
@@ -90,6 +92,7 @@ if (isset($_POST['verify'])) {
                     }
                 } else {
                     $errors[] = "User already exists. Please log in.";
+                    header("Location: login.php");
                 }
             }
         } else {
@@ -153,6 +156,7 @@ $seconds = $remaining_time % 60;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
     <link rel="stylesheet" href="/css/deskView.css" />
+    <script src="/js/navigation.js"></script>
     <script>
         // Dynamic countdown timer
         let remainingTime = <?php echo $remaining_time; ?>; // Remaining time in seconds

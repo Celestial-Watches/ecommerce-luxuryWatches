@@ -2,24 +2,13 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
-if (isset($_SESSION['user'])) {
-    // Destroy the session
-    session_unset();
-    session_destroy();
-
-    // Destroy the cookie
-    setcookie("username", "", time() - 3600, "/"); // Set cookie to expire in the past
-    header("Location: login.php"); // Redirect to login page
-    exit();
-}
-
-
 // Check if the user is logged in
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
     require_once "conn.php"; // Ensure database connection is established
 
     // Retrieve the username from the session
-    $usernamee = $_SESSION['user'];
+    $usernamee = isset($_SESSION['user']) ? $_SESSION['user'] : $_SESSION['admin'];
+    
 
     // Update the user's status to 'NO' in the database
     $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
@@ -30,6 +19,12 @@ if (isset($_SESSION['user'])) {
     } else {
         error_log("Failed to prepare SQL statement: " . mysqli_error($conn));
     }
+
+    // Set authenticated to false
+    $_SESSION['authenticated'] = false; // Set authenticated to false on logout
+
+    // Unset specific session variables
+    unset($_SESSION['user'], $_SESSION['admin']); // Unset both user and admin session variables
 
     // Unset all session variables
     $_SESSION = array();
@@ -46,12 +41,28 @@ if (isset($_SESSION['user'])) {
         );
     }
 
-    // Redirect to the login page
-    header("Location: signin.php");
+    // Destroy any additional cookies if used for authentication
+    setcookie("username", "", time() - 3600, "/"); // Set cookie to expire in the past
+
+    // Redirect to login page
+    header("Location: login.php");
     exit();
 } else {
     // If the user is not logged in, just redirect to the login page
-    header("Location: signin.php");
+    header("Location: login.php");
     exit();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <script src="/js/navigation.js"></script>
+</head>
+<body>
+    
+</body>
+</html>

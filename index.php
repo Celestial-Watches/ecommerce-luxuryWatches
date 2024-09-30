@@ -7,6 +7,9 @@ if (isset($_COOKIE['username'])) {
   $_SESSION['user'] = $_COOKIE['username'];
 }
 
+// Check if the user is logged in and is an admin
+$isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
+
 
 // Set session cookie parameters (if not set in login.php)
 if (session_status() === PHP_SESSION_NONE) {
@@ -65,6 +68,8 @@ if (isset($_SESSION['user'])) {
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+  
+  <script src="/js/navigation.js"></script>
 
   <!-- ============= CSS =============  -->
   <link rel="stylesheet" href="/css/deskView.css" />
@@ -196,6 +201,10 @@ if (isset($_SESSION['user'])) {
           </select>
 
           <button class="logg-button">
+          <?php if ($isAdmin): ?>
+              <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
+              <span class="log-button">/</span>
+                <?php endif; ?>
           <?php if (isset($_SESSION['user'])): ?>
               <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
             <?php else: ?>
@@ -237,7 +246,7 @@ if (isset($_SESSION['user'])) {
 
         <div class="header-user-actions">
 
-          <button class="action-btn profile-btn">
+          <button class="action-btn profile-btn" title="Personal Dashboard">
             <ion-icon name="person-outline"></ion-icon>
           </button>
 
@@ -757,7 +766,12 @@ if (isset($_SESSION['user'])) {
 
   <!-- ================================ MAIN ================================  -->
 
+          <?php include 'PHP/banner.php';
+          ?>
 
+          <?php include 'PHP/logo-slider.php';
+          ?>
+          
   <!-- ================================ JS ================================  -->
   <script src="/js/swiper-bundle.min.js"></script>
   <script src="/js/index.js"></script>

@@ -106,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password - Celestial Watches</title>
     <link rel="stylesheet" href="/css/deskView.css" />
+    <script src="/js/navigation.js"></script>
 </head>
 <body>
     <div class="login-container">
