@@ -1,6 +1,18 @@
 <?php 
 session_start();
 
+
+
+require_once "conn.php";
+
+// Insert session data into the sessions table
+$logSessionSql = "INSERT INTO sessions (username, session_id, user_agent, ip_address) VALUES (?, ?, ?, ?)";
+if ($logStmt = mysqli_prepare($conn, $logSessionSql)) {
+  mysqli_stmt_bind_param($logStmt, "ssss", $usernamee, $sessionId, $userAgent, $ipAddress);
+  mysqli_stmt_execute($logStmt);
+  mysqli_stmt_close($logStmt);
+}
+
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ) {
   header("Location: login.php"); // Redirect to login if not logged in or not authenticated
   exit();
@@ -20,7 +32,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
   <nav id="sidebar">
     <ul>
       <li>
-        <span class="logo">Celestial Watches</span>
+        <span class="logo" style="cursor:pointer;">Celestial Watches</span>
         <button onclick=toggleSidebar() id="toggle-btn">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"/></svg>
         </button>

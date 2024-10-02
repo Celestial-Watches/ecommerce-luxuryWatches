@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,6 +54,47 @@
         .logos-slide .brand-slider {
             height: 50px;
             margin: 0 40px;
+        }
+
+        .logg-button:hover {
+            transform: scale(1.05);
+            border-color: #fff9;
+        }
+
+        .logg-button:hover .icon {
+            transform: translate(4px);
+        }
+
+        .logg-button:hover::before {
+            animation: shine 1.5s ease-out infinite;
+        }
+
+        .logg-button::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100%;
+            background-image: linear-gradient(120deg,
+                    rgba(255, 255, 255, 0) 30%,
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0) 70%);
+            top: 0;
+            left: -100px;
+            opacity: 0.6;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100px;
+            }
+
+            60% {
+                left: 100%;
+            }
+
+            to {
+                left: 100%;
+            }
         }
     </style>
 </head>

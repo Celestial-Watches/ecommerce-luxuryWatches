@@ -1,10 +1,11 @@
 <?php
 session_start();
-require_once "../conn.php"; // Ensure database connection
+
+require_once "../conn.php"; 
 
 // Check if user is logged in and is an admin
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) {
-    header("Location: login.php"); // Redirect to login if not logged in
+    header("Location: ../login.php"); 
     exit();
 }
 
@@ -13,6 +14,22 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
     // If already authenticated, redirect to the panel
     header("Location: ../panel.php");
     exit();
+}
+
+// Check if the admin has already authenticated for this session
+$current_time = time(); // Get the current timestamp
+$timeout_duration = 1800; // 30 minutes in seconds
+
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
+  // Check if the session is still valid
+  if (isset($_SESSION['last_auth_time']) && ($current_time - $_SESSION['last_auth_time']) < $timeout_duration) {
+      // If already authenticated and within timeout duration, redirect to the panel
+      header("Location: ../panel.php");
+      exit();
+  } else {
+      // If the session has timed out, require password authentication
+      unset($_SESSION['authenticated']); // Remove the authenticated status
+  }
 }
 
 // Check if the password has been submitted
@@ -30,8 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verify the entered password
         if (password_verify($entered_password, $hashed_password)) {
+
+          
             // Password is correct, set session variable and grant access to the admin panel
             $_SESSION['authenticated'] = true; // Set authenticated to true here
+            $_SESSION['last_auth_time'] = $current_time; // Store the current time
             header("Location: ../panel.php");
             exit();
         } else {
@@ -41,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Database query failed.";
     }
 }
-
 
 ?>
 
@@ -227,7 +246,7 @@ body {
     <div class="container">
         <div class="left">
             <div class="header">
-                <h2 class="animation a1">Welcome Admin</h2>
+                <h2 class="animation a1">Welcome <?php echo htmlspecialchars($_SESSION['user']); ?></h2>
                 <h4 class="animation a2">Please enter your security passoword before moving forward</h4>
             </div>
             <div class="form">

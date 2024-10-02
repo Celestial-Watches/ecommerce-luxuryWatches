@@ -2,26 +2,23 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
+
+
 // Check for the username cookie to log in automatically
-if (isset($_COOKIE['username'])) {
-  $_SESSION['user'] = $_COOKIE['username'];
+if (isset($_COOKIE['SSIDU'])) {
+  $_SESSION['user'] = $_COOKIE['SSIDU'];
 }
+
+
+// Check if the user navigated back from verify_otp.php
+if (isset($_SESSION['otp']) && !isset($_SESSION['user'])) {
+  session_unset(); // Unset session variables
+  session_destroy(); // Destroy the session
+}
+
 
 // Check if the user is logged in and is an admin
 $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
-
-
-// Set session cookie parameters (if not set in login.php)
-if (session_status() === PHP_SESSION_NONE) {
-  session_set_cookie_params([
-    'lifetime' => 86400, // 1 day
-    'path' => '/',
-    'domain' => '',
-    'secure' => false,
-    'httponly' => true,
-    'samesite' => 'Lax'
-  ]);
-}
 
 // Set a session timeout period in seconds (e.g., 1800 seconds = 30 minutes)
 $sessionTimeout = 1800;
@@ -201,16 +198,18 @@ if (isset($_SESSION['user'])) {
           </select>
 
           <button class="logg-button">
-          <?php if ($isAdmin): ?>
-              <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
-              <span class="log-button">/</span>
+          <?php if (isset($_SESSION['user']) || isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true): ?>
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                    <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
+                    <span class="log-button">/</span>
+                    <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+                <?php else: ?>
+                    <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
                 <?php endif; ?>
-          <?php if (isset($_SESSION['user'])): ?>
-              <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
             <?php else: ?>
-              <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
-              <span class="log-button">/</span>
-              <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
+                <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
+                <span class="log-button">/</span>
+                <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
             <?php endif; ?>
             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -770,6 +769,13 @@ if (isset($_SESSION['user'])) {
           ?>
 
           <?php include 'PHP/logo-slider.php';
+          ?>
+
+          <?php include 'PHP/featured-product.php';
+          ?>
+          <hr style="border-color: #ffffff;">
+
+          <?php include 'PHP/trending-article.php';
           ?>
           
   <!-- ================================ JS ================================  -->

@@ -2,6 +2,7 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
+
 // Check if the user is logged in
 if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
     require_once "conn.php"; // Ensure database connection is established
@@ -24,7 +25,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
     $_SESSION['authenticated'] = false; // Set authenticated to false on logout
 
     // Unset specific session variables
-    unset($_SESSION['user'], $_SESSION['admin']); // Unset both user and admin session variables
+    unset($_SESSION['user'], $_SESSION['admin'], $_SESSION['otp_verified']); // Unset both user and admin session variables
 
     // Unset all session variables
     $_SESSION = array();
@@ -42,7 +43,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
     }
 
     // Destroy any additional cookies if used for authentication
-    setcookie("username", "", time() - 3600, "/"); // Set cookie to expire in the past
+    setcookie("SSIDU", "", time() - 3600, "/"); // Set cookie to expire in the past
 
     // Redirect to login page
     header("Location: login.php");
