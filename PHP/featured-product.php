@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Featured Products</title>
+    <script src="/js/scroll-animation.js"></script>
     <style>
         .featured-main {
             background-color: #f9f9f9;
@@ -50,6 +51,7 @@
             transition: transform 0.3s ease-in-out;
             justify-content: flex-start;
             width: 100%;
+            will-change: transform;
         }
 
         .card {
@@ -60,12 +62,21 @@
             padding: 20px;
             margin: 0 5px;
             flex: 0 0 32.32%;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+            /* Add opacity transition */
             text-align: center;
             background-image: linear-gradient(300deg,
                     rgba(255, 255, 255, 0) 30%,
                     rgba(255, 255, 255, 0.8),
                     rgba(255, 255, 255, 0) 70%);
+        }
+
+        .card.reduce-opacity {
+            opacity: 0.5;
+        }
+
+        .card.scale-down {
+            transform: scale(0.95);
         }
 
         .card .featured-card {
@@ -148,14 +159,13 @@
         @media (max-width: 1024px) {
             .card {
                 width: 28%;
-
             }
         }
 
         @media (max-width: 768px) {
             .card {
                 width: 45%;
-                flex: 0 0 100%;
+                flex: 0 0 50%;
             }
         }
 
@@ -164,18 +174,32 @@
             /* For mobile, show 1 card */
             .card {
                 width: 90%;
+                flex: 0 0 100%;
             }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Move elements slightly downwards */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Bring elements to their original position */
         }
     </style>
 </head>
 
 <body>
-    <main class="featured-main">
-        <section class="featured-products">
-            <h2 class="featured-title">Featured Products</h2>
+    <main class="featured-main animate-on-scroll">
+        <section class="featured-products animate-on-scroll">
+            <h2 class="featured-title animate-on-scroll">Our Exclusive Collection</h2>
             <div class="slider">
-                <button class="slider-button prev" onclick="moveSlide(-1)">&#10094;</button>
-                <div class="slider-container">
+                <button class="slider-button prev animate-on-scroll" aria-label="Previous Slide" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="slider-container animate-on-scroll">
                     <div class="product-grid">
                         <div class="card">
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/2d6f15c3-5f2a-49ab-16b7-23602a3d8700/w=400x400" alt="Audemars Piguet Royal Oak Selfwinding 34mm">
@@ -218,7 +242,7 @@
                         </div>
                         <!--  -->
                         <div class="card">
-                            <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/51185459-938c-4a5a-69fe-da97fcf26500/w=400x400" alt="Audemars Piguet Royal Oak 33mm"">
+                            <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/51185459-938c-4a5a-69fe-da97fcf26500/w=400x400" alt="Audemars Piguet Royal Oak 33mm">
                             <hr>
                             <h3 class=" featured-text">Audemars Piguet Royal Oak 33mm"</h3>
                             <p class="featured-price">$ 33,574</p>
@@ -250,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="slider-button next" onclick="moveSlide(1)">&#10095;</button>
+                <button class="slider-button next animate-on-scroll" aria-label="Next Slide" onclick="moveSlide(1)">&#10095;</button>
             </div>
         </section>
     </main>
@@ -260,10 +284,35 @@
         const cards = document.querySelectorAll('.card');
         let slidesToShow = 3; // Default for large screens
 
+        // Function to handle mouse enter
+        function handleMouseEnter() {
+            cards.forEach((card) => {
+                if (card !== this) {
+                    card.classList.add('scale-down'); // Add scale-down class to other cards
+                    card.classList.add('reduce-opacity'); // Add reduce-opacity class to other cards
+                }
+            });
+        }
+
+        // Function to handle mouse leave
+        function handleMouseLeave() {
+            cards.forEach((card) => {
+                card.classList.remove('scale-down'); // Remove scale-down class
+                card.classList.remove('reduce-opacity'); // Remove reduce-opacity class
+            });
+        }
+
+        // Attach event listeners to each card
+        cards.forEach((card) => {
+            card.addEventListener('mouseenter', handleMouseEnter);
+            card.addEventListener('mouseleave', handleMouseLeave);
+        });
+
+        // Adjust number of slides based on window width
         function updateSlidesToShow() {
             if (window.innerWidth <= 480) {
                 slidesToShow = 1; // For mobile
-            } else if (window.innerWidth <= 768) {
+            } else if (window.innerWidth < 768) {
                 slidesToShow = 2; // For tablets
             } else if (window.innerWidth <= 1024) {
                 slidesToShow = 3; // For smaller laptops, 3 cards but smaller
@@ -273,29 +322,31 @@
             showSlides();
         }
 
+        // Move the slides
         function moveSlide(step) {
             currentIndex += step;
 
             // Wrapping logic
             if (currentIndex < 0) {
                 currentIndex = cards.length - slidesToShow; // Jump from the first slide to the last set of slides
-            } else if (currentIndex >= cards.length - slidesToShow + 1) {
-                currentIndex = 0; // Jump back to the first slide when reaching the end
+            } else if (currentIndex > cards.length - slidesToShow) {
+                currentIndex = 0; // Jump from the last set of slides to the first slide
             }
 
             showSlides();
         }
-
+        // Display the slides by translating the grid
         function showSlides() {
             const grid = document.querySelector('.product-grid');
             const cardWidth = document.querySelector('.card').offsetWidth;
-            const totalWidth = (cardWidth + 10) * currentIndex; // 10 is the gap between cards
+            const totalWidth = (cardWidth + 9.5) * currentIndex; // 9px gap between cards
             grid.style.transform = `translateX(-${totalWidth}px)`;
         }
 
         window.addEventListener('resize', updateSlidesToShow);
-        updateSlidesToShow();
+        updateSlidesToShow(); // Initial setup
     </script>
+
 </body>
 
 </html>

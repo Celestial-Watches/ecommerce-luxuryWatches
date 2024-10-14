@@ -161,8 +161,16 @@ main p{
   h2, p { margin-top: 1em }
 }
 
+/* Hide the .noShow text by default */
 .noShow {
-  display: block; /* Default display */
+  display: none; /* Hidden by default */
+}
+
+/* Show the .noShow text on larger screens (desktop/tablet) */
+@media (min-width: 801px) {
+  .noShow {
+    display: block; /* Visible on desktop */
+  }
 }
 
 .close .noShow {
@@ -180,6 +188,7 @@ main p{
     border: none;
     padding: 0;
   }
+
   
   #sidebar{
     height: 60px;
@@ -242,6 +251,11 @@ main p{
     }
   }
 }
+
+#sidebar.close .noShow {
+  display: none; /* Sidebar closed behavior */
+}
+
 #sidebar.close .dropdown-btn svg:last-child {
   display: none; /* Hide the arrow icon when sidebar is closed */
 }

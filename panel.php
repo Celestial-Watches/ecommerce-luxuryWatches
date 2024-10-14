@@ -1,17 +1,22 @@
 <?php 
+
+// Set the session cookie with secure attributes
+session_set_cookie_params([
+  'lifetime' => 86400,              // Session expires when the browser is closed
+  'path' => '/',                // Available throughout the site
+  'domain' => '',               // Leave empty for current domain
+  'secure' => false,             // Only send over HTTPS
+  'httponly' => true,           // Prevent JavaScript access
+  'samesite' => 'Strict'        // Protect against CSRF
+]);
+
 session_start();
 
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
 
 
 require_once "conn.php";
-
-// Insert session data into the sessions table
-$logSessionSql = "INSERT INTO sessions (username, session_id, user_agent, ip_address) VALUES (?, ?, ?, ?)";
-if ($logStmt = mysqli_prepare($conn, $logSessionSql)) {
-  mysqli_stmt_bind_param($logStmt, "ssss", $usernamee, $sessionId, $userAgent, $ipAddress);
-  mysqli_stmt_execute($logStmt);
-  mysqli_stmt_close($logStmt);
-}
 
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ) {
   header("Location: login.php"); // Redirect to login if not logged in or not authenticated
@@ -41,7 +46,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
       <!-- Dashboard Overview -->
 
       <li class="active">
-        <a href="index.html">
+        <a href="">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z"/></svg>
           <span class="noShow">Dashboard Overview</span>
         </a>
@@ -310,6 +315,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
 
     </ul>
   </nav>
+
+  
  
 </body>
 </html>

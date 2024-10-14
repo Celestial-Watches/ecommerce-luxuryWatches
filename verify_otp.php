@@ -1,12 +1,26 @@
 <?php
+
+// // Set the session cookie with secure attributes
+session_set_cookie_params([
+    'lifetime' => 86400,              // Session expires when the browser is closed
+    'path' => '/',                // Available throughout the site
+    'domain' => '',               // Leave empty for current domain
+    'secure' => false,             // Only send over HTTPS
+    'httponly' => true,           // Prevent JavaScript access
+    'samesite' => 'Strict'        // Protect against CSRF
+]);
+
 session_start(); // Ensure session is started at the very beginning
 
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
 
 // Redirect logged-in users to index.php
 if (isset($_SESSION['user'])) {
     header("Location: index.php");
     exit();
 }
+
 
 $errors = [];
 $success_message = "";
@@ -32,6 +46,7 @@ if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] || $_SESSION['ip_add
 // Check if OTP has expired
 $otp_expiry_time = $_SESSION['otp_expiry'] ?? 0;
 $is_expired = time() > $otp_expiry_time;
+$usernamee = $_SESSION['username'];
 
 // Handle Resend OTP
 if (isset($_POST['resend'])) {
@@ -60,9 +75,18 @@ if (isset($_POST['resend'])) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Your OTP Code';
-        $mail->Body    = "Your new OTP code is: <b>$otp</b>";
+        $mail->Subject = 'Your New OTP Code';
+        $mail->addEmbeddedImage(dirname(__FILE__) . '/image/newsletter.jpg', 'newsletter_image');
+        $mail->Body    = '<img src="cid:newsletter_image">'
+            . '<br>'
+            . '<h2>Email Verification Code</h2>'
+            . '<p>Hello ' . htmlspecialchars($usernamee, ENT_QUOTES, 'UTF-8') . ', Enter this code on the identity verification screen:</p>'
+            . '<br>'
+            . "Your new OTP code is: <b>$otp</b>"
+            . '<br>'
+            . '<p>This code will expire shortly. If you can&#8217;t find the verification code, try signing up again.</p>';
         $mail->AltBody = "Your new OTP code is: $otp";
+       
 
         // Send the email
         $mail->send();
@@ -124,12 +148,13 @@ if (isset($_POST['verify'])) {
                             unset($_SESSION['password']); // Clear the password from the session
                             unset($_SESSION['phone']); // Clear the phone number from the session
                             unset($_SESSION['otp_expiry']); // Clear the OTP expiry time from the session
-                            setcookie('SSIDU', '', time() - 3600, '/', '', true, true);
+                            setcookie('SSIDU', '', time() - 3600, '/', '', false, true);
 
 
 
                             // Set user session
                             $_SESSION['user'] = $usernamee; // Set user session
+                            setcookie("loggedYes", "true", time() + 3600, "/", false, true);
                             $_SESSION['otp_verified'] = true;
                             header("Location: index.php"); // Redirect to index.php
                             exit(); // Ensure no further code is executed
@@ -156,6 +181,8 @@ $remaining_time = max(0, $otp_expiry_time - time());
 $minutes = floor($remaining_time / 60);
 $seconds = $remaining_time % 60;
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -170,9 +197,9 @@ $seconds = $remaining_time % 60;
 
 
     <script>
-        // Dynamic countdown timer
-        let remainingTime = <?php echo $remaining_time; ?>; // Remaining time in seconds
+        let remainingTime = <?php echo $remaining_time; ?>; // Initial remaining time in seconds
 
+        // Function to update the timer display
         function updateTimer() {
             if (remainingTime <= 0) {
                 document.getElementById('timer').innerHTML = "OTP has expired.";
@@ -183,12 +210,29 @@ $seconds = $remaining_time % 60;
             const minutes = Math.floor(remainingTime / 60);
             const seconds = remainingTime % 60;
             document.getElementById('timer').innerHTML = `Expires in: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            remainingTime--;
+            remainingTime--; // Decrement remaining time on the client-side
 
-            setTimeout(updateTimer, 1000); // Update every second
+            // Continue updating the timer every second
+            setTimeout(updateTimer, 1000);
         }
 
-        window.onload = updateTimer; // Start the timer when the page loads
+        // Function to fetch the remaining time from the server using AJAX
+        function fetchRemainingTime() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetch_remaining_time.php', true); // Your PHP file that returns remaining time
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    remainingTime = parseInt(this.responseText); // Update remainingTime with the server response
+                }
+            };
+            xhr.send();
+        }
+
+        // Fetch the remaining time every 30 seconds (adjust as needed)
+        setInterval(fetchRemainingTime, 30000); // Fetch updated time from the server
+
+        // Start the timer when the page loads
+        window.onload = updateTimer;
     </script>
 </head>
 
@@ -215,7 +259,7 @@ $seconds = $remaining_time % 60;
                 <button type="submit" class="login-button" name="verify" id="verify-button">Verify OTP</button>
                 <div class="login-footer">
                     <a href="javascript:void(0);" onclick="document.getElementById('resend-form').submit();">Resend OTP</a>
-                    <span id="timer" style="float: right;">Expires in: <?php echo sprintf("%02d:%02d", $minutes, $seconds); ?></span>
+                    <span id="timer" style="float: right;">Expires in: <?php echo str_pad($minutes, 2, '0', STR_PAD_LEFT) . ":" . str_pad($seconds, 2, '0', STR_PAD_LEFT); ?></span>
                 </div>
             </form>
             <form id="resend-form" action="verify_otp.php" method="post" style="display: none;">

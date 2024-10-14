@@ -1,5 +1,15 @@
 <?php
 
+// Set the session cookie with secure attributes
+session_set_cookie_params([
+  'lifetime' => 86400,              // Session expires when the browser is closed
+  'path' => '/',                // Available throughout the site
+  'domain' => '',               // Leave empty for current domain
+  'secure' => false,             // Only send over HTTPS
+  'httponly' => true,           // Prevent JavaScript access
+  'samesite' => 'Strict'        // Protect against CSRF
+]);
+
 // Set secure session cookie parameters
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1); // Ensure your site is served over HTTPS
@@ -10,12 +20,15 @@ ini_set('session.cookie_samesite', 'Strict'); // Additional session security
 session_start();
 ob_start();
 
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
+
 
 if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
   // User hasn't verified OTP yet, clear the session variable or reset it
   unset($_SESSION['user']);
   // Optionally, clear the cookies if you're storing the user info in cookies
-  setcookie("SSIDU", "", time() - 3600, "/"); // Expire the cookie
+  setcookie("SSIDU", "", time() - 3600, "/", true,true); // Expire the cookie
 }
 
 // Redirect logged-in users to index.php
@@ -160,6 +173,7 @@ if (isset($_POST["submit"])) {
   // Regenerate session ID upon successful login/registration
   session_regenerate_id(true);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

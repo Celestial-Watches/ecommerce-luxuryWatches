@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Watches</title>
+    <script src="/js/scroll-animation.js"></script>
     <style>
-        
         .banner {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             flex-direction: column;
-            height: 72vh;
+            height: 85vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,7 +21,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            height: calc(100vh - 220px);
+            height: 100%; 
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
@@ -84,6 +84,19 @@
             border-color: #fff9;
         }
 
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Move elements slightly downwards */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Bring elements to their original position */
+        }
+
 
         @media (max-width: 600px) {
             .bannerOverlay h1 {
@@ -103,14 +116,14 @@
 
 <body>
 
-    <section class="banner">
+    <section class="banner ">
         <div class="video-container">
             <video id="bannerVideo" autoplay muted loop>
                 <source src="/image/video/Untitled video - Made with Clipchamp.mp4" type="video/mp4">
             </video>
             <div class="bannerOverlay">
-                <h1>Welcome to Celestial Watches</h1>
-                <p>Exclusivity in Every Tick</p>
+                <h1 class="animate-on-scroll">Welcome to Celestial Watches</h1>
+                <p class="animate-on-scroll">Exclusivity in Every Tick</p>
                 <a href="#shop" class="cta-button">Shop Now</a>
             </div>
         </div>

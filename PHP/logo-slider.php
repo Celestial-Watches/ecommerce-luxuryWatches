@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/js/scroll-animation.js"></script>
     <style>
         @keyframes slide {
             from {
@@ -52,7 +53,7 @@
         }
 
         .logos-slide .brand-slider {
-            height: 50px;
+            height: 25px;
             margin: 0 40px;
         }
 
@@ -96,12 +97,25 @@
                 left: 100%;
             }
         }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Move elements slightly downwards */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Bring elements to their original position */
+        }
     </style>
 </head>
 
 <body>
-    <div class="logos">
-        <div class="logos-slide">
+    <div class="logos animate-on-scroll">
+        <div class="logos-slide animate-on-scroll">
             <span class="brand-slider"> Patek Philippe </span>
             <span class="brand-slider"> Richard Mille </span>
             <span class="brand-slider"> Audemars Piguet </span>

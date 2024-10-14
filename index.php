@@ -1,13 +1,20 @@
 <?php
+
+// Set the session cookie with secure attributes
+session_set_cookie_params([
+  'lifetime' => 86400,              // Session expires when the browser is closed
+  'path' => '/',                // Available throughout the site
+  'domain' => '',               // Leave empty for current domain
+  'secure' => false,             // Only send over HTTPS
+  'httponly' => true,           // Prevent JavaScript access
+  'samesite' => 'Strict'        // Protect against CSRF
+]);
+
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
-
-
-// Check for the username cookie to log in automatically
-if (isset($_COOKIE['SSIDU'])) {
-  $_SESSION['user'] = $_COOKIE['SSIDU'];
-}
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
 
 
 // Check if the user navigated back from verify_otp.php
@@ -15,7 +22,6 @@ if (isset($_SESSION['otp']) && !isset($_SESSION['user'])) {
   session_unset(); // Unset session variables
   session_destroy(); // Destroy the session
 }
-
 
 // Check if the user is logged in and is an admin
 $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
@@ -50,6 +56,7 @@ if (isset($_SESSION['user'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +72,7 @@ if (isset($_SESSION['user'])) {
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
-  
+
   <script src="/js/navigation.js"></script>
 
   <!-- ============= CSS =============  -->
@@ -161,7 +168,7 @@ if (isset($_SESSION['user'])) {
 
           <li>
             <a href="#" class="social-link">
-            <ion-icon name="logo-instagram"></ion-icon>
+              <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
 
@@ -198,18 +205,18 @@ if (isset($_SESSION['user'])) {
           </select>
 
           <button class="logg-button">
-          <?php if (isset($_SESSION['user']) || isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true): ?>
-                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
-                    <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
-                    <span class="log-button">/</span>
-                    <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
-                <?php else: ?>
-                    <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
-                <?php endif; ?>
-            <?php else: ?>
-                <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
+            <?php if (isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true || isset($_COOKIE['temp']) || isset($_COOKIE['loggedYes'])): ?>
+              <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
                 <span class="log-button">/</span>
-                <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
+                <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+              <?php else: ?>
+                <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+              <?php endif; ?>
+            <?php else: ?>
+              <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
+              <span class="log-button">/</span>
+              <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
             <?php endif; ?>
             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -663,21 +670,41 @@ if (isset($_SESSION['user'])) {
         <li class="menu-category">
           <a href="#" class="menu-title">Hot Offers</a>
         </li>
-        <?php if (isset($_SESSION['user'])): ?>
-          <li class="menu-category">
-            <a href="logout.php" class="menu-title">Logout</a>
-          </li>
+
+        <?php
+        // Check if the user is logged in (session or cookie) and OTP is verified
+        if ((isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true) || isset($_COOKIE['temp'])):
+        ?>
+
+          <?php
+          // Check if the user is an admin
+          if (isset($_SESSION['admin']) && $_SESSION['admin'] === true):
+          ?>
+            <!-- Admin-specific options -->
+            <li class="menu-category">
+              <a href="/PHP/panel.php" class="menu-title">Panel</a>
+            </li>
+            <li class="menu-category">
+              <a href="logout.php" class="menu-title">Logout</a>
+            </li>
+
+          <?php else: ?>
+            <!-- User-specific option -->
+            <li class="menu-category">
+              <a href="logout.php" class="menu-title">Logout</a>
+            </li>
+          <?php endif; ?>
+
         <?php else: ?>
+          <!-- Display login and signup links if the user is not logged in -->
           <li class="menu-category">
             <a href="login.php" class="menu-title">Log In</a>
           </li>
-
           <li class="menu-category">
             <a href="signin.php" class="menu-title">Sign Up</a>
           </li>
         <?php endif; ?>
-
-
+          
       </ul>
 
       <div class="menu-bottom">
@@ -765,23 +792,23 @@ if (isset($_SESSION['user'])) {
 
   <!-- ================================ MAIN ================================  -->
 
-          <?php include 'PHP/banner.php';
-          ?>
+  <?php include 'PHP/banner.php';
+  ?>
 
-          <?php include 'PHP/logo-slider.php';
-          ?>
+  <?php include 'PHP/logo-slider.php';
+  ?>
 
-          <?php include 'PHP/featured-product.php';
-          ?>
-          <hr style="border-color: #ffffff;">
+  <?php include 'PHP/featured-product.php';
+  ?>
+  <hr style="border-color: #ffffff;">
 
-          <?php include 'PHP/trending-article.php';
-          ?>
-          
+  <?php include 'PHP/trending-article.php';
+  ?>
+
   <!-- ================================ JS ================================  -->
   <script src="/js/swiper-bundle.min.js"></script>
   <script src="/js/index.js"></script>
-  
+
 </body>
 
 </html>

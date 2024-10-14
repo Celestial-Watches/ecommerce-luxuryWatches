@@ -1,8 +1,24 @@
 <?php
+
+// // Set the session cookie with secure attributes
+session_set_cookie_params([
+  'lifetime' => 86400,              // Session expires when the browser is closed
+  'path' => '/',                // Available throughout the site
+  'domain' => '',               // Leave empty for current domain
+  'secure' => false,             // Only send over HTTPS
+  'httponly' => true,           // Prevent JavaScript access
+  'samesite' => 'Strict'        // Protect against CSRF
+]);
+
+
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 ob_start();
 
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
+
+$usernamee = isset($_COOKIE['rem_username']) ? $_COOKIE['rem_username'] : '';
 
 // Check for the username cookie before displaying the login form
 if (isset($_SESSION['user']) || isset($_COOKIE['SSIDU'])) {
@@ -32,6 +48,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 // Update last activity time
 $_SESSION['last_activity'] = time();
 
+
 if (isset($_POST["login"])) {
   // Increment login attempts only if the login button is clicked
   $_SESSION['login_attempts']++;
@@ -49,6 +66,32 @@ if (isset($_POST["login"])) {
     }
     if (empty($password)) {
       $errors[] = "Password is required";
+    }
+
+    // Auto-login if cookies are set
+    if (isset($_COOKIE['temp'])) {
+      $usernamee = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES, 'UTF-8');
+      // Check if the user exists in the database
+      $sql = "SELECT * FROM users WHERE username = ?";
+      if ($stmt = mysqli_prepare($conn, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $usernamee);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($user = mysqli_fetch_assoc($result)) {
+          $_SESSION["user"] = $usernamee;
+          $_SESSION["LAST_ACTIVITY"] = time();
+          $_SESSION["CREATED"] = time();
+          $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+          $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+          $_SESSION['otp_verified'] = true;
+
+          // Redirect to index after auto-login
+          header("Location: index.php");
+          exit();
+        }
+        mysqli_stmt_close($stmt);
+      }
     }
 
     if (empty($errors)) {
@@ -82,7 +125,7 @@ if (isset($_POST["login"])) {
               $_SESSION["CREATED"] = time();
               $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
               $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
-
+              $_SESSION['otp_verified'] = true;
 
               // Redirect to admin verification page
               header("Location: index.php");
@@ -98,6 +141,17 @@ if (isset($_POST["login"])) {
             $_SESSION["CREATED"] = time();
             $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+            $_SESSION['otp_verified'] = true;
+
+            if (isset($_POST['remember'])) {
+              setcookie('temp', '1', time() + 3600, '/', '', true, true);
+              // echo "Cookie set: temp = 1"; // Debug output
+          } else {
+              setcookie('temp', '', time() - 3600, '/', '', true, true);
+              // echo "Cookie cleared"; // Debug output
+          }
+          
+
 
             // Redirect to the main index page
             header("Location: index.php");
@@ -117,18 +171,11 @@ if (isset($_POST["login"])) {
   }
 }
 
-// Cookie settings for session
-if (session_status() === PHP_SESSION_NONE) {
-  session_set_cookie_params([
-    'lifetime' => 86400, // 1 day
-    'path' => '/',
-    'domain' => '',
-    'secure' => false, // Change to true in production
-    'httponly' => true,
-    'samesite' => 'Lax'
-  ]);
-}
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -787,7 +834,7 @@ if (session_status() === PHP_SESSION_NONE) {
       <form action="login.php" method="post">
         <div class="input-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($usernamee ?? '', ENT_QUOTES); ?>">
+          <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($usernamee, ENT_QUOTES); ?>">
         </div>
         <div class="input-group">
           <label for="password">Password</label>
@@ -795,7 +842,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <span class="password-toggle-icon" title="Show Passowrd"><i class="fas fa-eye-slash"></i></span>
         </div>
         <div class="input-group remember-me-group">
-          <input type="checkbox" id="remember" name="remember" class="rem">
+          <input type="checkbox" id="remember" name="remember" value="1" class="rem" <?php echo (isset($_COOKIE['temp']) && $_COOKIE['temp'] === '1') ? 'checked' : ''; ?>>
           <label for="remember">Remember Me</label>
         </div>
         <button type="submit" class="login-button" name="login">Login</button>

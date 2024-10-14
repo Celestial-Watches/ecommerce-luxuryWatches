@@ -1,5 +1,19 @@
 <?php
+
+// // Set the session cookie with secure attributes
+session_set_cookie_params([
+  'lifetime' => 86400,              // Session expires when the browser is closed
+  'path' => '/',                // Available throughout the site
+  'domain' => '',               // Leave empty for current domain
+  'secure' => false,             // Only send over HTTPS
+  'httponly' => true,           // Prevent JavaScript access
+  'samesite' => 'Strict'        // Protect against CSRF
+]);
+
 session_start();
+
+// Regenerate the session ID on every page refresh
+session_regenerate_id(true);
 
 require_once "../conn.php"; 
 

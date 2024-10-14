@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Layout</title>
+    <script src="/js/scroll-animation.js"></script>
     <style>
-        
         .article-container {
             background-color: #f9f9f9;
             display: flex;
@@ -105,7 +106,8 @@
             margin-bottom: 5px;
         }
 
-        .right-text .spotlight-large-header , .spotlight-head  {
+        .right-text .spotlight-large-header,
+        .spotlight-head {
             font-family: "mrs-eaves-xl-serif-narrow", serif;
             font-style: normal;
             font-weight: 400;
@@ -127,7 +129,9 @@
             color: gray;
         }
 
-        .meta-info, .spotlight-text, .category {
+        .meta-info,
+        .spotlight-text,
+        .category {
             font-family: "mrs-eaves-xl-serif-narrow", serif;
             font-style: italic;
             font-weight: 400;
@@ -170,93 +174,92 @@
 
         @media (max-width: 768px) {
             .article-body {
-                flex-direction: column; 
+                flex-direction: column;
             }
 
             .feature-content-container {
-                margin-right: 0; 
+                margin-right: 0;
             }
 
             .right-grid {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
 
 <body class="articleBody">
     <div class="topic-name">
-        <h2 class="article-title">Trending Articles  <svg style="
+        <h2 class="article-title">Trending Articles <svg style="
     margin-left: 10px;
 " class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-</svg>
-</h2>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+            </svg>
+        </h2>
     </div>
-    <div class="article-container">
-        <div class="article-body">
-            <div class="feature-content-container">
+    <div class="article-container animate-on-scroll">
+        <div class="article-body animate-on-scroll">
+            <div class="feature-content-container animate-on-scroll">
                 <div class="feature-section">
                     <img class="feature-img"
                         src="https://www.favreleuba.com/blog/wp-content/uploads/2024/09/Favre-Leuba-Chief-chronograph.jpg"
                         alt="Feature Watch">
                 </div>
-                <div class="feature-content">
-                    <div class="spotlight">SPOTLIGHT</div>
-                    <h1 class="spotlight-head" style="font-size: 40px; line-height: 1;">Favre Leuba's Chief Collection: A 287-Year-Old Phoenix Rises</h1>
-                    <p class="spotlight-text">
+                <div class="feature-content animate-on-scroll">
+                    <div class="spotlight animate-on-scroll">SPOTLIGHT</div>
+                    <h1 class="spotlight-head animate-on-scroll" style="font-size: 40px; line-height: 1;">Favre Leuba's Chief Collection: A 287-Year-Old Phoenix Rises</h1>
+                    <p class="spotlight-text animate-on-scroll">
                         In the quiet Swiss town of Grenchen, a 287-year-old phoenix is rising from the ashes. Favre Leuba, once the titan of Swiss watchmaking, are stirring back to life with a collection that’s equal parts homage and revolution. The Favre Leuba Chief
                     </p> <br>
-                    <div class="meta-info">
+                    <div class="meta-info animate-on-scroll">
                         <span>August 31, 2024</span>
                     </div>
                 </div>
             </div>
-            <div class="right-section">
-                <div class="right-grid">
-                    <div class="right-item">
-                        <img class="right-img"
+            <div class="right-section animate-on-scroll">
+                <div class="right-grid animate-on-scroll">
+                    <div class="right-item animate-on-scroll">
+                        <img class="right-img animate-on-scroll"
                             src="https://cdn1.ethoswatches.com/media/catalog/product/h/-/h-moser-cie-pioneer-6804-0400-multiple-4.jpg"
                             alt="Watch">
-                        <div class="right-text">
-                            <span class="category">ROUND-UP</span>
-                            <h3 class="spotlight-large-header">Evolution Of Fluid Timekeeping: Presenting The Finest H.
+                        <div class="right-text animate-on-scroll">
+                            <span class="category animate-on-scroll">ROUND-UP</span>
+                            <h3 class="spotlight-large-header animate-on-scroll">Evolution Of Fluid Timekeeping: Presenting The Finest H.
                                 Moser &amp; Cie. Streamliner Timepieces</h3>
-                            <p class="spotlight-text">August 19, 2024</p>
+                            <p class="spotlight-text animate-on-scroll">August 19, 2024</p>
                         </div>
                     </div>
-                    <div class="right-item">
-                        <img class="right-img"
+                    <div class="right-item animate-on-scroll">
+                        <img class="right-img animate-on-scroll"
                             src="/image/Carl-F-Bucherer-Heritage-Chronometer-Celebration-Feat.jpg"
                             alt="Watch">
-                        <div class="right-text">
-                            <span class="category">REVIEW</span>
-                            <h3 class="spotlight-large-header">Simply Stunning: Introducing The Heritage Chronometer
+                        <div class="right-text animate-on-scroll">
+                            <span class="category animate-on-scroll">REVIEW</span>
+                            <h3 class="spotlight-large-header animate-on-scroll">Simply Stunning: Introducing The Heritage Chronometer
                                 Celebration timepieces By Carl F. Bucherer</h3>
-                            <p class="spotlight-text">August 23, 2024</p>
+                            <p class="spotlight-text animate-on-scroll">August 23, 2024</p>
                         </div>
                     </div>
-                    <div class="right-item">
-                        <img class="right-img"
+                    <div class="right-item animate-on-scroll">
+                        <img class="right-img animate-on-scroll"
                             src="/image/wempe-signature-collection-girard-perregaux-laureato-42mm-16.jpg"
                             alt="Watch">
-                        <div class="right-text">
-                            <span class="category">REVIEW</span>
-                            <h3 class="spotlight-large-header">The Legacy Lives On: Presenting The Girard-Perregaux
+                        <div class="right-text animate-on-scroll">
+                            <span class="category animate-on-scroll">REVIEW</span>
+                            <h3 class="spotlight-large-header animate-on-scroll">The Legacy Lives On: Presenting The Girard-Perregaux
                                 Laureato 38mm Copper Diamond Bezel</h3>
-                            <p class="spotlight-text">August 23, 2024</p>
+                            <p class="spotlight-text animate-on-scroll">August 23, 2024</p>
                         </div>
                     </div>
-                    <div class="right-item">
-                        <img class="right-img"
+                    <div class="right-item animate-on-scroll">
+                        <img class="right-img animate-on-scroll"
                             src="/image/Ressence-Type-3-Featured.jpeg"
                             alt="Watch">
-                        <div class="right-text">
-                            <span class="category">REVIEW</span>
-                            <h3 class="spotlight-large-header">A Well-Oiled Machine: Presenting The Ressence Type 3
+                        <div class="right-text animate-on-scroll">
+                            <span class="category animate-on-scroll">REVIEW</span>
+                            <h3 class="spotlight-large-header animate-on-scroll">A Well-Oiled Machine: Presenting The Ressence Type 3
                                 Collection</h3>
-                            <p class="spotlight-text">August 23, 2024</p>
+                            <p class="spotlight-text animate-on-scroll">August 23, 2024</p>
                         </div>
                     </div>
                 </div>

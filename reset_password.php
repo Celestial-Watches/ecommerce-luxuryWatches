@@ -1,106 +1,117 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-date_default_timezone_set('Asia/Kolkata');
 session_start();
 
-// Redirect logged-in users to index.php
-if (isset($_SESSION['user'])) {
-    header("Location: index.php");
-    exit();
-}
-
 require_once "conn.php";
+require 'vendor/autoload.php'; // Ensure PHPMailer is autoloaded
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 $errors = [];
 $success_message = "";
 
-if (isset($_GET['token'])) {
-    $token = $_GET['token'];
-    
-    // Check if the token is valid and not expired
-    $sql = "SELECT * FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()";
+$login_page_url = "login.php";
+
+if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $login_page_url) === false) {
+    header("Location: $login_page_url");
+    exit(); 
+}
+
+// Check if the password reset process is already completed
+if (isset($_SESSION['password_reset_complete']) && $_SESSION['password_reset_complete']) {
+    header('Location: login.php');
+    exit();
+}
+
+// Check if token is provided and valid
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['token'])) {
+    $token = $_POST['token'];
+    $sql = "SELECT email FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()";
     if ($stmt = mysqli_prepare($conn, $sql)) {
         mysqli_stmt_bind_param($stmt, "s", $token);
         mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_store_result($stmt);
 
-        if (mysqli_num_rows($result) == 1) {
-            $user = mysqli_fetch_assoc($result);
-
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $new_password = trim($_POST["new_password"]);
-                $confirm_password = trim($_POST["confirm_password"]);
-
-                if (empty($new_password)) {
-                    $errors[] = "New password is required";
-                } elseif (strlen($new_password) < 8) {
-                    $errors[] = "Password must be at least 8 characters long";
-                }
-
-                if ($new_password !== $confirm_password) {
-                    $errors[] = "Passwords do not match";
-                }
-
-                if (empty($errors)) {
-                    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-                    $update_sql = "UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?";
-                    if ($update_stmt = mysqli_prepare($conn, $update_sql)) {
-                        mysqli_stmt_bind_param($update_stmt, "si", $hashed_password, $user['id']);
-                        if (mysqli_stmt_execute($update_stmt)) {
-                            // Send confirmation email
-                            require 'vendor/autoload.php'; // Ensure PHPMailer is included
-                            $mail = new PHPMailer\PHPMailer\PHPMailer();
-                            $mail->isSMTP();
-                            $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-                            $mail->SMTPAuth = true;
-                            $mail->Username = 'celestialwatches69@gmail.com'; // Your email
-                            $mail->Password = 'xvmjnggsmsnkavzt'; // Your email password or App Password
-                            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-                            $mail->Port = 465;
-
-                            // Recipients
-                            $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
-                            $mail->addAddress($user['email']); // Send to the user's email
-
-                            // Content
-                            $mail->isHTML(true);
-                            $mail->Subject = 'Password Reset Confirmation';
-                            $mail->Body = 'Your password has been successfully reset. You can now log in with your new password.';
-
-                            // Send email
-                            if (!$mail->send()) {
-                                $errors[] = "Failed to send confirmation email. Mailer Error: {$mail->ErrorInfo}";
-                            } else {
-                                $success_message = "Your password has been successfully reset. A confirmation email has been sent.";
-                                
-                                // Add redirection script
-                                echo "<script>
-                                        setTimeout(function() {
-                                            window.location.href = 'login.php';
-                                        }, 2000);
-                                      </script>";
-                            }
-                        } else {
-                            $errors[] = "Something went wrong while updating the password.";
-                        }
-                    } else {
-                        $errors[] = "Something went wrong. Please try again later.";
-                    }
-                }
-            }
+        if (mysqli_stmt_num_rows($stmt) == 1) {
+            mysqli_stmt_bind_result($stmt, $email);
+            mysqli_stmt_fetch($stmt);
+            $_SESSION['email'] = $email; // Store email in session for password update
         } else {
-            $errors[] = "Invalid or expired token. Please request a new password reset.";
+            $errors[] = "Invalid or expired token.";
         }
         mysqli_stmt_close($stmt);
     } else {
-        $errors[] = "Something went wrong. Please try again later.";
+        $errors[] = "Database error: " . mysqli_error($conn);
     }
-} else {
-    $errors[] = "Invalid request. Please use the reset link sent to your email.";
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($errors) && isset($_POST['new_password'])) {
+    $new_password = trim($_POST["new_password"]);
+    $confirm_password = trim($_POST["confirm_password"]);
+
+    if (empty($new_password)) {
+        $errors[] = "New password is required";
+    } elseif (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $new_password)) {
+        $errors[] = "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    }
+
+    if ($new_password !== $confirm_password) {
+        $errors[] = "Passwords do not match";
+    }
+
+    if (empty($errors)) {
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $email = $_SESSION['email']; // Use the email stored in session
+
+        $update_sql = "UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE email = ?";
+        if ($update_stmt = mysqli_prepare($conn, $update_sql)) {
+            mysqli_stmt_bind_param($update_stmt, "ss", $hashed_password, $email);
+            if (mysqli_stmt_execute($update_stmt)) {
+                // Send confirmation email
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'celestialwatches69@gmail.com';
+                    $mail->Password = 'xvmjnggsmsnkavzt'; // Use env variable for security
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port = 465;
+
+                    // Recipients
+                    $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
+                    $mail->addAddress($email);
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Password Reset Confirmation';
+                    $mail->Body = 'Your password has been successfully reset. You can now log in with your new password.';
+
+                    $mail->send();
+                    $success_message = "Your password has been successfully reset. A confirmation email has been sent.";
+                    
+                    // Set session flag to indicate completion
+                    $_SESSION['password_reset_complete'] = true;
+
+                    echo "<script>
+                            setTimeout(function() {
+                                window.location.href = 'login.php';
+                            }, 2000);
+                          </script>";
+                } catch (Exception $e) {
+                    $errors[] = "Failed to send confirmation email. Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                $errors[] = "Something went wrong while updating the password.";
+            }
+            mysqli_stmt_close($update_stmt);
+        } else {
+            $errors[] = "Something went wrong. Please try again later.";
+        }
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +137,7 @@ if (isset($_GET['token'])) {
                 echo "<div class='alert alert-success'>$success_message</div>";
             } else {
             ?>
-            <form action="reset_password.php?token=<?php echo htmlspecialchars($token); ?>" method="post">
+            <form action="reset_password.php" method="post">
                 <div class="input-group">
                     <label for="new_password">New Password</label>
                     <input type="password" id="new_password" name="new_password" required>
