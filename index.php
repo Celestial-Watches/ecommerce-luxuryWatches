@@ -61,31 +61,31 @@ if (isset($_SESSION['user'])) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celestial Watches - Exclusivity in Every Tick</title>
 
 
 
-  <!-- ============= IONICONS =============  -->
-  <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
-  <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+    <!-- ============= IONICONS =============  -->
+    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
 
-  <script src="/js/navigation.js"></script>
+    <script src="/js/navigation.js"></script>
 
-  <!-- ============= CSS =============  -->
-  <link rel="stylesheet" href="/css/deskView.css" />
-  <link rel="stylesheet" href="/css/swiper-bundle.min.css">
+    <!-- ============= CSS =============  -->
+    <link rel="stylesheet" href="/css/deskView.css" />
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css">
 
 
 
-  <!-- ============= FONTS=============  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <!-- ============= FONTS=============  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
 
 </head>
@@ -93,174 +93,169 @@ if (isset($_SESSION['user'])) {
 <body>
 
 
-  <!-- ============= Newsletter=============  -->
+    <!-- ============= Newsletter=============  -->
 
-  <div class="overlay" data-overlay></div>
+    <div class="overlay" data-overlay></div>
 
-  <!-- ============= MODAL =============  -->
+    <!-- ============= MODAL =============  -->
 
-  <div class="modal" data-modal>
+    <div class="modal" data-modal>
 
-    <div class="modal-close-overlay" data-modal-overlay></div>
+        <div class="modal-close-overlay" data-modal-overlay></div>
 
-    <div class="modal-content">
+        <div class="modal-content">
 
-      <button class="modal-close-btn" data-modal-close>
-        <ion-icon name="close-outline"></ion-icon>
-      </button>
+            <button class="modal-close-btn" data-modal-close>
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
 
-      <div class="newsletter-img">
-        <img src="/image/newsletter.jpg" alt="subscribe newsletter" width="400" height="450">
-      </div>
+            <div class="newsletter-img">
+                <img src="/image/newsletter.jpg" alt="subscribe newsletter" width="400" height="450">
+            </div>
 
-      <div class="newsletter">
+            <div class="newsletter">
 
-        <form action="#">
+                <form action="#">
 
-          <div class="newsletter-header">
+                    <div class="newsletter-header">
 
-            <h3 class="newsletter-title">Subscribe Newsletter.</h3>
+                        <h3 class="newsletter-title">Subscribe Newsletter.</h3>
 
-            <p class="newsletter-desc">
-              Subscribe the <b>Celestial Watches </b> to get latest products and discount update.
-            </p>
+                        <p class="newsletter-desc">
+                            Subscribe the <b>Celestial Watches </b> to get latest products and discount update.
+                        </p>
 
-          </div>
+                    </div>
 
-          <input type="email" name="email" class="email-field" placeholder="Email Address" required>
+                    <input type="email" name="email" class="email-field" placeholder="Email Address" required>
 
-          <button type="submit" class="btn-newsletter">Subscribe</button>
+                    <button type="submit" class="btn-newsletter">Subscribe</button>
 
-        </form>
+                </form>
 
-      </div>
+            </div>
+
+        </div>
 
     </div>
 
-  </div>
+
+
+    <!-- ================================================================ -->
 
 
 
-  <!-- ================================================================ -->
+    <!-- ============= HEADER =============  -->
+    <header>
 
+        <div class="header-top">
 
+            <div class="container top-container">
 
-  <!-- ============= HEADER =============  -->
-  <header>
+                <ul class="header-social-container">
 
-    <div class="header-top">
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
 
-      <div class="container top-container">
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
 
-        <ul class="header-social-container">
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
+                </ul>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
+                <div class="header-alert-news">
+                    <p>
+                        <b>Free Shipping</b>
+                        This Week Order Over - $55
+                    </p>
+                </div>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
+                <div class="header-top-actions">
 
-        </ul>
+                    <select id="currency" name="currency">
+                        <option value="usd">USD &dollar;</option>
+                        <option value="eur">EUR &euro;</option>
+                    </select>
 
-        <div class="header-alert-news">
-          <p>
-            <b>Free Shipping</b>
-            This Week Order Over - $55
-          </p>
-        </div>
+                    <select id="language" name="language">
+                        <option value="en-US">English</option>
+                        <option value="es-ES">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
 
-        <div class="header-top-actions">
+                    <button class="logg-button">
+                        <?php if (isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true || isset($_COOKIE['temp']) || isset($_COOKIE['loggedYes'])): ?>
+                        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                        <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
+                        <span class="log-button">/</span>
+                        <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+                        <?php else: ?>
+                        <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
+                        <?php endif; ?>
+                        <?php else: ?>
+                        <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
+                        <span class="log-button">/</span>
+                        <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
+                        <?php endif; ?>
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
 
-          <select name="currency">
+                </div>
 
-            <option value="usd">USD &dollar;</option>
-            <option value="eur">EUR &euro;</option>
-
-          </select>
-
-          <select name="language">
-
-            <option value="en-US">English</option>
-            <option value="es-ES">Espa&ntilde;ol</option>
-            <option value="fr">Fran&ccedil;ais</option>
-
-          </select>
-
-          <button class="logg-button">
-            <?php if (isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true || isset($_COOKIE['temp']) || isset($_COOKIE['loggedYes'])): ?>
-              <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
-                <span class="log-button"><a class="styled-login" href="/PHP/panel.php">Panel</a></span>
-                <span class="log-button">/</span>
-                <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
-              <?php else: ?>
-                <span class="log-button"><a class="styled-login" href="logout.php">Logout</a></span>
-              <?php endif; ?>
-            <?php else: ?>
-              <span class="log-button"><a class="styled-login" href="login.php">Log In</a></span>
-              <span class="log-button">/</span>
-              <span class="log-button"><a class="styled-login" href="signin.php">Sign Up</a></span>
-            <?php endif; ?>
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
+            </div>
 
         </div>
 
-      </div>
+        <div class="header-main">
 
-    </div>
+            <div class="container">
 
-    <div class="header-main">
+                <a href="#" class="header-logo">
+                    <img src="" alt="Celestial logo" width="120" height="36">
+                </a>
 
-      <div class="container">
+                <div class="header-search-container">
 
-        <a href="#" class="header-logo">
-          <img src="" alt="Celestial logo" width="120" height="36">
-        </a>
+                    <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
 
-        <div class="header-search-container">
+                    <button class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
 
-          <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
+                </div>
 
-          <button class="search-btn">
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
+                <div class="header-user-actions">
 
-        </div>
+                    <button class="action-btn profile-btn" title="Personal Dashboard">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </button>
 
-        <div class="header-user-actions">
-
-          <button class="action-btn profile-btn" title="Personal Dashboard">
-            <ion-icon name="person-outline"></ion-icon>
-          </button>
-
-          <!-- Dropdown for profile -->
+                    <!-- Dropdown for profile -->
 
 
 
-          <!-- <ul class="profile-category">
+                    <!-- <ul class="profile-category">
               <li class="profile-item"><a href="#" class="profile-link">View Profile</a></li>
               <li class="profile-item"><a href="#" class="profile-link">Orders</a></li>
               <li class="profile-item"><a href="#" class="profile-link">Account Settings</a></li>
@@ -273,541 +268,544 @@ if (isset($_SESSION['user'])) {
 
 
 
-          <!-- =========================== -->
+                    <!-- =========================== -->
 
 
-          <button class="action-btn">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span class="count">0</span>
-          </button>
+                    <button class="action-btn">
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <span class="count">0</span>
+                    </button>
 
-          <button class="action-btn">
-            <ion-icon name="bag-handle-outline"></ion-icon>
-            <span class="count">0</span>
-          </button>
+                    <button class="action-btn">
+                        <ion-icon name="bag-handle-outline"></ion-icon>
+                        <span class="count">0</span>
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
-      </div>
+        <nav class="desktop-navigation-menu">
 
-    </div>
+            <div class="container">
 
-    <nav class="desktop-navigation-menu">
+                <ul class="desktop-menu-category-list">
 
-      <div class="container">
+                    <li class="menu-category">
+                        <a href="index.php" class="menu-title">Home</a>
+                    </li>
 
-        <ul class="desktop-menu-category-list">
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Watches</a>
 
-          <li class="menu-category">
-            <a href="index.php" class="menu-title">Home</a>
-          </li>
+                        <div class="dropdown-panel">
 
-          <li class="menu-category">
-            <a href="#" class="menu-title">Watches</a>
+                            <ul class="dropdown-panel-list">
 
-            <div class="dropdown-panel">
+                                <li class="menu-title">
+                                    <a href="#">Electronics</a>
+                                </li>
 
-              <ul class="dropdown-panel-list">
+                                <li class="panel-list-item">
+                                    <a href="#">Desktop</a>
+                                </li>
 
-                <li class="menu-title">
-                  <a href="#">Electronics</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Laptop</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Desktop</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Camera</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Laptop</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Tablet</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Camera</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Headphone</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Tablet</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">
+                                        <img src="/image/electronics-banner-2.jpg" alt="headphone collection"
+                                            width="250" height="119">
+                                    </a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Headphone</a>
-                </li>
+                            </ul>
 
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="/image/electronics-banner-2.jpg" alt="headphone collection" width="250"
-                      height="119">
-                  </a>
-                </li>
+                            <ul class="dropdown-panel-list">
 
-              </ul>
+                                <li class="menu-title">
+                                    <a href="#">Men's</a>
+                                </li>
 
-              <ul class="dropdown-panel-list">
+                                <li class="panel-list-item">
+                                    <a href="#">Formal</a>
+                                </li>
 
-                <li class="menu-title">
-                  <a href="#">Men's</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Casual</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Formal</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Sports</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Casual</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Jacket</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Sports</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Sunglasses</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Jacket</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">
+                                        <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                                    </a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Sunglasses</a>
-                </li>
+                            </ul>
 
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
-                  </a>
-                </li>
+                            <ul class="dropdown-panel-list">
 
-              </ul>
+                                <li class="menu-title">
+                                    <a href="#">Women's</a>
+                                </li>
 
-              <ul class="dropdown-panel-list">
+                                <li class="panel-list-item">
+                                    <a href="#">Formal</a>
+                                </li>
 
-                <li class="menu-title">
-                  <a href="#">Women's</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Casual</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Formal</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Perfume</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Casual</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Cosmetics</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Perfume</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Bags</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Cosmetics</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">
+                                        <img src="/image/womens-banner.jpg" alt="women's fashion" width="250"
+                                            height="119">
+                                    </a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Bags</a>
-                </li>
+                            </ul>
 
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="/image/womens-banner.jpg" alt="women's fashion" width="250" height="119">
-                  </a>
-                </li>
+                            <ul class="dropdown-panel-list">
 
-              </ul>
+                                <li class="menu-title">
+                                    <a href="#">Electronics</a>
+                                </li>
 
-              <ul class="dropdown-panel-list">
+                                <li class="panel-list-item">
+                                    <a href="#">Smart Watch</a>
+                                </li>
 
-                <li class="menu-title">
-                  <a href="#">Electronics</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Smart TV</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Smart Watch</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Keyboard</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Smart TV</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Mouse</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Keyboard</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">Microphone</a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Mouse</a>
-                </li>
+                                <li class="panel-list-item">
+                                    <a href="#">
+                                        <img src="/image/electronics-banner-2.jpg" alt="mouse collection" width="250"
+                                            height="119">
+                                    </a>
+                                </li>
 
-                <li class="panel-list-item">
-                  <a href="#">Microphone</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="/image/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119">
-                  </a>
-                </li>
-
-              </ul>
+                            </ul>
 
 
+
+                        </div>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Men's</a>
+
+                        <ul class="dropdown-list">
+
+                            <li class="dropdown-item">
+                                <a href="#">Shirt</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Shorts & Jeans</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Safety Shoes</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Wallet</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Women's</a>
+
+                        <ul class="dropdown-list">
+
+                            <li class="dropdown-item">
+                                <a href="#">Dress & Frock</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Earrings</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Necklace</a>
+                            </li>
+
+                            <li class="dropdown-item">
+                                <a href="#">Makeup Kit</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">About us</a>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">MEMBERSHIP</a>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Blog</a>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Hot Offers</a>
+                    </li>
+
+
+                </ul>
 
             </div>
-          </li>
 
-          <li class="menu-category">
-            <a href="#" class="menu-title">Men's</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Shirt</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Shorts & Jeans</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Safety Shoes</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Wallet</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Women's</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Dress & Frock</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Earrings</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Necklace</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Makeup Kit</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">About us</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">MEMBERSHIP</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Blog</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Hot Offers</a>
-          </li>
-
-
-        </ul>
-
-      </div>
-
-    </nav>
+        </nav>
 
 
 
-    <!-- /*-----------------------------------*\
+        <!-- /*-----------------------------------*\
             MOBILE NAV
           \*-----------------------------------*/
    -->
 
 
 
-    <div class="mobile-bottom-navigation">
+        <div class="mobile-bottom-navigation">
 
-      <button class="action-btn has-menu-btn" data-mobile-menu-open-btn>
-        <ion-icon name="menu-outline"></ion-icon>
-      </button>
+            <button class="action-btn has-menu-btn" data-mobile-menu-open-btn>
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
 
-      <button class="action-btn">
-        <ion-icon name="bag-handle-outline"></ion-icon>
+            <button class="action-btn">
+                <ion-icon name="bag-handle-outline"></ion-icon>
 
-        <span class="count">0</span>
-      </button>
+                <span class="count">0</span>
+            </button>
 
-      <button class="action-btn">
-        <ion-icon name="home-outline"></ion-icon>
-      </button>
+            <button class="action-btn">
+                <ion-icon name="home-outline"></ion-icon>
+            </button>
 
-      <button class="action-btn">
-        <ion-icon name="heart-outline"></ion-icon>
+            <button class="action-btn">
+                <ion-icon name="heart-outline"></ion-icon>
 
-        <span class="count">0</span>
-      </button>
+                <span class="count">0</span>
+            </button>
 
-      <button class="action-btn profile-btn" data-mobile-menu-open-btn>
-        <ion-icon name="person-outline"></ion-icon>
-      </button>
+            <button class="action-btn profile-btn" data-mobile-menu-open-btn>
+                <ion-icon name="person-outline"></ion-icon>
+            </button>
 
-    </div>
+        </div>
 
-    <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+        <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
 
-      <div class="menu-top">
-        <h2 class="menu-title">Menu</h2>
+            <div class="menu-top">
+                <h2 class="menu-title">Menu</h2>
 
-        <button class="menu-close-btn" data-mobile-menu-close-btn>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <ul class="mobile-menu-category-list">
-
-        <li class="menu-category">
-          <a href="index.php" class="menu-title">Home</a>
-        </li>
-
-        <li class="menu-category">
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">About Us</p>
-          </button>
-        </li>
-
-        <li class="menu-category">
-
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Men's</p>
-
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                <button class="menu-close-btn" data-mobile-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
             </div>
-          </button>
 
-          <ul class="submenu-category-list" data-accordion>
+            <ul class="mobile-menu-category-list">
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Formal</a>
-            </li>
+                <li class="menu-category">
+                    <a href="index.php" class="menu-title">Home</a>
+                </li>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Casual</a>
-            </li>
+                <li class="menu-category">
+                    <button class="accordion-menu" data-accordion-btn>
+                        <p class="menu-title">About Us</p>
+                    </button>
+                </li>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Sports</a>
-            </li>
+                <li class="menu-category">
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Jacket</a>
-            </li>
+                    <button class="accordion-menu" data-accordion-btn>
+                        <p class="menu-title">Men's</p>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Sunglasses</a>
-            </li>
+                        <div>
+                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                        </div>
+                    </button>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">
-                <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
-              </a>
-            </li>
+                    <ul class="submenu-category-list" data-accordion>
 
-          </ul>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Formal</a>
+                        </li>
 
-        </li>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Casual</a>
+                        </li>
 
-        <li class="menu-category">
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Sports</a>
+                        </li>
 
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Women's</p>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Jacket</a>
+                        </li>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Sunglasses</a>
+                        </li>
 
-          <ul class="submenu-category-list" data-accordion>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">
+                                <img src="/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                            </a>
+                        </li>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Dress & Frock</a>
-            </li>
+                    </ul>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Earrings</a>
-            </li>
+                </li>
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Necklace</a>
-            </li>
+                <li class="menu-category">
 
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Makeup Kit</a>
-            </li>
+                    <button class="accordion-menu" data-accordion-btn>
+                        <p class="menu-title">Women's</p>
 
-          </ul>
+                        <div>
+                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                        </div>
+                    </button>
 
-        </li>
+                    <ul class="submenu-category-list" data-accordion>
 
-        <li class="menu-category">
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Dress & Frock</a>
+                        </li>
 
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Membership</p>
-          </button>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Earrings</a>
+                        </li>
 
-        </li>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Necklace</a>
+                        </li>
 
-        <li class="menu-category">
-          <a href="#" class="menu-title">Blog</a>
-        </li>
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">Makeup Kit</a>
+                        </li>
 
-        <li class="menu-category">
-          <a href="#" class="menu-title">Hot Offers</a>
-        </li>
+                    </ul>
 
-        <?php
+                </li>
+
+                <li class="menu-category">
+
+                    <button class="accordion-menu" data-accordion-btn>
+                        <p class="menu-title">Membership</p>
+                    </button>
+
+                </li>
+
+                <li class="menu-category">
+                    <a href="#" class="menu-title">Blog</a>
+                </li>
+
+                <li class="menu-category">
+                    <a href="#" class="menu-title">Hot Offers</a>
+                </li>
+
+                <?php
         // Check if the user is logged in (session or cookie) and OTP is verified
         if ((isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true) || isset($_COOKIE['temp'])):
         ?>
 
-          <?php
+                <?php
           // Check if the user is an admin
           if (isset($_SESSION['admin']) && $_SESSION['admin'] === true):
           ?>
-            <!-- Admin-specific options -->
-            <li class="menu-category">
-              <a href="/PHP/panel.php" class="menu-title">Panel</a>
-            </li>
-            <li class="menu-category">
-              <a href="logout.php" class="menu-title">Logout</a>
-            </li>
+                <!-- Admin-specific options -->
+                <li class="menu-category">
+                    <a href="/PHP/panel.php" class="menu-title">Panel</a>
+                </li>
+                <li class="menu-category">
+                    <a href="logout.php" class="menu-title">Logout</a>
+                </li>
 
-          <?php else: ?>
-            <!-- User-specific option -->
-            <li class="menu-category">
-              <a href="logout.php" class="menu-title">Logout</a>
-            </li>
-          <?php endif; ?>
+                <?php else: ?>
+                <!-- User-specific option -->
+                <li class="menu-category">
+                    <a href="logout.php" class="menu-title">Logout</a>
+                </li>
+                <?php endif; ?>
 
-        <?php else: ?>
-          <!-- Display login and signup links if the user is not logged in -->
-          <li class="menu-category">
-            <a href="login.php" class="menu-title">Log In</a>
-          </li>
-          <li class="menu-category">
-            <a href="signin.php" class="menu-title">Sign Up</a>
-          </li>
-        <?php endif; ?>
-          
-      </ul>
-
-      <div class="menu-bottom">
-
-        <ul class="menu-category-list">
-
-          <li class="menu-category">
-
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Language</p>
-
-              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-            </button>
-
-            <ul class="submenu-category-list" data-accordion>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">English</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Espa&ntilde;ol</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Fren&ccedil;h</a>
-              </li>
+                <?php else: ?>
+                <!-- Display login and signup links if the user is not logged in -->
+                <li class="menu-category">
+                    <a href="login.php" class="menu-title">Log In</a>
+                </li>
+                <li class="menu-category">
+                    <a href="signin.php" class="menu-title">Sign Up</a>
+                </li>
+                <?php endif; ?>
 
             </ul>
 
-          </li>
+            <div class="menu-bottom">
 
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Currency</p>
-              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-            </button>
+                <ul class="menu-category-list">
 
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">USD &dollar;</a>
-              </li>
+                    <li class="menu-category">
 
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">EUR &euro;</a>
-              </li>
-            </ul>
-          </li>
+                        <button class="accordion-menu" data-accordion-btn>
+                            <p class="menu-title">Language</p>
 
-        </ul>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
 
-        <ul class="menu-social-container">
+                        <ul class="submenu-category-list" data-accordion>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
+                            <li class="submenu-category">
+                                <a href="#" class="submenu-title">English</a>
+                            </li>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
+                            <li class="submenu-category">
+                                <a href="#" class="submenu-title">Espa&ntilde;ol</a>
+                            </li>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
+                            <li class="submenu-category">
+                                <a href="#" class="submenu-title">Fren&ccedil;h</a>
+                            </li>
 
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
+                        </ul>
 
-        </ul>
+                    </li>
 
-      </div>
+                    <li class="menu-category">
+                        <button class="accordion-menu" data-accordion-btn>
+                            <p class="menu-title">Currency</p>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
 
-    </nav>
+                        <ul class="submenu-category-list" data-accordion>
+                            <li class="submenu-category">
+                                <a href="#" class="submenu-title">USD &dollar;</a>
+                            </li>
 
-  </header>
+                            <li class="submenu-category">
+                                <a href="#" class="submenu-title">EUR &euro;</a>
+                            </li>
+                        </ul>
+                    </li>
 
-  <!-- ================================ MAIN ================================  -->
+                </ul>
 
-  <?php include 'PHP/banner.php';
+                <ul class="menu-social-container">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- ================================ MAIN ================================  -->
+
+    <?php include 'PHP/banner.php';
   ?>
 
-  <?php include 'PHP/logo-slider.php';
+    <?php include 'PHP/logo-slider.php';
   ?>
 
-  <?php include 'PHP/featured-product.php';
+    <?php include 'PHP/featured-product.php';
   ?>
-  <hr style="border-color: #ffffff;">
+    <hr style="border-color: #ffffff;">
 
-  <?php include 'PHP/trending-article.php';
+    <?php include 'PHP/trending-article.php';
   ?>
 
-  <!-- ================================ JS ================================  -->
-  <script src="/js/swiper-bundle.min.js"></script>
-  <script src="/js/index.js"></script>
+    <!-- ================================ JS ================================  -->
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/currency-language.js"></script>
 
 </body>
 

@@ -252,7 +252,7 @@ if (isset($_POST["submit"])) {
 
         <div class="header-top-actions">
 
-          <select name="currency">
+          <select name="currency" id="currency">
 
             <option value="usd">USD &dollar;</option>
             <option value="eur">EUR &euro;</option>
@@ -880,6 +880,7 @@ if (isset($_POST["submit"])) {
 
   <!-- ============= JS =============  -->
   <script src="/js/index.js"></script>
+  <script src="/js/currency-language.js"></script>
 
 </body>
 

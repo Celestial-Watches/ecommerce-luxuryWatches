@@ -205,7 +205,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/2d6f15c3-5f2a-49ab-16b7-23602a3d8700/w=400x400" alt="Audemars Piguet Royal Oak Selfwinding 34mm">
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding 34mm</h3>
-                            <p class="featured-price">$ 57,154</p>
+                            <p class="featured-price" data-price-in-usd="57154">$ 57,154</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -221,7 +221,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/a3111a85-9142-446a-d24c-da44dce4f400/w=400x400" alt="Richard Mille RM67-02 Automatic Winding Extra-Thin &amp;quot;Mutaz Essa Barshim&amp;&quot;">
                             <hr>
                             <h3 class="featured-text">Richard Mille RM67-02 Automatic Winding Extra-Thin &amp;quot;Mutaz Essa Barshim&amp;&quot;</h3>
-                            <p class="featured-price">$ 324,507</p>
+                            <p class="featured-price" data-price-in-usd="324507">$ 324,507</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -229,7 +229,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/15af5265-b853-493d-c020-60b2b499de00/w=400x400" alt="Vacheron Constantin Overseas Self-winding 34.5mm">
                             <hr>
                             <h3 class="featured-text">Vacheron Constantin Overseas Self-winding 34.5mm</h3>
-                            <p class="featured-price">$ 26,836</p>
+                            <p class="featured-price" data-price-in-usd="26836">$ 26,836</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -237,7 +237,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/74a8797a-33b7-4c8b-7368-2a90ca9d8b00/w=400x400" alt="Audemars Piguet Royal Oak Selfwinding Chronograph &amp;&quot;50th Anniversary&amp;&quot; 41mm">
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding Chronograph &amp;&quot;50th Anniversary&amp;&quot; 41mm</h3>
-                            <p class="featured-price">$ 77,365</p>
+                            <p class="featured-price" data-price-in-usd="77365">$ 77,365</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -245,7 +245,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/51185459-938c-4a5a-69fe-da97fcf26500/w=400x400" alt="Audemars Piguet Royal Oak 33mm">
                             <hr>
                             <h3 class=" featured-text">Audemars Piguet Royal Oak 33mm"</h3>
-                            <p class="featured-price">$ 33,574</p>
+                            <p class="featured-price" data-price-in-usd="33574">$ 33,574</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -253,7 +253,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/32e13bec-79ff-4ab3-ceb5-0a6ed4bae200/w=400x400" alt="Audemars Piguet Royal Oak Double Balance Wheel Openworked 41mm">
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Double Balance Wheel Openworked 41mm</h3>
-                            <p class="featured-price">FROM $ 257,135</p>
+                            <p class="featured-price" data-price-in-usd="257135">FROM $ 257,135</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -261,7 +261,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/e9f16ed5-771f-495b-be31-5dc1493e0600/w=400x400" alt="Patek Philippe Nautilus 40mm">
                             <hr>
                             <h3 class="featured-text">Patek Philippe Nautilus 40mm</h3>
-                            <p class="featured-price">$ 112,174</p>
+                            <p class="featured-price" data-price-in-usd="112174">$ 112,174</p>
                             <button class="buy-button">View Details</button>
                         </div>
                         <!--  -->
@@ -269,7 +269,7 @@
                             <img class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/d58061b2-44dc-488c-1687-66e7fa753600/w=400x400" alt="Richard Mille RM11-03 Automatic Flyback Chronograph McLaren Limited Edition"">
                             <hr>
                             <h3 class=" featured-text">Richard Mille RM11-03 Automatic Flyback Chronograph McLaren Limited Edition"</h3>
-                            <p class="featured-price">$ 364,930</p>
+                            <p class="featured-price" data-price-in-usd="364930">$ 364,930</p>
                             <button class="buy-button">View Details</button>
                         </div>
                     </div>
