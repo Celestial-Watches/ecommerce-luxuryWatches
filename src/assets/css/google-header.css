@@ -1,0 +1,31 @@
+        /* Hide Google Translate elements using CSS */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        /* Hide the Google Translate dropdown */
+        .goog-te-combo {
+            display: none !important;
+        }
+
+        /* Remove any default margins and padding */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            top: 0 !important;
+            /* Ensure no top space is added */
+        }
+
+        /* Remove height and overflow for Google Translate elements */
+        .skiptranslate,
+        .goog-te-banner-frame,
+        .goog-te-gadget {
+            height: 0 !important;
+            overflow: hidden !important;
+            visibility: hidden !important;
+        }
+
+        /* Ensure the body height is correct */
+        iframe {
+            display: none !important;
+        }
