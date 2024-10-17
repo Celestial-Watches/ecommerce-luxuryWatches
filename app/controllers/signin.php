@@ -227,6 +227,11 @@ if (isset($_POST["submit"])) {
     }
   </script>
 
+<style>
+  .logg-button{
+    display: none;
+  }
+</style>
 </head>
 
 <body>

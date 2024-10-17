@@ -245,6 +245,10 @@ if (isset($_POST["login"])) {
     #alert-ok-btn:hover {
       background-color: #444;
     }
+
+    .logg-button{
+      display: none;
+    }
   </style>
 
 </head>
