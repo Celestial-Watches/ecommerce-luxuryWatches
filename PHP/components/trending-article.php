@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -201,7 +200,7 @@
         <div class="article-body animate-on-scroll">
             <div class="feature-content-container animate-on-scroll">
                 <div class="feature-section">
-                    <img class="feature-img"
+                    <img loading="lazy" class="feature-img"
                         src="https://www.favreleuba.com/blog/wp-content/uploads/2024/09/Favre-Leuba-Chief-chronograph.jpg"
                         alt="Feature Watch">
                 </div>
@@ -219,7 +218,7 @@
             <div class="right-section animate-on-scroll">
                 <div class="right-grid animate-on-scroll">
                     <div class="right-item animate-on-scroll">
-                        <img class="right-img animate-on-scroll"
+                        <img loading="lazy" class="right-img animate-on-scroll"
                             src="https://cdn1.ethoswatches.com/media/catalog/product/h/-/h-moser-cie-pioneer-6804-0400-multiple-4.jpg"
                             alt="Watch">
                         <div class="right-text animate-on-scroll">
@@ -230,7 +229,7 @@
                         </div>
                     </div>
                     <div class="right-item animate-on-scroll">
-                        <img class="right-img animate-on-scroll"
+                        <img loading="lazy" class="right-img animate-on-scroll"
                             src="../../src/assets/image/Carl-F-Bucherer-Heritage-Chronometer-Celebration-Feat.jpg"
                             alt="Watch">
                         <div class="right-text animate-on-scroll">
@@ -241,7 +240,7 @@
                         </div>
                     </div>
                     <div class="right-item animate-on-scroll">
-                        <img class="right-img animate-on-scroll"
+                        <img loading="lazy" class="right-img animate-on-scroll"
                             src="../../src/assets/image/wempe-signature-collection-girard-perregaux-laureato-42mm-16.jpg"
                             alt="Watch">
                         <div class="right-text animate-on-scroll">
@@ -252,7 +251,7 @@
                         </div>
                     </div>
                     <div class="right-item animate-on-scroll">
-                        <img class="right-img animate-on-scroll"
+                        <img loading="lazy" class="right-img animate-on-scroll"
                             src="../../src/assets/image/Ressence-Type-3-Featured.jpeg"
                             alt="Watch">
                         <div class="right-text animate-on-scroll">

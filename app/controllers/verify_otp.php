@@ -357,6 +357,7 @@ $seconds = $remaining_time % 60;
             });
         });
     </script>
+<script src="../../src/assets/js/cookie-monitor.js"></script>
 </body>
 
 </html>

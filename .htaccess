@@ -1,10 +1,11 @@
-Options +FollowSymLinks
 RewriteEngine On
 
-# Hide the .php extension for all files
+# If the request is not a directory
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# If the request file with .php extension exists
 RewriteCond %{REQUEST_FILENAME}.php -f
+
+# Rewrite URL to include .php
 RewriteRule ^(.*)$ $1.php [NC,L]
 
-# Hide 'php/component/' from URLs for all components
-RewriteRule ^(.*)$ PHP/components/$1.php [L]

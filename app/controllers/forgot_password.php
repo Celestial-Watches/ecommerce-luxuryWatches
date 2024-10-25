@@ -1,5 +1,13 @@
 <?php
+
+// Function: Set the default timezone.
+// Purpose: Ensure that date and time functions use the correct timezone for calculations (like OTP expiry).
+
 date_default_timezone_set('Asia/Kolkata');
+
+// Function: Start the session.
+// Purpose: To maintain user-specific data across multiple requests. This allows you to store the OTP and its expiry time.
+
 session_start(); // Ensure session is started
 
 require_once "../config/conn.php";
@@ -13,16 +21,24 @@ require '../../vendor/autoload.php';
 $errors = [];
 $success_message = "";
 
-// Check if OTP needs to be generated and sent
+// Function: Verify that the request method is POST and an email is provided.
+// Purpose: To determine if the script should process the OTP generation and sending.
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     $email = trim($_POST["email"]);
+
+//     Function: Validate the provided email address.
+// Purpose: Ensure the email is not empty and is in a valid format before proceeding with database checks.
 
     if (empty($email)) {
         $errors[] = "Email is required";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format";
     } else {
-        // Check if the email exists in the database
+
+//         Function: Check if the email exists in the database.
+// Purpose: Confirm that the email belongs to a registered user before generating an OTP.
+
         $sql = "SELECT * FROM users WHERE email = ?";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -30,15 +46,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if (mysqli_num_rows($result) > 0) {
-                // Generate a 6-digit OTP
+                
+//                 Function: Create a 6-digit OTP.
+// Purpose: Generate a random OTP to be sent to the user's email for verification.
+
                 $otp = rand(100000, 999999);
 
-                // Store the OTP and its expiry in the session
+//                 Function: Store the generated OTP and its expiry time in the session.
+// Purpose: Keep track of the OTP and when it should expire (10 minutes from now).
                 $_SESSION['otp'] = $otp;
                 $_SESSION['otp_expiry'] = date('Y-m-d H:i:s', strtotime('+10 minutes')); // OTP expires in 10 minutes
                 $_SESSION['email'] = $email;
 
-                // Send the OTP via email (using PHPMailer)
+//                 Function: Configure PHPMailer for sending emails.
+// Purpose: Prepare the mailer with SMTP settings and recipient details for sending the OTP email.
+
                 $mail = new PHPMailer(true);
                 try {
                     // SMTP settings

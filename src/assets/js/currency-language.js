@@ -1,3 +1,8 @@
+// Constructs the API URL for fetching exchange rates using an API key.
+// Sends an asynchronous request to get the latest conversion rates with USD as the base currency.
+// Returns the conversion rates if successful.
+// Handles errors in case the API request fails, and returns null.
+
 async function fetchConversionRates() {
     const apiKey = 'e006d55d7df672b1786abd14';
     const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
@@ -11,6 +16,14 @@ async function fetchConversionRates() {
         return null; // Return null in case of error
     }
 }
+
+// Fetches conversion rates by calling fetchConversionRates.
+// Retrieves all product elements with the class featured-price.
+// Iterates over each product and:
+// Extracts the price in USD from a data-price-in-usd attribute.
+// Converts the price based on the selected currency (USD, EUR, INR).
+// Updates the product price with the converted value and correct currency symbol.
+// Logs errors if price values are invalid.
 
 async function updatePrices(selectedCurrency) {
     const conversionRates = await fetchConversionRates();
@@ -49,7 +62,7 @@ async function updatePrices(selectedCurrency) {
                 }
 
                 const formattedPrice = convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                product.textContent = `${currencySymbol} ${formattedPrice}`;
+                product.innerHTML = `<span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
             } else {
                 console.error('Invalid price value:', priceNumber);
             }
@@ -57,7 +70,7 @@ async function updatePrices(selectedCurrency) {
     });
 }
 
-// Map country codes to currency codes
+// Maps country codes (e.g., 'US', 'IN', 'FR') to their respective currency codes ('usd', 'inr', 'eur').
 const countryCurrencyMap = {
     'US': 'usd',
     'IN': 'inr',
@@ -68,17 +81,29 @@ const countryCurrencyMap = {
 // Define a secret key for encryption
 const SECRET_KEY = 'languagecurrencysecure_@123'; // Change this to a secure key
 
-// Function to encrypt and decrypt data
+// Encrypts data (like currency information) using CryptoJS.AES.
 function encryptData(data) {
     return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 }
+
+// Decrypts the encrypted data back into its original format.
 
 function decryptData(ciphertext) {
     const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
     return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 }
 
-// Function to fetch user currency based on location
+// Tries to retrieve saved currency data from localStorage.
+// If saved currency data is found:
+// Decrypts and retrieves the currency.
+// Updates prices based on the saved currency.
+// If no saved data is found or expired:
+// Fetches user location using the ipinfo.io API.
+// Uses country information to determine the user’s currency.
+// Saves the detected currency in localStorage (with encryption).
+// Updates prices accordingly.
+
+
 async function fetchUserCurrency() {
     const savedCurrency = localStorage.getItem('selectedCurrencyData');
     
@@ -105,13 +130,22 @@ async function fetchUserCurrency() {
     }
 }
 
-// Fallback function to set currency to USD
+// Sets the currency to USD if no user currency is detected or if an error occurs.
+// Updates product prices based on USD.
+
 function fallbackCurrency() {
     document.getElementById("currency").value = 'usd';
     updatePrices('usd'); // Update prices based on fallback currency
 }
 
 // Wait for the DOM to be fully loaded before running the script
+// Runs when the DOM is fully loaded.
+// Checks for saved currency data in localStorage.
+// If valid saved data is found:
+// Updates the currency and product prices.
+// If no valid data is found, fetches the user’s currency using fetchUserCurrency.
+// Listens for changes in the currency dropdown to update prices in real-time.
+
 document.addEventListener("DOMContentLoaded", async function () {
     const currencyElement = document.getElementById("currency");
     const savedCurrencyData = localStorage.getItem('selectedCurrencyData');
@@ -131,7 +165,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
-// Handle currency selection change
+// Listens for user selection changes in the currency dropdown.
+// Updates and saves the selected currency in localStorage.
+// Calls updatePrices to adjust prices based on the selected currency.
+
 document.getElementById("currency").addEventListener("change", (event) => {
     const selectedCurrency = event.target.value;
     const currencyData = { currency: selectedCurrency, timestamp: Date.now() };
@@ -139,20 +176,28 @@ document.getElementById("currency").addEventListener("change", (event) => {
     updatePrices(selectedCurrency); // Update prices based on selected currency
 });
 
-// Google language translation below
-function translateLanguage(lang) {
-    const googleTranslateDropdown = document.querySelector('.goog-te-combo');
-    if (googleTranslateDropdown) {
-        googleTranslateDropdown.value = lang || "en"; // Default to English
-        googleTranslateDropdown.dispatchEvent(new Event('change'));
+// Handles language translation using Google Translate.
+// Saves the selected language in localStorage with a timestamp.
+// Checks if the language data is still valid (less than 3 hours old).
+// Translates the page to the selected language.
+// Provides language change functionality for the user.
 
-        // Store the selected language in localStorage
-        localStorage.setItem('selectedLanguage', lang);
-        localStorage.setItem('languageTimestamp', Date.now());
-    } else {
-        console.error('Google Translate dropdown not found.');
-    }
+function translateLanguage(lang) {
+    setTimeout(() => { // Wait a moment to ensure the element is available
+        const googleTranslateDropdown = document.querySelector('.goog-te-combo');
+        if (googleTranslateDropdown) {
+            googleTranslateDropdown.value = lang || "en"; // Default to English
+            googleTranslateDropdown.dispatchEvent(new Event('change'));
+
+            // Store the selected language in localStorage
+            localStorage.setItem('selectedLanguage', lang);
+            localStorage.setItem('languageTimestamp', Date.now());
+        } else {
+            console.error('Google Translate dropdown not found.');
+        }
+    }, 100); // Adjust the timeout as needed
 }
+
 
 window.onload = function () {
     const savedLanguage = localStorage.getItem('selectedLanguage');
@@ -173,7 +218,9 @@ window.onload = function () {
     }
 };
 
-// Hide the Google Translate header
+// Hides the Google Translate banner using a MutationObserver.
+// Continuously monitors the DOM to ensure that the translation header is hidden.
+
 function hideGoogleTranslateHeader() {
     const translateHeader = document.querySelector('.skiptranslate');
     if (translateHeader) {
@@ -195,6 +242,10 @@ function updateCurrency(selectedCurrency) {
     updatePrices(selectedCurrency); // Update prices based on selected currency
 }
 
+// Adds event listeners to the currency and language selection elements.
+// Updates the prices and language translation based on user interactions.
+// Reloads the page with a slight delay after selection to update the UI.
+
 // Ensure the event listeners are set up for both desktop and mobile
 document.addEventListener("DOMContentLoaded", function () {
     const currencyElement = document.getElementById("currency");
@@ -211,6 +262,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// Handles the selection of currency or language.
+// Updates the displayed currency or language on the page.
+// Reloads the page to apply the changes.
+
 function selectCurrency(currency) {
     updateCurrency(currency);
     document.getElementById('selectedCurrency').textContent = currency.toUpperCase();
@@ -219,12 +274,11 @@ function selectCurrency(currency) {
     }, 100); // Delay to ensure the text update is visible before reload
 }
 
-function selectLanguage(language) {
-    console.log(`Selected language: ${language}`); // Debugging log
-    translateLanguage(language);
-    const languageMap = { 'en': 'English', 'es': 'Español', 'fr': 'Français' };
-    document.getElementById('selectedLanguage').textContent = languageMap[language];
-    setTimeout(() => {
-        location.reload(); // Reload the page to close the navbar
-    }, 100); // Delay to ensure the text update is visible before reload
-}
+// Touch event support
+const currencyLinks = document.querySelectorAll('.submenu-category a');
+currencyLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor click behavior
+        selectCurrency(this.getAttribute('onclick').match(/'([^']+)'/)[1]); // Extract currency from onclick
+    });
+});

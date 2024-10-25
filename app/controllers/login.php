@@ -126,6 +126,7 @@ if (isset($_POST["login"])) {
               $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
               $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
               $_SESSION['otp_verified'] = true;
+              
 
               // Redirect to admin verification page
               header("Location: ../../index.php");
@@ -142,6 +143,7 @@ if (isset($_POST["login"])) {
             $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
             $_SESSION['otp_verified'] = true;
+            
 
             if (isset($_POST['remember'])) {
               // Set cookie for 1 hour
@@ -167,6 +169,8 @@ if (isset($_POST["login"])) {
     }
   }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -246,7 +250,7 @@ if (isset($_POST["login"])) {
       background-color: #444;
     }
 
-    .logg-button{
+    .logg-button {
       display: none;
     }
   </style>
@@ -340,6 +344,8 @@ if (isset($_POST["login"])) {
         * *** LOGIN PAGE  END *** *
         ***************************************************/    -->
 
+
+  <script src="../../src/assets/js/cookie-monitor.js"></script>
   <script src="../../src/assets/js/index.js"></script>
   <script src="../../src/assets/js/currency-language.js"></script>
 </body>

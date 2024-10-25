@@ -1,69 +1,102 @@
 <?php
 
-// Set the session cookie with secure attributes
+// Define secure session cookie settings:
+// lifetime: Session duration (86400 seconds = 24 hours).
+// path: Set cookie available across the entire site.
+// domain: Use current domain (default).
+// secure: false means cookies are not restricted to HTTPS (should be true in production).
+// httponly: true to prevent JavaScript access to the cookie.
+// samesite: Set to Strict to mitigate CSRF attacks by restricting cross-site requests.
+
 session_set_cookie_params([
-    'lifetime' => 86400,              // Session expires when the browser is closed
-    'path' => '/',                // Available throughout the site
-    'domain' => '',               // Leave empty for current domain
-    'secure' => false,             // Only send over HTTPS
-    'httponly' => true,           // Prevent JavaScript access
-    'samesite' => 'Strict'        // Protect against CSRF
+    'lifetime' => 86400, // 1 day
+    'path' => '/',
+    'domain' => '', // Set to your domain
+    'secure' => true, // Set to true if using HTTPS
+    'httponly' => true,
+    'samesite' => 'Strict' // or 'Lax' based on your needs
 ]);
+
+// Set the default timezone to 'Asia/Kolkata'.
+// Start the PHP session to manage user data across pages.
 
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
-// Regenerate the session ID on every page refresh
+
+// Call session_regenerate_id() to:
+// Create a new session ID for the user.
+// Mitigate session fixation attacks.
+
 session_regenerate_id(true);
 
+// If the session contains OTP data but not the user data:
+// Unset the session variables using session_unset().
+// Destroy the session using session_destroy() to clear user authentication.
 
-// Check if the user navigated back from verify_otp.php
 if (isset($_SESSION['otp']) && !isset($_SESSION['user'])) {
-    session_unset(); // Unset session variables
-    session_destroy(); // Destroy the session
+    session_unset();
+    session_destroy(); 
 }
 
-// Check if the user is logged in and is an admin
+// Verify if:
+//     The session has the admin variable set.
+//     The admin value is true, indicating admin status.
+
+
 $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
-// Set a session timeout period in seconds (e.g., 1800 seconds = 30 minutes)
+
+// Define $sessionTimeout as 1800 seconds (30 minutes).
+
 $sessionTimeout = 1800;
 
-// Regenerate session ID periodically to prevent session fixation/hijacking
+// Check if the session creation time (CREATED) is set:
+//     If not, set $_SESSION['CREATED'] to the current time.
+//     If it exists and more than 600 seconds (10 minutes) have passed since creation:
+//     Regenerate the session ID using session_regenerate_id().
+//     Reset the CREATED timestamp to the current time.
+
 if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
 } else if (time() - $_SESSION['CREATED'] > 600) {
-    // Regenerate session ID every 10 minutes
+   
     session_regenerate_id(true);
     $_SESSION['CREATED'] = time();
 }
 
-// Check if the user is logged in
+// If the session contains the user variable (indicating a logged-in user):
+// Check if the session's last activity (LAST_ACTIVITY) exists:
+// If the session has been idle for more than $sessionTimeout (30 minutes):
+// Unset the session variables.
+// Destroy the session.
+// Redirect the user to the login page (app/controllers/login.php).
+// If the session is still active, update the LAST_ACTIVITY timestamp to extend the session duration.
+
+
 if (isset($_SESSION['user'])) {
-    // Session expiration handling
+    
     if (isset($_SESSION['LAST_ACTIVITY'])) {
         $sessionDuration = time() - $_SESSION['LAST_ACTIVITY'];
         if ($sessionDuration > $sessionTimeout) {
-            // Session expired: unset and destroy session
+           
             session_unset();
-            session_destroy(); 
-            header("Location: app/controllers/login.php"); // Redirect to login page with timeout message
+            session_destroy();
+            header("Location: app/controllers/login.php"); 
             exit();
         }
     }
-    // Update last activity time stamp to extend the session
+   
     $_SESSION['LAST_ACTIVITY'] = time();
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <title>Celestial Watches | Exclusivity in Every Tick</title>
 
 
 
@@ -81,7 +114,7 @@ if (isset($_SESSION['user'])) {
 
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="/src/assets/css/deskView.css" />
-    <link rel="stylesheet" href="/src/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/src/libs/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/src/assets/css/google-header.css">
 
 
@@ -92,6 +125,7 @@ if (isset($_SESSION['user'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
+        
 </head>
 
 <body>
@@ -114,7 +148,7 @@ if (isset($_SESSION['user'])) {
             </button>
 
             <div class="newsletter-img">
-                <img src="/src/assets/image/newsletter.jpg" alt="subscribe newsletter" width="400" height="450">
+                <img src="/src/assets/image/newsletter.jpg" alt="subscribe newsletter" width="450" height="450">
             </div>
 
             <div class="newsletter">
@@ -169,13 +203,17 @@ if (isset($_SESSION['user'])) {
 
     <?php include 'PHP/components/trending-article.php';
     ?>
-
     
+    <hr style="border-color: #ffffff; visibility:hidden;">
+
+   
+   
 
     <!-- ================================ JS ================================  -->
-    <script src="/src/assets/js/swiper-bundle.min.js"></script>
+    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/src/assets/js/index.js"></script>
     <script src="/src/assets/js/currency-language.js"></script>
+    <script src="/src/assets/js/cookie-monitor.js"></script>
 
 
 </body>

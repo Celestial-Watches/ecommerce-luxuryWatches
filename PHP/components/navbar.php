@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <title>Celestial Watches | Exclusivity in Every Tick</title>
     <script src="../../src/assets/js/scroll-animation.js"></script>
 </head>
 <body>
@@ -110,13 +110,12 @@
                 </a>
 
                 <div class="header-search-container">
-
-                    <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
-
+                <form action="../../app/views/productLanding.php" method="GET">
+                    <input type="search" name="search" class="search-field" placeholder="Enter your product name..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     <button class="search-btn">
                         <ion-icon name="search-outline"></ion-icon>
                     </button>
-
+                </form>
                 </div>
 
                 <div class="header-user-actions">
@@ -172,7 +171,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="#" class="menu-title">Watches</a>
+                        <a href="../../app/views/productLanding.php" class="menu-title">Watches</a>
 
                         <div class="dropdown-panel">
 
@@ -318,54 +317,6 @@
 
 
                         </div>
-                    </li>
-
-                    <li class="menu-category">
-                        <a href="#" class="menu-title">Men's</a>
-
-                        <ul class="dropdown-list">
-
-                            <li class="dropdown-item">
-                                <a href="#">Shirt</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Shorts & Jeans</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Safety Shoes</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Wallet</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <li class="menu-category">
-                        <a href="#" class="menu-title">Women's</a>
-
-                        <ul class="dropdown-list">
-
-                            <li class="dropdown-item">
-                                <a href="#">Dress & Frock</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Earrings</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Necklace</a>
-                            </li>
-
-                            <li class="dropdown-item">
-                                <a href="#">Makeup Kit</a>
-                            </li>
-
-                        </ul>
                     </li>
 
                     <li class="menu-category">

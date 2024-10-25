@@ -27,6 +27,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
         error_log("Failed to prepare SQL statement: " . mysqli_error($conn));
     }
 
+    $_SESSION = [];
     // Set authenticated to false
     $_SESSION['authenticated'] = false; // Set authenticated to false on logout
 
@@ -81,7 +82,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <title>Celestial Watches | Exclusivity in Every Tick</title>
     <script src="../../src/assets/js/navigation.js"></script>
 </head>
 

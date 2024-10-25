@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial Watches - Exclusivity in Every Tick</title>
+    <title>Celestial Watches | Exclusivity in Every Tick</title>
     <!-- CSS for Loader -->
   <style>
     /* Loader Container */
@@ -49,7 +49,7 @@
   </style>
   
 </head>
-<body>
+<body >
     <!-- Loader HTML -->
 <div id="loader">
     <div class="loader-logo">

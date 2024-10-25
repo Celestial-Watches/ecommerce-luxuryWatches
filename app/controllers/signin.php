@@ -28,7 +28,7 @@ if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
 
   unset($_SESSION['user']); // User hasn't verified OTP yet, clear the session variable or reset it
 
-  // Optionally, clear the cookies if you're storing the user info in cookies
+  // clear the cookies if you're storing the user info in cookies
   setcookie("SSIDU", "", time() - 3600, "/", true, true); // Expire the cookie
 }
 
@@ -128,9 +128,9 @@ if (isset($_POST["submit"])) {
       $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
       $mail->addAddress($email);
 
+      $mail->addEmbeddedImage(dirname(__FILE__) . '/../../src/assets/image/newsletter.jpg', 'newsletter_image', 'newsletter.jpg', 'base64', 'image/jpeg');
       $mail->isHTML(true);
       $mail->Subject = 'Your OTP Code Celestial Watches';
-      $mail->addEmbeddedImage(dirname(__FILE__) . '/../../src/assets/image/newsletter.jpg', 'newsletter_image');
       $mail->Body = '
 <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px;">
     <div style="text-align: center;">
@@ -167,7 +167,7 @@ if (isset($_POST["submit"])) {
       if ($mail->send()) {
         // Optionally hash the username for added security
         $hashedUsername = hash('sha256', $usernamee); // Hash the username
-        // Set a cookie for the hashed username (e.g., for 1 week)
+        // Set a cookie for the hashed username for 1 week
         setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true); // Secure and HttpOnly flags enabled
         $_SESSION['email'] = $email; // Store email in the session
         header("Location: verify_otp.php"); // Redirect to OTP verification page
@@ -198,7 +198,7 @@ if (isset($_POST["submit"])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Celestial Watches - Exclusivity in Every Tick</title>
+  <title>Celestial Watches | Exclusivity in Every Tick</title>
 
   <!-- ============= IONICONS =============  -->
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
@@ -227,11 +227,11 @@ if (isset($_POST["submit"])) {
     }
   </script>
 
-<style>
-  .logg-button{
-    display: none;
-  }
-</style>
+  <style>
+    .logg-button {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -309,6 +309,7 @@ if (isset($_POST["submit"])) {
 
 
   <!-- ============= JS =============  -->
+  <script src="../../src/assets/js/cookie-monitor.js"></script>
   <script src="../../src/assets/js/index.js"></script>
   <script src="../../src/assets/js/currency-language.js"></script>
 

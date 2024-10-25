@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Kolkata');
     $servername = "localhost";
     $username = "root";
-    $password = ""; // Your database password
+    $password = ""; 
     $dbname = "celestial_watches";
     
     // Create connection

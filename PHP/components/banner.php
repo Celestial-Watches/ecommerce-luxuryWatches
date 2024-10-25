@@ -7,10 +7,10 @@
     <script src="../../src/assets/js/scroll-animation.js"></script>
     <style>
         .banner {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif !important;
             background-color: #f7f7f7;
             flex-direction: column;
-            height: 85vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -60,16 +60,17 @@
         .bannerOverlay h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            font-family: 'icomoon';
         }
 
         .bannerOverlay p {
-            font-size: 1.2rem;
+            font-size: 2rem;
             margin-bottom: 20px;
         }
 
         .cta-button {
             padding: 10px 20px;
-            background-color: #FF6666;
+            background-color: #000;
             color: #ffff;
             cursor: pointer;
             text-decoration: none;
@@ -114,11 +115,10 @@
 </head>
 
 <body>
-
     <section class="banner ">
         <div class="video-container">
             <video id="bannerVideo" autoplay muted loop>
-                <source src="../../src/assets/image/video/Untitled video - Made with Clipchamp.mp4" type="video/mp4">
+                <source src="../../src/assets/image/video/Untitled video - Made with Clipchamp.mp4" type="video/mp4" loading="lazy">
             </video>
             <div class="bannerOverlay">
                 <h1 class="animate-on-scroll">Welcome to Celestial Watches</h1>
