@@ -1,11 +1,88 @@
+<?php if (!defined('ALLOW_ACCESS')) {
+    header("Location: ../../index.php");
+    exit();
+} ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Watches | Exclusivity in Every Tick</title>
     <script src="../../src/assets/js/scroll-animation.js"></script>
+    <style>
+        #suggestions {
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        #suggestions::-webkit-scrollbar {
+            width: 8px;
+            background: transparent;
+        }
+
+        #suggestions::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #suggestions::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        #suggestions::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        #suggestions {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+
+        #suggestions:hover {
+            scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+        }
+
+        .suggestion-item.selected {
+    background-color: rgba(0, 0, 0, 0.1); /* Highlight color */
+    color: #000; /* Text color */
+}
+        .suggestions-container {
+            border: 1px solid #ccc;
+            background: white;
+            max-height: 300px;
+            overflow-y: auto;
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: justify;
+            font-family: 'Helvetica';
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            #suggestions {
+                max-width: 180px;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- ============= HEADER =============  -->
     <header>
@@ -110,12 +187,13 @@
                 </a>
 
                 <div class="header-search-container">
-                <form action="../../app/views/productLanding.php" method="GET">
-                    <input type="search" name="search" class="search-field" placeholder="Enter your product name..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                    <button class="search-btn">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </button>
-                </form>
+                    <form action="../../app/views/search.php" method="GET" id="searchForm">
+                        <input type="search" name="search" id="searchInput" class="search-field" placeholder="Enter your product name..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" autocomplete="off">
+                        <button type="submit" class="search-btn">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </button>
+                    </form>
+                    <div id="suggestions" class="suggestions-container"></div>
                 </div>
 
                 <div class="header-user-actions">
@@ -531,51 +609,51 @@
 
             <div class="menu-bottom">
 
-            <ul class="menu-category-list">
-    <li class="menu-category">
-        <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title" id="selectedCurrency">Currency</p>
-            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-        </button>
-        <ul class="submenu-category-list" data-accordion>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectCurrency('usd')">USD &dollar;</a>
-            </li>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectCurrency('eur')">EUR &euro;</a>
-            </li>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectCurrency('inr')">INR &#8377;</a>
-            </li>
-        </ul>
-    </li>
-    <div id="google_translate_element" style="display:none;"></div>
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en'
-        }, 'google_translate_element');
-    }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <li class="menu-category">
-        <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title" id="selectedLanguage">Language</p>
-            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-        </button>
-        <ul class="submenu-category-list" data-accordion>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectLanguage('en')">English</a>
-            </li>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectLanguage('es')">Español</a>
-            </li>
-            <li class="submenu-category">
-                <a href="" class="submenu-title" onclick="selectLanguage('fr')">Français</a>
-            </li>
-        </ul>
-    </li>
-</ul>
+                <ul class="menu-category-list">
+                    <li class="menu-category">
+                        <button class="accordion-menu" data-accordion-btn>
+                            <p class="menu-title" id="selectedCurrency">Currency</p>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
+                        <ul class="submenu-category-list" data-accordion>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectCurrency('usd')">USD &dollar;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectCurrency('eur')">EUR &euro;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectCurrency('inr')">INR &#8377;</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <div id="google_translate_element" style="display:none;"></div>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en'
+                            }, 'google_translate_element');
+                        }
+                    </script>
+                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                    <li class="menu-category">
+                        <button class="accordion-menu" data-accordion-btn>
+                            <p class="menu-title" id="selectedLanguage">Language</p>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
+                        <ul class="submenu-category-list" data-accordion>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectLanguage('en')">English</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectLanguage('es')">Español</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="" class="submenu-title" onclick="selectLanguage('fr')">Français</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <ul class="menu-social-container">
 
@@ -610,5 +688,102 @@
         </nav>
 
     </header>
+    <script>
+        // Wait for the DOM to fully load
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const suggestions = document.getElementById('suggestions');
+    const searchForm = document.getElementById('searchForm');
+    let selectedIndex = -1; // Track the currently selected suggestion
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value;
+
+            if (query.length > 1) {
+                fetch('http://localhost:3000/app/controllers/fetch-suggestion.php?search=' + encodeURIComponent(query))
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        suggestions.innerHTML = ''; // Clear previous suggestions
+                        suggestions.style.display = 'none'; // Hide by default
+                        selectedIndex = -1; // Reset selected index
+
+                        if (data.length > 0) {
+                            suggestions.style.display = 'block'; // Show suggestions
+                            data.forEach((item, index) => {
+                                const suggestionItem = document.createElement('div');
+                                suggestionItem.classList.add('suggestion-item');
+                                suggestionItem.textContent = item.name;
+
+                                suggestionItem.addEventListener('click', function() {
+                                    searchInput.value = item.name;
+                                    suggestions.style.display = 'none';
+                                    searchForm.submit();
+                                });
+
+                                suggestionItem.addEventListener('mousedown', function() {
+                                    searchInput.value = item.name;
+                                    suggestions.style.display = 'none';
+                                    searchForm.submit();
+                                });
+
+                                suggestions.appendChild(suggestionItem);
+
+                                if (index < data.length - 1) {
+                                    const hr = document.createElement('hr');
+                                    suggestions.appendChild(hr);
+                                }
+                            });
+                        } else {
+                            suggestions.style.display = 'none'; // No suggestions
+                        }
+                    })
+                    .catch(error => console.error('Error fetching suggestions:', error));
+            } else {
+                suggestions.style.display = 'none'; // Hide if query is short
+            }
+        });
+
+        // Keydown event listener for arrow keys and enter
+        searchInput.addEventListener('keydown', function(event) {
+            const suggestionItems = suggestions.querySelectorAll('.suggestion-item');
+
+            if (event.key === 'ArrowDown') {
+                selectedIndex = (selectedIndex + 1) % suggestionItems.length; // Move down
+                updateSuggestionSelection(suggestionItems);
+                event.preventDefault(); // Prevent default scrolling
+            } else if (event.key === 'ArrowUp') {
+                selectedIndex = (selectedIndex - 1 + suggestionItems.length) % suggestionItems.length; // Move up
+                updateSuggestionSelection(suggestionItems);
+                event.preventDefault(); // Prevent default scrolling
+            } else if (event.key === 'Enter') {
+                if (selectedIndex >= 0 && selectedIndex < suggestionItems.length) {
+                    suggestionItems[selectedIndex].click(); // Trigger click on selected item
+                }
+            }
+        });
+
+        // Function to update the selected suggestion style
+        function updateSuggestionSelection(suggestionItems) {
+            suggestionItems.forEach((item, index) => {
+                if (index === selectedIndex) {
+                    item.classList.add('selected'); // Add selected class for styling
+                } else {
+                    item.classList.remove('selected'); // Remove selected class
+                }
+            });
+        }
+    } else {
+        console.error('Search input not found. Please check your HTML.');
+    }
+});
+
+    </script>
 </body>
+
 </html>

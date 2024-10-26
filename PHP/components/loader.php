@@ -1,3 +1,7 @@
+<?php if (!defined('ALLOW_ACCESS')) {
+    header("Location: ../../index.php");
+    exit();
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

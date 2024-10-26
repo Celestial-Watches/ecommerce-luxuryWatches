@@ -1,5 +1,8 @@
 <?php
-
+ if (!defined('ALLOW_ACCESS')) {
+    header("Location: ../../index.php");
+    exit();
+}
 // // Set the session cookie with secure attributes
 session_set_cookie_params([
   'lifetime' => 86400,              // Session expires when the browser is closed
@@ -26,7 +29,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) {
 // Check if the admin has already authenticated for this session
 if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
     // If already authenticated, redirect to the panel
-    header("Location: ../../admin/panel.php");
+    header("Location: ../../admin/dashboard.php");
     exit();
 }
 
@@ -38,7 +41,7 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
   // Check if the session is still valid
   if (isset($_SESSION['last_auth_time']) && ($current_time - $_SESSION['last_auth_time']) < $timeout_duration) {
       // If already authenticated and within timeout duration, redirect to the panel
-      header("Location: ../../admin/panel.php");
+      header("Location: ../../admin/dashboard.php");
       exit();
   } else {
       // If the session has timed out, require password authentication
@@ -66,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, set session variable and grant access to the admin panel
             $_SESSION['authenticated'] = true; // Set authenticated to true here
             $_SESSION['last_auth_time'] = $current_time; // Store the current time
-            header("Location: ../../admin/panel.php");
+            header("Location: ../../admin/dashboard.php");
             exit();
         } else {
             $error_message = "Incorrect password. Access denied.";

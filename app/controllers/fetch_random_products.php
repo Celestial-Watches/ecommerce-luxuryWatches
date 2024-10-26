@@ -1,7 +1,99 @@
-<?php if (!defined('ALLOW_ACCESS')) {
-    header("Location: ../../index.php");
-    exit();
-}?>
+<?php
+require_once __DIR__ . '/../config/conn.php';
+
+
+$userId = $_SESSION['user_id'] ?? null; // Get the logged-in user's ID from session
+
+// Set the cache file and expiration time (in seconds)
+$cacheFile = __DIR__ . '/../cache/recommended_products_' . ($userId ? $userId : 'guest') . '.json';
+$cacheTime = 86400; // 24 hours
+
+// Check if cache file exists and is fresh
+if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
+    $recommendedProducts = json_decode(file_get_contents($cacheFile), true);
+} else {
+    $recommendedProducts = [];
+
+    // If user is logged in, fetch recommendations based on search history and views
+    if ($userId) {
+        // Fetch user's recent search terms
+        $searchStmt = $conn->prepare("SELECT search_term FROM search_history WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
+        $searchStmt->bind_param('i', $userId);
+        $searchStmt->execute();
+        $searchTerms = $searchStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        // Prepare the search terms for the query
+        $searchQuery = implode("','", array_column($searchTerms, 'search_term'));
+
+        // Fetch products based on search history
+        if (!empty($searchQuery)) {
+            $recommendedProducts = array_merge($recommendedProducts, getProductsBySearch($searchQuery, $conn));
+        }
+
+        // Fetch products based on recently viewed items
+        $viewStmt = $conn->prepare("SELECT product_id FROM product_views WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
+        $viewStmt->bind_param('i', $userId);
+        $viewStmt->execute();
+        $viewedProducts = $viewStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        
+        if (!empty($viewedProducts)) {
+            $productIds = implode(',', array_column($viewedProducts, 'product_id'));
+            $recommendedProducts = array_merge($recommendedProducts, getProductsByIds($productIds, $conn));
+        }
+    }
+
+    // If no user, fallback to random products
+    if (empty($recommendedProducts)) {
+        // Fetch random products as fallback
+        $stmt = $conn->prepare("SELECT * FROM products WHERE stock > 0 ORDER BY RAND() LIMIT 9");
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        while ($row = $result->fetch_assoc()) {
+            $recommendedProducts[] = $row;
+        }
+    
+        if (empty($recommendedProducts)) {
+            echo '<p>No recommended products available at this time.</p>'; // Display when absolutely no products exist
+        }
+    }    
+
+    // Save the result in cache
+    if (!empty($recommendedProducts)) {
+        file_put_contents($cacheFile, json_encode($recommendedProducts));
+    }
+}
+
+// Function to get products by search terms
+function getProductsBySearch($searchTerms, $conn) {
+    $searchTermsArray = explode("','", $searchTerms);
+    if (empty($searchTermsArray)) {
+        return []; // Return an empty array if no search terms are provided
+    }
+
+    $placeholders = implode(',', array_fill(0, count($searchTermsArray), '?'));
+    $query = "SELECT * FROM products WHERE name IN ($placeholders)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param(str_repeat('s', count($searchTermsArray)), ...$searchTermsArray);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC) ?: []; // Return empty array on failure
+}
+
+function getProductsByIds($productIds, $conn) {
+    if (empty($productIds)) {
+        return []; // Return an empty array if no product IDs are provided
+    }
+
+    $query = "SELECT * FROM products WHERE id IN ($productIds)";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC) ?: []; // Return empty array on failure
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +158,6 @@
             margin: 0 5px;
             flex: 0 0 32.32%;
             transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
-            /* Add opacity transition */
             text-align: center;
             background-image: linear-gradient(300deg,
                     rgba(255, 255, 255, 0) 30%,
@@ -173,7 +264,6 @@
         }
 
         @media (max-width: 480px) {
-
             /* For mobile, show 1 card */
             .card {
                 width: 90%;
@@ -184,97 +274,34 @@
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(20px);
-            /* Move elements slightly downwards */
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
-            /* Bring elements to their original position */
         }
     </style>
 </head>
 
 <body>
+<?php if (!empty($recommendedProducts)): ?>
     <main class="featured-main animate-on-scroll">
         <section class="featured-products animate-on-scroll">
-            <h2 class="featured-title animate-on-scroll">Our Exclusive Collection</h2>
+            <h2 class="featured-title animate-on-scroll">Luxury Timepieces: Handpicked Just for You</h2>
             <div class="slider">
                 <button class="slider-button prev animate-on-scroll" aria-label="Previous Slide" onclick="moveSlide(-1)">&#10094;</button>
                 <div class="slider-container animate-on-scroll">
                     <div class="product-grid">
+                        <?php foreach ($recommendedProducts as $product): ?>
                         <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/2d6f15c3-5f2a-49ab-16b7-23602a3d8700/w=400x400" alt="Audemars Piguet Royal Oak Selfwinding 34mm">
+                            <img loading="lazy" class="featured-card" src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                             <hr>
-                            <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding 34mm</h3>
-                            <p class="featured-price" data-price-in-usd="57154">$ 57,154</p>
+                            <h3 class="featured-text"><?= htmlspecialchars($product['name']) ?></h3>
+                            <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($product['price']) ?>">$ <?= htmlspecialchars($product['price']) ?></p>
                             <button class="buy-button">View Details</button>
                         </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/0739c076-75f1-4bc8-8a66-ce6268fa5a00/w=400x400" alt="Jacob &amp; Co. High Complication Masterpieces Casino Tourbillon Baguette Diamonds Limited Edition 44mm">
-                            <hr>
-                            <h3 class="featured-text">Jacob &amp; Co. High Complication Masterpieces Casino Tourbillon Baguette Diamonds Limited Edition 44mm</h3>
-                            <p class="featured-price">ON REQUEST</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/a3111a85-9142-446a-d24c-da44dce4f400/w=400x400" alt="Richard Mille RM67-02 Automatic Winding Extra-Thin &amp;quot;Mutaz Essa Barshim&amp;&quot;">
-                            <hr>
-                            <h3 class="featured-text">Richard Mille RM67-02 Automatic Winding Extra-Thin &amp;quot;Mutaz Essa Barshim&amp;&quot;</h3>
-                            <p class="featured-price" data-price-in-usd="324507">$ 324,507</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/15af5265-b853-493d-c020-60b2b499de00/w=400x400" alt="Vacheron Constantin Overseas Self-winding 34.5mm">
-                            <hr>
-                            <h3 class="featured-text">Vacheron Constantin Overseas Self-winding 34.5mm</h3>
-                            <p class="featured-price" data-price-in-usd="26836">$ 26,836</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/74a8797a-33b7-4c8b-7368-2a90ca9d8b00/w=400x400" alt="Audemars Piguet Royal Oak Selfwinding Chronograph &amp;&quot;50th Anniversary&amp;&quot; 41mm">
-                            <hr>
-                            <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding Chronograph &amp;&quot;50th Anniversary&amp;&quot; 41mm</h3>
-                            <p class="featured-price" data-price-in-usd="77365">$ 77,365</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/51185459-938c-4a5a-69fe-da97fcf26500/w=400x400" alt="Audemars Piguet Royal Oak 33mm">
-                            <hr>
-                            <h3 class=" featured-text">Audemars Piguet Royal Oak 33mm"</h3>
-                            <p class="featured-price" data-price-in-usd="33574">$ 33,574</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/32e13bec-79ff-4ab3-ceb5-0a6ed4bae200/w=400x400" alt="Audemars Piguet Royal Oak Double Balance Wheel Openworked 41mm">
-                            <hr>
-                            <h3 class="featured-text">Audemars Piguet Royal Oak Double Balance Wheel Openworked 41mm</h3>
-                            <p class="featured-price show-from-text" data-price-in-usd="257135">FROM $ 257,135</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/e9f16ed5-771f-495b-be31-5dc1493e0600/w=400x400" alt="Patek Philippe Nautilus 40mm">
-                            <hr>
-                            <h3 class="featured-text">Patek Philippe Nautilus 40mm</h3>
-                            <p class="featured-price" data-price-in-usd="112174">$ 112,174</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
-                        <!--  -->
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/d58061b2-44dc-488c-1687-66e7fa753600/w=400x400" alt="Richard Mille RM11-03 Automatic Flyback Chronograph McLaren Limited Edition"">
-                            <hr>
-                            <h3 class=" featured-text">Richard Mille RM11-03 Automatic Flyback Chronograph McLaren Limited Edition"</h3>
-                            <p class="featured-price" data-price-in-usd="364930">$ 364,930</p>
-                            <button class="buy-button">View Details</button>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <button class="slider-button next animate-on-scroll" aria-label="Next Slide" onclick="moveSlide(1)">&#10095;</button>
@@ -282,7 +309,10 @@
         </section>
     </main>
 
-    <script>
+    <hr style="border-color: #ffffff;">
+<?php endif; ?>
+
+<script>
     // Function to initialize sliders
     function initializeSlider(sliderContainer) {
         let currentIndex = 0;
@@ -361,6 +391,11 @@
     // Initialize sliders
     document.querySelectorAll('.slider').forEach(initializeSlider);
 </script>
-</body>
 
+    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="/src/assets/js/index.js"></script>
+    <script src="/src/assets/js/currency-language.js"></script>
+    <script src="/src/assets/js/cookie-monitor.js"></script>
+
+</body>
 </html>

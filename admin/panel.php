@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('ALLOW_ACCESS')) {
+  header("Location: ../index.php");
+  exit();
+}
+
 session_set_cookie_params([
   'lifetime' => 86400, // 1 day
   'path' => '/',
@@ -13,12 +18,15 @@ session_start();
 // Regenerate the session ID on every page refresh
 session_regenerate_id(true);
 
-// var_dump($_SESSION);
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-  header("Location: /app/contollers/login.php");
+  header("Location: ../app/controllers/login.php");
   exit();
 }
+
+// var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -28,15 +36,17 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Celestial Watches - Admin Panel</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../src/assets/css/panel.css">
   <script type="text/javascript" src="../src/assets/js/panelNav.js" defer></script>
   <script type="text/javascript" src="../src/assets/js/navigation.js"></script>
-  <style>
-    .card-header{
-      color: black;
-    }
-  </style>
+  <script>
+        window.addEventListener('pageshow', function(event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+        }
+    });
+
+    </script>
 </head>
 
 <body>
@@ -54,7 +64,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
       <!-- Dashboard Overview -->
 
       <li class="active">
-        <a href="/admin/panel.php">
+        <a href="/admin/dashboard.php">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
             <path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z" />
           </svg>
@@ -351,251 +361,5 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
 
     </ul>
   </nav>
-  <div class="container-fluid">
-    <div class="row">   
-        <!-- Main content -->
-        <main role="main" style="text-wrap: nowrap;" class="col-md-9 col-lg-10 px-3"> 
-          <!-- Search Functionality -->
-          <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Search</div>
-                        <div class="card-body">
-                            <input type="text" class="form-control" placeholder="Search users, products, or orders">
-                        </div>
-                    </div>
-                </div>
-            </div><br>
-        <div class="row" style="color:black;">
-          
-                <div class="col-md-4">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">Total Users</div>
-                        <div class="card-body">
-                            <h5 class="card-title">150</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-white bg-success mb-3">
-                        <div class="card-header">Total Sales</div>
-                        <div class="card-body">
-                            <h5 class="card-title">$2000</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-white bg-danger mb-3">
-                        <div class="card-header">Pending Orders</div>
-                        <div class="card-body">
-                            <h5 class="card-title">5</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- User Growth Chart -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">User Growth Over Time</div>
-                        <div class="card-body">
-                            <canvas id="userGrowthChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sales Overview -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Sales Trends</div>
-                        <div class="card-body">
-                            <canvas id="salesTrendsChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Management -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Product Management</div>
-                        <div class="card-body">
-                            <p>Quick access to <a href="#">add/edit/delete products</a>.</p>
-                            <p>Inventory Levels: <strong>Alerts for low stock.</strong></p>
-                            <p>Recently Added Products: <strong>Product List Here</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Order Management -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Order Management</div>
-                        <div class="card-body">
-                            <p>Summary of recent orders:</p>
-                            <ul>
-                                <li>Order 1 - Status: Pending</li>
-                                <li>Order 2 - Status: Completed</li>
-                                <li>Order 3 - Status: Canceled</li>
-                            </ul>
-                            <p><a href="#">View all orders</a>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Customer Feedback -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Customer Feedback</div>
-                        <div class="card-body">
-                            <p>Recent reviews:</p>
-                            <ul>
-                                <li>Review 1 - Rating: ⭐⭐⭐⭐⭐</li>
-                                <li>Review 2 - Rating: ⭐⭐⭐⭐</li>
-                                <li>Review 3 - Rating: ⭐⭐⭐</li>
-                            </ul>
-                            <p><a href="#">Manage feedback</a>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics & Reports -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Analytics & Reports</div>
-                        <div class="card-body">
-                            <p>Traffic Statistics: <strong>Details here</strong></p>
-                            <p>Performance Reports: <strong>User engagement data</strong></p>
-                            <p><a href="#">Export detailed reports</a>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- System Health -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">System Health</div>
-                        <div class="card-body">
-                            <p>Server Uptime: <strong>99.9%</strong></p>
-                            <p>Error Rates: <strong>Minimal errors logged.</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Notifications & Alerts -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Notifications</div>
-                        <div class="card-body">
-                            <ul>
-                                <li>New user signup: User123</li>
-                                <li>Low inventory alert: Product XYZ</li>
-                                <li>Update: System maintenance scheduled.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings/Configuration Panel -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Settings</div>
-                        <div class="card-body">
-                            <p>Configure application settings:</p>
-                            <ul>
-                                <li>User roles and permissions</li>
-                                <li>Theme customization options</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- User Activity Log -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">User Activity Log</div>
-                        <div class="card-body">
-                            <p>Recent actions taken by users:</p>
-                            <ul>
-                                <li>User123 logged in at 10:00 AM</li>
-                                <li>User456 made changes at 10:15 AM</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-</div>
-
-<!-- Include Bootstrap JS and Chart.js -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Example code to create charts using Chart.js
-    var ctxUserGrowth = document.getElementById('userGrowthChart').getContext('2d');
-    var userGrowthChart = new Chart(ctxUserGrowth, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May'],
-            datasets: [{
-                label: 'User Growth',
-                data: [50, 100, 150, 200, 250],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    var ctxSalesTrends = document.getElementById('salesTrendsChart').getContext('2d');
-    var salesTrendsChart = new Chart(ctxSalesTrends, {
-        type: 'bar',
-        data: {
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-            datasets: [{
-                label: 'Sales',
-                data: [500, 1000, 1500, 2000],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 </body>
 </html>

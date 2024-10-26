@@ -1,4 +1,10 @@
 <?php
+if (!defined('ALLOW_ACCESS')) {
+    // Redirect to homepage or show an error message
+    header("Location: ../index.php");
+    exit();
+  }
+  
 require_once '../app/config/conn.php';
 
 // Get current page and search term from the AJAX request
@@ -92,7 +98,7 @@ if ($result->num_rows > 0) {
     </tr>';
     }
 } else {
-    $productTable .= '<tr><td colspan="9" class="text-center">No products found</td></tr>';
+    $productTable .= '<tr><td colspan="10" class="text-center">No products found. Please check your search term</td></tr>';
 }
 
 $productTable .= '</tbody></table>';

@@ -1,3 +1,7 @@
+<?php if (!defined('ALLOW_ACCESS')) {
+    header("Location: ../../index.php");
+    exit();
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +86,7 @@
         .cta-button:hover {
             transform: scale(1.05);
             border-color: #fff9;
+            background-color: red;
         }
 
         .animate-on-scroll {

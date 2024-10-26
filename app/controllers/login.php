@@ -1,5 +1,5 @@
 <?php
-
+define('ALLOW_ACCESS', true);
 // // Set the session cookie with secure attributes
 session_set_cookie_params([
   'lifetime' => 86400,              // Session expires when the browser is closed
@@ -97,77 +97,77 @@ if (isset($_POST["login"])) {
     if (empty($errors)) {
       $sql = "SELECT * FROM users WHERE username = ?";
       if ($stmt = mysqli_prepare($conn, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", $usernamee);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        // After verifying the password
-        if ($user = mysqli_fetch_assoc($result)) {
-          // Verify the password
-          if (password_verify($password, $user["password"])) {
-
-            // Update the user's status to 'YES' in the database
-            $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
-            if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
-              mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-              mysqli_stmt_execute($updateStmt);
-              mysqli_stmt_close($updateStmt);
-            }
-
-            // Check if user is admin
-            if ($user["role"] === "admin") { // Assuming 'role' column exists
-              $_SESSION["admin"] = true; // Set admin session
-              // Regenerate session ID to prevent session fixation
-              session_regenerate_id(true);
-              // Set session variables for admin
-              $_SESSION["user"] = $usernamee;
-              $_SESSION["LAST_ACTIVITY"] = time();
-              $_SESSION["CREATED"] = time();
-              $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-              $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
-              $_SESSION['otp_verified'] = true;
-              
-
-              // Redirect to admin verification page
-              header("Location: ../../index.php");
-              exit(); // Ensure script termination here
-            }
-
-            // Regenerate session ID to prevent session fixation
-            session_regenerate_id(true);
-
-            // Set session variables and initialize session management
-            $_SESSION["user"] = $usernamee;
-            $_SESSION["LAST_ACTIVITY"] = time();
-            $_SESSION["CREATED"] = time();
-            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
-            $_SESSION['otp_verified'] = true;
-            
-
-            if (isset($_POST['remember'])) {
-              // Set cookie for 1 hour
-              setcookie('temp', '1', time() + 3600, '/', '', true, true);
-            } else {
-              setcookie('temp', '', time() - 3600, '/', '', true, true);
-            }
-
-            // Redirect to the main index page
-            header("Location: ../../index.php");
-            exit(); // Ensure script termination here
+          mysqli_stmt_bind_param($stmt, "s", $usernamee);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+  
+          // After verifying the password
+          if ($user = mysqli_fetch_assoc($result)) {
+              // Verify the password
+              if (password_verify($password, $user["password"])) {
+  
+                  // Update the user's status to 'YES' in the database
+                  $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+                  if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+                      mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+                      mysqli_stmt_execute($updateStmt);
+                      mysqli_stmt_close($updateStmt);
+                  }
+  
+                  // Check if user is admin
+                  if ($user["role"] === "admin") { // Assuming 'role' column exists
+                      $_SESSION["admin"] = true; // Set admin session
+                      // Regenerate session ID to prevent session fixation
+                      session_regenerate_id(true);
+                      // Set session variables for admin
+                      $_SESSION["user"] = $usernamee;
+                      $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
+                      $_SESSION["LAST_ACTIVITY"] = time();
+                      $_SESSION["CREATED"] = time();
+                      $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+                      $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+                      $_SESSION['otp_verified'] = true;
+  
+                      // Redirect to admin verification page
+                      header("Location: ../../index.php");
+                      exit(); // Ensure script termination here
+                  }
+  
+                  // Regenerate session ID to prevent session fixation
+                  session_regenerate_id(true);
+  
+                  // Set session variables and initialize session management
+                  $_SESSION["user"] = $usernamee;
+                  $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
+                  $_SESSION["LAST_ACTIVITY"] = time();
+                  $_SESSION["CREATED"] = time();
+                  $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+                  $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+                  $_SESSION['otp_verified'] = true;
+  
+                  if (isset($_POST['remember'])) {
+                      // Set cookie for 1 hour
+                      setcookie('temp', '1', time() + 3600, '/', '', true, true);
+                  } else {
+                      setcookie('temp', '', time() - 3600, '/', '', true, true);
+                  }
+  
+                  // Redirect to the main index page
+                  header("Location: ../../index.php");
+                  exit(); // Ensure script termination here
+              } else {
+                  $errors[] = "Incorrect password";
+              }
           } else {
-            $errors[] = "Incorrect password";
+              $errors[] = "Username not found";
           }
-        } else {
-          $errors[] = "Username not found";
-        }
-
-        mysqli_stmt_close($stmt);
+  
+          mysqli_stmt_close($stmt);
       } else {
-        $errors[] = "Database query failed";
+          $errors[] = "Database query failed";
       }
-    }
   }
+}  
 }
 
 

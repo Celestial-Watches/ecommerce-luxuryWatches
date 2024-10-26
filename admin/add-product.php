@@ -1,10 +1,16 @@
 <?php
-
+define('ALLOW_ACCESS', true);
 include 'panel.php';
+
+if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    header("Location: ../app/controllers/login.php"); 
+    exit();
+  }
+  
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
     // Redirect to login if not authenticated
-    header("Location: /app/controllers/login.php");
+    header("Location: ../app/controllers/login.php");
     exit();
 }
 

@@ -1,5 +1,7 @@
 <?php
 
+define('ALLOW_ACCESS', true);
+
 // Define secure session cookie settings:
 // lifetime: Session duration (86400 seconds = 24 hours).
 // path: Set cookie available across the entire site.
@@ -130,7 +132,6 @@ if (isset($_SESSION['user'])) {
 
 <body>
 
-
     <!-- ============= Newsletter=============  -->
 
     <div class="overlay" data-overlay></div>
@@ -199,7 +200,11 @@ if (isset($_SESSION['user'])) {
 
     <?php include 'PHP/components/featured-product.php';
     ?>
-    <hr style="border-color: #ffffff;">
+   
+
+    <?php include 'app/controllers/fetch_random_products.php';
+    ?>
+    
 
     <?php include 'PHP/components/trending-article.php';
     ?>

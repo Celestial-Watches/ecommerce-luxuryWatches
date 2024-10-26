@@ -2,13 +2,14 @@
 session_start();
 define('ALLOW_ACCESS', true);
 include '../config/conn.php';
+include '../controllers/search-engine.php'; // Include the search engine logic here
 
-  include '../controllers/search-engine.php';
+// Display the results in search.php
 ?>
 <!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- ============= IONICONS =============  -->
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
@@ -19,22 +20,22 @@ include '../config/conn.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- ============= JS =============  -->
-    <script src="../..//src/assets/js/navigation.js"></script>
+    <script src="../../src/assets/js/navigation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
     <!-- ============= CSS =============  -->
-    <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy"/>
-    <link rel="stylesheet" href="../..//src/libs/swiper/swiper-bundle.min.css" loading="lazy">
-    <link rel="stylesheet" href="../..//src/assets/css/google-header.css" loading="lazy">
+    <link rel="stylesheet" href="../../src/assets/css/deskView.css" loading="lazy"/>
+    <link rel="stylesheet" href="../../src/libs/swiper/swiper-bundle.min.css" loading="lazy">
+    <link rel="stylesheet" href="../../src/assets/css/google-header.css" loading="lazy">
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-</head>
+    <title>Search Results</title>
 
-<style type="text/css" media="all">
+    <style type="text/css" media="all">
     .product__container {
         padding: 40px ;
         background-color: #FCF8F5 !important;
@@ -241,9 +242,9 @@ include '../config/conn.php';
     }
 </style>
 
+</head>
 <body>
-    
-<?php include '../../PHP/components/navbar.php'; ?>
+    <?php include '../../PHP/components/navbar.php'; ?>
 
     <div class="product__container">
         <div class="search-results">
@@ -328,12 +329,12 @@ include '../config/conn.php';
         </div>
     </div>
 
+    <!-- Include your scripts -->
     <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/src/assets/js/index.js"></script>
     <script src="/src/assets/js/currency-language.js"></script>
     <script src="/src/assets/js/cookie-monitor.js"></script>
 </body>
-
 </html>
 
 <?php
