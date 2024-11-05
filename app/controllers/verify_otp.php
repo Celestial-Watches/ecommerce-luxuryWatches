@@ -182,6 +182,7 @@ if (isset($_POST['verify'])) {
 
                             // Set user session
                             $_SESSION['user'] = $usernamee; // Set user session
+                            $_SESSION["user_id"] = $user['id'];
                             setcookie("loggedYes", "true", time() + 3600, "/", false, true);
                             $_SESSION['otp_verified'] = true;
                             header("Location: ../../index.php"); // Redirect to index.php
@@ -278,8 +279,7 @@ $seconds = $remaining_time % 60;
 </head>
 
 <body>
-    <?php include '../../PHP/components/loader.php';
-    ?>
+
     <div class="login-container">
         <div class="login-box">
             <h1>Verify OTP</h1>

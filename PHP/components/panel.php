@@ -1,8 +1,5 @@
 <?php
- if (!defined('ALLOW_ACCESS')) {
-    header("Location: ../../index.php");
-    exit();
-}
+ 
 // // Set the session cookie with secure attributes
 session_set_cookie_params([
   'lifetime' => 86400,              // Session expires when the browser is closed

@@ -154,7 +154,7 @@ If you did not make this change or believe someone has accessed your account, pl
 </head>
 
 <body>
-<?php include '../../PHP/components/loader.php';
+
     ?>
     <div class="login-container">
         <div class="login-box">

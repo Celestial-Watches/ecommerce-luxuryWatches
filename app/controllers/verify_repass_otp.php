@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-<?php include '../../PHP/components/loader.php';
+
     ?>
     <div class="login-container">
         <div class="login-box">

@@ -181,7 +181,7 @@ if (isset($_POST["submit"])) {
   }
 
   // Implement session timeout
-  if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+  if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
     session_unset(); // Unset session data
     session_destroy(); // Destroy session
   }
@@ -236,8 +236,7 @@ if (isset($_POST["submit"])) {
 
 <body>
 
-  <?php include '../../PHP/components/loader.php';
-  ?>
+
   <!-- ============= HEADER =============  -->
   <?php include '../../PHP/components/navbar.php';
   ?>

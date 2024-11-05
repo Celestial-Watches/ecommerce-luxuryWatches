@@ -14,7 +14,7 @@
             font-family: Arial, sans-serif !important;
             background-color: #f7f7f7;
             flex-direction: column;
-            height: 100vh;
+            height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -128,7 +128,7 @@
             <div class="bannerOverlay">
                 <h1 class="animate-on-scroll">Welcome to Celestial Watches</h1>
                 <p class="animate-on-scroll">Exclusivity in Every Tick</p>
-                <a href="#shop" class="cta-button">Shop Now</a>
+                <a href="http://localhost:3000/app/views/productLanding.php" class="cta-button">Shop Now</a>
             </div>
         </div>
     </section>

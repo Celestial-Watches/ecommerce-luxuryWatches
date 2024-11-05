@@ -49,9 +49,9 @@ if (isset($_SESSION['otp']) && !isset($_SESSION['user'])) {
 $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 
-// Define $sessionTimeout as 1800 seconds (30 minutes).
+// Define $sessionTimeout as 3600 seconds (60 minutes).
 
-$sessionTimeout = 1800;
+$sessionTimeout = 3600;
 
 // Check if the session creation time (CREATED) is set:
 //     If not, set $_SESSION['CREATED'] to the current time.
@@ -67,30 +67,41 @@ if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
 }
 
-// If the session contains the user variable (indicating a logged-in user):
-// Check if the session's last activity (LAST_ACTIVITY) exists:
-// If the session has been idle for more than $sessionTimeout (30 minutes):
-// Unset the session variables.
-// Destroy the session.
-// Redirect the user to the login page (app/controllers/login.php).
-// If the session is still active, update the LAST_ACTIVITY timestamp to extend the session duration.
-
+// 1. Check if the `user` variable exists in the session, indicating a logged-in user.
+// 2. Verify if `LAST_ACTIVITY` exists in the session:
+//    - Calculate the session idle time by comparing the current time with `LAST_ACTIVITY`.
+//    - If the idle time exceeds `$sessionTimeout` (e.g., 60 minutes):
+//      1. Update the user's `status` to `'NO'` in the database to indicate they are logged out.
+//      2. Clear the session variables.
+//      3. Destroy the session.
+//      4. Redirect the user to the login page (`app/controllers/login.php`).
+// 3. If the session is still active, update the `LAST_ACTIVITY` timestamp to extend the session duration.
 
 if (isset($_SESSION['user'])) {
-    
     if (isset($_SESSION['LAST_ACTIVITY'])) {
         $sessionDuration = time() - $_SESSION['LAST_ACTIVITY'];
+        
         if ($sessionDuration > $sessionTimeout) {
-           
+            require 'app/config/conn.php';
+            // Update user status to 'NO' in the database
+            $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
+            $stmt = $conn->prepare($updateSql);
+            $stmt->bind_param("s", $_SESSION['user']);
+            $stmt->execute();
+
+            // Clear session data and log the user out
             session_unset();
             session_destroy();
-            header("Location: app/controllers/login.php"); 
+            header("Location: app/controllers/login.php");
             exit();
         }
     }
-   
+
+    // Update the last activity time
     $_SESSION['LAST_ACTIVITY'] = time();
 }
+
+// var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -154,7 +165,7 @@ if (isset($_SESSION['user'])) {
 
             <div class="newsletter">
 
-                <form action="#">
+                <form action="app/controllers//subscribe.php">
 
                     <div class="newsletter-header">
 
@@ -166,9 +177,11 @@ if (isset($_SESSION['user'])) {
 
                     </div>
 
-                    <input type="email" name="email" class="email-field" placeholder="Email Address" required>
+                    <input type="email" id="subscribe-email" name="email" class="email-field" placeholder="Email Address" required>
 
                     <button type="submit" class="btn-newsletter">Subscribe</button>
+
+                    <div id="feedback-message"></div>
 
                 </form>
 
@@ -182,8 +195,7 @@ if (isset($_SESSION['user'])) {
 
     <!-- ================================================================ -->
 
-    <?php include 'PHP/components/loader.php';
-    ?>
+    
 
     <!-- ============= HEADER =============  -->
 

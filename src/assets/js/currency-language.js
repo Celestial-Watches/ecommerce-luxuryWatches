@@ -4,7 +4,7 @@
 // Handles errors in case the API request fails, and returns null.
 
 async function fetchConversionRates() {
-    const apiKey = 'e006d55d7df672b1786abd14';
+    const apiKey = '223277458a876e4b0d9bffc4';
     const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
     try {
         const response = await fetch(url);
@@ -37,7 +37,23 @@ async function updatePrices(selectedCurrency) {
     productElements.forEach(product => {
         const priceInUSD = product.dataset.priceInUsd; // Get the value directly
         if (priceInUSD) { // Check if priceInUSD is defined
-            const priceNumber = parseFloat(priceInUSD.replace(/,/g, '').trim()); // Parse the number
+            const originalPrice = priceInUSD.trim(); // Store the original price string
+            let priceNumber = null;
+            let isFromPrice = false;
+
+            // Check if the price string starts with "FROM"
+            if (originalPrice.startsWith("FROM")) {
+                isFromPrice = true; // Mark that this is a "FROM" price
+                // Match the number after "FROM"
+                const match = originalPrice.match(/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i);
+                if (match) {
+                    priceNumber = parseFloat(match[1].replace(/,/g, '').trim()); // Convert to float
+                }
+            } else {
+                // For prices without "FROM", extract the numeric part directly
+                priceNumber = parseFloat(originalPrice.replace(/,/g, '').trim());
+            }
+
             if (!isNaN(priceNumber)) {
                 let convertedPrice;
                 let currencySymbol;
@@ -62,13 +78,25 @@ async function updatePrices(selectedCurrency) {
                 }
 
                 const formattedPrice = convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                product.innerHTML = `<span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
+
+                // Construct the final price display
+                let finalPriceDisplay;
+                if (isFromPrice) {
+                    // If the price was a "FROM" price, include that in the display
+                    finalPriceDisplay = `FROM <span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
+                } else {
+                    // Normal display without "FROM"
+                    finalPriceDisplay = `<span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
+                }
+                
+                product.innerHTML = finalPriceDisplay; // Update the product price display
             } else {
                 console.error('Invalid price value:', priceNumber);
             }
-        } 
+        }
     });
 }
+
 
 // Maps country codes (e.g., 'US', 'IN', 'FR') to their respective currency codes ('usd', 'inr', 'eur').
 const countryCurrencyMap = {
@@ -282,3 +310,4 @@ currencyLinks.forEach(link => {
         selectCurrency(this.getAttribute('onclick').match(/'([^']+)'/)[1]); // Extract currency from onclick
     });
 });
+

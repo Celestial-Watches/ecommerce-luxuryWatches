@@ -95,14 +95,69 @@ document.addEventListener('DOMContentLoaded', () => {
         if (subscribeForm) {
             subscribeForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevent form from submitting normally
-
-                // Set local storage to remember subscription
-                setLocalStorageWithExpiry('subscribed', 'true', 3); // Set subscription state with 3 hours expiry
-
-                // Close the modal
-                modalCloseFunc(); // Call the modal close function
+        
+                const email = document.getElementById('subscribe-email').value; // Get the email value
+                const feedbackMessage = document.getElementById('feedback-message'); // Assuming there's a div for feedback
+                feedbackMessage.textContent = ''; // Clear previous messages
+        
+                if (!email) {
+                    feedbackMessage.textContent = 'Please enter your email.';
+                    feedbackMessage.style.color = 'red';
+                    return;
+                }
+        
+                const formData = new FormData();
+                formData.append('email', email);
+        
+                // Show loading indicator
+                feedbackMessage.textContent = 'Processing...';
+                feedbackMessage.style.color = 'black'; // Reset color for loading state
+        
+                // Disable the submit button to prevent multiple submissions
+                const submitButton = subscribeForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+        
+                fetch('../../../app/controllers/subscribe.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    // Check if the response is ok (status in the range 200-299)
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    feedbackMessage.style.color = data.status === 'success' ? 'green' : 'red';
+                    feedbackMessage.textContent = data.message;
+        
+                    if (data.status === 'success') {
+                        // Set local storage to remember subscription
+                        setLocalStorageWithExpiry('subscribed', 'true', 3); // Set subscription state with 3 hours expiry
+                        subscribeForm.reset(); // Clear the input field
+                        modalCloseFunc(); // Close the modal
+                        location.reload();
+        
+                        // Optional: If you want to update UI without a full page reload
+                        // You can append a thank-you message or something similar
+                        const thankYouMessage = document.createElement('div');
+                        thankYouMessage.textContent = 'Thank you for subscribing!';
+                        document.body.appendChild(thankYouMessage);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    feedbackMessage.textContent = 'An unexpected error occurred. Please try again later.';
+                    feedbackMessage.style.color = 'red';
+                })
+                .finally(() => {
+                    // Re-enable the submit button after processing is done
+                    submitButton.disabled = false;
+                });
             });
         }
+        
 
         // Modal event listeners
         if (modalCloseOverlay) {

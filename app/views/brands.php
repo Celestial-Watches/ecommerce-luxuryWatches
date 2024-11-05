@@ -2,24 +2,18 @@
 session_start();
 define('ALLOW_ACCESS', true);
 include '../config/conn.php';
-
 include '../controllers/search-engine.php';
 
+$brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 
-// Insert the below code in product_detail page
-
-// $userId = $_SESSION['user_id'] ?? null; // Get user ID from session
-// $productId = $_GET['product_id'] ?? null; // Get product ID from URL or request
-
-// if ($userId && $productId) {
-//     // Insert a record for this product view
-//     $stmt = $conn->prepare("INSERT INTO product_views (user_id, product_id, created_at) VALUES (?, ?, NOW())");
-//     $stmt->bind_param('ii', $userId, $productId);
-//     $stmt->execute();
-//     $stmt->close();
-// }
+// Prepare and execute the SQL statement
+$stmt = $conn->prepare("SELECT * FROM products WHERE brand = ?"); // Adjust the table name as needed
+$stmt->bind_param("s", $brand);
+$stmt->execute();
+$result = $stmt->get_result();
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,8 +40,7 @@ include '../controllers/search-engine.php';
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <style type="text/css" media="all">
@@ -76,7 +69,6 @@ include '../controllers/search-engine.php';
         .product-grid,
         .single-row {
             grid-template-columns: repeat(4, minmax(250px, 1fr));
-            /* 4 items per row */
         }
     }
 
@@ -85,7 +77,6 @@ include '../controllers/search-engine.php';
         .product-grid,
         .single-row {
             grid-template-columns: repeat(3, minmax(250px, 1fr));
-            /* 3 items per row */
         }
     }
 
@@ -94,7 +85,6 @@ include '../controllers/search-engine.php';
         .product-grid,
         .single-row {
             grid-template-columns: repeat(2, minmax(250px, 1fr));
-            /* 2 items per row */
         }
     }
 
@@ -103,10 +93,8 @@ include '../controllers/search-engine.php';
         .product-grid,
         .single-row {
             grid-template-columns: repeat(1, 1fr);
-            /* 1 item per row */
         }
     }
-
 
     .single-row .product-item {
         margin: 5px;
@@ -129,7 +117,6 @@ include '../controllers/search-engine.php';
 
     .cta-button:hover {
         background-color: #F3F4F4 !important;
-
     }
 
     .product-code {
@@ -275,11 +262,34 @@ include '../controllers/search-engine.php';
     <?php include '../../PHP/components/navbar.php'; ?>
 
     <div class="product__container">
-        <div class="search-results">
-            <?php if ($message): ?>
-                <p><?php echo $message; ?></p>
-            <?php endif; ?>
-        </div>
+
+        <?php
+        // Check if there are results for the selected brand
+        if ($result && $result->num_rows > 0) {
+        ?>
+
+            <div style="font-size: 21px;
+                    font-weight: 700;
+                    line-height: 25px;
+                    text-transform: uppercase;
+                    margin-top: 17px;
+                    margin-bottom: 10px;
+                    text-align: left;
+                    font-family: 'Poppins';">
+                <?php echo htmlspecialchars($brand); ?>
+            </div>
+
+            <span style="text-align: left;
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 21px;
+                    padding-bottom: 20px;
+                    font-family: 'Poppins';">
+                Discover our prestigious collections of luxury watches.</span>
+
+        <?php
+        }
+        ?>
 
         <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
             <?php
@@ -349,42 +359,28 @@ include '../controllers/search-engine.php';
             <?php
                 }
             } else {
-                // If there are no results and a search was attempted, show the message
-                if ($search !== '') {
-                    echo '<p>' . $message . '</p>';
-                }
+                // If there are no results for the selected brand
+                echo '<p style="display:block; text-align: center;">Coming soon</p>';
             }
 
-            // Close the statement if it exists
+            // Close the statement and connection
             if (isset($stmt)) {
                 $stmt->close();
             }
+            $conn->close();
             ?>
         </div>
-        <!-- Pagination -->
-        <div class="pagination">
-            <?php if ($page > 1): ?>
-                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">« Prev</a>
-            <?php endif; ?>
 
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
-            <?php endfor; ?>
 
-            <?php if ($page < $totalPages): ?>
-                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next »</a>
-            <?php endif; ?>
-        </div>
-    </div>
 
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
+        <!-- JS files -->
+        <script src="../../src/libs/swiper/swiper-bundle.min.js"></script>
+        <script src="../../src/assets/js/product-page.js"></script>
 </body>
 
 </html>
 
 <?php
-$conn->close();
+// $stmt->close(); // Close statement
+// $conn->close(); // Close connection
 ?>

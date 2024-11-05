@@ -8,6 +8,7 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- ============= IONICONS =============  -->
@@ -24,7 +25,7 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
     <!-- ============= CSS =============  -->
-    <link rel="stylesheet" href="../../src/assets/css/deskView.css" loading="lazy"/>
+    <link rel="stylesheet" href="../../src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../../src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../../src/assets/css/google-header.css" loading="lazy">
 
@@ -36,224 +37,244 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
     <title>Search Results</title>
 
     <style type="text/css" media="all">
-    .product__container {
-        padding: 40px ;
-        background-color: #FCF8F5 !important;
-    }
+        .product__container {
+            padding: 40px;
+            background-color: #FCF8F5 !important;
+        }
 
-    .product-grid, .single-row {
-        display: grid !important;
-        grid-template-columns: repeat(5, minmax(250px, 1fr));
-        justify-content: center !important;
-        gap: 10px !important;
-    }
+        .product-grid,
+        .single-row {
+            display: grid !important;
+            grid-template-columns: repeat(5, minmax(250px, 1fr));
+            justify-content: center !important;
+            gap: 10px !important;
+        }
 
-    .product-item {
-        background-color: white !important;
-        padding: 10px !important;
-        height: 100%;
-    }
+        .product-item {
+            background-color: white !important;
+            padding: 10px !important;
+            height: 100%;
+        }
 
-/* Media Queries */
-@media (max-width: 1360px) {
-    .product-grid,.single-row {
-        grid-template-columns: repeat(4, minmax(250px, 1fr)); /* 4 items per row */
-    }
-}
+        /* Media Queries */
+        @media (max-width: 1360px) {
 
-@media (max-width: 992px) {
-    .product-grid,.single-row {
-        grid-template-columns: repeat(3, minmax(250px, 1fr)); /* 3 items per row */
-    }
-}
+            .product-grid,
+            .single-row {
+                grid-template-columns: repeat(4, minmax(250px, 1fr));
+                /* 4 items per row */
+            }
+        }
 
-@media (max-width: 768px) {
-    .product-grid,.single-row {
-        grid-template-columns: repeat(2, minmax(250px, 1fr)); /* 2 items per row */
-    }
-}
+        @media (max-width: 992px) {
 
-@media (max-width: 580px) {
-    .product-grid,.single-row {
-        grid-template-columns: repeat(1, 1fr); /* 1 item per row */
-    }
-}
+            .product-grid,
+            .single-row {
+                grid-template-columns: repeat(3, minmax(250px, 1fr));
+                /* 3 items per row */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .product-grid,
+            .single-row {
+                grid-template-columns: repeat(2, minmax(250px, 1fr));
+                /* 2 items per row */
+            }
+        }
+
+        @media (max-width: 580px) {
+
+            .product-grid,
+            .single-row {
+                grid-template-columns: repeat(1, 1fr);
+                /* 1 item per row */
+            }
+        }
 
 
-    .single-row .product-item {
-        margin: 5px;
-        flex: 0 0 auto;
-    }
+        .single-row .product-item {
+            margin: 5px;
+            flex: 0 0 auto;
+        }
 
-    .product-content {
-        margin-top: 20px;
-        padding: 5px;
-    }
+        .product-content {
+            margin-top: 20px;
+            padding: 5px;
+        }
 
-    .product__image {
-        text-align: center !important;
-        padding-block: 20px !important;
-    }
+        .product__image {
+            text-align: center !important;
+            padding-block: 20px !important;
+        }
 
-    .product-image {
-        width: 100% !important;
-    }
+        .product-image {
+            width: 100% !important;
+        }
 
-    .cta-button:hover {
-        background-color: #F3F4F4 !important;
+        .cta-button:hover {
+            background-color: #F3F4F4 !important;
 
-    }
+        }
 
-    .product-code {
-        display: flex !important;
-        justify-content: space-between !important;
-        padding: 10px !important;
-        line-height: 45px !important;
-    }
+        .product-code {
+            display: flex !important;
+            justify-content: space-between !important;
+            padding: 10px !important;
+            line-height: 45px !important;
+        }
 
-    .product-title {
-        display: block !important;
-        text-align: left !important;
-        width: 100% !important;
-    }
-
-    .product-name {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-    }
-
-    .product-date {
-        font-size: 12px !important;
-        text-transform: uppercase !important;
-        color: #BFBFBF !important;
-        text-align: left !important;
-    }
-
-    .product-ref-code {
-        font-size: 12px !important;
-        text-transform: uppercase !important;
-        color: #BFBFBF !important;
-        text-align: right !important;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .name-link {
-        text-decoration: none !important;
-        font-size: 11px;
-        text-transform: uppercase !important;
-        font-family: "Univers LT Std", sans-serif !important;
-        height: auto !important;
-        max-width: 100% !important;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        color: #000 !important;
-        font-weight: 400;
-    }
-
-    .product-price {
-        font-size: 17px !important;
-        font-weight: 400 !important;
-        line-height: 30px !important;
-        font-family: 'Univers LT Std', sans-serif !important;
-        color: #000 !important;
-        margin-top: 8px !important;
-        text-transform: uppercase !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-
-    .product-button {
-        position: relative !important;
-        display: flex !important;
-        justify-content: center !important;
-        background-color: transparent !important;
-        width: 100%;
-        text-align: center !important;
-    }
-
-    .cta-button {
-        font-size: 14px !important;
-        height: 44px !important;
-        background-color: transparent !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-weight: 400 !important;
-        width: 95% !important;
-        padding: 5px !important;
-        cursor: pointer !important;
-        transition: all .4s !important;
-        border-style: double !important;
-        border: 1px solid #BFBFBF !important;
-        display: flex;
-    }
-
-    .button-link {
-        color: black;
-    }
-
-    @media (max-width: 580px) {
-
-        .product-item,
-        .product-name,
         .product-title {
-            text-align: center;
-            place-items: center;
+            display: block !important;
+            text-align: left !important;
+            width: 100% !important;
+        }
+
+        .product-name {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+        }
+
+        .product-date {
+            font-size: 12px !important;
+            text-transform: uppercase !important;
+            color: #BFBFBF !important;
+            text-align: left !important;
+        }
+
+        .product-ref-code {
+            font-size: 12px !important;
+            text-transform: uppercase !important;
+            color: #BFBFBF !important;
+            text-align: right !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .name-link {
-            white-space: normal;
-            text-overflow: clip;
-            overflow: visible;
+            text-decoration: none !important;
+            font-size: 11px;
+            text-transform: uppercase !important;
+            font-family: "Univers LT Std", sans-serif !important;
+            height: auto !important;
+            max-width: 100% !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #000 !important;
+            font-weight: 400;
         }
-    }
 
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+        .product-price {
+            font-size: 17px !important;
+            font-weight: 400 !important;
+            line-height: 30px !important;
+            font-family: 'Univers LT Std', sans-serif !important;
+            color: #000 !important;
+            margin-top: 8px !important;
+            text-transform: uppercase !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
 
-    .pagination a,
-    .pagination strong {
-        margin: 0 5px;
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        text-decoration: none;
-    }
+        .product-button {
+            position: relative !important;
+            display: flex !important;
+            justify-content: center !important;
+            background-color: transparent !important;
+            width: 100%;
+            text-align: center !important;
+        }
 
-    .pagination a:hover {
-        background-color: #f0f0f0;
-    }
+        .cta-button {
+            font-size: 14px !important;
+            height: 44px !important;
+            background-color: transparent !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-weight: 400 !important;
+            width: 95% !important;
+            padding: 5px !important;
+            cursor: pointer !important;
+            transition: all .4s !important;
+            border-style: double !important;
+            border: 1px solid #BFBFBF !important;
+            display: flex;
+        }
 
-    .pagination strong {
-        font-weight: bold;
-    }
+        .button-link {
+            color: black;
+        }
 
-    .search-results {
-        text-align: center;
-        margin-bottom: 2%;
-        font-size: 24px;
-        font-weight: 500;
-    }
-</style>
+        @media (max-width: 580px) {
+
+            .product-item,
+            .product-name,
+            .product-title {
+                text-align: center;
+                place-items: center;
+            }
+
+            .name-link {
+                white-space: normal;
+                text-overflow: clip;
+                overflow: visible;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a,
+        .pagination strong {
+            margin: 0 5px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination strong {
+            font-weight: bold;
+        }
+
+        .search-results {
+            text-align: center;
+            margin-bottom: 2%;
+            font-size: 24px;
+            font-weight: 500;
+        }
+    </style>
 
 </head>
+
 <body>
     <?php include '../../PHP/components/navbar.php'; ?>
 
     <div class="product__container">
         <div class="search-results">
-            <?php if ($search): ?>
-                <p><?php echo $result->num_rows; ?> results found for “<?php echo htmlspecialchars($search); ?>”</p>
+            <?php if ($search && $result): ?>
+                <?php if ($result->num_rows > 0): ?>
+                    <p><?php echo $result->num_rows; ?> results found for “<?php echo htmlspecialchars($search); ?>”</p>
+                <?php else: ?>
+                    <p>No products found for “<?php echo htmlspecialchars($search); ?>”</p>
+                <?php endif; ?>
+            <?php elseif (!$search): ?>
+                <p>No products found for ""</p>
             <?php endif; ?>
         </div>
 
-        <div class="product-grid <?php echo ($result->num_rows <= 4) ? 'single-row' : ''; ?>">
+        <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
             <?php
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -302,8 +323,10 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
                     </div>
             <?php
                 }
-            } else {
+            } elseif ($search) {
                 echo '<p>No products found for "' . htmlspecialchars($search) . '"</p>';
+            } else {
+                echo '<p>Please enter a search term.</p>';
             }
 
             // Close the statement if it exists
@@ -335,6 +358,7 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
     <script src="/src/assets/js/currency-language.js"></script>
     <script src="/src/assets/js/cookie-monitor.js"></script>
 </body>
+
 </html>
 
 <?php

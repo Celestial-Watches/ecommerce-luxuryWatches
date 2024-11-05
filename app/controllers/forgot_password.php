@@ -159,7 +159,7 @@ Best regards, Celestial Watches Team.";
 
 <body>
 
-<?php include '../../PHP/components/loader.php';
+
     ?>
     <div class="login-container">
         <div class="login-box">

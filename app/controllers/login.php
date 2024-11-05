@@ -40,7 +40,7 @@ require_once "../config/conn.php";
 $errors = [];
 
 // Check for session timeout
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
   session_unset(); // Unset session data
   session_destroy(); // Destroy session
 }
@@ -259,8 +259,7 @@ if (isset($_POST["login"])) {
 
 <body>
 
-  <?php include '../../PHP/components/loader.php';
-  ?>
+ 
 
   <!-- ===================================================== HEADER =====================================================  -->
 

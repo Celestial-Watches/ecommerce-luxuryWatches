@@ -44,9 +44,10 @@
         }
 
         .suggestion-item.selected {
-    background-color: rgba(0, 0, 0, 0.1); /* Highlight color */
-    color: #000; /* Text color */
-}
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+        }
+
         .suggestions-container {
             border: 1px solid #ccc;
             background: white;
@@ -67,7 +68,7 @@
             transition: background 0.2s;
             text-align: justify;
             font-family: 'Helvetica';
-            font-size: 14px;
+            font-size: 11px;
             white-space: nowrap;
         }
 
@@ -79,6 +80,12 @@
             #suggestions {
                 max-width: 180px;
             }
+        }
+
+        .no-product {
+            color: #000;
+            padding: 10px;
+            text-align: center;
         }
     </style>
 </head>
@@ -196,6 +203,9 @@
                     <div id="suggestions" class="suggestions-container"></div>
                 </div>
 
+
+
+
                 <div class="header-user-actions">
 
                     <button class="action-btn profile-btn" title="Personal Dashboard">
@@ -227,10 +237,11 @@
                         <span class="count">0</span>
                     </button>
 
-                    <button class="action-btn">
+                    <button class="action-btn add-to-cart">
                         <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count">0</span>
+                        <span class="count" id="cart-count">0</span>
                     </button>
+
 
                 </div>
 
@@ -255,33 +266,29 @@
 
                             <ul class="dropdown-panel-list">
 
-                                <li class="menu-title">
-                                    <a href="#">Electronics</a>
+                                <li class="panel-list-item">
+                                    <a href="../../app/views/brands.php?brand=Patek%20Philippe">Patek Philippe</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Desktop</a>
+                                    <a href="../../app/views/brands.php?brand=Richard%20Mille">Richard Mille</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Laptop</a>
+                                    <a href="../../app/views/brands.php?brand=Audemars%20Piguet">Audemars Piguet</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Camera</a>
+                                    <a href="../../app/views/brands.php?brand=Vacheron%20Constantin">Vacheron Constantin</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Tablet</a>
-                                </li>
-
-                                <li class="panel-list-item">
-                                    <a href="#">Headphone</a>
+                                    <a href="../../app/views/brands.php?brand=Jaeger-LeCoultre">Jaeger-LeCoultre</a>
                                 </li>
 
                                 <li class="panel-list-item">
                                     <a href="#">
-                                        <img src="" alt="headphone collection"
+                                        <img src="https://www.theluxuryhut.com/admin/upload/1675842246expensive-and-rare-patek-philippe-watches.jpg" alt="patek watch"
                                             width="250" height="119">
                                     </a>
                                 </li>
@@ -290,33 +297,32 @@
 
                             <ul class="dropdown-panel-list">
 
-                                <li class="menu-title">
-                                    <a href="#">Men's</a>
+
+                                <li class="panel-list-item">
+                                    <a href="../../app/views/brands.php?brand=IWC%20Schaffhausen">IWC Schaffhausen</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Formal</a>
+                                    <a href="../../app/views/brands.php?brand=Breguet">Breguet</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Casual</a>
+                                    <a href="../../app/views/brands.php?brand=Cartier">Cartier</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Sports</a>
+                                    <a href="../../app/views/brands.php?brand=Blancpain">Blancpain</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Jacket</a>
+                                    <a href="../../app/views/brands.php?brand=Hublot">Hublot</a>
                                 </li>
 
-                                <li class="panel-list-item">
-                                    <a href="#">Sunglasses</a>
-                                </li>
 
                                 <li class="panel-list-item">
                                     <a href="#">
-                                        <img src="../../src/assets/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                                        <img style="height: 203px !important;" src="https://www.watchclub.com/upload/watches/gallery_big/watch-club-rolex-oyster-perpetual-box-and-certificate-ref-124300-year-2022-15012-wb.png6.jpg" alt="rolex box image"
+                                            width="250" height="119">
                                     </a>
                                 </li>
 
@@ -324,33 +330,30 @@
 
                             <ul class="dropdown-panel-list">
 
-                                <li class="menu-title">
-                                    <a href="#">Women's</a>
+                                <li class="panel-list-item">
+                                    <a href="../../app/views/brands.php?brand=Rolex">Rolex</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Formal</a>
+                                    <a href="../../app/views/brands.php?brand=A.%20Lange%20%26%20Söhne">A. Lange & Söhne</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Casual</a>
+                                    <a href="../../app/views/brands.php?brand=Parmigiani%20Fleurier">Parmigiani Fleurier</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Perfume</a>
+                                    <a href="../../app/views/brands.php?brand=Greubel%20Forsey">Greubel Forsey</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Cosmetics</a>
+                                    <a href="../../app/views/brands.php?brand=Roger%20Dubuis">Roger Dubuis</a>
                                 </li>
 
-                                <li class="panel-list-item">
-                                    <a href="#">Bags</a>
-                                </li>
 
                                 <li class="panel-list-item">
                                     <a href="#">
-                                        <img src="../../src/assets/image/womens-banner.jpg" alt="women's fashion" width="250"
+                                        <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" width="250"
                                             height="119">
                                     </a>
                                 </li>
@@ -359,33 +362,30 @@
 
                             <ul class="dropdown-panel-list">
 
-                                <li class="menu-title">
-                                    <a href="#">Electronics</a>
+                                <li class="panel-list-item">
+                                    <a href="../../app/views/brands.php?brand=MB%26F">MB&F (Maximilian Büsser & Friends)</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Smart Watch</a>
+                                    <a href="../../app/views/brands.php?brand=Ulysse%20Nardin">Ulysse Nardin</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Smart TV</a>
+                                    <a href="../../app/views/brands.php?brand=Zenith">Zenith</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Keyboard</a>
+                                    <a href="../../app/views/brands.php?brand=F.P.%20Journe">F.P. Journe</a>
                                 </li>
 
                                 <li class="panel-list-item">
-                                    <a href="#">Mouse</a>
+                                    <a href="../../app/views/brands.php?brand=Jacob%20%26%20Co.">Jacob & Co.</a>
                                 </li>
 
-                                <li class="panel-list-item">
-                                    <a href="#">Microphone</a>
-                                </li>
 
                                 <li class="panel-list-item">
                                     <a href="#">
-                                        <img src="" alt="mouse collection" width="250"
+                                        <img style="height: 200px;" src="https://i.ytimg.com/vi/KeVNb45AXoQ/maxresdefault.jpg" alt="Jacob and CO" width="250"
                                             height="119">
                                     </a>
                                 </li>
@@ -398,7 +398,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="#" class="menu-title">About us</a>
+                        <a href="../../app/views/about-us.php" class="menu-title">About us</a>
                     </li>
 
                     <li class="menu-category">
@@ -441,7 +441,7 @@
                 <span class="count">0</span>
             </button>
 
-            <button class="action-btn">
+            <button class="action-btn" onclick="window.location.href ='http://localhost:3000/index.php';">
                 <ion-icon name="home-outline"></ion-icon>
             </button>
 
@@ -474,7 +474,7 @@
                 </li>
 
                 <li class="menu-category">
-                    <button class="accordion-menu" data-accordion-btn>
+                    <button class="accordion-menu" data-accordion-btn onclick="window.location.href ='http://localhost:3000/app/views/about-us.php';">
                         <p class="menu-title">About Us</p>
                     </button>
                 </li>
@@ -482,7 +482,7 @@
                 <li class="menu-category">
 
                     <button class="accordion-menu" data-accordion-btn>
-                        <p class="menu-title">Men's</p>
+                        <p class="menu-title">Brands</p>
 
                         <div>
                             <ion-icon name="add-outline" class="add-icon"></ion-icon>
@@ -493,62 +493,117 @@
                     <ul class="submenu-category-list" data-accordion>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Formal</a>
+                            <a href="../../app/views/brands.php?brand=Patek%20Philippe" class="submenu-title">Patek Philippe</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Casual</a>
+                            <a href="../../app/views/brands.php?brand=Richard%20Mille" class="submenu-title">Richard Mille</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Sports</a>
+                            <a href="../../app/views/brands.php?brand=Audemars%20Piguet" class="submenu-title">Audemars Piguet</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Jacket</a>
+                            <a href="../../app/views/brands.php?brand=Vacheron%20Constantin" class="submenu-title">Vacheron Constantin</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Sunglasses</a>
+                            <a href="../../app/views/brands.php?brand=Jaeger-LeCoultre" class="submenu-title">Jaeger-LeCoultre</a>
                         </li>
 
                         <li class="submenu-category">
                             <a href="#" class="submenu-title">
-                                <img src="../../src/assets/image/mens-banner.jpg" alt="men's fashion" width="250" height="119">
+                                <img src="https://www.theluxuryhut.com/admin/upload/1675842246expensive-and-rare-patek-philippe-watches.jpg" alt="patek watch"
+                                    width="250" height="119">
                             </a>
                         </li>
 
-                    </ul>
-
-                </li>
-
-                <li class="menu-category">
-
-                    <button class="accordion-menu" data-accordion-btn>
-                        <p class="menu-title">Women's</p>
-
-                        <div>
-                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                        </div>
-                    </button>
-
-                    <ul class="submenu-category-list" data-accordion>
+                        <hr>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Dress & Frock</a>
+                            <a href="../../app/views/brands.php?brand=IWC%20Schaffhausen" class="submenu-title">IWC Schaffhausen</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Earrings</a>
+                            <a href="../../app/views/brands.php?brand=Breguet" class="submenu-title">Breguet</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Necklace</a>
+                            <a href="../../app/views/brands.php?brand=Cartier" class="submenu-title">Cartier</a>
                         </li>
 
                         <li class="submenu-category">
-                            <a href="#" class="submenu-title">Makeup Kit</a>
+                            <a href="../../app/views/brands.php?brand=Blancpain" class="submenu-title">Blancpain</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Hublot" class="submenu-title">Hublot</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">
+                                <img style="height: 203px !important;" src="https://www.watchclub.com/upload/watches/gallery_big/watch-club-rolex-oyster-perpetual-box-and-certificate-ref-124300-year-2022-15012-wb.png6.jpg" alt="rolex box image"
+                                    width="250" height="119">
+                            </a>
+                        </li>
+
+                        <hr>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Rolex" class="submenu-title">Rolex</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=A.%20Lange%20%26%20Söhne" class="submenu-title">A. Lange & Söhne</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Parmigiani%20Fleurier" class="submenu-title">Parmigiani Fleurier</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Greubel%20Forsey" class="submenu-title">Greubel Forsey</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Roger%20Dubuis" class="submenu-title">Roger Dubuis</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">
+                                <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" width="250"
+                                    height="119">
+                            </a>
+                        </li>
+
+                        <hr>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=MB&F" class="submenu-title">MB&F (Maximilian Büsser & Friends)</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Ulysse%20Nardin" class="submenu-title">Ulysse Nardin</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Zenith" class="submenu-title">Zenith</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=F.P.%20Journe" class="submenu-title">F.P. Journe</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="../../app/views/brands.php?brand=Jacob%20%26%20Co." class="submenu-title">Jacob & Co.</a>
+                        </li>
+
+                        <li class="submenu-category">
+                            <a href="#" class="submenu-title">
+                                <img style="height: 200px;" src="https://i.ytimg.com/vi/KeVNb45AXoQ/maxresdefault.jpg" alt="Jacob and CO" width="250"
+                                    height="119">
+                            </a>
                         </li>
 
                     </ul>
@@ -688,102 +743,111 @@
         </nav>
 
     </header>
+
     <script>
         // Wait for the DOM to fully load
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const suggestions = document.getElementById('suggestions');
-    const searchForm = document.getElementById('searchForm');
-    let selectedIndex = -1; // Track the currently selected suggestion
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const suggestions = document.getElementById('suggestions');
+            const searchForm = document.getElementById('searchForm');
+            let selectedIndex = -1; // Track the currently selected suggestion
 
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const query = this.value;
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value;
 
-            if (query.length > 1) {
-                fetch('http://localhost:3000/app/controllers/fetch-suggestion.php?search=' + encodeURIComponent(query))
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        suggestions.innerHTML = ''; // Clear previous suggestions
-                        suggestions.style.display = 'none'; // Hide by default
-                        selectedIndex = -1; // Reset selected index
-
-                        if (data.length > 0) {
-                            suggestions.style.display = 'block'; // Show suggestions
-                            data.forEach((item, index) => {
-                                const suggestionItem = document.createElement('div');
-                                suggestionItem.classList.add('suggestion-item');
-                                suggestionItem.textContent = item.name;
-
-                                suggestionItem.addEventListener('click', function() {
-                                    searchInput.value = item.name;
-                                    suggestions.style.display = 'none';
-                                    searchForm.submit();
-                                });
-
-                                suggestionItem.addEventListener('mousedown', function() {
-                                    searchInput.value = item.name;
-                                    suggestions.style.display = 'none';
-                                    searchForm.submit();
-                                });
-
-                                suggestions.appendChild(suggestionItem);
-
-                                if (index < data.length - 1) {
-                                    const hr = document.createElement('hr');
-                                    suggestions.appendChild(hr);
+                    if (query.length > 1) {
+                        fetch('http://localhost:3000/app/controllers/fetch-suggestion.php?search=' + encodeURIComponent(query))
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
                                 }
-                            });
-                        } else {
-                            suggestions.style.display = 'none'; // No suggestions
+                                return response.json();
+                            })
+                            .then(data => {
+                                suggestions.innerHTML = ''; // Clear previous suggestions
+                                suggestions.style.display = 'none'; // Hide by default
+                                selectedIndex = -1; // Reset selected index
+
+                                if (data.length > 0) {
+                                    suggestions.style.display = 'block'; // Show suggestions
+                                    data.forEach((item, index) => {
+                                        const suggestionItem = document.createElement('div');
+                                        suggestionItem.classList.add('suggestion-item');
+                                        suggestionItem.textContent = item.name;
+
+                                        suggestionItem.addEventListener('click', function() {
+                                            searchInput.value = item.name;
+                                            suggestions.style.display = 'none';
+                                            searchForm.submit();
+                                        });
+
+                                        suggestionItem.addEventListener('mousedown', function() {
+                                            searchInput.value = item.name;
+                                            suggestions.style.display = 'none';
+                                            searchForm.submit();
+                                        });
+
+                                        suggestions.appendChild(suggestionItem);
+
+                                        if (index < data.length - 1) {
+                                            const hr = document.createElement('hr');
+                                            suggestions.appendChild(hr);
+                                        }
+                                    });
+                                } else {
+                                    // Show "No product found" if no suggestions
+                                    const noProductItem = document.createElement('div');
+                                    noProductItem.classList.add('no-product');
+                                    noProductItem.textContent = 'No product found';
+                                    suggestions.appendChild(noProductItem);
+                                    suggestions.style.display = 'block'; // Show the message
+                                }
+                            })
+                            .catch(error => console.error('Error fetching suggestions:', error));
+                    } else {
+                        suggestions.style.display = 'none'; // Hide if query is short
+                    }
+                });
+
+                // Keydown event listener for arrow keys and enter
+                searchInput.addEventListener('keydown', function(event) {
+                    const suggestionItems = suggestions.querySelectorAll('.suggestion-item');
+
+                    if (event.key === 'ArrowDown') {
+                        selectedIndex = (selectedIndex + 1) % suggestionItems.length; // Move down
+                        updateSuggestionSelection(suggestionItems);
+                        event.preventDefault(); // Prevent default scrolling
+                    } else if (event.key === 'ArrowUp') {
+                        selectedIndex = (selectedIndex - 1 + suggestionItems.length) % suggestionItems.length; // Move up
+                        updateSuggestionSelection(suggestionItems);
+                        event.preventDefault(); // Prevent default scrolling
+                    } else if (event.key === 'Enter') {
+                        if (selectedIndex >= 0 && selectedIndex < suggestionItems.length) {
+                            suggestionItems[selectedIndex].click(); // Trigger click on selected item
                         }
-                    })
-                    .catch(error => console.error('Error fetching suggestions:', error));
+                    }
+                });
+
+                // Function to update the selected suggestion style
+                function updateSuggestionSelection(suggestionItems) {
+                    suggestionItems.forEach((item, index) => {
+                        if (index === selectedIndex) {
+                            item.classList.add('selected'); // Add selected class for styling
+                        } else {
+                            item.classList.remove('selected'); // Remove selected class
+                        }
+                    });
+                }
             } else {
-                suggestions.style.display = 'none'; // Hide if query is short
+                console.error('Search input not found. Please check your HTML.');
             }
         });
-
-        // Keydown event listener for arrow keys and enter
-        searchInput.addEventListener('keydown', function(event) {
-            const suggestionItems = suggestions.querySelectorAll('.suggestion-item');
-
-            if (event.key === 'ArrowDown') {
-                selectedIndex = (selectedIndex + 1) % suggestionItems.length; // Move down
-                updateSuggestionSelection(suggestionItems);
-                event.preventDefault(); // Prevent default scrolling
-            } else if (event.key === 'ArrowUp') {
-                selectedIndex = (selectedIndex - 1 + suggestionItems.length) % suggestionItems.length; // Move up
-                updateSuggestionSelection(suggestionItems);
-                event.preventDefault(); // Prevent default scrolling
-            } else if (event.key === 'Enter') {
-                if (selectedIndex >= 0 && selectedIndex < suggestionItems.length) {
-                    suggestionItems[selectedIndex].click(); // Trigger click on selected item
-                }
-            }
-        });
-
-        // Function to update the selected suggestion style
-        function updateSuggestionSelection(suggestionItems) {
-            suggestionItems.forEach((item, index) => {
-                if (index === selectedIndex) {
-                    item.classList.add('selected'); // Add selected class for styling
-                } else {
-                    item.classList.remove('selected'); // Remove selected class
-                }
-            });
-        }
-    } else {
-        console.error('Search input not found. Please check your HTML.');
-    }
-});
-
     </script>
+
+
+
+
 </body>
 
 </html>

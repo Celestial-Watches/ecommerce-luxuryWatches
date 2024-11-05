@@ -2,70 +2,63 @@
 require_once __DIR__ . '/../config/conn.php';
 
 
-$userId = $_SESSION['user_id'] ?? null; // Get the logged-in user's ID from session
-
-// Set the cache file and expiration time (in seconds)
+$userId = $_SESSION['user_id'] ?? null;
 $cacheFile = __DIR__ . '/../cache/recommended_products_' . ($userId ? $userId : 'guest') . '.json';
-$cacheTime = 86400; // 24 hours
+$cacheTime = 86400;
 
-// Check if cache file exists and is fresh
 if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
     $recommendedProducts = json_decode(file_get_contents($cacheFile), true);
 } else {
     $recommendedProducts = [];
 
-    // If user is logged in, fetch recommendations based on search history and views
     if ($userId) {
-        // Fetch user's recent search terms
-        $searchStmt = $conn->prepare("SELECT search_term FROM search_history WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
-        $searchStmt->bind_param('i', $userId);
-        $searchStmt->execute();
-        $searchTerms = $searchStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-        // Prepare the search terms for the query
-        $searchQuery = implode("','", array_column($searchTerms, 'search_term'));
-
-        // Fetch products based on search history
-        if (!empty($searchQuery)) {
-            $recommendedProducts = array_merge($recommendedProducts, getProductsBySearch($searchQuery, $conn));
-        }
-
         // Fetch products based on recently viewed items
-        $viewStmt = $conn->prepare("SELECT product_id FROM product_views WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
+        $viewStmt = $conn->prepare("SELECT DISTINCT product_id FROM product_views WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
         $viewStmt->bind_param('i', $userId);
         $viewStmt->execute();
         $viewedProducts = $viewStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        
+        $viewStmt->close();
+
         if (!empty($viewedProducts)) {
             $productIds = implode(',', array_column($viewedProducts, 'product_id'));
             $recommendedProducts = array_merge($recommendedProducts, getProductsByIds($productIds, $conn));
         }
+
+        // Fetch additional recommendations based on search history if needed
+        if (count($recommendedProducts) < 9) {
+            $searchStmt = $conn->prepare("SELECT search_term FROM search_history WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
+            $searchStmt->bind_param('i', $userId);
+            $searchStmt->execute();
+            $searchTerms = $searchStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $searchStmt->close();
+
+            $searchQuery = implode("','", array_column($searchTerms, 'search_term'));
+            if (!empty($searchQuery)) {
+                $recommendedProducts = array_merge($recommendedProducts, getProductsBySearch($searchQuery, $conn));
+            }
+        }
     }
 
-    // If no user, fallback to random products
-    if (empty($recommendedProducts)) {
-        // Fetch random products as fallback
-        $stmt = $conn->prepare("SELECT * FROM products WHERE stock > 0 ORDER BY RAND() LIMIT 9");
+    // Fetch random products if recommendations are insufficient
+    if (count($recommendedProducts) < 9) {
+        $stmt = $conn->prepare("SELECT * FROM products WHERE stock > 0 ORDER BY RAND() LIMIT ?");
+        $limit = 9 - count($recommendedProducts);
+        $stmt->bind_param('i', $limit);
         $stmt->execute();
         $result = $stmt->get_result();
-    
         while ($row = $result->fetch_assoc()) {
             $recommendedProducts[] = $row;
         }
-    
-        if (empty($recommendedProducts)) {
-            echo '<p>No recommended products available at this time.</p>'; // Display when absolutely no products exist
-        }
-    }    
-
-    // Save the result in cache
-    if (!empty($recommendedProducts)) {
-        file_put_contents($cacheFile, json_encode($recommendedProducts));
+        $stmt->close();
     }
+
+    // Save to cache
+    file_put_contents($cacheFile, json_encode($recommendedProducts));
 }
 
 // Function to get products by search terms
-function getProductsBySearch($searchTerms, $conn) {
+function getProductsBySearch($searchTerms, $conn)
+{
     $searchTermsArray = explode("','", $searchTerms);
     if (empty($searchTermsArray)) {
         return []; // Return an empty array if no search terms are provided
@@ -80,7 +73,8 @@ function getProductsBySearch($searchTerms, $conn) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC) ?: []; // Return empty array on failure
 }
 
-function getProductsByIds($productIds, $conn) {
+function getProductsByIds($productIds, $conn)
+{
     if (empty($productIds)) {
         return []; // Return an empty array if no product IDs are provided
     }
@@ -96,6 +90,7 @@ function getProductsByIds($productIds, $conn) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -264,6 +259,7 @@ function getProductsByIds($productIds, $conn) {
         }
 
         @media (max-width: 480px) {
+
             /* For mobile, show 1 card */
             .card {
                 width: 90%;
@@ -285,112 +281,149 @@ function getProductsByIds($productIds, $conn) {
 </head>
 
 <body>
-<?php if (!empty($recommendedProducts)): ?>
-    <main class="featured-main animate-on-scroll">
-        <section class="featured-products animate-on-scroll">
-            <h2 class="featured-title animate-on-scroll">Luxury Timepieces: Handpicked Just for You</h2>
-            <div class="slider">
-                <button class="slider-button prev animate-on-scroll" aria-label="Previous Slide" onclick="moveSlide(-1)">&#10094;</button>
-                <div class="slider-container animate-on-scroll">
-                    <div class="product-grid">
-                        <?php foreach ($recommendedProducts as $product): ?>
-                        <div class="card">
-                            <img loading="lazy" class="featured-card" src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-                            <hr>
-                            <h3 class="featured-text"><?= htmlspecialchars($product['name']) ?></h3>
-                            <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($product['price']) ?>">$ <?= htmlspecialchars($product['price']) ?></p>
-                            <button class="buy-button">View Details</button>
+
+    <?php if (!empty($recommendedProducts)): ?>
+        <main class="featured-main animate-on-scroll">
+            <section class="featured-products animate-on-scroll">
+                <h2 class="featured-title animate-on-scroll">Luxury Timepieces: Handpicked Just for You</h2>
+                <div class="slider">
+                    <button class="slider-button prev animate-on-scroll" aria-label="Previous Slide" onclick="moveSlide(-1)">&#10094;</button>
+                    <div class="slider-container animate-on-scroll">
+                        <div class="product-grid">
+                            <?php foreach ($recommendedProducts as $product): ?>
+                                <div class="card">
+                                    <img loading="lazy" class="featured-card" src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <hr>
+                                    <h3 class="featured-text"><?= htmlspecialchars($product['name']) ?></h3>
+
+                                    <?php
+                                    $rawPrice = $product['price'];
+
+                                    // Initialize display price variable for this specific product
+                                    $displayPrice = '';
+                                    $onRequestPrice = ''; // New variable for ON REQUEST price
+
+                                    // Check if the price is "ON REQUEST"
+                                    if (stripos($rawPrice, 'ON REQUEST') !== false) {
+                                        // Set display price for "ON REQUEST"
+                                        $onRequestPrice = 'ON REQUEST'; 
+                                    } else {                                        
+                                        // Extract the currency symbol
+                                        $currencySymbol = preg_replace('/[0-9.,\s]+/', '', $rawPrice); // Extract currency symbol
+                                        $currencySymbol = trim($currencySymbol); // Trim any extra whitespace
+                                        // Extract numeric value and ensure proper formatting
+                                        $priceValue = (float)preg_replace('/[^0-9.]/', '', $rawPrice); // Extract numeric value
+
+                                        // Check for "FROM" in the raw price
+                                        if (stripos($rawPrice, 'FROM') !== false) {
+                                            // Format price for FROM case
+                                            $displayPrice = "FROM $currencySymbol" . number_format($priceValue, 2);
+                                        } else {
+                                            // Format price for normal case
+                                            $displayPrice = "$currencySymbol" . number_format($priceValue, 2);
+                                        }
+                                    }
+                                    ?>
+
+                                    <?php if (!empty($onRequestPrice)): ?>
+                                        <p class="featured-price"><?= $onRequestPrice ?></p> 
+                                    <?php else: ?>
+                                        <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($priceValue) ?>"><?= $displayPrice ?></p> 
+                                    <?php endif; ?>
+                                    <button class="buy-button">View Details</button>
+
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                        <?php endforeach; ?>
                     </div>
+                    <button class="slider-button next animate-on-scroll" aria-label="Next Slide" onclick="moveSlide(1)">&#10095;</button>
                 </div>
-                <button class="slider-button next animate-on-scroll" aria-label="Next Slide" onclick="moveSlide(1)">&#10095;</button>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+        <hr style="border-color: #ffffff;">
+    <?php endif; ?>
 
-    <hr style="border-color: #ffffff;">
-<?php endif; ?>
 
-<script>
-    // Function to initialize sliders
-    function initializeSlider(sliderContainer) {
-        let currentIndex = 0;
-        const cards = sliderContainer.querySelectorAll('.card');
-        let slidesToShow = 3; // Default for large screens
 
-        // Function to handle mouse enter
-        function handleMouseEnter() {
+    <script>
+        // Function to initialize sliders
+        function initializeSlider(sliderContainer) {
+            let currentIndex = 0;
+            const cards = sliderContainer.querySelectorAll('.card');
+            let slidesToShow = 3; // Default for large screens
+
+            // Function to handle mouse enter
+            function handleMouseEnter() {
+                cards.forEach((card) => {
+                    if (card !== this) {
+                        card.classList.add('scale-down'); // Add scale-down class to other cards
+                        card.classList.add('reduce-opacity'); // Add reduce-opacity class to other cards
+                    }
+                });
+            }
+
+            // Function to handle mouse leave
+            function handleMouseLeave() {
+                cards.forEach((card) => {
+                    card.classList.remove('scale-down'); // Remove scale-down class
+                    card.classList.remove('reduce-opacity'); // Remove reduce-opacity class
+                });
+            }
+
+            // Attach event listeners to each card
             cards.forEach((card) => {
-                if (card !== this) {
-                    card.classList.add('scale-down'); // Add scale-down class to other cards
-                    card.classList.add('reduce-opacity'); // Add reduce-opacity class to other cards
+                card.addEventListener('mouseenter', handleMouseEnter);
+                card.addEventListener('mouseleave', handleMouseLeave);
+            });
+
+            // Adjust number of slides based on window width
+            function updateSlidesToShow() {
+                if (window.innerWidth <= 480) {
+                    slidesToShow = 1; // For mobile
+                } else if (window.innerWidth < 768) {
+                    slidesToShow = 2; // For tablets
+                } else if (window.innerWidth <= 1024) {
+                    slidesToShow = 3; // For smaller laptops
+                } else {
+                    slidesToShow = 3; // For larger screens
                 }
-            });
-        }
-
-        // Function to handle mouse leave
-        function handleMouseLeave() {
-            cards.forEach((card) => {
-                card.classList.remove('scale-down'); // Remove scale-down class
-                card.classList.remove('reduce-opacity'); // Remove reduce-opacity class
-            });
-        }
-
-        // Attach event listeners to each card
-        cards.forEach((card) => {
-            card.addEventListener('mouseenter', handleMouseEnter);
-            card.addEventListener('mouseleave', handleMouseLeave);
-        });
-
-        // Adjust number of slides based on window width
-        function updateSlidesToShow() {
-            if (window.innerWidth <= 480) {
-                slidesToShow = 1; // For mobile
-            } else if (window.innerWidth < 768) {
-                slidesToShow = 2; // For tablets
-            } else if (window.innerWidth <= 1024) {
-                slidesToShow = 3; // For smaller laptops
-            } else {
-                slidesToShow = 3; // For larger screens
-            }
-            showSlides();
-        }
-
-        // Move the slides
-        function moveSlide(step) {
-            currentIndex += step;
-
-            // Wrapping logic
-            if (currentIndex < 0) {
-                currentIndex = cards.length - slidesToShow; // Jump from the first slide to the last set of slides
-            } else if (currentIndex > cards.length - slidesToShow) {
-                currentIndex = 0; // Jump from the last set of slides to the first slide
+                showSlides();
             }
 
-            showSlides();
+            // Move the slides
+            function moveSlide(step) {
+                currentIndex += step;
+
+                // Wrapping logic
+                if (currentIndex < 0) {
+                    currentIndex = cards.length - slidesToShow; // Jump from the first slide to the last set of slides
+                } else if (currentIndex > cards.length - slidesToShow) {
+                    currentIndex = 0; // Jump from the last set of slides to the first slide
+                }
+
+                showSlides();
+            }
+
+            // Display the slides by translating the grid
+            function showSlides() {
+                const grid = sliderContainer.querySelector('.product-grid');
+                const cardWidth = cards[0].offsetWidth; // Get the width of the first card
+                const totalWidth = (cardWidth + 9.5) * currentIndex; // 9px gap between cards
+                grid.style.transform = `translateX(-${totalWidth}px)`; // Translate the grid
+            }
+
+            // Expose moveSlide function to the global scope for button clicks
+            sliderContainer.querySelector('.prev').onclick = () => moveSlide(-1);
+            sliderContainer.querySelector('.next').onclick = () => moveSlide(1);
+
+            // Initial setup
+            updateSlidesToShow();
+            window.addEventListener('resize', updateSlidesToShow);
         }
 
-        // Display the slides by translating the grid
-        function showSlides() {
-            const grid = sliderContainer.querySelector('.product-grid');
-            const cardWidth = cards[0].offsetWidth; // Get the width of the first card
-            const totalWidth = (cardWidth + 9.5) * currentIndex; // 9px gap between cards
-            grid.style.transform = `translateX(-${totalWidth}px)`; // Translate the grid
-        }
-
-        // Expose moveSlide function to the global scope for button clicks
-        sliderContainer.querySelector('.prev').onclick = () => moveSlide(-1);
-        sliderContainer.querySelector('.next').onclick = () => moveSlide(1);
-
-        // Initial setup
-        updateSlidesToShow();
-        window.addEventListener('resize', updateSlidesToShow);
-    }
-
-    // Initialize sliders
-    document.querySelectorAll('.slider').forEach(initializeSlider);
-</script>
+        // Initialize sliders
+        document.querySelectorAll('.slider').forEach(initializeSlider);
+    </script>
 
     <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/src/assets/js/index.js"></script>
@@ -398,4 +431,5 @@ function getProductsByIds($productIds, $conn) {
     <script src="/src/assets/js/cookie-monitor.js"></script>
 
 </body>
+
 </html>
