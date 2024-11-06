@@ -1,0 +1,138 @@
+    /* Container for the result text and filter button */
+    .filter-head-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+
+    /* Results and Filter button container */
+    .top-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .results-count {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        color: #212121;
+        margin-right: 20px;
+    }
+
+    .filter-button {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        background: #212121;
+        border: 2px solid #212121;
+        border-radius: 4px;
+        width: 135px;
+        padding: 13px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Centers the text */
+        color: #fff;
+        position: relative;
+    }
+
+    .filter-button::before {
+        content: "";
+        background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-white.svg) no-repeat 0 0 / cover;
+        width: 16px;
+        height: 10px;
+        left: 23px;
+        position: absolute;
+    }
+
+
+    /* Filter grid layout, displayed inline in single row */
+    .filter-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .filter-item {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .filter-item::after {
+        content: "▼";
+        font-size: 10px;
+        color: #aaa;
+        margin-left: 5px;
+    }
+
+    /* Sort dropdown styling */
+    .sort-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sort-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000;
+        text-transform: uppercase;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .sort-dropdown {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        position: relative;
+        min-width: 150px;
+    }
+
+    .sort-dropdown::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+        font-size: 12px;
+        color: #333;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .sort-label {
+            font-size: 10px;
+            margin-right: 6px;
+        }
+
+        .sort-dropdown {
+            font-size: 12px;
+            padding: 6px 10px;
+            min-width: 120px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sort-label {
+            font-size: 9px;
+            margin-right: 4px;
+        }
+
+        .sort-dropdown {
+            font-size: 11px;
+            padding: 4px 8px;
+            min-width: 100px;
+        }
+    }

@@ -5,21 +5,52 @@ include '../config/conn.php';
 
 include '../controllers/search-engine.php';
 
+// Get category and sort parameters from the URL
+$category = isset($_GET['product_category']) ? $_GET['product_category'] : '';
+$sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-// Insert the below code in product_detail page
+// Base SQL query (Handle category filter)
+$sql = "SELECT * FROM products";
 
-// $userId = $_SESSION['user_id'] ?? null; // Get user ID from session
-// $productId = $_GET['product_id'] ?? null; // Get product ID from URL or request
+// If a category is set, apply the filter to the query
+if ($category) {
+    $sql .= " WHERE price = ?"; // Adjust column name according to your DB structure
+}
 
-// if ($userId && $productId) {
-//     // Insert a record for this product view
-//     $stmt = $conn->prepare("INSERT INTO product_views (user_id, product_id, created_at) VALUES (?, ?, NOW())");
-//     $stmt->bind_param('ii', $userId, $productId);
-//     $stmt->execute();
-//     $stmt->close();
-// }
+// Add ORDER BY clause based on the selected sort option
+switch ($sort) {
+    case 'new_in':
+        $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
+        break;
+    case 'price_low_high':
+        // Sort by price in ascending order after sanitizing
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";  // Remove commas and cast to DECIMAL for correct sorting
+        break;
+    case 'price_high_low':
+        // Sort by price in descending order after sanitizing
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC"; // Remove commas and cast to DECIMAL for correct sorting
+        break;
+}
 
+// Add LIMIT and OFFSET for pagination (you need to define $limit and $page)
+$sql .= " LIMIT ? OFFSET ?";
+
+// Prepare and execute the SQL statement
+$stmt = $conn->prepare($sql);
+
+// Bind parameters (adjust according to the query structure)
+if ($category) {
+    // Bind category and pagination parameters
+    $stmt->bind_param("ssi", $category, $limit, $offset); // Adjust parameter types as needed
+} else {
+    // Bind only pagination parameters if no category filter is set
+    $stmt->bind_param("ii", $limit, $offset); // Adjust parameter types as needed
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,6 +73,7 @@ include '../controllers/search-engine.php';
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../..//src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../..//src/assets/css/google-header.css" loading="lazy">
+    <link rel="stylesheet" href="assets/filter.css" loading="lazy">
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,7 +306,63 @@ include '../controllers/search-engine.php';
 
     <?php include '../../PHP/components/navbar.php'; ?>
 
+
+
     <div class="product__container">
+        <div style="
+            font-style: normal;
+            font-weight: 700;
+            font-size: 41px;
+            line-height: 49px;
+            text-transform: uppercase;
+            margin-top: 17px;
+            margin-bottom: 10px;
+            text-align: justify;
+            font-family: 'Poppins';">
+            <?php echo 'All Watches'; ?>
+        </div>
+
+        <span style="text-align: left;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 21px;
+            padding-bottom: 20px;
+            font-family: 'Poppins';">
+            Browse thousands of luxury watches from the best and trendy brands around the world.
+        </span>
+
+        <div class="filter-head-container">
+            <!-- Results and Filter Button -->
+            <div class="top-container">
+                <div class="results-count"><?php echo $totalProducts; ?> results</div>
+                <button class="filter-button">FILTER</button>
+            </div>
+
+            <!-- Filter grid layout -->
+            <div class="filter-container">
+                <div class="filter-item">Gender</div>
+                <div class="filter-item">Bracelet Color</div>
+                <div class="filter-item">Case Material</div>
+                <div class="filter-item">Bracelet Material</div>
+                <div class="filter-item">Case Diameter</div>
+                <div class="filter-item">Bezel Material</div>
+                <div class="filter-item">Movement</div>
+            </div>
+
+            <!-- Sort form -->
+            <form method="GET" action="" class="sort-form">
+                <!-- Hidden field for category/type instead of brand -->
+                <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+
+                <label for="sort" class="sort-label">Sort by</label>
+                <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
+                    <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
+                    <option value="price_low_high" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_low_high') ? 'selected' : ''; ?>>Price: Low to High</option>
+                    <option value="price_high_low" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_high_low') ? 'selected' : ''; ?>>Price: High to Low</option>
+                </select>
+            </form>
+        </div>
+
         <div class="search-results">
             <?php if ($message): ?>
                 <p><?php echo $message; ?></p>

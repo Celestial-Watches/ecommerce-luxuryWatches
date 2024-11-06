@@ -4,7 +4,7 @@
 // Handles errors in case the API request fails, and returns null.
 
 async function fetchConversionRates() {
-    const apiKey = '223277458a876e4b0d9bffc4';
+    const apiKey = '2db54a6d928d5ea7bd8dc85c';
     const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
     try {
         const response = await fetch(url);
@@ -107,7 +107,7 @@ const countryCurrencyMap = {
 };
 
 // Define a secret key for encryption
-const SECRET_KEY = 'languagecurrencysecure_@123'; // Change this to a secure key
+const SECRET_KEY = 'languagecurrencysecure_@123'; 
 
 // Encrypts data (like currency information) using CryptoJS.AES.
 function encryptData(data) {

@@ -4,14 +4,51 @@ define('ALLOW_ACCESS', true);
 include '../config/conn.php';
 include '../controllers/search-engine.php';
 
+// Get brand and sort parameters from the URL
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
+$sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-// Prepare and execute the SQL statement
-$stmt = $conn->prepare("SELECT * FROM products WHERE brand = ?"); // Adjust the table name as needed
-$stmt->bind_param("s", $brand);
+// Set pagination limit 
+$limit = 40;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Base SQL query with brand filter
+$sql = "SELECT * FROM products WHERE brand = ?";
+
+// Add ORDER BY clause based on the selected sort option
+switch ($sort) {
+    case 'new_in':
+        $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
+        break;
+    case 'price_low_high':
+        $sql .= " ORDER BY price ASC"; // Assuming price is stored as a numeric value
+        break;
+    case 'price_high_low':
+        $sql .= " ORDER BY price DESC"; // Assuming price is stored as a numeric value
+        break;
+}
+
+// Add LIMIT and OFFSET for pagination
+$sql .= " LIMIT ? OFFSET ?";
+
+// Prepare and execute the SQL statement with brand parameter, limit, and offset
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sii", $brand, $limit, $offset);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Fetch the total number of products for pagination
+$total_sql = "SELECT COUNT(*) FROM products WHERE brand = ?";
+$total_stmt = $conn->prepare($total_sql);
+$total_stmt->bind_param("s", $brand);
+$total_stmt->execute();
+$total_result = $total_stmt->get_result();
+$total_row = $total_result->fetch_row();
+$total_products = $total_row[0];
+
+// Calculate total pages
+$total_pages = ceil($total_products / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +73,7 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../..//src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../..//src/assets/css/google-header.css" loading="lazy">
+    <link rel="stylesheet" href="assets/filter.css" loading="lazy">
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -255,6 +293,7 @@ $result = $stmt->get_result();
         font-size: 24px;
         font-weight: 500;
     }
+
 </style>
 
 <body>
@@ -267,29 +306,59 @@ $result = $stmt->get_result();
         // Check if there are results for the selected brand
         if ($result && $result->num_rows > 0) {
         ?>
-
             <div style="font-size: 21px;
-                    font-weight: 700;
-                    line-height: 25px;
-                    text-transform: uppercase;
-                    margin-top: 17px;
-                    margin-bottom: 10px;
-                    text-align: left;
-                    font-family: 'Poppins';">
+            font-weight: 700;
+            line-height: 25px;
+            text-transform: uppercase;
+            margin-top: 17px;
+            margin-bottom: 10px;
+            text-align: left;
+            font-family: 'Poppins';">
                 <?php echo htmlspecialchars($brand); ?>
             </div>
 
             <span style="text-align: left;
-                    font-size: 15px;
-                    font-weight: 400;
-                    line-height: 21px;
-                    padding-bottom: 20px;
-                    font-family: 'Poppins';">
-                Discover our prestigious collections of luxury watches.</span>
-
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 21px;
+            padding-bottom: 20px;
+            font-family: 'Poppins';">
+                Discover our prestigious collections of luxury watches.
+            </span>
         <?php
         }
         ?>
+
+        <div class="filter-head-container">
+            <!-- Results and Filter Button -->
+            <div class="top-container">
+                <div class="results-count"><?php echo $total_products; ?> results</div>
+                <button class="filter-button">FILTER</button>
+            </div>
+
+            <!-- Filter grid layout -->
+            <div class="filter-container">
+                <div class="filter-item">Gender</div>
+                <div class="filter-item">Bracelet Color</div>
+                <div class="filter-item">Case Material</div>
+                <div class="filter-item">Bracelet Material</div>
+                <div class="filter-item">Case Diameter</div>
+                <div class="filter-item">Bezel Material</div>
+                <div class="filter-item">Movement</div>
+            </div>
+
+            <!-- Sort form -->
+            <form method="GET" action="" class="sort-form">
+                <input type="hidden" name="brand" value="<?php echo htmlspecialchars($brand); ?>">
+                <label for="sort" class="sort-label">Sort by</label>
+                <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
+                    <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
+                    <option value="price_low_high" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_low_high') ? 'selected' : ''; ?>>Price: Low to High</option>
+                    <option value="price_high_low" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_high_low') ? 'selected' : ''; ?>>Price: High to Low</option>
+                </select>
+            </form>
+        </div>
+
 
         <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
             <?php
@@ -370,17 +439,28 @@ $result = $stmt->get_result();
             $conn->close();
             ?>
         </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $page - 1; ?>">« Prev</a>
+            <?php endif; ?>
 
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+            <?php endfor; ?>
 
+            <?php if ($page < $total_pages): ?>
+                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $page + 1; ?>">Next »</a>
+            <?php endif; ?>
+        </div>
+    </div>
 
-        <!-- JS files -->
-        <script src="../../src/libs/swiper/swiper-bundle.min.js"></script>
-        <script src="../../src/assets/js/product-page.js"></script>
+    <!-- JS files -->
+    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="/src/assets/js/index.js"></script>
+    <script src="/src/assets/js/currency-language.js"></script>
+    <script src="/src/assets/js/cookie-monitor.js"></script>
+    
 </body>
 
 </html>
-
-<?php
-// $stmt->close(); // Close statement
-// $conn->close(); // Close connection
-?>

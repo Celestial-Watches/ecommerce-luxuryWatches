@@ -4,8 +4,54 @@ define('ALLOW_ACCESS', true);
 include '../config/conn.php';
 include '../controllers/search-engine.php'; // Include the search engine logic here
 
-// Display the results in search.php
+// Get category and sort parameters from the URL
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
+
+// Base SQL query (Handle category filter)
+$sql = "SELECT * FROM products";
+
+// If a category is set, apply the filter to the query
+if ($category) {
+    $sql .= " WHERE product_category = ?"; // Ensure this matches your database structure
+}
+
+// Add ORDER BY clause based on the selected sort option
+switch ($sort) {
+    case 'new_in':
+        $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
+        break;
+    case 'price_low_high':
+        // Sort by price in ascending order after sanitizing
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";  // Ensure price is numeric
+        break;
+    case 'price_high_low':
+        // Sort by price in descending order after sanitizing
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC"; // Ensure price is numeric
+        break;
+}
+
+// Add LIMIT and OFFSET for pagination (you need to define $limit and $page)
+$sql .= " LIMIT ? OFFSET ?";
+
+// Prepare and execute the SQL statement
+$stmt = $conn->prepare($sql);
+
+// Bind parameters (adjust according to the query structure)
+if ($category) {
+    // Bind category and pagination parameters
+    $stmt->bind_param("ssi", $category, $limit, $offset); // Adjust parameter types as needed
+} else {
+    // Bind only pagination parameters if no category filter is set
+    $stmt->bind_param("ii", $limit, $offset); // Adjust parameter types as needed
+}
+
+// Execute the statement
+$stmt->execute();
+$sortresult = $stmt->get_result();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +74,7 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
     <link rel="stylesheet" href="../../src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../../src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../../src/assets/css/google-header.css" loading="lazy">
+    <link rel="stylesheet" href="assets/filter.css" loading="lazy">
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,82 +321,119 @@ include '../controllers/search-engine.php'; // Include the search engine logic h
             <?php endif; ?>
         </div>
 
-        <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
-            <?php
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $image = $row['image_url'];
-                    $name = $row['name'];
-                    $price = $row['price'];
-                    $numericPrice = str_replace([','], '', $price);
-                    $year = $row['year'];
-                    $ref_code = $row['ref_code'];
-                    $button_name = $row['button_name'];
-                    $icon = $row['icon'];
-            ?>
-                    <div class="product-item">
-                        <div class="product__main">
-                            <div class="product__image">
-                                <div class="product-image">
-                                    <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image">
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="product-content">
-                                <div class="product-title">
-                                    <h3 class="product-name">
-                                        <a href="#" class="name-link"><?php echo $name; ?></a>
-                                    </h3>
-                                </div>
-                                <div class="product-price">
-                                    <span class="price featured-price" data-price-in-usd="<?php echo $numericPrice; ?>"><?php echo $price; ?></span>
-                                </div>
-                                <div class="product-code">
-                                    <div class="product-date">
-                                        <p class="product-year"><?php echo $year; ?></p>
+        <?php if ($search): ?> <!-- Only show the product grid and pagination if search is provided -->
+            <div class="filter-head-container">
+                <!-- Results and Filter Button -->
+                <div class="top-container">
+                    <div class="results-count"><?php echo $result->num_rows; ?> results</div>
+                    <button class="filter-button">FILTER</button>
+                </div>
+
+                <!-- Filter grid layout -->
+                <div class="filter-container">
+                    <div class="filter-item">Gender</div>
+                    <div class="filter-item">Bracelet Color</div>
+                    <div class="filter-item">Case Material</div>
+                    <div class="filter-item">Bracelet Material</div>
+                    <div class="filter-item">Case Diameter</div>
+                    <div class="filter-item">Bezel Material</div>
+                    <div class="filter-item">Movement</div>
+                </div>
+
+                <!-- Sort form -->
+                <form method="GET" action="" class="sort-form">
+                    <!-- Retain the search term in the input field -->
+                    <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search..." />
+
+                    <!-- Hidden field for category/type instead of brand -->
+                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+
+                    <label for="sort" class="sort-label">Sort by</label>
+                    <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
+                        <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
+                        <option value="price_low_high" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_low_high') ? 'selected' : ''; ?>>Price: Low to High</option>
+                        <option value="price_high_low" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_high_low') ? 'selected' : ''; ?>>Price: High to Low</option>
+                    </select>
+                </form>
+            </div>
+            <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
+                <?php
+
+
+                // Check if there are results
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $image = $row['image_url'];
+                        $name = $row['name'];
+                        $price = $row['price'];
+                        $numericPrice = str_replace([','], '', $price);
+                        $year = $row['year'];
+                        $ref_code = $row['ref_code'];
+                        $button_name = $row['button_name'];
+                        $icon = $row['icon'];
+                ?>
+                        <div class="product-item">
+                            <div class="product__main">
+                                <div class="product__image">
+                                    <div class="product-image">
+                                        <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image">
                                     </div>
-                                    <div class="product-ref-code">
-                                        <p class="product-ref">Ref Code: <?php echo $ref_code; ?></p>
-                                    </div>
                                 </div>
-                                <div class="product-button">
-                                    <button class="cta-button">
-                                        <i style="padding: 2%;" class="<?php echo $icon; ?>"></i>
-                                        <a class="button-link" href="#"><?php echo $button_name; ?></a>
-                                    </button>
+                                <hr>
+                                <div class="product-content">
+                                    <div class="product-title">
+                                        <h3 class="product-name">
+                                            <a href="#" class="name-link"><?php echo $name; ?></a>
+                                        </h3>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price featured-price" data-price-in-usd="<?php echo $numericPrice; ?>"><?php echo $price; ?></span>
+                                    </div>
+                                    <div class="product-code">
+                                        <div class="product-date">
+                                            <p class="product-year"><?php echo $year; ?></p>
+                                        </div>
+                                        <div class="product-ref-code">
+                                            <p class="product-ref">Ref Code: <?php echo $ref_code; ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="product-button">
+                                        <button class="cta-button">
+                                            <i style="padding: 2%;" class="<?php echo $icon; ?>"></i>
+                                            <a class="button-link" href="#"><?php echo $button_name; ?></a>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-            <?php
+                <?php
+                    }
+                } else {
+                    echo '<p>No products found based on the search term or sorting criteria.</p>';
                 }
-            } elseif ($search) {
-                echo '<p>No products found for "' . htmlspecialchars($search) . '"</p>';
-            } else {
-                echo '<p>Please enter a search term.</p>';
-            }
 
-            // Close the statement if it exists
-            if (isset($stmt)) {
-                $stmt->close();
-            }
-            ?>
-        </div>
+                // Close the statement if it exists
+                if (isset($stmt)) {
+                    $stmt->close();
+                }
+                ?>
+            </div>
 
-        <!-- Pagination -->
-        <div class="pagination">
-            <?php if ($page > 1): ?>
-                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">« Prev</a>
-            <?php endif; ?>
+            <!-- Pagination -->
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">« Prev</a>
+                <?php endif; ?>
 
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
-            <?php endfor; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                <?php endfor; ?>
 
-            <?php if ($page < $totalPages): ?>
-                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next »</a>
-            <?php endif; ?>
-        </div>
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next »</a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <!-- Include your scripts -->
