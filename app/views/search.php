@@ -436,6 +436,8 @@ $sortresult = $stmt->get_result();
         <?php endif; ?>
     </div>
 
+    <?php include '../../PHP/components/footer.php' ?>
+
     <!-- Include your scripts -->
     <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/src/assets/js/index.js"></script>

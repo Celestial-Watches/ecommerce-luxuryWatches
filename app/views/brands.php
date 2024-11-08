@@ -22,10 +22,10 @@ switch ($sort) {
         $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
         break;
     case 'price_low_high':
-        $sql .= " ORDER BY price ASC"; // Assuming price is stored as a numeric value
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC"; // Assuming price is stored as a numeric value
         break;
     case 'price_high_low':
-        $sql .= " ORDER BY price DESC"; // Assuming price is stored as a numeric value
+        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC"; // Assuming price is stored as a numeric value
         break;
 }
 
@@ -83,8 +83,10 @@ $total_pages = ceil($total_products / $limit);
 
 <style type="text/css" media="all">
     .product__container {
-        padding: 40px;
+        padding: 40px 0;
         background-color: #FCF8F5 !important;
+        flex-grow: 1;
+        overflow: hidden;
     }
 
     .product-grid,
@@ -93,6 +95,23 @@ $total_pages = ceil($total_products / $limit);
         grid-template-columns: repeat(5, minmax(250px, 1fr));
         justify-content: center !important;
         gap: 10px !important;
+    }
+
+    .coming-soon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        color: #333;
+        text-align: center;
+        z-index: 1; /* Ensure it's above the grid */
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .product-grid {
+        position: relative; /* Ensure the "Coming soon" text doesn't overlap with other elements */
     }
 
     .product-item {
@@ -313,7 +332,8 @@ $total_pages = ceil($total_products / $limit);
             margin-top: 17px;
             margin-bottom: 10px;
             text-align: left;
-            font-family: 'Poppins';">
+            font-family: 'Poppins';
+            padding-left: 10px;">
                 <?php echo htmlspecialchars($brand); ?>
             </div>
 
@@ -322,7 +342,8 @@ $total_pages = ceil($total_products / $limit);
             font-weight: 400;
             line-height: 21px;
             padding-bottom: 20px;
-            font-family: 'Poppins';">
+            font-family: 'Poppins';
+            padding-left: 10px;">
                 Discover our prestigious collections of luxury watches.
             </span>
         <?php
@@ -429,7 +450,7 @@ $total_pages = ceil($total_products / $limit);
                 }
             } else {
                 // If there are no results for the selected brand
-                echo '<p style="display:block; text-align: center;">Coming soon</p>';
+                echo '<p class="coming-soon">Coming soon</p>';
             }
 
             // Close the statement and connection
@@ -454,6 +475,8 @@ $total_pages = ceil($total_products / $limit);
             <?php endif; ?>
         </div>
     </div>
+
+    <?php include '../../PHP/components/footer.php' ?>
 
     <!-- JS files -->
     <script src="/src/libs/swiper/swiper-bundle.min.js"></script>

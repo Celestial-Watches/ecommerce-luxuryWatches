@@ -165,7 +165,7 @@ if (isset($_SESSION['user'])) {
 
             <div class="newsletter">
 
-                <form action="app/controllers//subscribe.php">
+                <form action="app/controllers/subscribe.php">
 
                     <div class="newsletter-header">
 
@@ -221,7 +221,9 @@ if (isset($_SESSION['user'])) {
     <?php include 'PHP/components/trending-article.php';
     ?>
     
-    <hr style="border-color: #ffffff; visibility:hidden;">
+    <!-- <hr style="border-color: #ffffff;"> -->
+
+    <?php include 'PHP/components/footer.php' ?>
 
    
    

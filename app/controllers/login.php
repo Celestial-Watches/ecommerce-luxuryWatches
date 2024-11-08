@@ -313,6 +313,8 @@ if (isset($_POST["login"])) {
     </div>
   </div>
 
+  <?php include '../../PHP/components/footer.php' ?>
+
   <script>
     document.getElementById('forgot-password-link').addEventListener('click', function(event) {
       var username = document.getElementById('username').value.trim();

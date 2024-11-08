@@ -1,138 +1,181 @@
-    /* Container for the result text and filter button */
-    .filter-head-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 20px;
-        flex-wrap: wrap;
+/* Container for the result text and filter button */
+.filter-head-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Results and Filter button container */
+.top-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Base styling for results count */
+.results-count {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 21px;
+    color: #212121;
+    margin-right: 20px;
+}
+
+.filter-container{
+    display: flex;
+    gap: 15px;
+}
+
+.filter-item {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    cursor: pointer;
+    width: auto; /* Default width */
+}
+
+.filter-item::after {
+    content: "▼";
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 5px;
+}
+
+
+/* Base styling for filter button */
+.filter-button {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+    background: #212121;
+    border: 2px solid #212121;
+    border-radius: 4px;
+    width: 135px;
+    padding: 13px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    position: relative;
+}
+
+/* Icon for filter button, positioned inline on the left */
+.filter-button::before {
+    content: "";
+    background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-white.svg) no-repeat center;
+    background-size: contain;
+    width: 16px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Sort form styling */
+.sort-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Sort label styling */
+.sort-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    text-wrap: nowrap;
+}
+
+/* Sort dropdown styling */
+.sort-dropdown {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    position: relative;
+    min-width: 150px;
+}
+
+.sort-dropdown::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: #333;
+}
+
+/* Responsive adjustments */
+
+/* For screen sizes 1280px or less */
+@media (max-width: 1280px) {
+    /* Hide the filter container */
+    .filter-container {
+        display: none;
     }
 
-    /* Results and Filter button container */
-    .top-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .results-count {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 21px;
-        color: #212121;
-        margin-right: 20px;
-    }
-
+    /* Remove background and border from filter button */
     .filter-button {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 21px;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        background: #212121;
-        border: 2px solid #212121;
-        border-radius: 4px;
-        width: 135px;
-        padding: 13px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* Centers the text */
-        color: #fff;
-        position: relative;
+        background: none;
+        border: none;
+        color: #212121;
+        width: auto;
+        padding: 0;
     }
 
     .filter-button::before {
-        content: "";
-        background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-white.svg) no-repeat 0 0 / cover;
-        width: 16px;
-        height: 10px;
-        left: 23px;
-        position: absolute;
+        background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-black.svg) no-repeat center;
     }
 
+    /* Adjust layout */
+    .filter-head-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
 
-    /* Filter grid layout, displayed inline in single row */
-    .filter-container {
+    /* Align filter button to the left */
+    .filter-button {
+        order: -1;
+    }
+
+    /* Position results-count below filter button with sort-form aligned to the right */
+    .top-container {
+        width: 100%;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
         gap: 20px;
     }
 
-    .filter-item {
-        font-weight: 600;
-        font-size: 14px;
-        color: #333;
-        position: relative;
-        cursor: pointer;
+    /* Make results-count appear below filter-button */
+    .results-count {
+        margin-top: 10px;
+        order: 1;
     }
+}
 
-    .filter-item::after {
-        content: "▼";
-        font-size: 10px;
-        color: #aaa;
-        margin-left: 5px;
-    }
-
-    /* Sort dropdown styling */
-    .sort-form {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
+/* For screen sizes 375px or less */
+@media (max-width: 375px) {
+    /* Hide sort-label text */
     .sort-label {
-        font-size: 12px;
-        font-weight: 600;
-        color: #000;
-        text-transform: uppercase;
-        font-family: 'Poppins', sans-serif;
+        display: none;
     }
 
-    .sort-dropdown {
-        font-size: 14px;
-        font-weight: 500;
-        padding: 8px 12px;
-        background-color: #fff;
-        color: #333;
-        border: none;
-        position: relative;
-        min-width: 150px;
+    /* Maintain single-line layout */
+    .top-container {
+        flex-wrap: nowrap;
     }
-
-    .sort-dropdown::after {
-        content: "▼";
-        position: absolute;
-        right: 10px;
-        pointer-events: none;
-        font-size: 12px;
-        color: #333;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .sort-label {
-            font-size: 10px;
-            margin-right: 6px;
-        }
-
-        .sort-dropdown {
-            font-size: 12px;
-            padding: 6px 10px;
-            min-width: 120px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .sort-label {
-            font-size: 9px;
-            margin-right: 4px;
-        }
-
-        .sort-dropdown {
-            font-size: 11px;
-            padding: 4px 8px;
-            min-width: 100px;
-        }
-    }
+}

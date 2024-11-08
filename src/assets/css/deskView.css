@@ -506,7 +506,7 @@ body::-webkit-scrollbar-thumb:hover {
   z-index: 20;
 }
 
-.mobile-navigation-menu.active {
+.mobile-navigation-menu.menu-visible {
   left: 0;
   visibility: visible;
 }

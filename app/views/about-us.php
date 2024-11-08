@@ -57,6 +57,7 @@
             justify-content: center;
             background: url('https://cdn1.ethoswatches.com/media/desktop/cmspage/about-header@2x.jpg') right center no-repeat;
             background-size: cover;
+            margin-top: 15px;
         }
 
         /* Content Overlay */
@@ -495,11 +496,11 @@
 
         @media (max-width: 480px) {
 
-            .about-container{
+            .about-container {
                 font-size: 12px;
             }
 
-            .about-container > p{
+            .about-container>p {
                 width: 300px;
             }
 
@@ -537,15 +538,15 @@
                 grid-template-columns: repeat(1, 1fr);
             }
 
-            .reason-item h3{
+            .reason-item h3 {
                 text-wrap: nowrap;
             }
 
-            .reason-item{
+            .reason-item {
                 padding: 10px;
             }
 
-            .reasons-container{
+            .reasons-container {
                 padding: 0;
             }
 
@@ -704,21 +705,27 @@
 
         .luxury-helpline-title {
             color: #9da4b1;
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 8px;
+            font-family: "mrs-eaves-xl-serif-narrow", serif !important;
+            font-style: italic;
         }
 
         .luxury-helpline-numbers {
-            display: flex;
+            font-size: 16px;
+            line-height: 28px;
+            margin-top: 4px;
+            display: flex !important;
+            white-space: nowrap;
             justify-content: center;
             align-items: center;
         }
 
-        .luxury-phone-number {
+        /* .luxury-phone-number {
             font-size: 18px;
             color: #fff;
             font-weight: bold;
-        }
+        } */
 
         .luxury-separator {
             font-size: 18px;
@@ -767,7 +774,7 @@
         }
 
         @media (min-width: 768px)and (max-width: 1024px) {
-            .luxury-phone-number{
+            .luxury-phone-number {
                 font-size: 12px;
             }
 
@@ -1708,36 +1715,9 @@
         </div>
     </section>
 
-    <!-- Helpline -->
+    <!-- Footer -->
 
-    <div class="luxury-helpline-section">
-        <div class="luxury-helpline-container">
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title" style="text-align: justify;">Luxury Watch Helpline:</h3>
-                <div class="luxury-helpline-numbers" style="justify-content: flex-start;">
-                    <span class="luxury-phone-number">+91 87250 28899</span>
-                    <span class="luxury-separator">•</span>
-                    <span class="luxury-phone-number">+91 87250 28882</span>
-                </div>
-            </div>
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title">Online Orders Helpline:</h3>
-                <div class="luxury-helpline-numbers" style="justify-content: end;">
-                    <span class="luxury-phone-number">+91 98215 43088</span>
-                    <span class="luxury-separator">•</span>
-                    <span class="luxury-phone-number">+91 11 4011 5246</span>
-                </div>
-            </div>
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title" style="width: 50%;
-    margin-left: 30%;">Customer Care Number:</h3>
-                <div class="luxury-helpline-numbers">
-                    <span class="luxury-phone-number">+91 87250 60021</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+        <?php include '../../PHP/components/footer.php' ?>
 
 
 

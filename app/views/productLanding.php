@@ -465,6 +465,8 @@ $result = $stmt->get_result();
         </div>
     </div>
 
+    <?php include '../../PHP/components/footer.php' ?>
+
     <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/src/assets/js/index.js"></script>
     <script src="/src/assets/js/currency-language.js"></script>

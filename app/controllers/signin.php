@@ -300,6 +300,9 @@ if (isset($_POST["submit"])) {
       </form>
     </div>
   </div>
+
+  <?php include '../../PHP/components/footer.php' ?>
+  
   <?php
   // End output buffering and flush the output
   ob_end_flush();

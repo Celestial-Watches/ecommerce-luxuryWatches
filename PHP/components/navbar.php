@@ -69,7 +69,7 @@
             text-align: justify;
             font-family: 'Helvetica';
             font-size: 11px;
-            white-space: nowrap;
+            /* white-space: nowrap; */
         }
 
         .suggestion-item:hover {
@@ -78,7 +78,7 @@
 
         @media (max-width: 600px) {
             #suggestions {
-                max-width: 180px;
+                max-width: 320px;
             }
         }
 
@@ -402,7 +402,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="#" class="menu-title">MEMBERSHIP</a>
+                        <a href="../../app/views/membership.php" class="menu-title">MEMBERSHIP</a>
                     </li>
 
                     <li class="menu-category">
@@ -612,13 +612,13 @@
 
                 <li class="menu-category">
 
-                    <button class="accordion-menu" data-accordion-btn>
+                    <button class="accordion-menu" data-accordion-btn onclick="window.location.href ='http://localhost:3000/app/views/membership.php';">
                         <p class="menu-title">Membership</p>
                     </button>
 
                 </li>
 
-                <li class="menu-category">
+                <li class="menu-category" onclick="window.location.href ='';">
                     <a href="#" class="menu-title">Blog</a>
                 </li>
 
