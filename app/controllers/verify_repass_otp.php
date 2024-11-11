@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-// var_dump($_SESSION); FOR LOGG PURPOSE
+
 ?>
 
 <!DOCTYPE html>

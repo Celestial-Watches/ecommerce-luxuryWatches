@@ -509,6 +509,9 @@ body::-webkit-scrollbar-thumb:hover {
 .mobile-navigation-menu.menu-visible {
   left: 0;
   visibility: visible;
+  display: block;
+  opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .menu-top {
@@ -600,7 +603,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .submenu-category-list.active {
   max-height: fit-content;
-
   visibility: visible;
 }
 

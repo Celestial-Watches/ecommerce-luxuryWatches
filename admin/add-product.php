@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+session_regenerate_id(true);
+
 define('ALLOW_ACCESS', true);
 include 'panel.php';
 

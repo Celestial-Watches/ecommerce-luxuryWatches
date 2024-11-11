@@ -1,33 +1,8 @@
 <?php
-
 if (!defined('ALLOW_ACCESS')) {
   header("Location: ../index.php");
   exit();
 }
-
-session_set_cookie_params([
-  'lifetime' => 86400, // 1 day
-  'path' => '/',
-  'domain' => '', // Set to your domain
-  'secure' => true, // Set to true if using HTTPS
-  'httponly' => true,
-  'samesite' => 'Strict' // or 'Lax' based on your needs
-]);
-
-session_start();
-// Regenerate the session ID on every page refresh
-session_regenerate_id(true);
-
-header("Cache-Control: no-cache, must-revalidate");
-header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-
-if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-  header("Location: ../app/controllers/login.php");
-  exit();
-}
-
-// var_dump($_SESSION);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,14 +14,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION[
   <link rel="stylesheet" href="../src/assets/css/panel.css">
   <script type="text/javascript" src="../src/assets/js/panelNav.js" defer></script>
   <script type="text/javascript" src="../src/assets/js/navigation.js"></script>
-  <script>
-        window.addEventListener('pageshow', function(event) {
-        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-            window.location.reload();
-        }
-    });
-
-    </script>
 </head>
 
 <body>

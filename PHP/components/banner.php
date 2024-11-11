@@ -120,9 +120,9 @@
 </head>
 
 <body>
-    <section class="banner ">
-        <div class="video-container">
-            <video id="bannerVideo" autoplay muted loop>
+    <section class="banner" style="padding-top: 10px;">
+        <div class="video-container animate-on-scroll">
+            <video id="bannerVideo animate-on-scroll" autoplay muted loop>
                 <source src="../../src/assets/image/video/Untitled video - Made with Clipchamp.mp4" type="video/mp4" loading="lazy">
             </video>
             <div class="bannerOverlay">

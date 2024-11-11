@@ -261,26 +261,26 @@
 </head>
 
 <body>
-    <div class="luxury-helpline-section">
+    <div class="luxury-helpline-section animate-on-scroll">
         <div class="luxury-helpline-container">
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title" style="text-align: justify;">Luxury Watch Helpline:</h3>
+            <div class="luxury-helpline-content animate-on-scroll">
+                <h3 class="luxury-helpline-title animate-on-scroll" style="text-align: justify;">Luxury Watch Helpline:</h3>
                 <div class="luxury-helpline-numbers" style="justify-content: flex-start;">
                     <span class="luxury-phone-number">+91 87250 28899</span>
                     <span class="luxury-separator">•</span>
                     <span class="luxury-phone-number">+91 87250 28882</span>
                 </div>
             </div>
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title">Online Orders Helpline:</h3>
+            <div class="luxury-helpline-content animate-on-scroll">
+                <h3 class="luxury-helpline-title animate-on-scroll">Online Orders Helpline:</h3>
                 <div class="luxury-helpline-numbers" style="justify-content: center;">
                     <span class="luxury-phone-number">+91 98215 43088</span>
                     <span class="luxury-separator">•</span>
                     <span class="luxury-phone-number">+91 11 4011 5246</span>
                 </div>
             </div>
-            <div class="luxury-helpline-content">
-                <h3 class="luxury-helpline-title" style="width: 50%;
+            <div class="luxury-helpline-content animate-on-scroll">
+                <h3 class="luxury-helpline-title animate-on-scroll" style="width: 50%;
     margin-left: 30%;">Customer Care Number:</h3>
                 <div class="luxury-helpline-numbers">
                     <span class="luxury-phone-number">+91 87250 60021</span>
@@ -289,19 +289,19 @@
         </div>
     </div>
 
-    <section class="footer" style="background-color: ghostwhite !important;">
-        <div class="footer-row">
+    <section class="footer animate-on-scroll" style="background-color: ghostwhite !important;">
+        <div class="footer-row animate-on-scroll">
 
-            <div class="footer-col">
+            <div class="footer-col animate-on-scroll">
                 <h4>Luxury Brands</h4>
-                <ul class="links">
+                <ul class="links animate-on-scroll">
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Patek%20Philippe">Patek Philippe</a></li>
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Richard%20Mille">Richard Mille</a></li>
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Audemars%20Piguet">Audemars Piguet</a></li>
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Vacheron%20Constantin">Vacheron Constantin</a></li>
                     <li><a href="javascript:void(0);" id="more-link-brands" onclick="toggleSection('brands')">More...</a></li>
                 </ul>
-                <ul class="links" id="other-brands" style="display:none;">
+                <ul class="links " id="other-brands" style="display:none;">
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Jaeger-LeCoultre">Jaeger-LeCoultre</a></li>
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=IWC%20Schaffhausen">IWC Schaffhausen</a></li>
                     <li><a href="http://localhost:3000/app/views/brands.php?brand=Breguet">Breguet</a></li>
@@ -324,9 +324,9 @@
 
 
 
-            <div class="footer-col">
+            <div class="footer-col animate-on-scroll">
                 <h4>Info</h4>
-                <ul class="links">
+                <ul class="links animate-on-scroll">
                     <li><a href="http://localhost:3000/app/views/about-us.php">About Us</a></li>
                     <li><a href="#">Contact us</a></li>
                     <li><a href="#">Customers</a></li>
@@ -335,9 +335,9 @@
                 </ul>
             </div>
 
-            <div class="footer-col">
+            <div class="footer-col animate-on-scroll">
                 <h4>Customer Care</h4>
-                <ul class="links">
+                <ul class="links animate-on-scroll">
                     <li><a href="http://localhost:3000/app/views/watch-care.php">Watch Care & Maintenance</a></li>
                     <li><a href="http://localhost:3000/app/views/authentication.php">Authentication & Certification</a></li>
                     <li><a href="http://localhost:3000/app/views/limited-editions.php">Limited Edition Watches</a></li>
@@ -354,9 +354,9 @@
 
 
 
-            <div class="footer-col">
+            <div class="footer-col animate-on-scroll">
                 <h4>Legal</h4>
-                <ul class="links">
+                <ul class="links animate-on-scroll">
                     <li><a href="#">Customer Agreement</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">GDPR</a></li>
@@ -365,17 +365,17 @@
                 </ul>
             </div>
 
-            <div class="footer-col">
-                <h4>Subscribe to our newsletter</h4>
-                <p>
+            <div class="footer-col animate-on-scroll">
+                <h4 class="animate-on-scroll">Subscribe to our newsletter</h4>
+                <p class="animate-on-scroll">
                     Be the first to hear about new arrivals, special offers, and invitations to private events.
                 </p>
-                <form action="http://localhost:3000/app/controllers/subscribe.php" method="post">
+                <form class="animate-on-scroll" action="http://localhost:3000/app/controllers/subscribe.php" method="post">
                     <input type="email" id="subscribe-email" name="email" placeholder="Your Email" required>
                     <button type="submit">SUBSCRIBE</button>
                 </form>
                 <div id="feedback-message" style="visibility: hidden;"></div>
-                <div class="icons">
+                <div class="icons animate-on-scroll">
                     <i class="fa-brands fa-facebook-f"></i>
                     <i class="fa-brands fa-twitter"></i>
                     <i class="fa-brands fa-linkedin"></i>

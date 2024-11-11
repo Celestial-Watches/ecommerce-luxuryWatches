@@ -138,7 +138,7 @@ If you did not make this change or believe someone has accessed your account, pl
         }
     }
 }
-// var_dump($_SESSION); FOR LOGG PURPOSE
+
 
 ?>
 
@@ -155,7 +155,7 @@ If you did not make this change or believe someone has accessed your account, pl
 
 <body>
 
-    ?>
+    
     <div class="login-container">
         <div class="login-box">
             <h1>Reset Password</h1>

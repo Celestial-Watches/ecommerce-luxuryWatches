@@ -86,7 +86,7 @@ async function updatePrices(selectedCurrency) {
                     finalPriceDisplay = `FROM <span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
                 } else {
                     // Normal display without "FROM"
-                    finalPriceDisplay = `<span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
+                    finalPriceDisplay = `<span class="currency-symbol notranslate">${currencySymbol}</span> <span class="formatted-price notranslate">${formattedPrice}</span>`;
                 }
                 
                 product.innerHTML = finalPriceDisplay; // Update the product price display

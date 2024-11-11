@@ -143,7 +143,7 @@ Best regards, Celestial Watches Team.";
     }
 }
 
-// var_dump($_SESSION); FOR LOGG PURPOSE
+
 ?>
 
 <!DOCTYPE html>

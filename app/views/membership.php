@@ -578,7 +578,7 @@ session_start();
                             <li>Get a new watch worth up to $500</li>
                             <li>Every shipment is a chance to win a Rolex!</li>
                             <li>Swiss or Japanese automatic or quartz movement</li>
-                            <li>Each watch is guaranteed to be authentic and backed by Watch Gang's Warranty</li>
+                            <li>Each watch is guaranteed to be authentic and backed by Celestial Watches Warranty</li>
                             <li>Premium and Craft Watch Brands</li>
                         </ul>
                     </div>

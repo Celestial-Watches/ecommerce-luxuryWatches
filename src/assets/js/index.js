@@ -1,11 +1,11 @@
 "use strict";
 
 
-    // ============================= NAVIGATION OPEN =============================
+// ============================= NAVIGATION OPEN =============================
 
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    const actionBtns = document.querySelectorAll('.has-menu-btn'); 
+    const actionBtns = document.querySelectorAll('.has-menu-btn');
     const mobileNavigationMenu = document.querySelector('.mobile-navigation-menu');
     const menuCloseBtns = document.querySelectorAll('.menu-close-btn'); // Declare menu close buttons
     const accordionBtns = document.querySelectorAll('[data-accordion-btn]'); // Declare accordion buttons
@@ -15,7 +15,8 @@
     // Toggle the menu on button click
     actionBtns.forEach(btn => {
         btn.addEventListener('click', (event) => {
-            event.stopPropagation(); 
+            console.log("Action button clicked!");
+            event.stopPropagation();
             isMenuOpen = !isMenuOpen; // Toggle the flag
             if (mobileNavigationMenu) {
                 mobileNavigationMenu.classList.toggle('menu-visible', isMenuOpen); // Add or remove 'menu-visible'
@@ -46,7 +47,7 @@
         });
     });
 
-    
+
 
     // Close the menu if clicking outside the menu area
     document.addEventListener('click', (event) => {
@@ -56,159 +57,153 @@
             console.log('Clicked outside, menu closed');
         }
 
-        
-        
+        // ============================= NAVIGATION CLOSE =============================
+        console.log('Action Buttons:', actionBtns);
+        console.log('Accordion Buttons:', accordionBtns);
 
+    });
 
-    // ============================= NAVIGATION CLOSE =============================
-
-    console.log(actionBtns);
-    console.log(menuCloseBtns);
-    console.log(accordionBtns);
 });
 
 
+    // ============================= MODAL OPEN =============================
 
-// ============================= MODAL OPEN =============================
+    // modal variables
+    const modal = document.querySelector('[data-modal]');
+    const modalCloseBtn = document.querySelector('[data-modal-close]');
+    const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
+    const subscribeForm = document.querySelector('.newsletter form');
 
-// modal variables
-const modal = document.querySelector('[data-modal]');
-const modalCloseBtn = document.querySelector('[data-modal-close]');
-const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
-const subscribeForm = document.querySelector('.newsletter form');
+    // Function to set a local storage item with an expiration time
+    function setLocalStorageWithExpiry(key, value, hours) {
+        const now = new Date();
+        const expiryTime = now.getTime() + hours * 60 * 60 * 1000;
+        const item = {
+            value: value,
+            expiry: expiryTime
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    }
 
-// Function to set a local storage item with an expiration time
-function setLocalStorageWithExpiry(key, value, hours) {
-    const now = new Date();
-    const expiryTime = now.getTime() + hours * 60 * 60 * 1000;
-    const item = {
-        value: value,
-        expiry: expiryTime
+    // Function to get a local storage item with an expiration time
+    function getLocalStorageWithExpiry(key) {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        const now = new Date();
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return item.value;
+    }
+
+    // Modal function to close the modal
+    const modalCloseFunc = function () {
+        if (modal) {
+            modal.classList.add('closed');
+            setLocalStorageWithExpiry('modalClosed', 'true', 3); // Set modal closed state with 3 hours expiry
+        }
     };
-    localStorage.setItem(key, JSON.stringify(item));
-}
 
-// Function to get a local storage item with an expiration time
-function getLocalStorageWithExpiry(key) {
-    const itemStr = localStorage.getItem(key);
-    if (!itemStr) {
-        return null;
-    }
-    const item = JSON.parse(itemStr);
-    const now = new Date();
-    if (now.getTime() > item.expiry) {
-        localStorage.removeItem(key);
-        return null;
-    }
-    return item.value;
-}
-
-// Modal function to close the modal
-const modalCloseFunc = function () {
+    // Check if the user has closed the modal
     if (modal) {
-        modal.classList.add('closed');
-        setLocalStorageWithExpiry('modalClosed', 'true', 3); // Set modal closed state with 3 hours expiry
-    }
-};
+        if (getLocalStorageWithExpiry('modalClosed') === 'true') {
+            modal.classList.add('closed'); // Hide modal if closed
+        } else {
+            modal.classList.remove('closed'); // Show modal if not closed
+        }
 
-// Check if the user has closed the modal
-if (modal) {
-    if (getLocalStorageWithExpiry('modalClosed') === 'true') {
-        modal.classList.add('closed'); // Hide modal if closed
-    } else {
-        modal.classList.remove('closed'); // Show modal if not closed
-    }
+        // Handle form submission
+        if (subscribeForm) {
+            subscribeForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent form from submitting normally
 
-    // Handle form submission
-    if (subscribeForm) {
-        subscribeForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form from submitting normally
+                const email = document.getElementById('subscribe-email').value; // Get the email value
+                const feedbackMessage = document.getElementById('feedback-message'); // Assuming there's a div for feedback
+                feedbackMessage.textContent = ''; // Clear previous messages
 
-            const email = document.getElementById('subscribe-email').value; // Get the email value
-            const feedbackMessage = document.getElementById('feedback-message'); // Assuming there's a div for feedback
-            feedbackMessage.textContent = ''; // Clear previous messages
-
-            if (!email) {
-                feedbackMessage.textContent = 'Please enter your email.';
-                feedbackMessage.style.color = 'red';
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('email', email);
-
-            // Show loading indicator
-            feedbackMessage.textContent = 'Processing...';
-            feedbackMessage.style.color = 'black'; // Reset color for loading state
-
-            // Disable the submit button to prevent multiple submissions
-            const submitButton = subscribeForm.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-
-            fetch('../../../app/controllers/subscribe.php', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    // Check if the response is ok (status in the range 200-299)
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    feedbackMessage.style.color = data.status === 'success' ? 'green' : 'red';
-                    feedbackMessage.textContent = data.message;
-
-                    if (data.status === 'success') {
-                        // Set local storage to remember subscription
-                        setLocalStorageWithExpiry('subscribed', 'true', 3); // Set subscription state with 3 hours expiry
-                        subscribeForm.reset(); // Clear the input field
-                        modalCloseFunc(); // Close the modal
-                        location.reload();
-
-                        // Optional: If you want to update UI without a full page reload
-                        // You can append a thank-you message or something similar
-                        const thankYouMessage = document.createElement('div');
-                        thankYouMessage.textContent = 'Thank you for subscribing!';
-                        document.body.appendChild(thankYouMessage);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    feedbackMessage.textContent = 'An unexpected error occurred. Please try again later.';
+                if (!email) {
+                    feedbackMessage.textContent = 'Please enter your email.';
                     feedbackMessage.style.color = 'red';
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('email', email);
+
+                // Show loading indicator
+                feedbackMessage.textContent = 'Processing...';
+                feedbackMessage.style.color = 'black'; // Reset color for loading state
+
+                // Disable the submit button to prevent multiple submissions
+                const submitButton = subscribeForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+
+                fetch('../../../app/controllers/subscribe.php', {
+                    method: 'POST',
+                    body: formData
                 })
-                .finally(() => {
-                    // Re-enable the submit button after processing is done
-                    submitButton.disabled = false;
-                });
-        });
+                    .then(response => {
+                        // Check if the response is ok (status in the range 200-299)
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        feedbackMessage.style.color = data.status === 'success' ? 'green' : 'red';
+                        feedbackMessage.textContent = data.message;
+
+                        if (data.status === 'success') {
+                            // Set local storage to remember subscription
+                            setLocalStorageWithExpiry('subscribed', 'true', 3); // Set subscription state with 3 hours expiry
+                            subscribeForm.reset(); // Clear the input field
+                            modalCloseFunc(); // Close the modal
+                            location.reload();
+
+                            const thankYouMessage = document.createElement('div');
+                            thankYouMessage.textContent = 'Thank you for subscribing!';
+                            document.body.appendChild(thankYouMessage);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        feedbackMessage.textContent = 'An unexpected error occurred. Please try again later.';
+                        feedbackMessage.style.color = 'red';
+                    })
+                    .finally(() => {
+                        // Re-enable the submit button after processing is done
+                        submitButton.disabled = false;
+                    });
+            });
+        }
+
+
+        // Modal event listeners
+        if (modalCloseOverlay) {
+            modalCloseOverlay.addEventListener('click', modalCloseFunc);
+        }
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', modalCloseFunc);
+        }
+
+        // Reset modal state if the user visits the website again
+        if (localStorage.getItem('modalClosed') === 'false') {
+            localStorage.removeItem('modalClosed');
+        }
     }
 
+    // ============================= MODAL CLOSE =============================
 
-    // Modal event listeners
-    if (modalCloseOverlay) {
-        modalCloseOverlay.addEventListener('click', modalCloseFunc);
-    }
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', modalCloseFunc);
-    }
+    console.log(modal);
+    console.log(modalCloseBtn);
+    console.log(modalCloseOverlay);
+    console.log(subscribeForm);
+    console.log(modalCloseFunc);
 
-    // Reset modal state if the user visits the website again
-    if (localStorage.getItem('modalClosed') === 'false') {
-        localStorage.removeItem('modalClosed');
-    }
-}
-
-// ============================= MODAL CLOSE =============================
-
-console.log(modal);
-console.log(modalCloseBtn);
-console.log(modalCloseOverlay);
-console.log(subscribeForm);
-console.log(modalCloseFunc);
-});
 
 // ============================= PASSWORD SHOW/HIDE START =============================
 

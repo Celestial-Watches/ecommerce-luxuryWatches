@@ -101,7 +101,7 @@ if (isset($_SESSION['user'])) {
     $_SESSION['LAST_ACTIVITY'] = time();
 }
 
-// var_dump($_SESSION);
+
 ?>
 
 <!DOCTYPE html>
@@ -220,6 +220,8 @@ if (isset($_SESSION['user'])) {
 
     <?php include 'PHP/components/trending-article.php';
     ?>
+
+<?php include 'PHP/components/benefit.php' ?>
     
     <!-- <hr style="border-color: #ffffff;"> -->
 

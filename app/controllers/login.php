@@ -336,7 +336,7 @@ if (isset($_POST["login"])) {
 
   <?php
   ob_end_flush();
-  // var_dump($_SESSION); FOR LOGG PURPOSE
+
   ?>
 
 

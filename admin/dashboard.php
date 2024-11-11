@@ -1,15 +1,16 @@
 <?php
+session_start();
+session_regenerate_id(true);
+
 define('ALLOW_ACCESS', true);
 include 'panel.php';
-
 require '../app/config/conn.php';
 
-
-
-if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+if (!isset($_SESSION['user'], $_SESSION['admin'], $_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
     header("Location: ../app/controllers/login.php");
     exit();
 }
+
 
 // Fetch the total user count
 $sqlCount = "SELECT COUNT(*) as user_count FROM users";
@@ -87,12 +88,7 @@ if ($lastWeekUserCount > 0) {
 // Close the database connection
 $conn->close();
 
-// var_dump($months);
-// var_dump($counts);
-// echo "<pre>";
-// print_r($dates);
-// print_r($counts);
-// echo "</pre>";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

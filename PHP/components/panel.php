@@ -1,59 +1,51 @@
 <?php
- 
-// // Set the session cookie with secure attributes
+// Set secure session cookie attributes
 session_set_cookie_params([
-  'lifetime' => 86400,              // Session expires when the browser is closed
+  'lifetime' => 86400,          // Session expires in 24 hours
   'path' => '/',                // Available throughout the site
   'domain' => '',               // Leave empty for current domain
-  'secure' => false,             // Only send over HTTPS
+  'secure' => false,            // Set to true if using HTTPS
   'httponly' => true,           // Prevent JavaScript access
   'samesite' => 'Strict'        // Protect against CSRF
 ]);
 
 session_start();
-
-// Regenerate the session ID on every page refresh
 session_regenerate_id(true);
 
 require_once "../../app/config/conn.php"; 
 
-// Check if user is logged in and is an admin
-if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) {
-    header("Location: ../../app/controllers/login.php"); 
-    exit();
-}
-
-// Check if the admin has already authenticated for this session
-if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-    // If already authenticated, redirect to the panel
-    header("Location: ../../admin/dashboard.php");
-    exit();
-}
-
-// Check if the admin has already authenticated for this session
-$current_time = time(); // Get the current timestamp
+// Session timeout settings
+$current_time = time();
 $timeout_duration = 1800; // 30 minutes in seconds
 
-if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-  // Check if the session is still valid
-  if (isset($_SESSION['last_auth_time']) && ($current_time - $_SESSION['last_auth_time']) < $timeout_duration) {
-      // If already authenticated and within timeout duration, redirect to the panel
-      header("Location: ../../admin/dashboard.php");
-      exit();
-  } else {
-      // If the session has timed out, require password authentication
-      unset($_SESSION['authenticated']); // Remove the authenticated status
-  }
+// Redirect if user or admin session variable isn't set
+if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) {
+    header("Location: ../../app/controllers/login.php");
+    exit();
 }
 
-// Check if the password has been submitted
+// Check if session is authenticated and within the timeout duration
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
+    // Check if session has expired
+    if (isset($_SESSION['last_auth_time']) && ($current_time - $_SESSION['last_auth_time']) < $timeout_duration) {
+        // Update last activity time and allow access
+        $_SESSION['last_auth_time'] = $current_time;
+        header("Location: ../../admin/dashboard.php");
+        exit();
+    } else {
+        // Session expired; reset authentication status
+        unset($_SESSION['authenticated']);
+    }
+}
+
+// If password has been submitted, validate it
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entered_password = trim($_POST["password"]);
 
-    // Fetch the admin's password from the admin_login table
-    $sql = "SELECT password FROM admin_login WHERE username = ?"; // Adjust the column name if necessary
+    // Fetch admin password from the database
+    $sql = "SELECT password FROM admin_login WHERE username = ?";
     if ($stmt = mysqli_prepare($conn, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", $_SESSION['user']); // Assuming the session variable holds the admin username
+        mysqli_stmt_bind_param($stmt, "s", $_SESSION['user']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $hashed_password);
         mysqli_stmt_fetch($stmt);
@@ -61,11 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verify the entered password
         if (password_verify($entered_password, $hashed_password)) {
-
-          
-            // Password is correct, set session variable and grant access to the admin panel
-            $_SESSION['authenticated'] = true; // Set authenticated to true here
-            $_SESSION['last_auth_time'] = $current_time; // Store the current time
+            // Password correct; grant access and set session variables
+            $_SESSION['authenticated'] = true;
+            $_SESSION['last_auth_time'] = $current_time;
             header("Location: ../../admin/dashboard.php");
             exit();
         } else {
@@ -75,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Database query failed.";
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

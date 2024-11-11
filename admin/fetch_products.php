@@ -1,9 +1,5 @@
 <?php
-if (!defined('ALLOW_ACCESS')) {
-    // Redirect to homepage or show an error message
-    header("Location: ../index.php");
-    exit();
-  }
+
   
 require_once '../app/config/conn.php';
 

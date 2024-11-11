@@ -1,7 +1,11 @@
 <?php
+session_start();
+session_regenerate_id(true);
+
 define('ALLOW_ACCESS', true);
 include 'panel.php'; 
 require_once '../app/config/conn.php';
+
 
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header("Location: ../app/controllers/login.php"); 
@@ -13,6 +17,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
     header("Location: /app/controllers/login.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
