@@ -12,8 +12,8 @@ if (!defined('ALLOW_ACCESS')) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Celestial Watches - Admin Panel</title>
   <link rel="stylesheet" href="../src/assets/css/panel.css">
-  <script type="text/javascript" src="../src/assets/js/panelNav.js" defer></script>
-  <script type="text/javascript" src="../src/assets/js/navigation.js"></script>
+  <script type="text/javascript" src="../src/assets/js/panelNav.js" async></script>
+  <script type="text/javascript" src="../src/assets/js/navigation.js" async></script>
 </head>
 
 <body>

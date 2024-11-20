@@ -18,7 +18,7 @@
 
 
     <!-- ============= JS =============  -->
-    <script src="/src/assets/js/navigation.js"></script>
+    <script src="/src/assets/js/navigation.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
     <!-- ============= CSS =============  -->
@@ -849,9 +849,9 @@
 
     <div class="carousel">
         <div class="carousel-images">
-            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-3@2x.jpg" alt="Image 1" />
-            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-2@2x.jpg" alt="Image 2" />
-            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-1@2x.jpg" alt="Image 3" />
+            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-3@2x.jpg" loading="lazy" alt="Image 1" />
+            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-2@2x.jpg" loading="lazy" alt="Image 2" />
+            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/about-slider-1@2x.jpg" loading="lazy" alt="Image 3" />
         </div>
         <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
         <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
@@ -917,7 +917,7 @@
             </div>
         </div>
         <div class="map-container">
-            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/globe-pin.svg" alt="World Map" class="map-image">
+            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/globe-pin.svg" loading="lazy" alt="World Map" class="map-image">
         </div>
     </section>
 
@@ -1614,7 +1614,7 @@
     <div class="watch-care-section">
         <div class="watch-care-content">
             <div class="watch-care-logo">
-                <img src="https://cdn1.ethoswatches.com/media/logo/stores/1/e_logo_watch_care.png" alt="Ethos Logo" width="50">
+                <img src="https://cdn1.ethoswatches.com/media/logo/stores/1/e_logo_watch_care.png" loading="lazy" alt="Ethos Logo" width="50">
             </div>
             <h2 class="watch-care-heading">CELESTIAL WATCH CARE</h2>
             <hr class="watch-care-divider">
@@ -1686,7 +1686,7 @@
                     <div class="lux_helpline">
                         <div class="helpline_content">
                             <a href="mailto:celestialwatches69@gmail.com" class="helpline-link">
-                                <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/mail.svg" width="40" class="helpline-icon" alt="Email Us">
+                                <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/mail.svg" width="40" loading="lazy" class="helpline-icon" alt="Email Us">
                                 <div class="helpline-label color_00">Email Us</div>
                                 <div class="helpline-info color_80">celestialwatches69@gmail.com</div>
                             </a>
@@ -1695,7 +1695,7 @@
                         <div class="h-line"></div>
 
                         <div class="helpline_content">
-                            <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/shake_phone.svg" width="35" class="helpline-icon" alt="Call Us">
+                            <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/shake_phone.svg" loading="lazy" width="35" class="helpline-icon" alt="Call Us">
                             <div class="helpline-label color_00">Call Us</div>
                             <div class="helpline-info color_80">+91 87250 28882</div>
                             <div class="helpline-info color_80">+91 87250 28899</div>
@@ -1704,7 +1704,7 @@
                         <div class="h-line"></div>
 
                         <div class="helpline_content">
-                            <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/live-chat.svg" width="30" class="helpline-icon" alt="Live Chat">
+                            <img src="https://cdn2.ethoswatches.com/static/frontend/Ethos-v2/destkop/en_US/images/live-chat.svg" loading="lazy" width="30" class="helpline-icon" alt="Live Chat">
                             <div class="helpline-label color_00">Live Chat</div>
                             <div class="helpline-info color_80">Monday-Friday, 10:00 am - 2:00 am</div>
                             <div class="helpline-info color_80">Saturday-Sunday, 10:00 am - 7:00 pm</div>
@@ -1780,10 +1780,10 @@
         window.addEventListener('resize', updateCarousel);
     </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
+    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+    <script src="/src/assets/js/index.js"async></script>
+    <script src="/src/assets/js/currency-language.js" async></script>
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
 
 </body>
 

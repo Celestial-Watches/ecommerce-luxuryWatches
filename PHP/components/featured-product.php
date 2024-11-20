@@ -1,17 +1,18 @@
 <?php if (!defined('ALLOW_ACCESS')) {
     header("Location: ../../index.php");
     exit();
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Featured Products</title>
-    <script src="../../src/assets/js/scroll-animation.js"></script>
+    <script src="../../src/assets/js/scroll-animation.js" async></script>
     <style>
         .featured-main {
-            background-color: #f9f9f9;
+            background-color: #fcf8f5;
         }
 
         .featured-products {
@@ -59,19 +60,15 @@
 
         .card {
             width: 30%;
-            background-color: #e4dfdf;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background-color: #ffffff;
+            /* border: 1px solid #ddd; */
+            /* border-radius: 8px; */
             padding: 20px;
             margin: 0 5px;
             flex: 0 0 32.32%;
             transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
-            /* Add opacity transition */
             text-align: center;
-            background-image: linear-gradient(300deg,
-                    rgba(255, 255, 255, 0) 30%,
-                    rgba(255, 255, 255, 0.8),
-                    rgba(255, 255, 255, 0) 70%);
+            background-image: linear-gradient(300deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 70%);
         }
 
         .card.reduce-opacity {
@@ -97,6 +94,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            padding-top: 10px;
         }
 
         .card .featured-price {
@@ -283,84 +281,84 @@
     </main>
 
     <script>
-    // Function to initialize sliders
-    function initializeSlider(sliderContainer) {
-        let currentIndex = 0;
-        const cards = sliderContainer.querySelectorAll('.card');
-        let slidesToShow = 3; // Default for large screens
+        // Function to initialize sliders
+        function initializeSlider(sliderContainer) {
+            let currentIndex = 0;
+            const cards = sliderContainer.querySelectorAll('.card');
+            let slidesToShow = 3; // Default for large screens
 
-        // Function to handle mouse enter
-        function handleMouseEnter() {
+            // Function to handle mouse enter
+            function handleMouseEnter() {
+                cards.forEach((card) => {
+                    if (card !== this) {
+                        card.classList.add('scale-down'); // Add scale-down class to other cards
+                        card.classList.add('reduce-opacity'); // Add reduce-opacity class to other cards
+                    }
+                });
+            }
+
+            // Function to handle mouse leave
+            function handleMouseLeave() {
+                cards.forEach((card) => {
+                    card.classList.remove('scale-down'); // Remove scale-down class
+                    card.classList.remove('reduce-opacity'); // Remove reduce-opacity class
+                });
+            }
+
+            // Attach event listeners to each card
             cards.forEach((card) => {
-                if (card !== this) {
-                    card.classList.add('scale-down'); // Add scale-down class to other cards
-                    card.classList.add('reduce-opacity'); // Add reduce-opacity class to other cards
+                card.addEventListener('mouseenter', handleMouseEnter);
+                card.addEventListener('mouseleave', handleMouseLeave);
+            });
+
+            // Adjust number of slides based on window width
+            function updateSlidesToShow() {
+                if (window.innerWidth <= 480) {
+                    slidesToShow = 1; // For mobile
+                } else if (window.innerWidth < 768) {
+                    slidesToShow = 2; // For tablets
+                } else if (window.innerWidth <= 1024) {
+                    slidesToShow = 3; // For smaller laptops
+                } else {
+                    slidesToShow = 3; // For larger screens
                 }
-            });
-        }
-
-        // Function to handle mouse leave
-        function handleMouseLeave() {
-            cards.forEach((card) => {
-                card.classList.remove('scale-down'); // Remove scale-down class
-                card.classList.remove('reduce-opacity'); // Remove reduce-opacity class
-            });
-        }
-
-        // Attach event listeners to each card
-        cards.forEach((card) => {
-            card.addEventListener('mouseenter', handleMouseEnter);
-            card.addEventListener('mouseleave', handleMouseLeave);
-        });
-
-        // Adjust number of slides based on window width
-        function updateSlidesToShow() {
-            if (window.innerWidth <= 480) {
-                slidesToShow = 1; // For mobile
-            } else if (window.innerWidth < 768) {
-                slidesToShow = 2; // For tablets
-            } else if (window.innerWidth <= 1024) {
-                slidesToShow = 3; // For smaller laptops
-            } else {
-                slidesToShow = 3; // For larger screens
-            }
-            showSlides();
-        }
-
-        // Move the slides
-        function moveSlide(step) {
-            currentIndex += step;
-
-            // Wrapping logic
-            if (currentIndex < 0) {
-                currentIndex = cards.length - slidesToShow; // Jump from the first slide to the last set of slides
-            } else if (currentIndex > cards.length - slidesToShow) {
-                currentIndex = 0; // Jump from the last set of slides to the first slide
+                showSlides();
             }
 
-            showSlides();
+            // Move the slides
+            function moveSlide(step) {
+                currentIndex += step;
+
+                // Wrapping logic
+                if (currentIndex < 0) {
+                    currentIndex = cards.length - slidesToShow; // Jump from the first slide to the last set of slides
+                } else if (currentIndex > cards.length - slidesToShow) {
+                    currentIndex = 0; // Jump from the last set of slides to the first slide
+                }
+
+                showSlides();
+            }
+
+            // Display the slides by translating the grid
+            function showSlides() {
+                const grid = sliderContainer.querySelector('.product-grid');
+                const cardWidth = cards[0].offsetWidth; // Get the width of the first card
+                const totalWidth = (cardWidth + 9.5) * currentIndex; // 9px gap between cards
+                grid.style.transform = `translateX(-${totalWidth}px)`; // Translate the grid
+            }
+
+            // Expose moveSlide function to the global scope for button clicks
+            sliderContainer.querySelector('.prev').onclick = () => moveSlide(-1);
+            sliderContainer.querySelector('.next').onclick = () => moveSlide(1);
+
+            // Initial setup
+            updateSlidesToShow();
+            window.addEventListener('resize', updateSlidesToShow);
         }
 
-        // Display the slides by translating the grid
-        function showSlides() {
-            const grid = sliderContainer.querySelector('.product-grid');
-            const cardWidth = cards[0].offsetWidth; // Get the width of the first card
-            const totalWidth = (cardWidth + 9.5) * currentIndex; // 9px gap between cards
-            grid.style.transform = `translateX(-${totalWidth}px)`; // Translate the grid
-        }
-
-        // Expose moveSlide function to the global scope for button clicks
-        sliderContainer.querySelector('.prev').onclick = () => moveSlide(-1);
-        sliderContainer.querySelector('.next').onclick = () => moveSlide(1);
-
-        // Initial setup
-        updateSlidesToShow();
-        window.addEventListener('resize', updateSlidesToShow);
-    }
-
-    // Initialize sliders
-    document.querySelectorAll('.slider').forEach(initializeSlider);
-</script>
+        // Initialize sliders
+        document.querySelectorAll('.slider').forEach(initializeSlider);
+    </script>
 </body>
 
 </html>

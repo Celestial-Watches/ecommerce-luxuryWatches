@@ -56,7 +56,7 @@ if ($result->num_rows > 0) {
         $productTable .= '<tr>
             <td>' . htmlspecialchars($product['id']) . '</td>
             <td>' . htmlspecialchars($product['product_category']) . '</td>
-            <td><img src="' . htmlspecialchars($product['image_url']) . '" class="product-image"></td>
+            <td><img src="' . htmlspecialchars($product['image_url']) . '" class="product-image" loading="lazy"></td>
             <td>' . htmlspecialchars($product['name']) . '</td>
             <td style="text-wrap: nowrap;">';
 

@@ -1,16 +1,16 @@
 <?php
-
 session_start();
 session_regenerate_id(true);
+
+ob_start();
 
 define('ALLOW_ACCESS', true);
 include 'panel.php';
 
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../app/controllers/login.php"); 
+    header("Location: ../app/controllers/login.php");
     exit();
-  }
-  
+}
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
     // Redirect to login if not authenticated
@@ -70,7 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO products (product_category,name, brand, price, year, ref_code, tags, stock, description, button_name, icon, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssssssssss", $pcategory, $name, $brand, $price, $year, $ref_code, $tags, $stock, $description, $button_name, $icon, $image);
             if ($stmt->execute()) {
-                $success = "Product added successfully!";
+                // Redirect to the same page after successful insert
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit();
             } else {
                 $error = "Error adding product.";
             }
@@ -78,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -197,12 +200,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     </script>
-    <script type="text/javascript" src="../src/assets/js/panelNav.js" defer></script>
-    <script type="text/javascript" src="../src/assets/js/navigation.js"></script>
+    <script type="text/javascript" src="../src/assets/js/panelNav.js" async></script>
+    <script type="text/javascript" src="../src/assets/js/navigation.js" async></script>
 </body>
 
 </html>
-
+<?php ob_end_flush(); ?>
 <?php
 $conn->close();
 ?>

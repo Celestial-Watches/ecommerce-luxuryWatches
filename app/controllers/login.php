@@ -20,13 +20,16 @@ session_regenerate_id(true);
 
 $usernamee = isset($_COOKIE['rem_username']) ? $_COOKIE['rem_username'] : '';
 
-// Check for the username cookie before displaying the login form
+// Check if the user is logged in (fully authenticated)
 if (isset($_SESSION['user']) || isset($_COOKIE['SSIDU'])) {
-  if (isset($_COOKIE['SSIDU'])) {
-    $_SESSION['user'] = $_COOKIE['SSIDU'];
+  if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
+    unset($_SESSION['user']);
+    setcookie("SSIDU", "", time() - 3600, "/"); // Clear any stale cookies
+  } else {
+    // Redirect logged-in users
+    header("Location: ../../index.php");
+    exit();
   }
-  header("Location: ../../index.php");
-  exit();
 }
 
 // Initialize login attempts if not set
@@ -97,78 +100,79 @@ if (isset($_POST["login"])) {
     if (empty($errors)) {
       $sql = "SELECT * FROM users WHERE username = ?";
       if ($stmt = mysqli_prepare($conn, $sql)) {
-          mysqli_stmt_bind_param($stmt, "s", $usernamee);
-          mysqli_stmt_execute($stmt);
-          $result = mysqli_stmt_get_result($stmt);
-  
-          // After verifying the password
-          if ($user = mysqli_fetch_assoc($result)) {
-              // Verify the password
-              if (password_verify($password, $user["password"])) {
-  
-                  // Update the user's status to 'YES' in the database
-                  $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
-                  if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
-                      mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-                      mysqli_stmt_execute($updateStmt);
-                      mysqli_stmt_close($updateStmt);
-                  }
-  
-                  // Check if user is admin
-                  if ($user["role"] === "admin") { // Assuming 'role' column exists
-                      $_SESSION["admin"] = true; // Set admin session
-                      // Regenerate session ID to prevent session fixation
-                      session_regenerate_id(true);
-                      // Set session variables for admin
-                      $_SESSION["user"] = $usernamee;
-                      $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
-                      $_SESSION["LAST_ACTIVITY"] = time();
-                      $_SESSION["CREATED"] = time();
-                      $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-                      $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
-                      $_SESSION['otp_verified'] = true;
-  
-                      // Redirect to admin verification page
-                      header("Location: ../../index.php");
-                      exit(); // Ensure script termination here
-                  }
-  
-                  // Regenerate session ID to prevent session fixation
-                  session_regenerate_id(true);
-  
-                  // Set session variables and initialize session management
-                  $_SESSION["user"] = $usernamee;
-                  $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
-                  $_SESSION["LAST_ACTIVITY"] = time();
-                  $_SESSION["CREATED"] = time();
-                  $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-                  $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
-                  $_SESSION['otp_verified'] = true;
-  
-                  if (isset($_POST['remember'])) {
-                      // Set cookie for 1 hour
-                      setcookie('temp', '1', time() + 3600, '/', '', true, true);
-                  } else {
-                      setcookie('temp', '', time() - 3600, '/', '', true, true);
-                  }
-  
-                  // Redirect to the main index page
-                  header("Location: ../../index.php");
-                  exit(); // Ensure script termination here
-              } else {
-                  $errors[] = "Incorrect password";
-              }
+        mysqli_stmt_bind_param($stmt, "s", $usernamee);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        // After verifying the password
+        if ($user = mysqli_fetch_assoc($result)) {
+          // Verify the password
+          if (password_verify($password, $user["password"])) {
+
+            // Update the user's status to 'YES' in the database
+            $updateSql = "UPDATE users SET status = 'YES' WHERE username = ?";
+            if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+              mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+              mysqli_stmt_execute($updateStmt);
+              mysqli_stmt_close($updateStmt);
+            }
+
+            // Check if user is admin
+            if ($user["role"] === "admin") { // Assuming 'role' column exists
+              $_SESSION["admin"] = true; // Set admin session
+              // Regenerate session ID 
+              session_regenerate_id(true);
+              // Set session variables for admin
+              $_SESSION["user"] = $usernamee;
+              $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
+              $_SESSION["LAST_ACTIVITY"] = time();
+              $_SESSION["CREATED"] = time();
+              $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+              $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+              $_SESSION['otp_verified'] = true;
+
+              // Redirect to admin verification page
+              header("Location: ../../index.php");
+              exit();
+            }
+
+            // Regenerate session ID
+            session_regenerate_id(true);
+
+            // Set session variables and initialize session management
+            $_SESSION["user"] = $usernamee;
+            $_SESSION["user_id"] = $user['id'];
+            $_SESSION["LAST_ACTIVITY"] = time();
+            $_SESSION["CREATED"] = time();
+            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
+            $_SESSION['otp_verified'] = true;
+
+            if (isset($_POST['remember'])) {
+              // Set cookie for 1 hour
+              setcookie('temp', '1', time() + 3600, '/', '', true, true);
+            } else {
+              setcookie('temp', '', time() - 3600, '/', '', true, true);
+            }
+
+            // Redirect to the main index page
+            header("Location: ../../index.php");
+            exit();
           } else {
-              $errors[] = "Username not found";
+            $errors[] = "Incorrect password";
           }
-  
-          mysqli_stmt_close($stmt);
+        } else {
+          $errors[] = "Username not found";
+        }
+
+        mysqli_stmt_close($stmt);
       } else {
-          $errors[] = "Database query failed";
+        $errors[] = "Database query failed";
       }
+    }
   }
-}  
 }
+
 
 
 ?>
@@ -188,7 +192,7 @@ if (isset($_POST["login"])) {
 
   <!-- JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-  <script src="../../src/assets/js/navigation.js"></script>
+  <script src="../../src/assets/js/navigation.js" async></script>
 
   <!-- ============= CSS =============  -->
   <link rel="stylesheet" href="../../src/assets/css/deskView.css" />
@@ -259,7 +263,7 @@ if (isset($_POST["login"])) {
 
 <body>
 
- 
+
 
   <!-- ===================================================== HEADER =====================================================  -->
 
@@ -346,9 +350,9 @@ if (isset($_POST["login"])) {
         ***************************************************/    -->
 
 
-  <script src="../../src/assets/js/cookie-monitor.js"></script>
-  <script src="../../src/assets/js/index.js"></script>
-  <script src="../../src/assets/js/currency-language.js"></script>
+  <script src="../../src/assets/js/cookie-monitor.js" async></script>
+  <script src="../../src/assets/js/index.js" async></script>
+  <script src="../../src/assets/js/currency-language.js" async></script>
 </body>
 
 </html>

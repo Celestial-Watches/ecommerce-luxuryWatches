@@ -2,44 +2,40 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 
-
+// Check if the user is logged in
 if (isset($_COOKIE['temp'])) {
     // Set the cookie to expire in the past
     setcookie('temp', '', time() - 3600, '/', false, true); // '/' to ensure the cookie is deleted for the entire domain
 }
 
 setcookie("loggedYes", "", time() - 1, "/", false, true); // Set cookie to expire in the past
-// Check if the user is logged in
+
 if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
-    require_once "../config/conn.php"; // Ensure database connection is established
+    require_once "../config/conn.php"; 
 
     // Retrieve the username from the session
     $usernamee = isset($_SESSION['user']) ? $_SESSION['user'] : $_SESSION['admin'];
-
 
     // Update the user's status to 'NO' in the database
     $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
     if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
         mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-        mysqli_stmt_execute($updateStmt);
+        if (!mysqli_stmt_execute($updateStmt)) {
+            error_log("Failed to execute SQL update: " . mysqli_error($conn));
+        }
         mysqli_stmt_close($updateStmt);
     } else {
         error_log("Failed to prepare SQL statement: " . mysqli_error($conn));
     }
 
+    // Clear session variables
     $_SESSION = [];
-    // Set authenticated to false
-    $_SESSION['authenticated'] = false; // Set authenticated to false on logout
+    $_SESSION['authenticated'] = false; // Ensure this flag is false on logout
 
-    $_SESSION['password_reset_complete'] = false;
+    unset($_SESSION['csrf_token']);
+    unset($_SESSION['user'], $_SESSION['admin'], $_SESSION['otp_verified']); // Clear user and admin sessions
 
-    // Unset specific session variables
-    unset($_SESSION['user'], $_SESSION['admin'], $_SESSION['otp_verified']); // Unset both user and admin session variables
-
-    // Unset all session variables
-    $_SESSION = array();
-
-    // Destroy the session
+    // Destroy the session completely
     session_destroy();
 
     // Invalidate the session cookie
@@ -56,15 +52,9 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
         );
     }
 
-
-
     // Destroy any additional cookies if used for authentication
     setcookie("SSIDU", "", time() - 3600, "/", false, true); // Set cookie to expire in the past
     setcookie("PHPSESSID", "", time() - 1, "/", false, true); // Destroy PHPSESSID After Logout
-    
-
-
-
 
     // Redirect to login page
     header("Location: login.php");
@@ -76,6 +66,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +74,7 @@ if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Watches | Exclusivity in Every Tick</title>
-    <script src="../../src/assets/js/navigation.js"></script>
+    <script src="../../src/assets/js/navigation.js" async></script>
 </head>
 
 <body>

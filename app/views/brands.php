@@ -8,29 +8,27 @@ include '../controllers/search-engine.php';
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-// Set pagination limit 
-$limit = 40;
+$limit = 40; // Set pagination limit 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
-// Base SQL query with brand filter
 $sql = "SELECT * FROM products WHERE brand = ?";
 
-// Add ORDER BY clause based on the selected sort option
 switch ($sort) {
     case 'new_in':
-        $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
+        $sql .= " ORDER BY created_at DESC";
         break;
     case 'price_low_high':
-        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC"; // Assuming price is stored as a numeric value
+        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 1 ELSE 0 END, 
+                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";
         break;
     case 'price_high_low':
-        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC"; // Assuming price is stored as a numeric value
+        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 0 ELSE 1 END, 
+                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC";
         break;
 }
 
-// Add LIMIT and OFFSET for pagination
-$sql .= " LIMIT ? OFFSET ?";
+$sql .= " LIMIT ? OFFSET ?"; // Add LIMIT and OFFSET for pagination
 
 // Prepare and execute the SQL statement with brand parameter, limit, and offset
 $stmt = $conn->prepare($sql);
@@ -73,7 +71,6 @@ $total_pages = ceil($total_products / $limit);
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../..//src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../..//src/assets/css/google-header.css" loading="lazy">
-    <link rel="stylesheet" href="assets/filter.css" loading="lazy">
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,6 +79,167 @@ $total_pages = ceil($total_products / $limit);
 </head>
 
 <style type="text/css" media="all">
+    .filter-head-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .top-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .results-count {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        color: #212121;
+        margin-right: 20px;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 15px;
+    }
+
+    .filter-item {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        position: relative;
+        cursor: pointer;
+        width: auto;
+    }
+
+    .filter-item::after {
+        content: "▼";
+        font-size: 10px;
+        color: #aaa;
+        margin-left: 5px;
+    }
+
+    .filter-button {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        text-transform: uppercase;
+        background: #212121;
+        border: 2px solid #212121;
+        border-radius: 4px;
+        width: 135px;
+        padding: 13px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        position: relative;
+    }
+
+    .filter-button::before {
+        content: "";
+        background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-white.svg) no-repeat center;
+        background-size: contain;
+        width: 16px;
+        height: 10px;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .sort-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sort-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000;
+        text-transform: uppercase;
+        font-family: 'Poppins', sans-serif;
+        text-wrap: nowrap;
+    }
+
+    .sort-dropdown {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        position: relative;
+        min-width: 150px;
+    }
+
+    .sort-dropdown::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+        font-size: 12px;
+        color: #333;
+    }
+
+    @media (max-width: 1280px) {
+        .filter-container {
+            display: none;
+        }
+
+        .filter-button {
+            background: none;
+            border: none;
+            color: #212121;
+            width: auto;
+            padding: 0;
+        }
+
+        .filter-button::before {
+            background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-black.svg) no-repeat center;
+        }
+
+        .filter-head-container {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            order: -1;
+        }
+
+        .top-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .results-count {
+            margin-top: 10px;
+            order: 1;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .sort-label {
+            display: none;
+        }
+
+        .top-container {
+            flex-wrap: nowrap;
+        }
+    }
+
     .product__container {
         padding: 40px 0;
         background-color: #FCF8F5 !important;
@@ -105,13 +263,14 @@ $total_pages = ceil($total_products / $limit);
         font-size: 2rem;
         color: #333;
         text-align: center;
-        z-index: 1; /* Ensure it's above the grid */
+        z-index: 1;
         width: 100%;
         margin-top: 15px;
     }
-    
+
     .product-grid {
-        position: relative; /* Ensure the "Coming soon" text doesn't overlap with other elements */
+        position: relative;
+        padding: 10px;
     }
 
     .product-item {
@@ -170,6 +329,8 @@ $total_pages = ceil($total_products / $limit);
 
     .product-image {
         width: 100% !important;
+        height: 260px !important;
+        object-fit: cover;
     }
 
     .cta-button:hover {
@@ -312,7 +473,6 @@ $total_pages = ceil($total_products / $limit);
         font-size: 24px;
         font-weight: 500;
     }
-
 </style>
 
 <body>
@@ -322,7 +482,6 @@ $total_pages = ceil($total_products / $limit);
     <div class="product__container">
 
         <?php
-        // Check if there are results for the selected brand
         if ($result && $result->num_rows > 0) {
         ?>
             <div style="font-size: 21px;
@@ -414,7 +573,7 @@ $total_pages = ceil($total_products / $limit);
                         <div class="product__main">
                             <div class="product__image">
                                 <div class="product-image">
-                                    <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image">
+                                    <img src="<?php echo $image; ?>" loading="lazy" alt="<?php echo $name; ?>" class="product-image">
                                 </div>
                             </div>
                             <hr>
@@ -449,11 +608,9 @@ $total_pages = ceil($total_products / $limit);
             <?php
                 }
             } else {
-                // If there are no results for the selected brand
                 echo '<p class="coming-soon">Coming soon</p>';
             }
 
-            // Close the statement and connection
             if (isset($stmt)) {
                 $stmt->close();
             }
@@ -479,11 +636,11 @@ $total_pages = ceil($total_products / $limit);
     <?php include '../../PHP/components/footer.php' ?>
 
     <!-- JS files -->
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
-    
+    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+    <script src="/src/assets/js/index.js" async></script>
+    <script src="/src/assets/js/currency-language.js"async></script>
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
+
 </body>
 
 </html>

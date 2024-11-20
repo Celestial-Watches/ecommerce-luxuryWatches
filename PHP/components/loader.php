@@ -57,7 +57,7 @@
     <!-- Loader HTML -->
 <div id="loader">
     <div class="loader-logo">
-      <img src="your-logo.png" alt="Loading" />
+      <img src="your-logo.png" loading="lazy" alt="Loading" />
     </div>
     <div class="loading-circle"></div>
   </div>

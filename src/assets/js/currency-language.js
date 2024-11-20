@@ -1,313 +1,290 @@
-// Constructs the API URL for fetching exchange rates using an API key.
-// Sends an asynchronous request to get the latest conversion rates with USD as the base currency.
-// Returns the conversion rates if successful.
-// Handles errors in case the API request fails, and returns null.
+(function () {
+    const STORAGE_KEY_CURRENCY_DATA = 'selectedCurrencyData';
+    const STORAGE_KEY_LANGUAGE = 'selectedLanguage';
+    const STORAGE_KEY_LANGUAGE_TIMESTAMP = 'languageTimestamp';
+    const currencySymbols = {
+        usd: '$', eur: '€', inr: '₹', gbp: '£', jpy: '¥', aud: 'A$', cny: '¥',
+    };
 
-async function fetchConversionRates() {
-    const apiKey = '2db54a6d928d5ea7bd8dc85c';
-    const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        return data.conversion_rates; // Return the conversion rates
-    } catch (error) {
-        console.error('Error fetching conversion rates:', error);
-        return null; // Return null in case of error
-    }
-}
+    const SECRET_KEY = 'languagecurrencysecure_@123';
 
-// Fetches conversion rates by calling fetchConversionRates.
-// Retrieves all product elements with the class featured-price.
-// Iterates over each product and:
-// Extracts the price in USD from a data-price-in-usd attribute.
-// Converts the price based on the selected currency (USD, EUR, INR).
-// Updates the product price with the converted value and correct currency symbol.
-// Logs errors if price values are invalid.
-
-async function updatePrices(selectedCurrency) {
-    const conversionRates = await fetchConversionRates();
-    if (!conversionRates) {
-        console.error("Unable to fetch conversion rates.");
-        return;
+    function encryptData(data) {
+        return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
     }
 
-    const productElements = document.querySelectorAll('.featured-price');
+    function decryptData(ciphertext) {
+        const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
+        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    }
 
-    productElements.forEach(product => {
-        const priceInUSD = product.dataset.priceInUsd; // Get the value directly
-        if (priceInUSD) { // Check if priceInUSD is defined
-            const originalPrice = priceInUSD.trim(); // Store the original price string
-            let priceNumber = null;
-            let isFromPrice = false;
+    function isLocalStorageExpired(key) {
+        const savedData = localStorage.getItem(key);
+        if (!savedData) return true; // No data, assume expired
 
-            // Check if the price string starts with "FROM"
-            if (originalPrice.startsWith("FROM")) {
-                isFromPrice = true; // Mark that this is a "FROM" price
-                // Match the number after "FROM"
-                const match = originalPrice.match(/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i);
-                if (match) {
-                    priceNumber = parseFloat(match[1].replace(/,/g, '').trim()); // Convert to float
-                }
+        try {
+            if (key === STORAGE_KEY_LANGUAGE_TIMESTAMP) {
+                const savedTimestamp = parseInt(savedData, 10);
+                if (isNaN(savedTimestamp)) throw new Error('Invalid timestamp');
+                return Date.now() > savedTimestamp;
             } else {
-                // For prices without "FROM", extract the numeric part directly
-                priceNumber = parseFloat(originalPrice.replace(/,/g, '').trim());
+                const { expiresAt } = decryptData(savedData);
+                return Date.now() > expiresAt;
+            }
+        } catch (error) {
+            console.error(`Error parsing localStorage data for ${key}:`, error);
+            return true; 
+        }
+    }
+
+    function toggleLoadingIndicator(show) {
+        document.getElementById('loading').style.display = show ? 'block' : 'none';
+    }
+
+    function selectCurrency(currency) {
+        document.querySelector(".current-currency").textContent = currency.toUpperCase();
+        updatePrices(currency);
+        const currencyElement = document.getElementById("currency");
+        if (currencyElement) {
+            currencyElement.value = currency;
+        }
+
+        const currencyButton = document.getElementById("selectedCurrency");
+        if (currencyButton) {
+            const currencySymbol = currencySymbols[currency.toLowerCase()] || '$'; 
+            currencyButton.innerHTML = `${currency.toUpperCase()} ${currencySymbol}`;
+        }
+
+        const currencyData = { currency, timestamp: Date.now(), expiresAt: Date.now() + 3 * 60 * 60 * 1000 };
+        localStorage.setItem(STORAGE_KEY_CURRENCY_DATA, encryptData(currencyData));
+    }
+
+    function setLanguageDisplay(lang) {
+        const languageNames = {
+            en: 'English', es: 'Spanish', fr: 'French', de: 'German',
+            it: 'Italian', pt: 'Portuguese', 'zh-CN': 'Chinese (Simplified)',
+            ja: 'Japanese', ru: 'Russian', ar: 'Arabic'
+        };
+        return languageNames[lang] || 'English';
+    }
+
+    function selectLanguage(lang) {
+        document.getElementById("selectedLanguage").textContent = setLanguageDisplay(lang);
+        document.querySelector(".current-lang").textContent = lang;
+        translateLanguage(lang);
+        updateLanguageFlag(lang);
+    }
+
+    function updateLanguageFlag(lang) {
+        const flagImg = document.getElementById("languageFlag");
+        if (flagImg) {
+            const flagUrls = {
+                en: 'https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/en.png',
+                es: 'https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/es.png',
+                fr: 'https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/fr.png',
+                de: 'https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/de.png',
+                it: 'https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/it.png',
+                pt: 'https://www.worldometers.info/img/flags/small/tn_po-flag.gif',
+                'zh-CN': 'https://www.worldometers.info/img/flags/small/tn_ch-flag.gif',
+                ja: 'https://www.worldometers.info/img/flags/small/tn_ja-flag.gif',
+                ru: 'https://www.worldometers.info/img/flags/small/tn_rs-flag.gif',
+                ar: 'https://www.worldometers.info/img/flags/small/tn_sa-flag.gif',
+            };
+            flagImg.src = flagUrls[lang] || flagUrls['en'];
+            localStorage.setItem('selectedLanguageFlag', flagImg.src); 
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", async function () {
+        const currencyElement = document.getElementById("currency");
+        if (currencyElement) {
+            const savedCurrencyData = localStorage.getItem(STORAGE_KEY_CURRENCY_DATA);
+            if (savedCurrencyData && !isLocalStorageExpired(STORAGE_KEY_CURRENCY_DATA)) {
+                const decryptedData = decryptData(savedCurrencyData);
+                selectCurrency(decryptedData.currency);
             }
 
-            if (!isNaN(priceNumber)) {
-                let convertedPrice;
-                let currencySymbol;
+            currencyElement.addEventListener("change", (event) => {
+                selectCurrency(event.target.value);
+            });
+        }
 
-                switch (selectedCurrency) {
-                    case 'usd':
-                        convertedPrice = priceNumber; // No conversion needed for USD
-                        currencySymbol = '$';
-                        break;
-                    case 'eur':
-                        convertedPrice = Math.round(priceNumber * conversionRates.EUR * 100) / 100;
-                        currencySymbol = '€';
-                        break;
-                    case 'inr':
-                        convertedPrice = Math.round(priceNumber * conversionRates.INR * 100) / 100;
-                        currencySymbol = '₹';
-                        break;
-                    default:
-                        convertedPrice = priceNumber; // Fallback to USD if currency is unknown
-                        currencySymbol = '$';
-                        break;
+        const savedLanguage = localStorage.getItem(STORAGE_KEY_LANGUAGE);
+        if (savedLanguage && !isLocalStorageExpired(STORAGE_KEY_LANGUAGE_TIMESTAMP)) {
+            selectLanguage(savedLanguage);
+        }
+
+        const flagImg = document.getElementById("languageFlag");
+        const storedFlagUrl = localStorage.getItem('selectedLanguageFlag');
+        if (storedFlagUrl && flagImg) {
+            flagImg.src = storedFlagUrl;
+        }
+        fetchUser(currency);
+    });
+
+    window.selectCurrency = selectCurrency;
+    window.selectLanguage = selectLanguage;
+    window.translateLanguage = translateLanguage;
+
+    const languageSelect = document.getElementById('customLanguageSelect');
+    if (languageSelect) {
+        languageSelect.addEventListener('change', function (event) {
+            translateLanguage(event.target.value);
+        });
+    }
+
+    async function fetchConversionRates(retries = 3, delay = 1000) {
+        const RATES_STORAGE_KEY = 'conversionRates';
+        const RATES_TIMESTAMP_KEY = 'ratesTimestamp';
+        const CACHE_DURATION = 3 * 60 * 60 * 1000; // Cache for 3 hours
+
+        const cachedRates = localStorage.getItem(RATES_STORAGE_KEY);
+        const cachedTimestamp = localStorage.getItem(RATES_TIMESTAMP_KEY);
+        if (cachedRates && cachedTimestamp && (Date.now() - cachedTimestamp < CACHE_DURATION)) {
+            return JSON.parse(cachedRates); // Return cached rates
+        }
+
+        const apiKey = 'e65d4909b78f3650d3bcb0d8';
+        const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+        for (let attempt = 0; attempt < retries; attempt++) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const conversionRates = data.conversion_rates;
+
+                localStorage.setItem(RATES_STORAGE_KEY, JSON.stringify(conversionRates));
+                localStorage.setItem(RATES_TIMESTAMP_KEY, Date.now());
+                return conversionRates;
+            } catch (error) {
+                if (attempt === retries - 1) {
+                    console.error('Error fetching conversion rates:', error);
+                    return null; // Return null if all retries fail
                 }
-
-                const formattedPrice = convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                // Construct the final price display
-                let finalPriceDisplay;
-                if (isFromPrice) {
-                    // If the price was a "FROM" price, include that in the display
-                    finalPriceDisplay = `FROM <span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
-                } else {
-                    // Normal display without "FROM"
-                    finalPriceDisplay = `<span class="currency-symbol notranslate">${currencySymbol}</span> <span class="formatted-price notranslate">${formattedPrice}</span>`;
-                }
-                
-                product.innerHTML = finalPriceDisplay; // Update the product price display
-            } else {
-                console.error('Invalid price value:', priceNumber);
+                await new Promise(resolve => setTimeout(resolve, delay)); // Retry delay
             }
         }
-    });
-}
+    }
 
+    async function fetchUser(Currency) {
+        const savedCurrency = localStorage.getItem(STORAGE_KEY_CURRENCY_DATA);
+        if (savedCurrency && !isLocalStorageExpired(STORAGE_KEY_CURRENCY_DATA)) {
+            const decryptedData = decryptData(savedCurrency);
+            const userCurrency = decryptedData.currency;
+            document.getElementById("currency").value = userCurrency;
+            updatePrices(userCurrency);
+            return;
+        }
 
-// Maps country codes (e.g., 'US', 'IN', 'FR') to their respective currency codes ('usd', 'inr', 'eur').
-const countryCurrencyMap = {
-    'US': 'usd',
-    'IN': 'inr',
-    'FR': 'eur',
-    // Add more country to currency mappings as needed
-};
-
-// Define a secret key for encryption
-const SECRET_KEY = 'languagecurrencysecure_@123'; 
-
-// Encrypts data (like currency information) using CryptoJS.AES.
-function encryptData(data) {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-}
-
-// Decrypts the encrypted data back into its original format.
-
-function decryptData(ciphertext) {
-    const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
-    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-}
-
-// Tries to retrieve saved currency data from localStorage.
-// If saved currency data is found:
-// Decrypts and retrieves the currency.
-// Updates prices based on the saved currency.
-// If no saved data is found or expired:
-// Fetches user location using the ipinfo.io API.
-// Uses country information to determine the user’s currency.
-// Saves the detected currency in localStorage (with encryption).
-// Updates prices accordingly.
-
-
-async function fetchUserCurrency() {
-    const savedCurrency = localStorage.getItem('selectedCurrencyData');
-    
-    if (savedCurrency) {
-        const decryptedData = decryptData(savedCurrency);
-        const userCurrency = decryptedData.currency;
-        document.getElementById("currency").value = userCurrency;
-        updatePrices(userCurrency); // Update prices based on saved currency
-    } else {
         try {
             const response = await fetch("https://ipinfo.io/json?token=b850294eaa5ee7");
             const data = await response.json();
-            const userCurrency = countryCurrencyMap[data.country] || 'usd'; // Default to 'usd'
-
+            const userCurrency = countryCurrencyMap[data.country] || 'usd';
             document.getElementById("currency").value = userCurrency;
-            const currencyData = { currency: userCurrency, timestamp: Date.now() };
-            localStorage.setItem('selectedCurrencyData', encryptData(currencyData));
 
-            updatePrices(userCurrency); // Update prices based on detected currency
+            const currencyData = { currency: userCurrency, timestamp: Date.now(), expiresAt: Date.now() + 3 * 60 * 60 * 1000 };
+            localStorage.setItem(STORAGE_KEY_CURRENCY_DATA, encryptData(currencyData));
+
+            updatePrices(userCurrency);
         } catch (error) {
             console.error('Error fetching location data:', error);
-            fallbackCurrency(); // Fallback to USD on error
+            fallbackCurrency();
         }
     }
-}
 
-// Sets the currency to USD if no user currency is detected or if an error occurs.
-// Updates product prices based on USD.
-
-function fallbackCurrency() {
-    document.getElementById("currency").value = 'usd';
-    updatePrices('usd'); // Update prices based on fallback currency
-}
-
-// Wait for the DOM to be fully loaded before running the script
-// Runs when the DOM is fully loaded.
-// Checks for saved currency data in localStorage.
-// If valid saved data is found:
-// Updates the currency and product prices.
-// If no valid data is found, fetches the user’s currency using fetchUserCurrency.
-// Listens for changes in the currency dropdown to update prices in real-time.
-
-document.addEventListener("DOMContentLoaded", async function () {
-    const currencyElement = document.getElementById("currency");
-    const savedCurrencyData = localStorage.getItem('selectedCurrencyData');
-    const currentTime = Date.now();
-    const currencyExpiryHours = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
-
-    if (savedCurrencyData) {
-        const decryptedData = decryptData(savedCurrencyData);
-        if (decryptedData && (currentTime - decryptedData.timestamp) < currencyExpiryHours) {
-            currencyElement.value = decryptedData.currency;
-            updatePrices(decryptedData.currency); // Update prices based on saved currency
-        } else {
-            fetchUserCurrency(); // Fetch user's currency if data is invalid or expired
+    async function updatePrices(selectedCurrency) {
+        const conversionRates = await fetchConversionRates();
+        if (!conversionRates) {
+            console.error("Unable to fetch conversion rates.");
+            return;
         }
-    } else {
-        fetchUserCurrency(); // Fetch user's currency if no saved data
-    }
-});
 
-// Listens for user selection changes in the currency dropdown.
-// Updates and saves the selected currency in localStorage.
-// Calls updatePrices to adjust prices based on the selected currency.
+        const productElements = document.querySelectorAll('.featured-price');
+        productElements.forEach(product => {
+            const priceInUSD = product.dataset.priceInUsd;
+            if (priceInUSD) {
+                let priceNumber = parseFloat(priceInUSD.replace(/,/g, '').trim());
+                if (isNaN(priceNumber)) return;
 
-document.getElementById("currency").addEventListener("change", (event) => {
-    const selectedCurrency = event.target.value;
-    const currencyData = { currency: selectedCurrency, timestamp: Date.now() };
-    localStorage.setItem('selectedCurrencyData', encryptData(currencyData));
-    updatePrices(selectedCurrency); // Update prices based on selected currency
-});
-
-// Handles language translation using Google Translate.
-// Saves the selected language in localStorage with a timestamp.
-// Checks if the language data is still valid (less than 3 hours old).
-// Translates the page to the selected language.
-// Provides language change functionality for the user.
-
-function translateLanguage(lang) {
-    setTimeout(() => { // Wait a moment to ensure the element is available
-        const googleTranslateDropdown = document.querySelector('.goog-te-combo');
-        if (googleTranslateDropdown) {
-            googleTranslateDropdown.value = lang || "en"; // Default to English
-            googleTranslateDropdown.dispatchEvent(new Event('change'));
-
-            // Store the selected language in localStorage
-            localStorage.setItem('selectedLanguage', lang);
-            localStorage.setItem('languageTimestamp', Date.now());
-        } else {
-            console.error('Google Translate dropdown not found.');
-        }
-    }, 100); // Adjust the timeout as needed
-}
-
-
-window.onload = function () {
-    const savedLanguage = localStorage.getItem('selectedLanguage');
-    const savedTime = localStorage.getItem('languageTimestamp');
-    const currentTime = Date.now();
-
-    if (savedLanguage && savedTime && (currentTime - savedTime < 3 * 60 * 60 * 1000)) {
-        document.getElementById('customLanguageSelect').value = savedLanguage;
-        const googleTranslateDropdown = document.querySelector('.goog-te-combo');
-        if (googleTranslateDropdown) {
-            googleTranslateDropdown.value = savedLanguage;
-            googleTranslateDropdown.dispatchEvent(new Event('change'));
-        }
-    } else {
-        localStorage.removeItem('selectedLanguage');
-        localStorage.removeItem('languageTimestamp');
-        document.getElementById('customLanguageSelect').value = 'en'; // Default to English
-    }
-};
-
-// Hides the Google Translate banner using a MutationObserver.
-// Continuously monitors the DOM to ensure that the translation header is hidden.
-
-function hideGoogleTranslateHeader() {
-    const translateHeader = document.querySelector('.skiptranslate');
-    if (translateHeader) {
-        translateHeader.style.display = 'none';
-    }
-}
-
-// Use MutationObserver to monitor changes in the DOM
-const observer = new MutationObserver(() => {
-    hideGoogleTranslateHeader();
-});
-
-observer.observe(document.body, { childList: true, subtree: true });
-
-// Function to update currency based on selection
-function updateCurrency(selectedCurrency) {
-    const currencyData = { currency: selectedCurrency, timestamp: Date.now() };
-    localStorage.setItem('selectedCurrencyData', encryptData(currencyData));
-    updatePrices(selectedCurrency); // Update prices based on selected currency
-}
-
-// Adds event listeners to the currency and language selection elements.
-// Updates the prices and language translation based on user interactions.
-// Reloads the page with a slight delay after selection to update the UI.
-
-// Ensure the event listeners are set up for both desktop and mobile
-document.addEventListener("DOMContentLoaded", function () {
-    const currencyElement = document.getElementById("currency");
-    if (currencyElement) {
-        currencyElement.addEventListener("change", (event) => {
-            updateCurrency(event.target.value);
+                const currencySymbol = currencySymbols[selectedCurrency] || currencySymbols['usd'];
+                const convertedPrice = priceNumber * (conversionRates[selectedCurrency.toUpperCase()] || 1);
+                const formattedPrice = convertedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                product.innerHTML = `<span class="currency-symbol">${currencySymbol}</span> <span class="formatted-price">${formattedPrice}</span>`;
+            }
         });
     }
-    // Initialize currency and language settings
-    fetchUserCurrency();
-    const savedLanguage = localStorage.getItem('selectedLanguage');
-    if (savedLanguage) {
-        translateLanguage(savedLanguage);
+
+    const countryCurrencyMap = {
+        'US': 'usd', 'IN': 'inr', 'FR': 'eur', 'GB': 'gbp', 'JP': 'jpy', 'AU': 'aud', 'CN': 'cny',
+    };
+
+    async function fetchUser(Currency) {
+        const savedCurrency = localStorage.getItem(STORAGE_KEY_CURRENCY_DATA);
+        if (savedCurrency && !isLocalStorageExpired(STORAGE_KEY_CURRENCY_DATA)) {
+            const decryptedData = decryptData(savedCurrency);
+            const userCurrency = decryptedData.currency;
+            document.getElementById("currency").value = userCurrency;
+            updatePrices(userCurrency);
+        } else {
+            try {
+                const response = await fetch("https://ipinfo.io/json?token=b850294eaa5ee7");
+                const data = await response.json();
+                const userCurrency = countryCurrencyMap[data.country] || 'usd';
+                document.getElementById("currency").value = userCurrency;
+
+                const currencyData = { currency: userCurrency, timestamp: Date.now(), expiresAt: Date.now() + 3 * 60 * 60 * 1000 };
+                localStorage.setItem(STORAGE_KEY_CURRENCY_DATA, encryptData(currencyData));
+
+                updatePrices(userCurrency);
+            } catch (error) {
+                console.error('Error fetching location data:', error);
+                fallbackCurrency();
+            }
+        }
     }
-});
 
-// Handles the selection of currency or language.
-// Updates the displayed currency or language on the page.
-// Reloads the page to apply the changes.
+    function fallbackCurrency() {
+        document.getElementById("currency").value = 'usd';
+        updatePrices('usd');
+    }
 
-function selectCurrency(currency) {
-    updateCurrency(currency);
-    document.getElementById('selectedCurrency').textContent = currency.toUpperCase();
-    setTimeout(() => {
-        location.reload(); // Reload the page to close the navbar
-    }, 100); // Delay to ensure the text update is visible before reload
-}
+    function translateLanguage(lang) {
+        setTimeout(() => {
+            const googleTranslateDropdown = document.querySelector('.goog-te-combo');
+            if (googleTranslateDropdown) {
+                googleTranslateDropdown.value = lang || "en";
+                googleTranslateDropdown.dispatchEvent(new Event('change'));
+                localStorage.setItem(STORAGE_KEY_LANGUAGE, lang);
+                localStorage.setItem(STORAGE_KEY_LANGUAGE_TIMESTAMP, Date.now());
+            } else {
+                console.error('Google Translate dropdown not found.');
+            }
+        }, 100);
+    }
 
-// Touch event support
-const currencyLinks = document.querySelectorAll('.submenu-category a');
-currencyLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent default anchor click behavior
-        selectCurrency(this.getAttribute('onclick').match(/'([^']+)'/)[1]); // Extract currency from onclick
-    });
-});
+    window.onload = function () {
+        const savedLanguage = localStorage.getItem(STORAGE_KEY_LANGUAGE);
+        const savedTime = localStorage.getItem(STORAGE_KEY_LANGUAGE_TIMESTAMP);
+        const currentTime = Date.now();
 
+        if (savedLanguage && savedTime && (currentTime - savedTime < 3 * 60 * 60 * 1000)) {
+            document.getElementById('customLanguageSelect').value = savedLanguage;
+            const googleTranslateDropdown = document.querySelector('.goog-te-combo');
+            if (googleTranslateDropdown) {
+                googleTranslateDropdown.value = savedLanguage;
+                googleTranslateDropdown.dispatchEvent(new Event('change'));
+            }
+        } else {
+            localStorage.removeItem(STORAGE_KEY_LANGUAGE);
+            localStorage.removeItem(STORAGE_KEY_LANGUAGE_TIMESTAMP);
+            document.getElementById('customLanguageSelect').value = 'en'; // Default to English
+        }
+    };
+
+    function hideGoogleTranslateHeader() {
+        const translateHeader = document.querySelector('.goog-te-banner-frame');
+        if (translateHeader) {
+            translateHeader.style.display = 'none';
+        }
+    }
+})();

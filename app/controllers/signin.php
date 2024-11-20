@@ -1,48 +1,43 @@
 <?php
 define('ALLOW_ACCESS', true);
+
 // Set the session cookie with secure attributes
 session_set_cookie_params([
-  'lifetime' => 86400,              // Session expires when the browser is closed
-  'path' => '/',                // Available throughout the site
-  'domain' => '',               // Leave empty for current domain
-  'secure' => false,             // Only send over HTTPS
-  'httponly' => true,           // Prevent JavaScript access
-  'samesite' => 'Strict'        // Protect against CSRF
+  'lifetime' => 86400,             // Session expires after 1 day
+  'path' => '/',                   // Available throughout the site
+  'domain' => '',                  // Leave empty for current domain
+  'secure' => false,                // False for local development (use HTTPS for production)
+  'httponly' => true,               // Prevent JavaScript access
+  'samesite' => 'Strict'            // Prevent CSRF
 ]);
 
-// Set secure session cookie parameters
+// Set additional secure session parameters
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1); // Ensure your site is served over HTTPS
-ini_set('session.cookie_samesite', 'Strict'); // Additional session security
+ini_set('session.cookie_secure', 1); 
+ini_set('session.cookie_samesite', 'Strict');
 
-
-// Start session and output buffering
+// Initialize session and buffer output
 session_start();
 ob_start();
+session_regenerate_id(true);  // Regenerate session ID to prevent session fixation
 
-// Regenerate the session ID on every page refresh
-session_regenerate_id(true);
-
-
+// Clear session data if OTP is not verified
 if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
-
-  unset($_SESSION['user']); // User hasn't verified OTP yet, clear the session variable or reset it
-
-  // clear the cookies if you're storing the user info in cookies
-  setcookie("SSIDU", "", time() - 3600, "/", true, true); // Expire the cookie
+  unset($_SESSION['user']);  // User hasn't verified OTP yet, clear session data
+  setcookie("SSIDU", "", time() - 3600, "/", true, true);  // Expire cookie
 }
 
-require_once "../config/conn.php"; // Include database connection
+require_once "../config/conn.php";  // Ensure the DB connection file is included
 
-// Check if user is already logged in
+// Redirect if user is already logged in
 if (isset($_SESSION["user"])) {
   header("Location: ../../index.php");
-  exit(); // Stop further execution after redirection
+  exit();
 }
 
-// Ensure CSRF token is set
+// Generate CSRF token if not set
 if (empty($_SESSION['csrf_token'])) {
-  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(64));  // Stronger CSRF token
 }
 
 // Initialize errors array
@@ -50,6 +45,11 @@ $errors = [];
 
 // Handle form submission
 if (isset($_POST["submit"])) {
+
+  if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(64));  // Stronger CSRF token
+  }
+  // CSRF validation
   if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     die("CSRF token validation failed");
   }
@@ -61,25 +61,28 @@ if (isset($_POST["submit"])) {
   $password = $_POST["password"];
   $passwordRepeat = $_POST["confirm_password"];
 
-  // Password validation
+  // Validate password
   if (strlen($password) < 8) {
     $errors[] = "Password must be at least 8 characters long.";
   }
   if ($password !== $passwordRepeat) {
     $errors[] = "Passwords do not match.";
   }
+  if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $password)) {
+    $errors[] = "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.";
+  }
 
-  // Validate email and phone
+  // Validate email
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Email is not valid.";
   }
+
+  // Validate phone number
   if (!preg_match("/^\+\d{1,3}\d{10}$/", $phone)) {
     $errors[] = "Phone number must include country code and be at least 10 digits long (e.g., +919876543210).";
   }
-  if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $password)) {
-    $errors[] = "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
-  }
 
+  // Ensure no empty fields
   if (empty($usernamee) || empty($email) || empty($phone) || empty($password) || empty($passwordRepeat)) {
     $errors[] = "All fields are required.";
   }
@@ -100,6 +103,7 @@ if (isset($_POST["submit"])) {
 
   // If no errors, proceed with OTP generation and sending
   if (empty($errors)) {
+    // Hash the password
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $_SESSION['username'] = $usernamee;
     $_SESSION['email'] = $email;
@@ -108,89 +112,79 @@ if (isset($_POST["submit"])) {
     $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
     $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
 
-    // Generate OTP
+    // Generate OTP and set expiry time
     $otp = rand(100000, 999999);
     $_SESSION['otp'] = $otp;
-    $_SESSION['otp_expiry'] = time() + 300; // OTP expires in 5 minutes
+    $_SESSION['otp_expiry'] = time() + 300;  // OTP expires in 5 minutes
 
-    // Send OTP via email
-    require '../../vendor/autoload.php'; // Include PHPMailer
+    // Send OTP via email using PHPMailer
+    require '../../vendor/autoload.php';  // Include PHPMailer library
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     try {
       $mail->isSMTP();
       $mail->Host       = 'smtp.gmail.com';
       $mail->SMTPAuth   = true;
       $mail->Username   = 'celestialwatches69@gmail.com';
-      $mail->Password   = 'xvmjnggsmsnkavzt';
+      $mail->Password   = 'xvmjnggsmsnkavzt';  // Use environment variables or a secure method for storing passwords
       $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
       $mail->Port       = 465;
 
       $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
       $mail->addAddress($email);
-
       $mail->addEmbeddedImage(dirname(__FILE__) . '/../../src/assets/image/newsletter.jpg', 'newsletter_image', 'newsletter.jpg', 'base64', 'image/jpeg');
       $mail->isHTML(true);
       $mail->Subject = 'Your OTP Code Celestial Watches';
       $mail->Body = '
-<div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px;">
-    <div style="text-align: center;">
-        <img src="cid:newsletter_image" alt="Celestial Watches" style="max-width: 100%; height: auto; margin-bottom: 20px;">
-    </div>
-    <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h2 style="color: #000; text-align: center;">Email Verification Code</h2>
-        <p style="font-size: 16px; text-align: center;">
-            Hello <strong>' . htmlspecialchars($usernamee, ENT_QUOTES, 'UTF-8') . '</strong>,
-        </p>
-        <p style="font-size: 16px; text-align: center;">
-            Thank you for choosing <strong>Celestial Watches</strong>! To complete your email verification, please enter the following code on the identity verification screen:
-        </p>
-        <p style="font-size: 24px; font-weight: bold; color: #000; text-align: center; margin: 20px 0;">
-            Your OTP Code: <strong>' . htmlspecialchars($otp, ENT_QUOTES, 'UTF-8') . '</strong>
-        </p>
-        <p style="font-size: 16px; text-align: center; color: #555;">
-            This code is valid for 5 minutes. If you didn’t request this, please disregard this email.
-        </p>
-    </div>
-    <div style="margin-top: 30px; text-align: center;">
-        <p style="font-size: 14px; color: #888;">Best regards,</p>
-        <p style="font-size: 14px; color: #888;"><strong>Celestial Watches Team</strong></p>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="https://www.celestialwatches.com" style="font-size: 14px; color: white; background-color: #000; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-            Visit Celestial Watches
-        </a>
-    </div>
-</div>';
-      $mail->AltBody = "Your OTP code is: $otp";
+      <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px;">
+          <div style="text-align: center;">
+              <img src="cid:newsletter_image" alt="Celestial Watches" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+          </div>
+          <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+              <h2 style="color: #000; text-align: center;">Email Verification Code</h2>
+              <p style="font-size: 16px; text-align: center;">
+                  Hello <strong>' . htmlspecialchars($usernamee, ENT_QUOTES, 'UTF-8') . '</strong>,
+              </p>
+              <p style="font-size: 16px; text-align: center;">
+                  Thank you for choosing <strong>Celestial Watches</strong>! To complete your email verification, please enter the following code on the identity verification screen:
+              </p>
+              <p style="font-size: 24px; font-weight: bold; color: #000; text-align: center; margin: 20px 0;">
+                  Your OTP Code: <strong>' . htmlspecialchars($otp, ENT_QUOTES, 'UTF-8') . '</strong>
+              </p>
+              <p style="font-size: 16px; text-align: center; color: #555;">
+                  This code is valid for 5 minutes. If you didn’t request this, please disregard this email.
+              </p>
+          </div>
+          <div style="margin-top: 30px; text-align: center;">
+              <p style="font-size: 14px; color: #888;">Best regards,</p>
+              <p style="font-size: 14px; color: #888;"><strong>Celestial Watches Team</strong></p>
+          </div>
+          <div style="text-align: center; margin-top: 20px;">
+              <a href="https://www.celestialwatches.com" style="font-size: 14px; color: white; background-color: #000; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                  Visit Celestial Watches
+              </a>
+          </div>
+      </div>';
 
+      $mail->AltBody = "Your OTP code is: $otp";
 
       if ($mail->send()) {
         // Optionally hash the username for added security
-        $hashedUsername = hash('sha256', $usernamee); // Hash the username
+        $hashedUsername = hash('sha256', $usernamee);  // Hash the username
         // Set a cookie for the hashed username for 1 week
-        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true); // Secure and HttpOnly flags enabled
-        $_SESSION['email'] = $email; // Store email in the session
-        header("Location: verify_otp.php"); // Redirect to OTP verification page
+        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true);  // Secure and HttpOnly flags enabled
+        $_SESSION['email'] = $email;  // Store email in the session
+        header("Location: verify_otp.php");  // Redirect to OTP verification page
         exit();
       } else {
-        $errors[] = "Failed to send OTP email. Mailer Error: {$mail->ErrorInfo}";
+        $errors[] = "There was a problem sending the OTP. Please try again later.";
       }
     } catch (Exception $e) {
-      $errors[] = "Failed to send OTP email. Mailer Error: {$mail->ErrorInfo}";
+      $errors[] = "Mailer Error: " . $mail->ErrorInfo;
     }
   }
-
-  // Implement session timeout
-  if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
-    session_unset(); // Unset session data
-    session_destroy(); // Destroy session
-  }
-  $_SESSION['last_activity'] = time(); // Update last activity time
-
-  // Regenerate session ID upon successful login/registration
-  session_regenerate_id(true);
 }
 
+// var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,6 +193,9 @@ if (isset($_POST["submit"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Celestial Watches | Exclusivity in Every Tick</title>
+
+  <link rel="preload" href="verify_otp.php" as="document">
+  <link rel="preload" href="../../src/assets/js/otp-verify-function.js" as="script">
 
   <!-- ============= IONICONS =============  -->
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
@@ -211,9 +208,9 @@ if (isset($_POST["submit"])) {
 
 
   <!-- ============= JS =============  -->
-  <script src="../../src/assets/js/scroll-animation.js"></script>
+  <script src="../../src/assets/js/scroll-animation.js" async></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-  <script src="../../src/assets/js/navigation.js"></script>
+  <script src="../../src/assets/js/navigation.js" async></script>
 
   <!-- ============= FONTS=============  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,9 +308,9 @@ if (isset($_POST["submit"])) {
 
 
   <!-- ============= JS =============  -->
-  <script src="../../src/assets/js/cookie-monitor.js"></script>
-  <script src="../../src/assets/js/index.js"></script>
-  <script src="../../src/assets/js/currency-language.js"></script>
+  <script src="../../src/assets/js/cookie-monitor.js" async></script>
+  <script src="../../src/assets/js/index.js" async></script>
+  <script src="../../src/assets/js/currency-language.js" async></script>
 
 </body>
 

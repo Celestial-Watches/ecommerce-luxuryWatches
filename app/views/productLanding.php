@@ -2,37 +2,33 @@
 session_start();
 define('ALLOW_ACCESS', true);
 include '../config/conn.php';
-
 include '../controllers/search-engine.php';
 
-// Get category and sort parameters from the URL
 $category = isset($_GET['product_category']) ? $_GET['product_category'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-// Base SQL query (Handle category filter)
 $sql = "SELECT * FROM products";
 
-// If a category is set, apply the filter to the query
 if ($category) {
-    $sql .= " WHERE price = ?"; // Adjust column name according to your DB structure
+    $sql .= " WHERE product_category = ?";
 }
 
-// Add ORDER BY clause based on the selected sort option
+// Sorting logic based on the sort type
 switch ($sort) {
     case 'new_in':
-        $sql .= " ORDER BY created_at DESC"; // Assuming there's a created_at column
+        $sql .= " ORDER BY created_at DESC";
         break;
     case 'price_low_high':
-        // Sort by price in ascending order after sanitizing
-        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";  // Remove commas and cast to DECIMAL for correct sorting
+        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 1 ELSE 0 END, 
+                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";
         break;
     case 'price_high_low':
-        // Sort by price in descending order after sanitizing
-        $sql .= " ORDER BY CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC"; // Remove commas and cast to DECIMAL for correct sorting
+        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 0 ELSE 1 END, 
+                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC";
         break;
 }
 
-// Add LIMIT and OFFSET for pagination (you need to define $limit and $page)
+// Add LIMIT and OFFSET for pagination
 $sql .= " LIMIT ? OFFSET ?";
 
 // Prepare and execute the SQL statement
@@ -40,16 +36,15 @@ $stmt = $conn->prepare($sql);
 
 // Bind parameters (adjust according to the query structure)
 if ($category) {
-    // Bind category and pagination parameters
-    $stmt->bind_param("ssi", $category, $limit, $offset); // Adjust parameter types as needed
+    $stmt->bind_param("ssi", $category, $limit, $offset);
 } else {
-    // Bind only pagination parameters if no category filter is set
-    $stmt->bind_param("ii", $limit, $offset); // Adjust parameter types as needed
+    $stmt->bind_param("ii", $limit, $offset);
 }
 
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -73,7 +68,7 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
     <link rel="stylesheet" href="../..//src/libs/swiper/swiper-bundle.min.css" loading="lazy">
     <link rel="stylesheet" href="../..//src/assets/css/google-header.css" loading="lazy">
-    <link rel="stylesheet" href="assets/filter.css" loading="lazy">
+
 
     <!-- ============= FONTS =============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +78,191 @@ $result = $stmt->get_result();
 </head>
 
 <style type="text/css" media="all">
+    /* Container for the result text and filter button */
+    .filter-head-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* Results and Filter button container */
+    .top-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Base styling for results count */
+    .results-count {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        color: #212121;
+        margin-right: 20px;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 15px;
+    }
+
+    .filter-item {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        position: relative;
+        cursor: pointer;
+        width: auto;
+        /* Default width */
+    }
+
+    .filter-item::after {
+        content: "▼";
+        font-size: 10px;
+        color: #aaa;
+        margin-left: 5px;
+    }
+
+
+    /* Base styling for filter button */
+    .filter-button {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        text-transform: uppercase;
+        background: #212121;
+        border: 2px solid #212121;
+        border-radius: 4px;
+        width: 135px;
+        padding: 13px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        position: relative;
+    }
+
+    /* Icon for filter button, positioned inline on the left */
+    .filter-button::before {
+        content: "";
+        background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-white.svg) no-repeat center;
+        background-size: contain;
+        width: 16px;
+        height: 10px;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    /* Sort form styling */
+    .sort-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Sort label styling */
+    .sort-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000;
+        text-transform: uppercase;
+        font-family: 'Poppins', sans-serif;
+        text-wrap: nowrap;
+    }
+
+    /* Sort dropdown styling */
+    .sort-dropdown {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        position: relative;
+        min-width: 150px;
+    }
+
+    .sort-dropdown::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+        font-size: 12px;
+        color: #333;
+    }
+
+    /* Responsive adjustments */
+
+    /* For screen sizes 1280px or less */
+    @media (max-width: 1280px) {
+
+        /* Hide the filter container */
+        .filter-container {
+            display: none;
+        }
+
+        /* Remove background and border from filter button */
+        .filter-button {
+            background: none;
+            border: none;
+            color: #212121;
+            width: auto;
+            padding: 0;
+        }
+
+        .filter-button::before {
+            background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-black.svg) no-repeat center;
+        }
+
+        /* Adjust layout */
+        .filter-head-container {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Align filter button to the left */
+        .filter-button {
+            order: -1;
+        }
+
+        /* Position results-count below filter button with sort-form aligned to the right */
+        .top-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        /* Make results-count appear below filter-button */
+        .results-count {
+            margin-top: 10px;
+            order: 1;
+        }
+    }
+
+    /* For screen sizes 375px or less */
+    @media (max-width: 375px) {
+
+        /* Hide sort-label text */
+        .sort-label {
+            display: none;
+        }
+
+        /* Maintain single-line layout */
+        .top-container {
+            flex-wrap: nowrap;
+        }
+    }
+
     .product__container {
         padding: 40px;
         background-color: #FCF8F5 !important;
@@ -157,6 +337,8 @@ $result = $stmt->get_result();
 
     .product-image {
         width: 100% !important;
+        height: 260px !important;
+        object-fit: cover;
     }
 
     .cta-button:hover {
@@ -402,7 +584,7 @@ $result = $stmt->get_result();
                         <div class="product__main">
                             <div class="product__image">
                                 <div class="product-image">
-                                    <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image">
+                                    <img src="<?php echo $image; ?>" loading="lazy" alt="<?php echo $name; ?>" class="product-image">
                                 </div>
                             </div>
                             <hr>
@@ -467,10 +649,10 @@ $result = $stmt->get_result();
 
     <?php include '../../PHP/components/footer.php' ?>
 
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
+    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+    <script src="/src/assets/js/index.js" async></script>
+    <script src="/src/assets/js/currency-language.js" async></script>
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
 </body>
 
 </html>

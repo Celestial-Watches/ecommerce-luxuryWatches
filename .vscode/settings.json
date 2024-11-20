@@ -154,5 +154,6 @@
     "cSpell.ignoreWords": [
         "passsword",
         "usernamee"
-    ]
+    ],
+    "Codegeex.GenerationPreference": "automatic"
 }

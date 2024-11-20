@@ -115,7 +115,7 @@ if (isset($_POST['resend'])) {
         // Send the email
         $mail->send();
 
-        $_SESSION['otp_verified'] = true;
+
         $_SESSION['otp'] = $otp; // Store the new OTP in the session
         $success_message = "A new OTP has been sent to your email.";
     } catch (Exception $e) {
@@ -209,6 +209,8 @@ if (isset($_POST['verify'])) {
 $remaining_time = max(0, $otp_expiry_time - time());
 $minutes = floor($remaining_time / 60);
 $seconds = $remaining_time % 60;
+
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -219,11 +221,16 @@ $seconds = $remaining_time % 60;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
     <link rel="stylesheet" href="../../src/assets/css/deskView.css">
-    <script src="../../src/assets/js/navigation.js"></script>
+    <script src="../../src/assets/js/navigation.js" async></script>
     <script>
         let remainingTime = <?php echo $remaining_time; ?>; // Initial remaining time in seconds
     </script>
-    <script src="../../src/assets/js/otp-verify-function.js"></script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+    <script src="../../src/assets/js/otp-verify-function.js" async></script>
     <style>
         /* General Alert Styles */
         .alert {
@@ -357,7 +364,7 @@ $seconds = $remaining_time % 60;
             });
         });
     </script>
-<script src="../../src/assets/js/cookie-monitor.js"></script>
+    <script src="../../src/assets/js/cookie-monitor.js" async></script>
 </body>
 
 </html>

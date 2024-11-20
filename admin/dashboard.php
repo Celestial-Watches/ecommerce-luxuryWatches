@@ -1,6 +1,8 @@
 <?php
+
 session_start();
 session_regenerate_id(true);
+ob_start();
 
 define('ALLOW_ACCESS', true);
 include 'panel.php';
@@ -88,6 +90,9 @@ if ($lastWeekUserCount > 0) {
 // Close the database connection
 $conn->close();
 
+// echo '<pre>';
+// print_r($_SESSION);  // Debugging: See what session data is set
+// echo '</pre>';
 
 ?>
 <!DOCTYPE html>
@@ -128,11 +133,11 @@ $conn->close();
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="assets/vendor/js/helpers.js"></script>
+    <script src="assets/vendor/js/helpers.js" async></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="assets/js/config.js"></script>
+    <script src="assets/js/config.js" async></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -190,7 +195,7 @@ $conn->close();
                                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                         <div class="avatar avatar-online">
-                                            <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                            <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" loading="lazy" />
                                         </div>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
@@ -199,7 +204,7 @@ $conn->close();
                                                 <div class="d-flex">
                                                     <div class="flex-shrink-0 me-3">
                                                         <div class="avatar avatar-online">
-                                                            <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                            <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" loading="lazy" />
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
@@ -408,7 +413,7 @@ $conn->close();
                                                 <div class="card-body">
                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                         <div class="avatar flex-shrink-0">
-                                                            <img src="assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                                                            <img src="assets/img/icons/unicons/paypal.png" alt="Credit Card" loading="lazy" class="rounded" />
                                                         </div>
                                                         <div class="dropdown">
                                                             <button
@@ -437,7 +442,7 @@ $conn->close();
                                                 <div class="card-body">
                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                         <div class="avatar flex-shrink-0">
-                                                            <img src="assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                                                            <img src="assets/img/icons/unicons/cc-primary.png" alt="Credit Card" loading="lazy" class="rounded" />
                                                         </div>
                                                         <div class="dropdown">
                                                             <button
@@ -615,7 +620,7 @@ $conn->close();
                                                 <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
                                                     <div class="d-flex p-4 pt-3">
                                                         <div class="avatar flex-shrink-0 me-3">
-                                                            <img src="assets/img/icons/unicons/wallet.png" alt="User" />
+                                                            <img src="assets/img/icons/unicons/wallet.png" alt="User" loading="lazy" />
                                                         </div>
                                                         <div>
                                                             <small class="text-muted d-block">Total Balance</small>
@@ -671,7 +676,7 @@ $conn->close();
                                             <ul class="p-0 m-0">
                                                 <li class="d-flex mb-4 pb-1">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/paypal.png" alt="User" class="rounded" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -686,7 +691,7 @@ $conn->close();
                                                 </li>
                                                 <li class="d-flex mb-4 pb-1">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/wallet.png" alt="User" class="rounded" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -701,7 +706,7 @@ $conn->close();
                                                 </li>
                                                 <li class="d-flex mb-4 pb-1">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/chart.png" alt="User" class="rounded" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -716,7 +721,7 @@ $conn->close();
                                                 </li>
                                                 <li class="d-flex mb-4 pb-1">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/cc-success.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/cc-success.png" alt="User" class="rounded" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -731,7 +736,7 @@ $conn->close();
                                                 </li>
                                                 <li class="d-flex mb-4 pb-1">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/wallet.png" alt="User" class="rounded" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -746,7 +751,7 @@ $conn->close();
                                                 </li>
                                                 <li class="d-flex">
                                                     <div class="avatar flex-shrink-0 me-3">
-                                                        <img src="assets/img/icons/unicons/cc-warning.png" alt="User" class="rounded" />
+                                                        <img src="assets/img/icons/unicons/cc-warning.png" alt="User" loading="lazy" class="rounded" />
                                                     </div>
                                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                         <div class="me-2">
@@ -792,17 +797,17 @@ $conn->close();
         <script src="assets/vendor/js/bootstrap.js"></script>
         <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <script src="assets/vendor/js/menu.js"></script>
+        <script src="assets/vendor/js/menu.js" async></script>
         <!-- endbuild -->
 
         <!-- Vendors JS -->
-        <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+        <script src="assets/vendor/libs/apex-charts/apexcharts.js" async></script>
 
         <!-- Main JS -->
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/main.js" async></script>
 
         <!-- Page JS -->
-        <script src="assets/js/dashboards-analytics.js"></script>
+        <script src="assets/js/dashboards-analytics.js" async></script>
 
         <script>
             // Fetch the PHP data and validate before using it
@@ -882,3 +887,4 @@ $conn->close();
     </body>
 
 </html>
+<?php ob_end_flush(); ?>

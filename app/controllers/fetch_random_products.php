@@ -1,6 +1,11 @@
 <?php
-require_once __DIR__ . '/../config/conn.php';
 
+if (!defined('ALLOW_ACCESS')) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+require_once __DIR__ . '/../config/conn.php';
 
 $userId = $_SESSION['user_id'] ?? null;
 $cacheFile = __DIR__ . '/../cache/recommended_products_' . ($userId ? $userId : 'guest') . '.json';
@@ -86,6 +91,7 @@ function getProductsByIds($productIds, $conn)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC) ?: []; // Return empty array on failure
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +101,7 @@ function getProductsByIds($productIds, $conn)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Featured Products</title>
-    <script src="../../src/assets/js/scroll-animation.js"></script>
+    <script src="../../src/assets/js/scroll-animation.js" async></script>
     <style>
         .featured-main {
             background-color: #f9f9f9;
@@ -107,6 +113,21 @@ function getProductsByIds($productIds, $conn)
             text-align: center;
             padding: 20px;
             width: 100%;
+        }
+
+        @media (min-width: 425px) {
+            .card .featured-card {
+                width: 100% !important;
+                height: 333px !important;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 424px) {
+            .card .featured-card {
+                width: 100% !important;
+                height: 250px !important;
+            }
         }
 
         .featured-title {
@@ -146,18 +167,13 @@ function getProductsByIds($productIds, $conn)
 
         .card {
             width: 30%;
-            background-color: #e4dfdf;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background-color: #ffffff;
             padding: 20px;
             margin: 0 5px;
             flex: 0 0 32.32%;
             transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
             text-align: center;
-            background-image: linear-gradient(300deg,
-                    rgba(255, 255, 255, 0) 30%,
-                    rgba(255, 255, 255, 0.8),
-                    rgba(255, 255, 255, 0) 70%);
+            background-image: linear-gradient(300deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 70%);
         }
 
         .card.reduce-opacity {
@@ -260,7 +276,6 @@ function getProductsByIds($productIds, $conn)
 
         @media (max-width: 480px) {
 
-            /* For mobile, show 1 card */
             .card {
                 width: 90%;
                 flex: 0 0 100%;
@@ -291,8 +306,11 @@ function getProductsByIds($productIds, $conn)
                     <div class="slider-container animate-on-scroll">
                         <div class="product-grid">
                             <?php foreach ($recommendedProducts as $product): ?>
+                                <?php $image_url = $product['image_url'];
+                                $cleaned_url = rtrim(urldecode($image_url), "'"); ?>
+
                                 <div class="card">
-                                    <img loading="lazy" class="featured-card" src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <img loading="lazy" class="featured-card" src="<?php echo htmlspecialchars($cleaned_url); ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                     <hr>
                                     <h3 class="featured-text"><?= htmlspecialchars($product['name']) ?></h3>
 
@@ -306,8 +324,8 @@ function getProductsByIds($productIds, $conn)
                                     // Check if the price is "ON REQUEST"
                                     if (stripos($rawPrice, 'ON REQUEST') !== false) {
                                         // Set display price for "ON REQUEST"
-                                        $onRequestPrice = 'ON REQUEST'; 
-                                    } else {                                        
+                                        $onRequestPrice = 'ON REQUEST';
+                                    } else {
                                         // Extract the currency symbol
                                         $currencySymbol = preg_replace('/[0-9.,\s]+/', '', $rawPrice); // Extract currency symbol
                                         $currencySymbol = trim($currencySymbol); // Trim any extra whitespace
@@ -326,9 +344,9 @@ function getProductsByIds($productIds, $conn)
                                     ?>
 
                                     <?php if (!empty($onRequestPrice)): ?>
-                                        <p class="featured-price"><?= $onRequestPrice ?></p> 
+                                        <p class="featured-price"><?= $onRequestPrice ?></p>
                                     <?php else: ?>
-                                        <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($priceValue) ?>"><?= $displayPrice ?></p> 
+                                        <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($priceValue) ?>"><?= $displayPrice ?></p>
                                     <?php endif; ?>
                                     <button class="buy-button">View Details</button>
 
@@ -425,10 +443,10 @@ function getProductsByIds($productIds, $conn)
         document.querySelectorAll('.slider').forEach(initializeSlider);
     </script>
 
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
+    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+    <script src="/src/assets/js/index.js" async></script>
+    <script src="/src/assets/js/currency-language.js" async></script>
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
 
 </body>
 

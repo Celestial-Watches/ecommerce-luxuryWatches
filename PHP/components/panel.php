@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Set secure session cookie attributes
 session_set_cookie_params([
   'lifetime' => 86400,          // Session expires in 24 hours
@@ -16,10 +17,10 @@ require_once "../../app/config/conn.php";
 
 // Session timeout settings
 $current_time = time();
-$timeout_duration = 1800; // 30 minutes in seconds
+$timeout_duration = 3600; 
 
 // Redirect if user or admin session variable isn't set
-if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) {
+if (!isset($_SESSION['admin'])) {
     header("Location: ../../app/controllers/login.php");
     exit();
 }
@@ -75,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel Access</title>
-    <script type="text/javascript" src="../../src/assets/js/navigation.js"></script>
+    <!-- <script type="text/javascript" src="../../src/assets/js/navigation.js"></script> -->
     <style>
         * { box-sizing: border-box; }
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
@@ -289,3 +290,4 @@ body {
     </script>
 
 </html>
+<?php ob_end_flush(); ?>

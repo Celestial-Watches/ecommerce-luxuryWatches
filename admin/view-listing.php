@@ -1,6 +1,10 @@
 <?php
+ 
 session_start();
+
 session_regenerate_id(true);
+
+ob_start();
 
 define('ALLOW_ACCESS', true);
 include 'panel.php'; 
@@ -217,7 +221,9 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
     </script>
     
     <!-- <script src="../src/assets/js/panelNav.js" defer></script> -->
-    <script src="../src/assets/js/navigation.js"></script>
+    <script src="../src/assets/js/navigation.js" async></script>
 </body>
 
 </html>
+
+<?php ob_end_flush(); ?>

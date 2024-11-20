@@ -1,7 +1,8 @@
 <?php if (!defined('ALLOW_ACCESS')) {
     header("Location: ../../index.php");
     exit();
-} ?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Watches | Exclusivity in Every Tick</title>
-    <script src="../../src/assets/js/scroll-animation.js"></script>
+    <script src="../../src/assets/js/scroll-animation.js" async></script>
     <style>
         #suggestions {
             overflow-y: auto;
@@ -87,7 +88,232 @@
             padding: 10px;
             text-align: center;
         }
+
+        /* Cart Button */
+
+        .cart-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background-color: #555;
+        }
+
+        /* Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            /* Initially off-screen */
+            width: 400px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+
+        /* Cart Drawer Content */
+        .cart-drawer-content {
+            padding: 20px;
+        }
+
+        /* Close Button */
+        .cart-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            margin-left: auto;
+            display: block;
+        }
+
+        /* Cart Header */
+        .cart-header {
+            margin-bottom: 20px;
+        }
+
+        .cart-title {
+            font-size: 24px;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+
+            /* Adjust the width of the drawer for mobile */
+            .cart-drawer {
+                width: 100%;
+                /* Full width on mobile */
+                right: -100%;
+                /* Initially hide the drawer */
+            }
+
+            /* Cart button and other buttons in mobile */
+            .action-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .cart-title {
+                font-size: 20px;
+            }
+
+            .cart-item {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        /* For smaller screens (480px or less) */
+        @media (max-width: 480px) {
+            .cart-title {
+                font-size: 18px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
+    <style type="text/css" media="all">
+        .languages-box {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 0px !important;
+            background-color: #fff;
+            left: 0px;
+            padding: 0px 10px;
+            height: 32px;
+            width: fit-content !important;
+            min-width: 65px;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 10px;
+        }
+
+        .languages-box img.flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+        }
+
+        .languages-box .selected {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .languages-box .current-lang,
+        .languages-box .current-currency {
+            font-weight: 500;
+            font-size: 12px !important;
+        }
+
+        .languages-box .sep {
+            margin: 0 5px;
+            color: #555;
+        }
+
+        .languages-box img.arrow {
+            margin-left: 5px;
+        }
+
+        .dropdown-box {
+            font-family: Arial, sans-serif;
+            width: 20rem;
+            background-color: #fff !important;
+            border: 1px solid #E5E5E5;
+            padding: 20px;
+            right: 10px;
+            z-index: 100;
+            position: absolute;
+            top: 3rem !important;
+            text-transform: initial;
+            display: none;
+        }
+
+        .dropdown-box .title {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 21px;
+            text-align: center;
+            margin-bottom: 14px;
+
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+        }
+
+
+        .form-label {
+            border: 1px solid #BFBFBF;
+            border-radius: 0px;
+            font-family: 'Univers LT Std', sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            color: #000;
+            padding: 9px 10px;
+            border-bottom: 0px !important;
+            text-align: center;
+        }
+
+        select.form-control {
+            width: 100%;
+            padding: 12px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            outline: none;
+        }
+
+        /* Save Button */
+        .btn-submit .btn-default {
+            background-color: #000;
+            color: #fff;
+            font-size: 14px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .btn-submit .btn-default:hover {
+            background-color: #333;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+            /* Smooth rotation */
+        }
+
+        .arrow.rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+
 </head>
 
 <body>
@@ -135,41 +361,101 @@
 
                 <div class="header-top-actions">
 
-                    <select id="currency" name="currency">
-                        <option value="usd">USD &dollar;</option>
-                        <option value="eur">EUR &euro;</option>
-                        <option value="inr">INR &#8377;</option>
-                    </select>
 
                     <div id="google_translate_element" style="display:none;"></div>
                     <script type="text/javascript">
                         function googleTranslateElementInit() {
                             new google.translate.TranslateElement({
-                                pageLanguage: 'en'
+                                pageLanguage: 'en', // Default page language
+                                includedLanguages: 'en,es,fr,de,it,pt,zh-CN,ja,ru,ar', // Add other languages as needed
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
                             }, 'google_translate_element');
                         }
                     </script>
-                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-                    <select id="customLanguageSelect" name="language" onchange="translateLanguage(this.value)">
-                        <option value="">Select Language</option>
-                        <option value="en">English</option>
-                        <option value="es">Spanish</option>
-                        <option value="fr">France</option>
-                    </select>
+                    <li class="lang-curr languages-box">
+                        <!-- Flag Image -->
+                        <img
+                            id="languageFlag"
+                            alt="language flag"
+                            class="mr-1 flag lazyload"
+                            src="https://www.watchesworld.com/wp-content/themes/ww2/assets/images/language-flags/en.png">
+
+
+                        <!-- Language and Currency Selector -->
+                        <div class="mr-1 d-flex selected">
+                            <span class="current-lang">en</span>
+                            <span class="sep">|</span>
+                            <span class="current-currency" data-currency="USD">USD</span>
+
+                            <!-- Dropdown Icon -->
+                            <img
+                                alt="dropdown icon"
+                                width="7"
+                                height="7"
+                                data-src="https://www.watchesworld.com/wp-content/themes/ww2/assets/images/navigator/triangle-down.svg"
+                                class="arrow ml-1 lazyload"
+                                src="https://www.watchesworld.com/wp-content/themes/ww2/assets/images/navigator/triangle-down.svg">
+                        </div>
+
+                        <div id="langCurrBox" class="dropdown-box">
+                            <div class="title text-uppercase">Select your currency and language</div>
+
+                            <!-- Language Selector -->
+                            <div class="form-group lang-field">
+                                <label class="form-label" for="customLanguageSelect">Language</label>
+                                <select id="customLanguageSelect" name="language" class="form-control">
+                                    <option value="en" selected>English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="it">Italian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="zh-CN">Chinese (Simplified)</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="ar">Arabic</option>
+                                </select>
+                            </div>
+
+                            <!-- Currency Selector -->
+                            <div class="form-group currency-field">
+                                <label class="form-label" for="currency">Currency</label>
+                                <select id="currency" name="currency" class="form-control">
+                                    <option value="usd" selected>USD</option>
+                                    <option value="eur">EUR</option>
+                                    <option value="gbp">GBP</option>
+                                    <option value="jpy">JPY</option>
+                                    <option value="aud">AUD</option>
+                                    <option value="inr">INR</option>
+                                    <option value="cny">CNY</option>
+                                </select>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="btn-submit w-100">
+                                <button class="btn btn-default w-100 text-uppercase set-curr-lang" id="saveSettingsBtn">
+                                    Save These Settings
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+
 
                     <button class="logg-button">
                         <?php if (isset($_SESSION['user']) && isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true || isset($_COOKIE['temp']) || isset($_COOKIE['loggedYes'])): ?>
                             <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
                                 <span class="log-button"><a class="styled-login" href="/PHP/components/panel.php">Panel</a></span>
-                                <span class="log-button">/</span>
+                                <span class="log-button">|</span>
                                 <span class="log-button"><a class="styled-login" href="../../app/controllers/logout.php">Logout</a></span>
                             <?php else: ?>
                                 <span class="log-button"><a class="styled-login" href="../../app/controllers/logout.php">Logout</a></span>
                             <?php endif; ?>
                         <?php else: ?>
+                            <i class="ri-user-line"></i>
                             <span class="log-button"><a class="styled-login" href="../../app/controllers/login.php">Log In</a></span>
-                            <span class="log-button">/</span>
+                            <span class="log-button">|</span>
                             <span class="log-button"><a class="styled-login" href="../../app/controllers/signin.php">Sign Up</a></span>
                         <?php endif; ?>
                         <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -190,7 +476,7 @@
             <div class="container">
 
                 <a href="#" class="header-logo">
-                    <img src="" alt="Celestial logo" width="120" height="36">
+                    <img src="" loading="lazy" alt="Celestial logo" width="120" height="36">
                 </a>
 
                 <div class="header-search-container">
@@ -208,9 +494,10 @@
 
                 <div class="header-user-actions">
 
-                    <button class="action-btn profile-btn" title="Personal Dashboard">
+                    <button class="action-btn profile-btn" title="Personal Dashboard" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';">
                         <ion-icon name="person-outline"></ion-icon>
                     </button>
+
 
                     <!-- Dropdown for profile -->
 
@@ -232,16 +519,33 @@
                     <!-- =========================== -->
 
 
-                    <button class="action-btn">
+                    <button class="action-btn" id="wish-btn">
                         <ion-icon name="heart-outline"></ion-icon>
                         <span class="count">0</span>
                     </button>
 
-                    <button class="action-btn add-to-cart">
+                    <div id="wishlist-drawer" class="cart-drawer">
+                        <div class="cart-drawer-content">
+                            <button id="wishlist-close-btn" class="cart-close-btn">✖</button>
+                            <div class="cart-header">
+                                <h2 class="cart-title">Your Wishlist</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="action-btn" id="cart-btn">
                         <ion-icon name="bag-handle-outline"></ion-icon>
                         <span class="count" id="cart-count">0</span>
                     </button>
 
+                    <div id="cart-drawer" class="cart-drawer">
+                        <div class="cart-drawer-content">
+                            <button id="cart-close-btn" class="cart-close-btn">✖</button>
+                            <div class="cart-header">
+                                <h2 class="cart-title">Your Cart</h2>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -289,7 +593,7 @@
                                 <li class="panel-list-item">
                                     <a href="#">
                                         <img src="https://www.theluxuryhut.com/admin/upload/1675842246expensive-and-rare-patek-philippe-watches.jpg" alt="patek watch"
-                                            width="250" height="119">
+                                            width="250" loading="lazy" height="119">
                                     </a>
                                 </li>
 
@@ -353,7 +657,7 @@
 
                                 <li class="panel-list-item">
                                     <a href="#">
-                                        <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" width="250"
+                                        <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" loading="lazy" width="250"
                                             height="119">
                                     </a>
                                 </li>
@@ -430,32 +734,50 @@
 
 
         <div class="mobile-bottom-navigation">
-
             <button class="action-btn has-menu-btn" data-mobile-menu-open-btn>
                 <ion-icon name="menu-outline"></ion-icon>
             </button>
 
-            <button class="action-btn">
+            <button class="action-btn" id="cart-btn">
                 <ion-icon name="bag-handle-outline"></ion-icon>
-
-                <span class="count">0</span>
+                <span class="count" id="cart-count">0</span>
             </button>
 
             <button class="action-btn" onclick="window.location.href ='http://localhost:3000/index.php';">
                 <ion-icon name="home-outline"></ion-icon>
             </button>
 
-            <button class="action-btn">
+            <button class="action-btn" id="wish-btn">
                 <ion-icon name="heart-outline"></ion-icon>
-
                 <span class="count">0</span>
             </button>
 
-            <button class="action-btn profile-btn" data-mobile-menu-open-btn>
+            <button class="action-btn profile-btn" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';" data-mobile-menu-open-btn>
                 <ion-icon name="person-outline"></ion-icon>
             </button>
-
         </div>
+
+        <!-- Cart Drawer for Mobile -->
+        <div id="cart-drawer" class="cart-drawer">
+            <div class="cart-drawer-content">
+                <button id="cart-close-btn" class="cart-close-btn">✖</button>
+                <div class="cart-header">
+                    <h2 class="cart-title">Your Cart</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Drawer for Mobile -->
+        <div id="wishlist-drawer" class="cart-drawer">
+            <div class="cart-drawer-content">
+                <button id="wishlist-close-btn" class="cart-close-btn">✖</button>
+                <div class="cart-header">
+                    <h2 class="cart-title">Your Wishlist</h2>
+                </div>
+            </div>
+        </div>
+
+
 
         <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
 
@@ -514,7 +836,7 @@
 
                         <li class="submenu-category">
                             <a href="#" class="submenu-title">
-                                <img src="https://www.theluxuryhut.com/admin/upload/1675842246expensive-and-rare-patek-philippe-watches.jpg" alt="patek watch"
+                                <img src="https://www.theluxuryhut.com/admin/upload/1675842246expensive-and-rare-patek-philippe-watches.jpg" loading="lazy" alt="patek watch"
                                     width="250" height="119">
                             </a>
                         </li>
@@ -572,7 +894,7 @@
 
                         <li class="submenu-category">
                             <a href="#" class="submenu-title">
-                                <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" width="250"
+                                <img src="https://www.watchclub.com/upload/watches/originali/watch-club-iwc-portuguese-box-and-papers-ref-iw371417-year-2010-wb.jpgwbwbwbwbwb6.jpg" alt="IWC WATCH BOX" width="250" loading="lazy"
                                     height="119">
                             </a>
                         </li>
@@ -672,13 +994,25 @@
                         </button>
                         <ul class="submenu-category-list" data-accordion>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectCurrency('usd')">USD &dollar;</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('usd')">USD &dollar;</a>
                             </li>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectCurrency('eur')">EUR &euro;</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('eur')">EUR &euro;</a>
                             </li>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectCurrency('inr')">INR &#8377;</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('inr')">INR &#8377;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('gbp')">GBP &pound;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('jpy')">JPY &#165;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('aud')">AUD &dollar;</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectCurrency('cny')">CNY &#165;</a>
                             </li>
                         </ul>
                     </li>
@@ -698,13 +1032,34 @@
                         </button>
                         <ul class="submenu-category-list" data-accordion>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectLanguage('en')">English</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('en')">English</a>
                             </li>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectLanguage('es')">Español</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('es')">Spanish</a>
                             </li>
                             <li class="submenu-category">
-                                <a href="" class="submenu-title" onclick="selectLanguage('fr')">Français</a>
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('fr')">French</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('de')">German</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('it')">Italian</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('pt')">Portuguese</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('zh-CN')">Chinese (Simplified)</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('ja')">Japanese</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('ru')">Russian</a>
+                            </li>
+                            <li class="submenu-category">
+                                <a href="javascript:void(0)" class="submenu-title" onclick="selectLanguage('ar')">Arabic</a>
                             </li>
                         </ul>
                     </li>
@@ -743,6 +1098,73 @@
         </nav>
 
     </header>
+
+    <script>
+        // ============================= NAVIGATION OPEN =============================
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const actionBtns = document.querySelectorAll('.has-menu-btn');
+            const mobileNavigationMenu = document.querySelector('.mobile-navigation-menu');
+            const menuCloseBtns = document.querySelectorAll('.menu-close-btn'); // Declare menu close buttons
+            const accordionBtns = document.querySelectorAll('[data-accordion-btn]'); // Declare accordion buttons
+
+            let isMenuOpen = false; // Flag to track menu state
+
+            // Toggle the menu on button click
+            actionBtns.forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    console.log("Action button clicked!");
+                    event.stopPropagation();
+                    isMenuOpen = !isMenuOpen; // Toggle the flag
+                    if (mobileNavigationMenu) {
+                        mobileNavigationMenu.classList.toggle('menu-visible', isMenuOpen);
+                        console.log('Menu button clicked, menu state:', isMenuOpen);
+                    }
+                });
+            });
+
+            // Close the menu if a close button is clicked
+            menuCloseBtns.forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    isMenuOpen = false; // Update flag
+                    if (mobileNavigationMenu) {
+                        mobileNavigationMenu.classList.remove('menu-visible');
+                    }
+                });
+            });
+
+            // Toggle accordion dropdowns inside the menu
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const submenu = btn.nextElementSibling;
+                    if (submenu) {
+                        submenu.classList.toggle('active');
+                    }
+                    btn.classList.toggle('active');
+                });
+            });
+
+
+
+            // Close the menu if clicking outside the menu area
+            document.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (isMenuOpen && !mobileNavigationMenu.contains(event.target)) {
+                    isMenuOpen = false;
+                    mobileNavigationMenu.classList.remove('menu-visible');
+                    console.log('Clicked outside, menu closed');
+                }
+
+                // ============================= NAVIGATION CLOSE =============================
+                console.log('Action Buttons:', actionBtns);
+                console.log('Accordion Buttons:', accordionBtns);
+
+            });
+
+        });
+    </script>
 
     <script>
         // Wait for the DOM to fully load
@@ -845,8 +1267,92 @@
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartBtn = document.getElementById('cart-btn');
+            const wishlistBtn = document.getElementById('wish-btn');
+            const cartDrawer = document.getElementById('cart-drawer');
+            const wishlistDrawer = document.getElementById('wishlist-drawer');
+            const cartCloseBtn = document.getElementById('cart-close-btn');
+            const wishlistCloseBtn = document.getElementById('wishlist-close-btn');
 
+            // Function to show and hide drawers and buttons
+            function toggleDrawer(drawer, otherDrawer, button) {
+                drawer.style.right = '0';
+                button.style.display = 'none'; // Hide the current button
+                otherDrawer.style.right = '-400px'; // Close the other drawer if open
+            }
 
+            function closeDrawer(drawer, button) {
+                drawer.style.right = '-400px'; // Hide the drawer
+                button.style.display = 'block'; // Show the button again
+            }
+
+            // Open the cart drawer when cart button is clicked
+            cartBtn.addEventListener('click', () => {
+                toggleDrawer(cartDrawer, wishlistDrawer, cartBtn);
+            });
+
+            // Close the cart drawer when close button is clicked
+            cartCloseBtn.addEventListener('click', () => {
+                closeDrawer(cartDrawer, cartBtn);
+            });
+
+            // Open the wishlist drawer when wishlist button is clicked
+            wishlistBtn.addEventListener('click', () => {
+                toggleDrawer(wishlistDrawer, cartDrawer, wishlistBtn);
+            });
+
+            // Close the wishlist drawer when close button is clicked
+            wishlistCloseBtn.addEventListener('click', () => {
+                closeDrawer(wishlistDrawer, wishlistBtn);
+            });
+        });
+    </script>
+
+    <script>
+        // JavaScript code to handle dropdown functionality
+        const langCurrBox = document.getElementById('langCurrBox');
+        const langCurrTrigger = document.querySelector('.lang-curr');
+        const dropdownArrow = langCurrTrigger.querySelector('.arrow'); // Select the arrow
+
+        // Open/Close Dropdown on Click
+        langCurrTrigger.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent event from bubbling up
+            langCurrBox.style.display = langCurrBox.style.display === 'block' ? 'none' : 'block';
+            dropdownArrow.classList.toggle('rotate'); // Toggle rotation class
+        });
+
+        // Close Dropdown on Outside Click
+        document.addEventListener('click', () => {
+            langCurrBox.style.display = 'none';
+            dropdownArrow.classList.remove('rotate'); // Reset rotation
+        });
+
+        // Prevent Dropdown from Closing When Clicking Inside It
+        langCurrBox.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
+        // Attach listeners for currency and language selection
+        const currencySelect = document.getElementById("currency");
+        currencySelect.addEventListener("change", (event) => {
+            const selectedCurrency = event.target.value;
+            selectCurrency(selectedCurrency); // Ensure this function is defined in your JS
+        });
+
+        const languageSelect = document.getElementById('customLanguageSelect');
+        languageSelect.addEventListener('change', function(event) {
+            selectLanguage(event.target.value); // Ensure this function is defined in your JS
+        });
+
+        // Reload the page when the save button is clicked
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        saveSettingsBtn.addEventListener('click', () => {
+            // Optionally, you can add any additional logic here before reloading
+            location.reload(); // Reload the page
+        });
+    </script>
 
 </body>
 

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Layout</title>
-    <script src="../../src/assets/js/scroll-animation.js"></script>
+    <script src="../../src/assets/js/scroll-animation.js" async></script>
     <style>
         .article-container {
             background-color: #f9f9f9;

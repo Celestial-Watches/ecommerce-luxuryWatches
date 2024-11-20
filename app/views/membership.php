@@ -528,7 +528,7 @@ session_start();
 
                 <!-- Background Image -->
                 <img src="https://www.tagheuer.com/on/demandware.static/-/Library-Sites-TagHeuer-Shared/default/dwb72c3d38/images/collections/carrera/precious/TH-headline-banner-revamp-precious-1.jpg"
-                    alt="Membership Image" class="mem-img">
+                    alt="Membership Image" loading="lazy" class="mem-img">
 
                 <!-- Text Content Overlay -->
                 <div class="mem-text-overlay">
@@ -751,7 +751,7 @@ session_start();
         <section class="membership-benefits">
             <!-- Title and watch image at the top -->
             <div class="title-container">
-                <img src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/238bfd03-2f60-4cbd-780d-d7985ccd5c00/w=200x200" alt="Luxury Watch" class="watch-image-timeline">
+                <img src="https://imagedelivery.net/lyg2LuGO05OELPt1DKJTnw/238bfd03-2f60-4cbd-780d-d7985ccd5c00/w=200x200" alt="Luxury Watch" loading="lazy" class="watch-image-timeline">
                 <h2 class="benefits-title">Membership Benefits</h2>
             </div>
 
@@ -831,7 +831,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image1.jpg" alt="Johnathan Smith">
+                                    <img src="image1.jpg" loading="lazy" alt="Johnathan Smith">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Johnathan Smith</span>
@@ -857,7 +857,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image2.jpg" alt="Emily Carter">
+                                    <img src="image2.jpg" loading="lazy" alt="Emily Carter">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Emily Carter</span>
@@ -883,7 +883,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image3.jpg" alt="Michael Johnson">
+                                    <img src="image3.jpg" loading="lazy" alt="Michael Johnson">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Michael Johnson</span>
@@ -910,7 +910,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image4.jpg" alt="Sophia Lee">
+                                    <img src="image4.jpg" loading="lazy" alt="Sophia Lee">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Sophia Lee</span>
@@ -937,7 +937,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image5.jpg" alt="Daniel Brown">
+                                    <img src="image5.jpg" loading="lazy" alt="Daniel Brown">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Daniel Brown</span>
@@ -964,7 +964,7 @@ session_start();
                             </div>
                             <div class="profile">
                                 <div class="profile-image">
-                                    <img src="image6.jpg" alt="Olivia Davis">
+                                    <img src="image6.jpg" loading="lazy" alt="Olivia Davis">
                                 </div>
                                 <div class="profile-desc">
                                     <span>Olivia Davis</span>
@@ -982,7 +982,7 @@ session_start();
         <section class="membership-video">
 
             <div class="video-background">
-                <img src="	https://media.gq.com/photos/57ffacbfbcbaa8b0566b4c5e/16:9/w_2560%2Cc_limit/best-watches-patek-01.jpg" class="video" alt="">
+                <img src="	https://media.gq.com/photos/57ffacbfbcbaa8b0566b4c5e/16:9/w_2560%2Cc_limit/best-watches-patek-01.jpg" loading="lazy" class="video" alt="">
             </div>
         </section>
 
@@ -1025,10 +1025,10 @@ session_start();
     </script>
 
 
-    <script src="/src/libs/swiper/swiper-bundle.min.js"></script>
-    <script src="/src/assets/js/index.js"></script>
-    <script src="/src/assets/js/currency-language.js"></script>
-    <script src="/src/assets/js/cookie-monitor.js"></script>
+    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+    <script src="/src/assets/js/index.js" async></script>
+    <script src="/src/assets/js/currency-language.js" async></script>
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
 
 </body>
 

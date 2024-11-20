@@ -150,7 +150,7 @@ If you did not make this change or believe someone has accessed your account, pl
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - Celestial Watches</title>
     <link rel="stylesheet" href="../../src/assets/css/deskView.css" />
-    <script src="../../src/assets/js/navigation.js"></script>
+    <script src="../../src/assets/js/navigation.js" async></script>
 </head>
 
 <body>

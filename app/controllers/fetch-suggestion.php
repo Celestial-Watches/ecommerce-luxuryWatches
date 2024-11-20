@@ -7,11 +7,21 @@ $suggestions = [];
 if (isset($_GET['search'])) {
     $search = trim($_GET['search']);
 
-    // Prepare your SQL query based on the search input
+
     // Fetching product names from the 'name' column
-    $stmt = $conn->prepare("SELECT name FROM products WHERE name LIKE ? LIMIT 10");
+    $stmt = $conn->prepare("
+    SELECT name 
+    FROM products 
+    WHERE brand LIKE ? 
+    OR description LIKE ? 
+    OR tags LIKE ? 
+    OR product_category LIKE ? 
+    LIMIT 10
+");
+
     $param = "%" . $search . "%";
-    $stmt->bind_param("s", $param);
+    $stmt->bind_param("ssss", $param, $param, $param, $param);
+
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -28,4 +38,3 @@ if (isset($_GET['search'])) {
     header('HTTP/1.1 400 Bad Request');
     echo json_encode(["error" => "No search term provided."]);
 }
-?>
