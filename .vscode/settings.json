@@ -155,5 +155,6 @@
         "passsword",
         "usernamee"
     ],
-    "Codegeex.GenerationPreference": "automatic"
+    "Codegeex.GenerationPreference": "automatic",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

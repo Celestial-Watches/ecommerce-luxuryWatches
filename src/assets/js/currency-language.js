@@ -259,8 +259,9 @@
             } else {
                 console.error('Google Translate dropdown not found.');
             }
-        }, 100);
+        }, 100); 
     }
+    
 
     window.onload = function () {
         const savedLanguage = localStorage.getItem(STORAGE_KEY_LANGUAGE);

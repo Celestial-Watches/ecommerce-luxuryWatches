@@ -133,11 +133,11 @@ $conn->close();
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="assets/vendor/js/helpers.js" async></script>
+    <script src="assets/vendor/js/helpers.js" ></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="assets/js/config.js" async></script>
+    <script src="assets/js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -484,8 +484,9 @@ $conn->close();
                                                                 <h3 class="mb-0">$120,450</h3> <!-- Replace with dynamic PHP or JavaScript variable -->
                                                             </div>
                                                         </div>
-                                                        <div id="profileReportChart"></div>
+                                                        
                                                     </div>
+                                                    <div id="profileReportChart"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -773,10 +774,7 @@ $conn->close();
                         </div>
                         <!-- / Content -->
 
-                        <!-- Footer -->
-
-                        <!-- / Footer -->
-
+                        
                         <div class="content-backdrop fade"></div>
                     </div>
                     <!-- Content wrapper -->
@@ -797,17 +795,17 @@ $conn->close();
         <script src="assets/vendor/js/bootstrap.js"></script>
         <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <script src="assets/vendor/js/menu.js" async></script>
+        <script src="assets/vendor/js/menu.js"></script>
         <!-- endbuild -->
 
         <!-- Vendors JS -->
-        <script src="assets/vendor/libs/apex-charts/apexcharts.js" async></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         <!-- Main JS -->
-        <script src="assets/js/main.js" async></script>
+        <script src="assets/js/main.js"></script>
 
         <!-- Page JS -->
-        <script src="assets/js/dashboards-analytics.js" async></script>
+        <script src="assets/js/dashboards-analytics.js"></script>
 
         <script>
             // Fetch the PHP data and validate before using it
