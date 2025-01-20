@@ -124,7 +124,7 @@ if (isset($_POST["login"])) {
               session_regenerate_id(true);
               // Set session variables for admin
               $_SESSION["user"] = $usernamee;
-              $_SESSION["user_id"] = $user['id']; // Corrected from $row to $user
+              $_SESSION["user_id"] = $user['id']; 
               $_SESSION["LAST_ACTIVITY"] = time();
               $_SESSION["CREATED"] = time();
               $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];

@@ -356,7 +356,7 @@ if (isset($_SESSION['user'])) {
 
             <div class="newsletter">
 
-                <form action="app/controllers/subscribe.php">
+                <form>
 
                     <div class="newsletter-header">
 

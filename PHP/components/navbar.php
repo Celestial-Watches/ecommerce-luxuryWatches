@@ -710,7 +710,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="#" class="menu-title">Blog</a>
+                        <a href="../../app/views/blogs.php" class="menu-title">Blog</a>
                     </li>
 
                     <li class="menu-category">
@@ -941,7 +941,7 @@
                 </li>
 
                 <li class="menu-category" onclick="window.location.href ='';">
-                    <a href="#" class="menu-title">Blog</a>
+                    <a href="../../app/views/blogs.php" class="menu-title">Blog</a>
                 </li>
 
                 <li class="menu-category">

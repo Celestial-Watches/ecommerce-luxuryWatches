@@ -22,7 +22,7 @@ $abbreviationMap = array_map('generateAbbreviation', $brands);
 // Sanitize search term to handle special characters like periods
 function sanitizeSearchTerm($term)
 {
-    return str_replace('.', '%', $term); // Replace periods with wildcard '%' for SQL LIKE matching
+    return str_replace('.', '%', $term); 
 }
 
 // Helper function to build WHERE clause dynamically
@@ -59,7 +59,7 @@ function getSortOrder($sort) {
 // Search logic
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? $_GET['category'] : '';
-$limit = 30; // Set the number of products per page
+$limit = 20; // Set the number of products per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';

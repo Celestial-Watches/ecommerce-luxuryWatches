@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'celestialwatches69@gmail.com'; // Use environment variable
-        $mail->Password = 'xvmjnggsmsnkavzt'; // Use environment variable
+        $mail->Username = 'celestialwatches69@gmail.com'; 
+        $mail->Password = 'xvmjnggsmsnkavzt'; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
@@ -78,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Return JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>

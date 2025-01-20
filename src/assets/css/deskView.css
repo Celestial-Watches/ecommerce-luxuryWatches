@@ -964,6 +964,15 @@ body::-webkit-scrollbar-thumb:hover {
     margin-bottom: 0;
   }
 
+  select.form-control {
+    width: 100%;
+    padding: 12px 12px !important;
+    font-size: 14px !important;
+    border: 1px solid #ddd !important;
+    background-color: #fff;
+    outline: none;
+  }
+
   .header-top-actions {
     display: flex;
     align-items: center;

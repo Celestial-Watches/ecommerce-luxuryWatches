@@ -8,7 +8,7 @@ include '../controllers/search-engine.php';
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-$limit = 40; // Set pagination limit 
+$limit = 20; // Set pagination limit 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 

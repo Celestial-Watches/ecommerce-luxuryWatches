@@ -208,6 +208,7 @@ if (!defined('ALLOW_ACCESS')) {
             <li><a href="#">Manage Auctions</a></li>
             <li><a href="#">Online Events</a></li>
             <li><a href="#">Coupons & Discounts</a></li>
+            <li><a href="add-blogs.php">Blogs</a></li>
           </div>
         </ul>
       </li>
