@@ -164,21 +164,17 @@ $total_pages = ceil($total_blogs / $limit);
         .pagination a {
             padding: 8px 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
             text-decoration: none;
             color: #333;
             transition: background-color 0.2s, color 0.2s;
         }
 
         .pagination a.active {
-            background-color: #333;
+            background-color: #000;
             color: #fff;
         }
 
-        .pagination a:hover {
-            background-color: #555;
-            color: #fff;
-        }
+        
 
 
         /* Responsive Design */

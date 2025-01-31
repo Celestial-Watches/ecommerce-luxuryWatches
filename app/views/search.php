@@ -2,7 +2,7 @@
 session_start();
 define('ALLOW_ACCESS', true);
 include '../config/conn.php';
-include '../controllers/search-engine.php'; 
+include '../controllers/search-engine.php';
 
 // Get category and sort parameters from the URL
 $category = isset($_GET['category']) ? $_GET['category'] : '';
@@ -13,7 +13,7 @@ $sql = "SELECT * FROM products";
 
 
 if ($category) { // If a category is set, apply the filter to the query
-    $sql .= " WHERE product_category = ?"; 
+    $sql .= " WHERE product_category = ?";
 }
 
 // Add ORDER BY clause based on the selected sort option
@@ -37,9 +37,9 @@ $sql .= " LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sql);
 
 if ($category) {
-    $stmt->bind_param("ssi", $category, $limit, $offset); 
+    $stmt->bind_param("ssi", $category, $limit, $offset);
 } else {
-    $stmt->bind_param("ii", $limit, $offset); 
+    $stmt->bind_param("ii", $limit, $offset);
 }
 
 $stmt->execute();
@@ -565,7 +565,7 @@ $sortresult = $stmt->get_result();
                                 <div class="product-content">
                                     <div class="product-title">
                                         <h3 class="product-name">
-                                            <a href="#" class="name-link"><?php echo $name; ?></a>
+                                            <a href="details.php?id=<?php echo $row['id']; ?>" class="name-link"><?php echo $name; ?></a>
                                         </h3>
                                     </div>
                                     <div class="product-price">
@@ -622,7 +622,7 @@ $sortresult = $stmt->get_result();
 
     <!-- Include your scripts -->
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
-    <script src="/src/assets/js/index.js"async></script>
+    <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
 </body>

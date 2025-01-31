@@ -140,9 +140,33 @@ body{
     transition: rotate 150ms ease;
   }
 }
+
+.image-preview-container {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.image-preview {
+  max-width: 300px;
+  max-height: 200px;
+  object-fit: contain;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  display: none;
+}
+
+.preview-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-weight: 500;
+}
+
 button:hover, #toggle-btn:hover {
-  background-color: var(--accent-clr); /* Change to accent color on hover */
-  color: var(--base-clr); /* Inverse text color for better visibility */
+  background-color: var(--accent-clr); 
+  color: var(--base-clr); 
 }
 main{
   padding: min(30px, 7%);
@@ -163,18 +187,18 @@ main p{
 
 /* Hide the .noShow text by default */
 .noShow {
-  display: none; /* Hidden by default */
+  display: none; 
 }
 
 /* Show the .noShow text on larger screens (desktop/tablet) */
 @media (min-width: 801px) {
   .noShow {
-    display: block; /* Visible on desktop */
+    display: block; 
   }
 }
 
 .close .noShow {
-  display: none; /* Hide text when sidebar is closed */
+  display: none; 
 }
 
 @media(max-width: 800px){

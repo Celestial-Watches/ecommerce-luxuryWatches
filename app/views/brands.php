@@ -580,7 +580,7 @@ $total_pages = ceil($total_products / $limit);
                             <div class="product-content">
                                 <div class="product-title">
                                     <h3 class="product-name">
-                                        <a href="#" class="name-link"><?php echo $name; ?></a>
+                                        <a href="details.php?id=<?php echo $row['id']; ?>" class="name-link"><?php echo $name; ?></a>
                                     </h3>
                                 </div>
                                 <div class="product-price">
@@ -638,7 +638,7 @@ $total_pages = ceil($total_products / $limit);
     <!-- JS files -->
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
     <script src="/src/assets/js/index.js" async></script>
-    <script src="/src/assets/js/currency-language.js"async></script>
+    <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
 
 </body>

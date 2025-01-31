@@ -521,7 +521,7 @@
 
                     <button class="action-btn" id="wish-btn">
                         <ion-icon name="heart-outline"></ion-icon>
-                        <span class="count">0</span>
+                        <span class="count wish-count">0</span>
                     </button>
 
                     <div id="wishlist-drawer" class="cart-drawer">
@@ -535,7 +535,7 @@
 
                     <button class="action-btn" id="cart-btn">
                         <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count" id="cart-count">0</span>
+                        <span class="count cart-count" id="cart-count">0</span>
                     </button>
 
                     <div id="cart-drawer" class="cart-drawer">
@@ -552,6 +552,20 @@
             </div>
 
         </div>
+
+        <script>
+            function updateCartCount(newCount) {
+                document.querySelectorAll('.cart-count').forEach(el => {
+                    el.textContent = newCount;
+                });
+            }
+
+            function updateWishlistCount(newCount) {
+                document.querySelectorAll('.wish-count').forEach(el => {
+                    el.textContent = newCount;
+                });
+            }
+        </script>
 
         <nav class="desktop-navigation-menu">
 
@@ -1351,8 +1365,7 @@
         // Reload the page when the save button is clicked
         const saveSettingsBtn = document.getElementById('saveSettingsBtn');
         saveSettingsBtn.addEventListener('click', () => {
-            // Optionally, you can add any additional logic here before reloading
-            location.reload(); // Reload the page
+            location.reload();
         });
     </script>
 

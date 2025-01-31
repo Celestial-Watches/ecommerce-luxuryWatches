@@ -35,9 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tags = trim($_POST['tags']);
     $stock = trim($_POST['stock']);
     $description = trim($_POST['description']);
+    $material = trim($_POST['material']);
+    $glass = trim($_POST['glass']);
+    $dial_numerals = trim($_POST['dial_numerals']);
+    $movement = trim($_POST['movement']);
+    $water_resistance = trim($_POST['water_resistance']);
+    $clasp_type = trim($_POST['clasp_type']);
+    $power_reserve = trim($_POST['power_reserve']);
+    $bracelet_color = trim($_POST['bracelet_color']);
+    $gender = trim($_POST['gender']);
+    $case_diameter = trim($_POST['case_diameter']);
+    $case_material = trim($_POST['case_material']);
+    $clasp_material = trim($_POST['clasp_material']);
+    $bezel_material = trim($_POST['bezel_material']);
+    $bracelet_material = trim($_POST['bracelet_material']);
+    $functions = trim($_POST['functions']);
 
-    // Basic validation
-    if (empty($pcategory) || empty($name) || empty($price) || empty($year) || empty($ref_code) || empty($brand) || empty($tags) || empty($stock) || empty($description)) {
+    // validation
+    if (empty($pcategory) || empty($name) || empty($price) || empty($year) || empty($ref_code) || empty($brand) || empty($tags) || empty($stock) || empty($description) || empty($material) || empty($glass) || empty($dial_numerals) || empty($movement) || empty($water_resistance) || empty($clasp_type) || empty($power_reserve) || empty($bracelet_color) || empty($gender) || empty($case_diameter) || empty($case_material) || empty($clasp_material) || empty($bezel_material) || empty($bracelet_material) || empty($functions)) {
         $error = "All fields are required.";
     } else {
         // Handle image upload or URL
@@ -70,9 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO products (product_category,name, brand, price, year, ref_code, tags, stock, description, button_name, icon, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssssssssss", $pcategory, $name, $brand, $price, $year, $ref_code, $tags, $stock, $description, $button_name, $icon, $image);
             if ($stmt->execute()) {
-                // Redirect to the same page after successful insert
-                header("Location: " . $_SERVER['PHP_SELF']);
-                exit();
+                $product_id = $conn->insert_id;
+                $stmt = $conn->prepare("INSERT INTO product_details (product_id, material, glass, dial_numerals, movement, water_resistance, clasp_type, power_reserve, bracelet_color, gender, case_diameter, case_material, clasp_material, bezel_material, bracelet_material, functions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssssssssssssss", $product_id, $material, $glass, $dial_numerals, $movement, $water_resistance, $clasp_type, $power_reserve, $bracelet_color, $gender, $case_diameter, $case_material, $clasp_material, $bezel_material, $bracelet_material, $functions);
+                if ($stmt->execute()) {
+                    // Redirect to the same page after successful insert
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    $error = "Error adding product details.";
+                }
             } else {
                 $error = "Error adding product.";
             }
@@ -97,9 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-
-
-
     <div class="container mt-5">
         <h2 class="text-center" style="color: black;">Add New Product</h2>
 
@@ -164,6 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="ri-message-2-line">ri-message-2-line</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label style="color: black;" for="image_option">Select Image Type:</label>
                 <div>
@@ -173,13 +193,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label style="color: black;" for="upload_option">Upload Image</label>
                 </div>
             </div>
+
             <div id="url_field" class="form-group" style="display:none;">
                 <label style="color: black;" for="image_url">Image URL</label>
                 <input type="url" name="image_url" id="image_url" class="form-control" placeholder="Enter image URL">
+                <div class="image-preview-container">
+                    <span class="preview-label">URL Image Preview</span>
+                    <img id="urlPreview" class="image-preview" alt="URL image preview">
+                </div>
             </div>
+
             <div id="upload_field" class="form-group" style="display:none;">
                 <label style="color: black;" for="upload_image">Upload Image</label>
                 <input type="file" name="upload_image" id="upload_image" class="form-control-file">
+                <div class="image-preview-container">
+                    <span class="preview-label">Uploaded Image Preview</span>
+                    <img id="uploadPreview" class="image-preview" alt="Upload preview">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="color: black;" for="product-details">Product Details</label>
+                <div>
+                    <div class="form-group">
+                        <label style="color: black;" for="glass">Glass</label>
+                        <input type="text" name="glass" id="glass" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="dial_numerals">Dial Numerals</label>
+                        <input type="text" name="dial_numerals" id="dial_numerals" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="movement">Movement</label>
+                        <input type="text" name="movement" id="movement" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="water_resistance">Water Resistance</label>
+                        <input type="text" name="water_resistance" id="water_resistance" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="clasp_type">Clasp Type</label>
+                        <input type="text" name="clasp_type" id="clasp_type" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="power_reserve">Power Reserve</label>
+                        <input type="text" name="power_reserve" id="power_reserve" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="bracelet_color">Bracelet Color</label>
+                        <input type="text" name="bracelet_color" id="bracelet_color" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="gender">Gender</label>
+                        <input type="text" name="gender" id="gender" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="case_diameter">Case Diameter</label>
+                        <input type="text" name="case_diameter" id="case_diameter" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="color: black;" for="materials">Materials</label>
+                <div>
+                    <div class="form-group">
+                        <label style="color: black;" for="case_material">Case Material</label>
+                        <input type="text" name="case_material" id="case_material" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="clasp_material">Clasp Material</label>
+                        <input type="text" name="clasp_material" id="clasp_material" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="bezel_material">Bezel Material</label>
+                        <input type="text" name="bezel_material" id="bezel_material" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: black;" for="bracelet_material">Bracelet Material</label>
+                        <input type="text" name="bracelet_material" id="bracelet_material" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="color: black;" for="functions">Functions</label>
+                <textarea name="functions" id="functions" class="form-control" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Product</button>
         </form>
@@ -191,13 +288,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const urlField = document.getElementById('url_field');
             const uploadField = document.getElementById('upload_field');
             const urlOption = document.getElementById('url_option');
+
             if (urlOption.checked) {
                 urlField.style.display = 'block';
                 uploadField.style.display = 'none';
+                clearPreview('uploadPreview');
             } else {
                 urlField.style.display = 'none';
                 uploadField.style.display = 'block';
+                clearPreview('urlPreview');
             }
+        }
+
+        // URL image preview
+        document.getElementById('image_url').addEventListener('input', function(e) {
+            const preview = document.getElementById('urlPreview');
+            if (this.value) {
+                preview.style.display = 'block';
+                preview.src = this.value;
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // Uploaded image preview
+        document.getElementById('upload_image').addEventListener('change', function(e) {
+            const preview = document.getElementById('uploadPreview');
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.style.display = 'block';
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        function clearPreview(elementId) {
+            const preview = document.getElementById(elementId);
+            preview.style.display = 'none';
+            preview.src = '';
         }
     </script>
     <script type="text/javascript" src="../src/assets/js/panelNav.js" async></script>

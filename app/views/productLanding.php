@@ -533,7 +533,7 @@ $result = $stmt->get_result();
 
             <!-- Sort form -->
             <form method="GET" action="" class="sort-form">
-                <!-- Hidden field for category/type instead of brand -->
+                <!-- Hidden field for category -->
                 <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
 
                 <label for="sort" class="sort-label">Sort by</label>
@@ -591,7 +591,7 @@ $result = $stmt->get_result();
                             <div class="product-content">
                                 <div class="product-title">
                                     <h3 class="product-name">
-                                        <a href="#" class="name-link"><?php echo $name; ?></a>
+                                        <a href="details.php?id=<?php echo $row['id']; ?>" class="name-link"><?php echo $name; ?></a>
                                     </h3>
                                 </div>
                                 <div class="product-price">

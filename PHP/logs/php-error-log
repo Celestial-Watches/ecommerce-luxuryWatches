@@ -8017,3 +8017,213 @@ Stack trace:
 #0 D:\Marwadi university\Semester 5\PROJECT\admin\add-blogs.php(42): mysqli->query('INSERT INTO blo...')
 #1 {main}
   thrown in D:\Marwadi university\Semester 5\PROJECT\admin\add-blogs.php on line 42
+[20-Jan-2025 14:15:02 Europe/Berlin] PHP Warning:  require_once(simple_html_dom.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 5
+[20-Jan-2025 14:15:02 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'simple_html_dom.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php:5
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 5
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "plaintext" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 14
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "plaintext" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 15
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "plaintext" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 16
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "src" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 17
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "plaintext" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 18
+[20-Jan-2025 14:15:15 Europe/Berlin] PHP Warning:  Attempt to read property "plaintext" on null in D:\Marwadi university\Semester 5\AWT\CW\panel\scraping.php on line 19
+[20-Jan-2025 14:19:17 Europe/Berlin] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\AWT\CW\panel\product-detail.php on line 6
+[20-Jan-2025 14:19:17 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in D:\Marwadi university\Semester 5\AWT\CW\panel\product-detail.php:10
+Stack trace:
+#0 D:\Marwadi university\Semester 5\AWT\CW\panel\product-detail.php(10): mysqli->query('SELECT * FROM p...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\AWT\CW\panel\product-detail.php on line 10
+[30-Jan-2025 14:18:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:18:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:32:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:32:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:33:06 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:33:06 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:33:28 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:33:28 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:40:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:40:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:41:11 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:41:11 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:47:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:48:53 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:49:21 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:52:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:53:02 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:55:13 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:55:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 30
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 34
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 35
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 36
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 38
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 39
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 40
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 41
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 42
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 43
+[30-Jan-2025 14:55:56 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 44
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $reference in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 423
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $glass in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 424
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $dial_numerals in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 425
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $movement in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 426
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $water_resistance in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 427
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $clasp_type in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 428
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $power_reserve in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 429
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $bracelet_color in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 430
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $gender in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 431
+[30-Jan-2025 15:06:15 Asia/Kolkata] PHP Warning:  Undefined variable $case_diameter in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 432
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 411
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 411
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 420
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 421
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 422
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 439
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 440
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 455
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 456
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 471
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 472
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 502
+[30-Jan-2025 21:49:11 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 512
+[30-Jan-2025 23:13:41 Asia/Kolkata] PHP Warning:  Undefined variable $currentUrl in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 72
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $description in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 73
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 74
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 562
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 562
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 571
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 572
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 573
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 595
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 596
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 614
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 615
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 630
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 631
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 661
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 671
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 737
+[31-Jan-2025 12:34:35 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 738
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 14
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 15
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 16
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 18
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 19
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 21
+[31-Jan-2025 13:11:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 22
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 14
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 15
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 16
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 18
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 19
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 21
+[31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 22

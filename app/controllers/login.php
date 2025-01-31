@@ -15,8 +15,6 @@ date_default_timezone_set('Asia/Kolkata');
 session_start();
 ob_start();
 
-// Regenerate the session ID on every page refresh
-session_regenerate_id(true);
 
 $usernamee = isset($_COOKIE['rem_username']) ? $_COOKIE['rem_username'] : '';
 
@@ -42,10 +40,23 @@ require_once "../config/conn.php";
 
 $errors = [];
 
-// Check for session timeout
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
-  session_unset(); // Unset session data
-  session_destroy(); // Destroy session
+  // Update user status to 'NO' in the database
+  if (isset($_SESSION['user'])) {
+      $usernamee = $_SESSION['user'];
+      $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
+      if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+          mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+          mysqli_stmt_execute($updateStmt);
+          mysqli_stmt_close($updateStmt);
+      }
+  }
+
+  session_unset();  
+  session_destroy();
+
+  header("Location: login.php");
+  exit();
 }
 
 // Update last activity time
@@ -118,13 +129,11 @@ if (isset($_POST["login"])) {
             }
 
             // Check if user is admin
-            if ($user["role"] === "admin") { // Assuming 'role' column exists
+            if ($user["role"] === "admin") { // Check if user is admin
               $_SESSION["admin"] = true; // Set admin session
-              // Regenerate session ID 
-              session_regenerate_id(true);
               // Set session variables for admin
               $_SESSION["user"] = $usernamee;
-              $_SESSION["user_id"] = $user['id']; 
+              $_SESSION["user_id"] = $user['id'];
               $_SESSION["LAST_ACTIVITY"] = time();
               $_SESSION["CREATED"] = time();
               $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
@@ -135,9 +144,6 @@ if (isset($_POST["login"])) {
               header("Location: ../../index.php");
               exit();
             }
-
-            // Regenerate session ID
-            session_regenerate_id(true);
 
             // Set session variables and initialize session management
             $_SESSION["user"] = $usernamee;
@@ -171,6 +177,9 @@ if (isset($_POST["login"])) {
       }
     }
   }
+
+  // Regenerate session ID
+  session_regenerate_id(true);
 }
 
 
