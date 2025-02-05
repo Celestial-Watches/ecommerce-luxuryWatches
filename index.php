@@ -415,10 +415,6 @@ if (isset($_SESSION['user'])) {
     <?php include 'PHP/components/benefit.php' ?>
 
     <?php include 'PHP/components/footer.php' ?>
-
-
-
-
     <!-- ================================ JS ================================  -->
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
     <script src="/src/assets/js/index.js" async></script>

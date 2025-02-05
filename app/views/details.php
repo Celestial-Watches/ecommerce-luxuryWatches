@@ -60,6 +60,8 @@ if (isset($_GET['id'])) {
         }
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -542,6 +544,11 @@ if (isset($_GET['id'])) {
             image-rendering: high-quality;
             image-rendering: optimizeQuality;
         }
+
+        .reminder-btn{
+            background-color: white;
+            color: red;
+        }
     </style>
 </head>
 
@@ -605,9 +612,14 @@ if (isset($_GET['id'])) {
                             <img src="assets/image/contact-mail.png" alt="Contact">
                             Contact a personal advisor
                         </div>
-                        <button class="actionBtn" id="cart-btn-details" title="Add to Cart">
-                            <span>Add to Cart</span><ion-icon name="bag-handle-outline"></ion-icon>
-                        </button>
+                        <?php if ($isLoggedIn): ?>
+                            <button class="actionBtn" id="cart-btn-details" title="Add to Cart">
+                                <span>Add to Cart</span><ion-icon name="bag-handle-outline"></ion-icon>
+                            </button>
+                        <?php else: ?>
+                            <p class="request-button reminder-btn" onclick="window.location.href='../controllers/login.php'">Please login to add items to cart</p>
+                        <?php endif; ?>
+
                     </div>
                 </div>
                 <div class="footer-reference">
@@ -674,6 +686,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <?php include '../../PHP/components/footer.php' ?>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -802,6 +815,34 @@ if (isset($_GET['id'])) {
             }
         });
     </script>
+
+    <script>
+        var isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const product = {
+                id: <?= $id ?>,
+                image: '<?= $image ?>',
+                name: '<?= $name ?>',
+                brand: '<?= $brand ?>',
+                numericPrice: <?= ($numericPrice !== null) ? $numericPrice : 'null' ?>,
+                ref_code: '<?= $ref_code ?>',
+                isOnRequest: <?= ($numericPrice === null) ? 'true' : 'false' ?>
+            };
+
+            document.getElementById('wish-btn-details').addEventListener('click', () => {
+                addToWishlist(product);
+                renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
+            });
+
+            document.getElementById('cart-btn-details').addEventListener('click', () => {
+                addToCart(product);
+                renderDrawerContent(CART_KEY, cartDrawer);
+            });
+        });
+    </script>
+
 
 
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>

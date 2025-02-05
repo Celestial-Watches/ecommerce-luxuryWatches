@@ -8227,3 +8227,69 @@ Stack trace:
 [31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
 [31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 21
 [31-Jan-2025 13:11:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 22
+[05-Feb-2025 20:44:44 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:44:44 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:44:44 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 291
+[05-Feb-2025 20:44:44 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 291
+[05-Feb-2025 20:45:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 290
+[05-Feb-2025 20:45:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 290
+[05-Feb-2025 20:45:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 295
+[05-Feb-2025 20:45:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 295
+[05-Feb-2025 20:48:06 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:48:06 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:48:06 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 292
+[05-Feb-2025 20:48:06 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 292
+[05-Feb-2025 20:48:57 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:48:57 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 286
+[05-Feb-2025 20:48:57 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 292
+[05-Feb-2025 20:48:57 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 292
+[05-Feb-2025 20:49:49 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 282
+[05-Feb-2025 20:49:49 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 282
+[05-Feb-2025 20:51:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 287
+[05-Feb-2025 20:51:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 287
+[05-Feb-2025 20:51:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 294
+[05-Feb-2025 20:51:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 294
+[05-Feb-2025 20:52:39 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\index.php on line 428
+[05-Feb-2025 20:52:39 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\index.php on line 428
+[05-Feb-2025 20:52:39 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\index.php on line 435
+[05-Feb-2025 20:52:39 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\index.php on line 435
+[05-Feb-2025 20:54:30 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 208
+[05-Feb-2025 20:54:30 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 208
+[05-Feb-2025 20:56:45 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\index.php on line 104
+[05-Feb-2025 20:56:45 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\index.php on line 104
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\index.php on line 104
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\index.php on line 104
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 301
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 301
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 308
+[05-Feb-2025 21:01:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 308
+[05-Feb-2025 21:01:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 301
+[05-Feb-2025 21:01:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 301
+[05-Feb-2025 21:01:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 308
+[05-Feb-2025 21:01:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 308
+[05-Feb-2025 21:02:52 Asia/Kolkata] PHP Warning:  Undefined variable $conn in D:\Marwadi university\Semester 5\PROJECT\index.php on line 105
+[05-Feb-2025 21:02:52 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\index.php:105
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\index.php on line 105
+[05-Feb-2025 21:18:40 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 256
+[05-Feb-2025 21:18:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 256
+[05-Feb-2025 21:19:11 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 256
+[05-Feb-2025 21:19:11 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\PHP\components\featured-product.php on line 256
+[05-Feb-2025 19:37:02 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1596
+[05-Feb-2025 19:39:17 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1596
+[05-Feb-2025 19:42:44 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1598
+[05-Feb-2025 19:51:30 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:51:38 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:51:44 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:51:50 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:51:54 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:53:53 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1641
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1645
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1727
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1728
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1729
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1730
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1731
+[05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1733
+[05-Feb-2025 19:57:03 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1645

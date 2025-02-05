@@ -2,7 +2,14 @@
     header("Location: ../../index.php");
     exit();
 }
+$_SESSION['cart'] = $_SESSION['cart'] ?? [];
+$_SESSION['wishlist'] = $_SESSION['wishlist'] ?? [];
+$isLoggedIn = isset($_SESSION['user_id']);
 ?>
+
+<script>
+    var userId = <?php echo $isLoggedIn ? json_encode($_SESSION['user_id']) : 'null'; ?>;
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,7 +126,7 @@
             height: 100%;
             background-color: #fff;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 999;
+            z-index: 9999;
             transition: right 0.3s ease-in-out;
             overflow-y: auto;
         }
@@ -149,15 +156,123 @@
             font-size: 24px;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: 4px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -100%);
+            }
+
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .notification.error {
+            background: #c44;
+        }
+
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .drawer-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info h3 {
+            font-size: 16px;
+            margin: 0 0 5px;
+            font-weight: 500;
+        }
+
+        .item-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333 !important;
+            margin-top: 5px !important;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+
+        .qty-btn {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
+        }
+
         /* Mobile Styles */
         @media (max-width: 768px) {
 
             /* Adjust the width of the drawer for mobile */
             .cart-drawer {
                 width: 100%;
-                /* Full width on mobile */
                 right: -100%;
-                /* Initially hide the drawer */
+            }
+
+            .mobile-bottom-navigation .action-btn {
+                padding: 12px;
+                font-size: 1.2em;
             }
 
             /* Cart button and other buttons in mobile */
@@ -311,6 +426,17 @@
 
         .arrow.rotate {
             transform: rotate(180deg);
+        }
+
+        .price[data-on-request]::after {
+            content: "ON REQUEST";
+            color: #666;
+            font-style: italic;
+        }
+
+        .price.on-request {
+            color: #c00;
+            font-weight: bold;
         }
     </style>
 
@@ -475,10 +601,11 @@
 
             <div class="container">
 
-                <a href="#" class="header-logo">
-                    <img src="" loading="lazy" alt="Celestial logo" width="120" height="36">
-                </a>
-
+                <div class="logoCont">
+                    <a href="../../index.php" class="header-logo">
+                        <img src="../../celestial-logo.png" loading="lazy" alt="Celestial logo" width="120" height="36">
+                    </a>
+                </div>
                 <div class="header-search-container">
                     <form action="../../app/views/search.php" method="GET" id="searchForm">
                         <input type="search" name="search" id="searchInput" class="search-field" placeholder="Enter your product name..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" autocomplete="off">
@@ -521,7 +648,7 @@
 
                     <button class="action-btn" id="wish-btn">
                         <ion-icon name="heart-outline"></ion-icon>
-                        <span class="count wish-count">0</span>
+                        <span class="count wish-count global-wish-counter">0</span>
                     </button>
 
                     <div id="wishlist-drawer" class="cart-drawer">
@@ -535,7 +662,7 @@
 
                     <button class="action-btn" id="cart-btn">
                         <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count cart-count" id="cart-count">0</span>
+                        <span class="count cart-count global-cart-counter" id="cart-count">0</span>
                     </button>
 
                     <div id="cart-drawer" class="cart-drawer">
@@ -552,20 +679,6 @@
             </div>
 
         </div>
-
-        <script>
-            function updateCartCount(newCount) {
-                document.querySelectorAll('.cart-count').forEach(el => {
-                    el.textContent = newCount;
-                });
-            }
-
-            function updateWishlistCount(newCount) {
-                document.querySelectorAll('.wish-count').forEach(el => {
-                    el.textContent = newCount;
-                });
-            }
-        </script>
 
         <nav class="desktop-navigation-menu">
 
@@ -752,19 +865,27 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </button>
 
-            <button class="action-btn" id="cart-btn">
+            <!-- Cart -->
+
+            <button class="action-btn" id="mobile-cart-btn">
                 <ion-icon name="bag-handle-outline"></ion-icon>
-                <span class="count" id="cart-count">0</span>
+                <span class="count cart-count global-cart-counter">0</span>
             </button>
+
+            <!-- Homepage -->
 
             <button class="action-btn" onclick="window.location.href ='http://localhost:3000/index.php';">
                 <ion-icon name="home-outline"></ion-icon>
             </button>
 
-            <button class="action-btn" id="wish-btn">
+            <!-- wishlist -->
+
+            <button class="action-btn" id="mobile-wish-btn">
                 <ion-icon name="heart-outline"></ion-icon>
-                <span class="count">0</span>
+                <span class="count wish-count global-wish-counter">0</span>
             </button>
+
+            <!-- Profile -->
 
             <button class="action-btn profile-btn" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';" data-mobile-menu-open-btn>
                 <ion-icon name="person-outline"></ion-icon>
@@ -1174,8 +1295,6 @@
                 }
 
                 // ============================= NAVIGATION CLOSE =============================
-                console.log('Action Buttons:', actionBtns);
-                console.log('Accordion Buttons:', accordionBtns);
 
             });
 
@@ -1188,7 +1307,7 @@
             const searchInput = document.getElementById('searchInput');
             const suggestions = document.getElementById('suggestions');
             const searchForm = document.getElementById('searchForm');
-            let selectedIndex = -1; // Track the currently selected suggestion
+            let selectedIndex = -1; // Index of the selected suggestion
 
             if (searchInput) {
                 searchInput.addEventListener('input', function() {
@@ -1283,7 +1402,7 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cartBtn = document.getElementById('cart-btn');
             const wishlistBtn = document.getElementById('wish-btn');
@@ -1324,13 +1443,12 @@
                 closeDrawer(wishlistDrawer, wishlistBtn);
             });
         });
-    </script>
+    </script> -->
 
     <script>
-        // JavaScript code to handle dropdown functionality
         const langCurrBox = document.getElementById('langCurrBox');
         const langCurrTrigger = document.querySelector('.lang-curr');
-        const dropdownArrow = langCurrTrigger.querySelector('.arrow'); // Select the arrow
+        const dropdownArrow = langCurrTrigger.querySelector('.arrow');
 
         // Open/Close Dropdown on Click
         langCurrTrigger.addEventListener('click', (event) => {
@@ -1366,6 +1484,360 @@
         const saveSettingsBtn = document.getElementById('saveSettingsBtn');
         saveSettingsBtn.addEventListener('click', () => {
             location.reload();
+        });
+    </script>
+
+    <script>
+        // Handle login
+        document.querySelectorAll('.styled-login[href*="login"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Migrate from sessionStorage to user-specific localStorage
+                const cart = getStorage(CART_BASE_KEY);
+                const wishlist = getStorage(WISHLIST_BASE_KEY);
+
+                if (!userId) {
+                    sessionStorage.removeItem(CART_BASE_KEY);
+                    sessionStorage.removeItem(WISHLIST_BASE_KEY);
+                }
+            });
+        });
+
+        // Handle logout
+        document.querySelectorAll('[href*="logout"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Clear user-specific storage
+                if (userId) {
+                    localStorage.removeItem(`${CART_BASE_KEY}_${userId}`);
+                    localStorage.removeItem(`${WISHLIST_BASE_KEY}_${userId}`);
+                }
+                // Clear guest storage
+                sessionStorage.removeItem(CART_BASE_KEY);
+                sessionStorage.removeItem(WISHLIST_BASE_KEY);
+                // Redirect to logout page
+                window.location.href = btn.href;
+            });
+        });
+
+        // Function to toggle visibility of buttons based on login status
+        function toggleAddToButtons(isLoggedIn) {
+            const addToCartBtns = document.querySelectorAll('.add-to-cart');
+            const addToWishlistBtns = document.querySelectorAll('.add-to-wishlist');
+
+            addToCartBtns.forEach(btn => {
+                btn.style.display = isLoggedIn ? 'inline-block' : 'none';
+            });
+
+            addToWishlistBtns.forEach(btn => {
+                btn.style.display = isLoggedIn ? 'inline-block' : 'none';
+            });
+        }
+
+        // Sync storage on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (<?= $isLoggedIn ? 'true' : 'false' ?>) {
+                const sessionCart = sessionStorage.getItem(CART_KEY);
+                const sessionWishlist = sessionStorage.getItem(WISHLIST_KEY);
+
+                if (sessionCart) {
+                    localStorage.setItem(CART_KEY, sessionCart);
+                    sessionStorage.removeItem(CART_KEY);
+                }
+
+                if (sessionWishlist) {
+                    localStorage.setItem(WISHLIST_KEY, sessionWishlist);
+                    sessionStorage.removeItem(WISHLIST_KEY);
+                }
+
+                // Show "Add to Cart" and "Add to Wishlist" buttons
+                toggleAddToButtons(true);
+            } else {
+                // Hide "Add to Cart" and "Add to Wishlist" buttons
+                toggleAddToButtons(false);
+            }
+        });
+
+
+        // Cart and Wishlist Management
+        const CART_KEY = 'cart_items';
+        const WISHLIST_KEY = 'wishlist_items';
+
+        const cartDrawer = document.getElementById('cart-drawer');
+        const wishlistDrawer = document.getElementById('wishlist-drawer');
+
+        // Storage Functions
+        const getStorage = (baseKey) => {
+            const key = userId ? `${baseKey}_${userId}` : baseKey;
+            const storage = userId ? localStorage : sessionStorage;
+            return JSON.parse(storage.getItem(key)) || [];
+        };
+
+        const setStorage = (baseKey, items) => {
+            const key = userId ? `${baseKey}_${userId}` : baseKey;
+            const storage = userId ? localStorage : sessionStorage;
+            storage.setItem(key, JSON.stringify(items));
+        };
+
+        // Update all instances where CART_KEY and WISHLIST_KEY are used
+        const CART_BASE_KEY = 'cart';
+        const WISHLIST_BASE_KEY = 'wishlist';
+
+        // Notification System
+        function showNotification(message, isError = false) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${isError ? 'error' : ''}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Update Counters
+        function updateCounters() {
+            document.querySelectorAll('.global-cart-counter').forEach(el => {
+                el.textContent = getStorage(CART_KEY).length;
+            });
+
+            document.querySelectorAll('.global-wish-counter').forEach(el => {
+                el.textContent = getStorage(WISHLIST_KEY).length;
+            });
+        }
+
+        // Add to Cart/Wishlist Functions
+        function addToCart(product) {
+            if (!isLoggedIn) {
+                showNotification('Please login to add items to cart', true);
+                setTimeout(() => window.location.href = '../../app/controllers/login.php', 5000);
+                return;
+            }
+
+            if (!product.numericPrice) {
+                showNotification('This product is available on request only', true);
+                return;
+            }
+
+            const cart = getStorage(CART_KEY);
+            const existing = cart.find(item => item.id === product.id);
+
+            if (!existing) {
+                cart.push({
+                    ...product,
+                    quantity: 1,
+                    addedAt: new Date().toISOString(),
+                    currency: getCurrentCurrency()
+                });
+                setStorage(CART_KEY, cart);
+                updateCounters();
+                showNotification('Item added to cart');
+            }
+            setStorage(CART_BASE_KEY, cart);
+        }
+
+        function getCurrentCurrency() {
+            return localStorage.getItem('currency') || 'usd';
+        }
+
+        function addToWishlist(product) {
+            if (!isLoggedIn) {
+                showNotification('Please login to add items to wishlist', true);
+                setTimeout(() => window.location.href = '../../app/controllers/login.php', 5000);
+                return;
+            }
+
+            const wishlist = getStorage(WISHLIST_KEY);
+            if (!wishlist.find(item => item.id === product.id)) {
+                wishlist.push({
+                    ...product,
+                    numericPrice: product.numericPrice !== null ? product.numericPrice : null,
+                    isOnRequest: product.numericPrice === null
+                });
+                setStorage(WISHLIST_KEY, wishlist);
+                updateCounters();
+                showNotification('Item added to wishlist');
+            }
+            setStorage(WISHLIST_BASE_KEY, wishlist);
+        }
+
+        function convertAndFormatPrice(usdPrice) {
+            if (usdPrice === null || isNaN(usdPrice)) {
+                return 'ON REQUEST';
+            }
+
+            const currency = getCurrentCurrency();
+            const rates = JSON.parse(localStorage.getItem('conversionRates')) || {
+                USD: 1
+            };
+            const rate = rates[currency.toUpperCase()] || 1;
+
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency.toUpperCase(),
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(usdPrice * rate);
+        }
+
+        // Drawer Content Rendering
+        function renderDrawerContent(key, drawer) {
+            const items = getStorage(key);
+            const content = drawer.querySelector('.cart-drawer-content');
+
+            // Clear existing content
+            while (content.children.length > 2) content.removeChild(content.lastChild);
+
+            if (items.length === 0) {
+                const empty = document.createElement('p');
+                empty.className = 'empty-message';
+                empty.textContent = 'Your ' + (key === CART_KEY ? 'cart' : 'wishlist') + ' is empty';
+                content.appendChild(empty);
+                return;
+            }
+
+            items.forEach(item => {
+                const isCart = key === CART_KEY;
+                const numericValue = isCart ? item.numericPrice * (item.quantity || 1) : item.numericPrice;
+                const displayPrice = convertAndFormatPrice(numericValue);
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'drawer-item';
+                itemEl.dataset.itemId = item.id;
+
+                itemEl.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div class="item-info">
+                    <h3>${item.brand} ${item.name}</h3>
+                    <p>Ref: ${item.ref_code}</p>
+                    ${isCart ? `<div class="quantity-controls">
+                        <button class="qty-btn" data-action="decrease">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="qty-btn" data-action="increase">+</button>
+                    </div>` : ''}
+                    <p class="price">
+                        ${isCart ? `${convertAndFormatPrice(item.numericPrice)} × ${item.quantity} = ` : ''}
+                        ${displayPrice}
+                    </p>
+                </div>
+                <button class="remove-btn">&times;</button>
+            `;
+
+                itemEl.querySelector('.price').textContent = displayPrice;
+
+                itemEl.querySelector('.remove-btn').addEventListener('click', () => {
+                    const updated = getStorage(key).filter(i => i.id !== item.id);
+                    setStorage(key, updated);
+                    renderDrawerContent(key, drawer);
+                    updateCounters();
+                });
+
+                if (key === CART_KEY) {
+                    const qtyControls = itemEl.querySelector('.quantity-controls');
+                    qtyControls.addEventListener('click', (e) => {
+                        if (e.target.tagName === 'BUTTON') {
+                            const action = e.target.dataset.action;
+                            const updated = getStorage(CART_KEY).map(i => {
+                                if (i.id === item.id) {
+                                    i.quantity = action === 'increase' ? i.quantity + 1 : Math.max(1, i.quantity - 1);
+                                }
+                                return i;
+                            });
+                            setStorage(CART_KEY, updated);
+                            renderDrawerContent(key, drawer);
+                            updateCounters();
+                        }
+                    });
+                }
+
+                content.appendChild(itemEl);
+            });
+
+            if (key === CART_KEY) {
+                const checkoutBtn = document.createElement('button');
+                checkoutBtn.className = 'checkout-btn';
+                checkoutBtn.textContent = 'Proceed to Checkout';
+                checkoutBtn.addEventListener('click', () => {
+                    if (!isLoggedIn) {
+                        showNotification('Please login to proceed to checkout', true);
+                        setTimeout(() => window.location.href = '../../app/controllers/login.php', 5000);
+                        return;
+                    }
+                    window.location.href = '/checkout.php';
+                });
+                content.appendChild(checkoutBtn);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounters();
+
+            if (userId) {
+                const cart = getStorage(CART_BASE_KEY);
+                const wishlist = getStorage(WISHLIST_BASE_KEY);
+
+            }
+
+            // Get references to the drawers
+            const cartDrawer = document.getElementById('cart-drawer');
+            const wishlistDrawer = document.getElementById('wishlist-drawer');
+
+            // Handle both desktop and mobile buttons using querySelectorAll
+            document.getElementById('cart-btn, mobile-cart-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    cartDrawer.style.right = '0';
+                    renderDrawerContent(CART_KEY, cartDrawer);
+                });
+            });
+
+            document.getElementById('wish-btn, mobile-wish-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    wishlistDrawer.style.right = '0';
+                    renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
+                });
+            });
+
+            // Close handlers
+            document.getElementById('cart-close-btn').addEventListener('click', () => {
+                cartDrawer.style.right = '-400px';
+            });
+
+            document.getElementById('wishlist-close-btn').addEventListener('click', () => {
+                wishlistDrawer.style.right = '-400px';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle quantity changes through event delegation
+            document.querySelector('.cart-drawer-content').addEventListener('click', function(e) {
+                const button = e.target.closest('[data-action]');
+                if (!button) return;
+
+                const action = button.dataset.action;
+                const itemElement = button.closest('.drawer-item');
+                const itemId = itemElement.dataset.itemId;
+
+                const cart = getStorage(CART_KEY);
+                const itemIndex = cart.findIndex(item => item.id == itemId);
+
+                if (itemIndex === -1) return;
+
+                // Update quantity
+                if (action === 'increase') {
+                    cart[itemIndex].quantity++;
+                } else if (action === 'decrease') {
+                    cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
+                }
+
+                setStorage(CART_KEY, cart);
+                renderDrawerContent(CART_KEY, cartDrawer);
+                updateCounters();
+            });
+        });
+
+        document.addEventListener('currencyChanged', () => {
+            renderDrawerContent(CART_KEY, cartDrawer);
+            renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
         });
     </script>
 

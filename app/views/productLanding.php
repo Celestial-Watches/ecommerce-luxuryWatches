@@ -78,7 +78,6 @@ $result = $stmt->get_result();
 </head>
 
 <style type="text/css" media="all">
-    /* Container for the result text and filter button */
     .filter-head-container {
         display: flex;
         align-items: center;
@@ -116,7 +115,6 @@ $result = $stmt->get_result();
         position: relative;
         cursor: pointer;
         width: auto;
-        /* Default width */
     }
 
     .filter-item::after {
@@ -396,7 +394,7 @@ $result = $stmt->get_result();
         font-weight: 400;
     }
 
-    .product-price {
+    .product-price, .price {
         font-size: 17px !important;
         font-weight: 400 !important;
         line-height: 30px !important;

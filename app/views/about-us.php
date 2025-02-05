@@ -1,4 +1,4 @@
-<?php define('ALLOW_ACCESS', true); ?>
+<?php define('ALLOW_ACCESS', true);  session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -917,7 +917,7 @@
             </div>
         </div>
         <div class="map-container">
-            <img src="https://cdn1.ethoswatches.com/media/desktop/cmspage/globe-pin.svg" loading="lazy" alt="World Map" class="map-image">
+            <img src="../../globe-pin.png" loading="lazy" alt="World Map" class="map-image">
         </div>
     </section>
 

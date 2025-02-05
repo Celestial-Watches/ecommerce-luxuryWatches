@@ -182,14 +182,12 @@
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(20px);
-            /* Move elements slightly downwards */
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
-            /* Bring elements to their original position */
         }
     </style>
 </head>

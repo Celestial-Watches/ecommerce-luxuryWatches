@@ -466,7 +466,7 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   padding: 5px 0;
   box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.25);
-  z-index: 5;
+  z-index: 9998;
 }
 
 .mobile-bottom-navigation .action-btn {
@@ -908,6 +908,7 @@ body::-webkit-scrollbar-thumb:hover {
   .header-social-container,
   .header-top-actions {
     display: none;
+    padding-top: 5px;
   }
 
   .header-alert-news {

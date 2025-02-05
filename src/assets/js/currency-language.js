@@ -32,13 +32,14 @@
             }
         } catch (error) {
             console.error(`Error parsing localStorage data for ${key}:`, error);
-            return true; 
+            return true;
         }
     }
 
     function toggleLoadingIndicator(show) {
         document.getElementById('loading').style.display = show ? 'block' : 'none';
     }
+
 
     function selectCurrency(currency) {
         document.querySelector(".current-currency").textContent = currency.toUpperCase();
@@ -50,12 +51,15 @@
 
         const currencyButton = document.getElementById("selectedCurrency");
         if (currencyButton) {
-            const currencySymbol = currencySymbols[currency.toLowerCase()] || '$'; 
+            const currencySymbol = currencySymbols[currency.toLowerCase()] || '$';
             currencyButton.innerHTML = `${currency.toUpperCase()} ${currencySymbol}`;
         }
 
         const currencyData = { currency, timestamp: Date.now(), expiresAt: Date.now() + 3 * 60 * 60 * 1000 };
         localStorage.setItem(STORAGE_KEY_CURRENCY_DATA, encryptData(currencyData));
+
+        localStorage.setItem('currency', currency);
+        document.dispatchEvent(new CustomEvent('currencyChanged'));
     }
 
     function setLanguageDisplay(lang) {
@@ -90,7 +94,7 @@
                 ar: 'https://www.worldometers.info/img/flags/small/tn_sa-flag.gif',
             };
             flagImg.src = flagUrls[lang] || flagUrls['en'];
-            localStorage.setItem('selectedLanguageFlag', flagImg.src); 
+            localStorage.setItem('selectedLanguageFlag', flagImg.src);
         }
     }
 
@@ -165,6 +169,8 @@
             }
         }
     }
+
+    window.fetchConversionRates = fetchConversionRates;
 
     async function fetchUser(Currency) {
         const savedCurrency = localStorage.getItem(STORAGE_KEY_CURRENCY_DATA);
@@ -259,9 +265,8 @@
             } else {
                 console.error('Google Translate dropdown not found.');
             }
-        }, 100); 
+        }, 100);
     }
-    
 
     window.onload = function () {
         const savedLanguage = localStorage.getItem(STORAGE_KEY_LANGUAGE);
