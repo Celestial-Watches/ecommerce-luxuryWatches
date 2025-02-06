@@ -503,7 +503,7 @@ $sortresult = $stmt->get_result();
             <?php endif; ?>
         </div>
 
-        <?php if ($search): ?> <!-- Only show the product grid and pagination if search is provided -->
+        <?php if ($search): ?> 
             <div class="filter-head-container">
                 <!-- Results and Filter Button -->
                 <div class="top-container">
@@ -580,9 +580,9 @@ $sortresult = $stmt->get_result();
                                         </div>
                                     </div>
                                     <div class="product-button">
-                                        <button class="cta-button">
+                                        <button class="cta-button actionBtn" id="cart-btn-details">
                                             <i style="padding: 2%;" class="<?php echo $icon; ?>"></i>
-                                            <a class="button-link" href="#"><?php echo $button_name; ?></a>
+                                            <a class="button-link" href="details.php?id=<?php echo $row['id']; ?>"><?php echo $button_name; ?></a>
                                         </button>
                                     </div>
                                 </div>
@@ -625,6 +625,7 @@ $sortresult = $stmt->get_result();
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
+    <script src="/src/assets/js/imagePreview.js"></script>
 </body>
 
 </html>

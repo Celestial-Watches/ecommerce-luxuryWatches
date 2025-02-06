@@ -545,7 +545,7 @@ if (isset($_GET['id'])) {
             image-rendering: optimizeQuality;
         }
 
-        .reminder-btn{
+        .reminder-btn {
             background-color: white;
             color: red;
         }
@@ -566,7 +566,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="slider">
-                <img class="watch1" src="<?php echo $image; ?>" alt="<?php echo $name; ?>" id="zoom-image">
+                <img class="watch1 preview-image" src="<?php echo $image; ?>" alt="<?php echo $name; ?>" id="zoom-image" data-preview="<?php echo $image; ?>">
             </div>
             <div class="magnifier" id="magnifier">
                 <ion-icon name="search-outline"></ion-icon>
@@ -821,6 +821,7 @@ if (isset($_GET['id'])) {
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
             const product = {
                 id: <?= $id ?>,
                 image: '<?= $image ?>',
@@ -830,6 +831,7 @@ if (isset($_GET['id'])) {
                 ref_code: '<?= $ref_code ?>',
                 isOnRequest: <?= ($numericPrice === null) ? 'true' : 'false' ?>
             };
+            
 
             document.getElementById('wish-btn-details').addEventListener('click', () => {
                 addToWishlist(product);

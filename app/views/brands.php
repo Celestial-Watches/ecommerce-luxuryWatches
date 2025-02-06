@@ -640,6 +640,7 @@ $total_pages = ceil($total_products / $limit);
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
+    <script src="/src/assets/js/imagePreview.js" async></script>
 
 </body>
 

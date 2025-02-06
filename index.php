@@ -419,7 +419,7 @@ if (isset($_SESSION['user'])) {
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
-    <!-- <script src="/src/assets/js/cookie-monitor.js" async></script> -->
+    <script src="/src/assets/js/cookie-monitor.js" async></script>
 
 
 </body>

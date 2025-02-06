@@ -198,12 +198,10 @@ $result = $stmt->get_result();
     /* For screen sizes 1280px or less */
     @media (max-width: 1280px) {
 
-        /* Hide the filter container */
         .filter-container {
             display: none;
         }
 
-        /* Remove background and border from filter button */
         .filter-button {
             background: none;
             border: none;
@@ -216,7 +214,6 @@ $result = $stmt->get_result();
             background: url(https://www.watchesworld.com/wp-content/themes/ww2/assets/images/shop/filter-btn-black.svg) no-repeat center;
         }
 
-        /* Adjust layout */
         .filter-head-container {
             flex-direction: column;
             align-items: flex-start;
@@ -225,12 +222,10 @@ $result = $stmt->get_result();
             flex-wrap: wrap;
         }
 
-        /* Align filter button to the left */
         .filter-button {
             order: -1;
         }
 
-        /* Position results-count below filter button with sort-form aligned to the right */
         .top-container {
             width: 100%;
             display: flex;
@@ -240,7 +235,6 @@ $result = $stmt->get_result();
             gap: 20px;
         }
 
-        /* Make results-count appear below filter-button */
         .results-count {
             margin-top: 10px;
             order: 1;
@@ -250,12 +244,10 @@ $result = $stmt->get_result();
     /* For screen sizes 375px or less */
     @media (max-width: 375px) {
 
-        /* Hide sort-label text */
         .sort-label {
             display: none;
         }
 
-        /* Maintain single-line layout */
         .top-container {
             flex-wrap: nowrap;
         }
@@ -286,7 +278,6 @@ $result = $stmt->get_result();
         .product-grid,
         .single-row {
             grid-template-columns: repeat(4, minmax(250px, 1fr));
-            /* 4 items per row */
         }
     }
 
@@ -295,7 +286,6 @@ $result = $stmt->get_result();
         .product-grid,
         .single-row {
             grid-template-columns: repeat(3, minmax(250px, 1fr));
-            /* 3 items per row */
         }
     }
 
@@ -304,7 +294,6 @@ $result = $stmt->get_result();
         .product-grid,
         .single-row {
             grid-template-columns: repeat(2, minmax(250px, 1fr));
-            /* 2 items per row */
         }
     }
 
@@ -313,7 +302,6 @@ $result = $stmt->get_result();
         .product-grid,
         .single-row {
             grid-template-columns: repeat(1, 1fr);
-            /* 1 item per row */
         }
     }
 
@@ -397,7 +385,6 @@ $result = $stmt->get_result();
     .product-price, .price {
         font-size: 17px !important;
         font-weight: 400 !important;
-        line-height: 30px !important;
         font-family: 'Univers LT Std', sans-serif !important;
         color: #000 !important;
         margin-top: 8px !important;
