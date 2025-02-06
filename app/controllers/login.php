@@ -43,16 +43,16 @@ $errors = [];
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
   // Update user status to 'NO' in the database
   if (isset($_SESSION['user'])) {
-      $usernamee = $_SESSION['user'];
-      $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
-      if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
-          mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
-          mysqli_stmt_execute($updateStmt);
-          mysqli_stmt_close($updateStmt);
-      }
+    $usernamee = $_SESSION['user'];
+    $updateSql = "UPDATE users SET status = 'NO' WHERE username = ?";
+    if ($updateStmt = mysqli_prepare($conn, $updateSql)) {
+      mysqli_stmt_bind_param($updateStmt, "s", $usernamee);
+      mysqli_stmt_execute($updateStmt);
+      mysqli_stmt_close($updateStmt);
+    }
   }
 
-  session_unset();  
+  session_unset();
   session_destroy();
 
   header("Location: login.php");
@@ -100,6 +100,13 @@ if (isset($_POST["login"])) {
           $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
           $_SESSION['otp_verified'] = true;
 
+          // Loggin user activity
+          $userId = $_SESSION['user_id'];
+          $activityType = 'Auto Login';
+          $description = 'User logged in successfully.';
+
+          logUserActivity($userId, $activityType, $description);
+
           // Redirect to index after auto-login
           header("Location: ../../index.php");
           exit();
@@ -140,7 +147,13 @@ if (isset($_POST["login"])) {
               $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
               $_SESSION['otp_verified'] = true;
 
-              // Redirect to admin verification page
+              // Loggin user activity
+              $userId = $_SESSION['user_id'];
+              $activityType = 'Login';
+              $description = 'Admin logged in successfully.';
+              logUserActivity($userId, $activityType, $description);
+
+
               header("Location: ../../index.php");
               exit();
             }
@@ -155,13 +168,17 @@ if (isset($_POST["login"])) {
             $_SESSION['otp_verified'] = true;
 
             if (isset($_POST['remember'])) {
-              // Set cookie for 1 hour
               setcookie('temp', '1', time() + 3600, '/', '', true, true);
             } else {
               setcookie('temp', '', time() - 3600, '/', '', true, true);
             }
 
-            // Redirect to the main index page
+            // Loggin user activity
+            $userId = $_SESSION['user_id'];
+            $activityType = 'Login';
+            $description = 'User logged in successfully.';
+            logUserActivity($userId, $activityType, $description);
+
             header("Location: ../../index.php");
             exit();
           } else {

@@ -3,6 +3,8 @@ if (!defined('ALLOW_ACCESS')) {
   header("Location: ../index.php");
   exit();
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,10 +56,9 @@ if (!defined('ALLOW_ACCESS')) {
         </button>
         <ul class="sub-menu">
           <div>
-            <li><a href="#">View Users</a></li>
-            <li><a href="#">Add/Edit User</a></li>
-            <li><a href="#">User Roles & Permissions</a></li>
-            <li><a href="#">User Activity Logs</a></li>
+            <li><a href="/admin/users/view_users.php">View Users</a></li>
+            <li><a href="/admin/users/add-edit-users.php">Add/Edit User</a></li>
+            <li><a href="/admin/users/user-activity-log.php">User Activity Logs</a></li>
             <li><a href="#">Support Queries</a></li>
           </div>
         </ul>
@@ -318,7 +319,7 @@ if (!defined('ALLOW_ACCESS')) {
       </li>
 
       <li>
-        <a href="../app/controllers/logout.php">
+        <a href="/app/controllers/logout.php">
           <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" transform="scale(-1, 1)">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2" />
           </svg>

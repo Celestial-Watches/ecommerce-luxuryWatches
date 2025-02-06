@@ -8293,3 +8293,270 @@ Stack trace:
 [05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1731
 [05-Feb-2025 19:56:41 Europe/Berlin] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1733
 [05-Feb-2025 19:57:03 Europe/Berlin] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php on line 1645
+[06-Feb-2025 20:11:08 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(9): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\index.php(85): require('D:\\Marwadi univ...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 9
+[06-Feb-2025 20:11:23 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(9): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 9
+[06-Feb-2025 20:11:33 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(9): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 9
+[06-Feb-2025 15:55:52 Europe/Berlin] PHP Warning:  include(header.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 1
+[06-Feb-2025 15:55:52 Europe/Berlin] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 1
+[06-Feb-2025 20:25:52 Asia/Kolkata] PHP Warning:  Undefined variable $db in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 48
+[06-Feb-2025 20:25:52 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php:48
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 48
+[06-Feb-2025 20:27:37 Asia/Kolkata] PHP Warning:  Undefined variable $db in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 20:27:37 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php:63
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 20:28:02 Asia/Kolkata] PHP Warning:  Undefined variable $db in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 20:28:02 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php:63
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 20:28:05 Asia/Kolkata] PHP Warning:  Undefined variable $db in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 20:28:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php:63
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users-setting\users_view.php on line 63
+[06-Feb-2025 17:20:25 Europe/Berlin] PHP Warning:  require_once(D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\users\view_users.php on line 21
+[06-Feb-2025 17:20:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\users\view_users.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\view_users.php on line 21
+[06-Feb-2025 21:51:26 Asia/Kolkata] PHP Warning:  require_once(D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 22
+[06-Feb-2025 21:51:26 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:22
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 22
+[06-Feb-2025 21:52:06 Asia/Kolkata] PHP Warning:  require_once(D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 22
+[06-Feb-2025 21:52:06 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\admin\users/../app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:22
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 22
+[06-Feb-2025 21:54:14 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:14 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 4
+[06-Feb-2025 21:54:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 4
+[06-Feb-2025 21:54:44 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:44 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:46 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:54:46 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 4
+[06-Feb-2025 21:54:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 4
+[06-Feb-2025 21:54:50 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:54:50 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:17 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:17 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:18 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:18 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:19 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:20 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:55:20 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:55:23 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:23 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:35 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:35 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:37 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:55:37 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 4
+[06-Feb-2025 21:55:40 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:40 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:55:51 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:55:51 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:6
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:56:31 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:56:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:6
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:56:43 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:56:43 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:56:43 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:56:43 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:57:01 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:57:01 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:6
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 6
+[06-Feb-2025 21:57:04 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:57:04 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:05 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:05 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:58:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:58:17 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:17 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:17 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:58:17 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:58:34 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:34 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:58:34 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:58:34 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:59:22 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:59:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:59:22 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:59:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:59:31 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:59:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_users.php on line 7
+[06-Feb-2025 21:59:31 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:59:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_chart_data.php on line 7
+[06-Feb-2025 21:59:46 Asia/Kolkata] PHP Warning:  Undefined variable $mysqli in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 21:59:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on null in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php:4
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\users\export_users.php on line 4
+[06-Feb-2025 23:23:14 Asia/Kolkata] PHP Warning:  Undefined variable $user in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 185
+[06-Feb-2025 23:23:14 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 185
+[07-Feb-2025 00:20:00 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function logUserActivity() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\login.php:154
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\login.php on line 154
+[07-Feb-2025 00:23:29 Asia/Kolkata] PHP Warning:  Undefined array key "user_id" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 61
+[07-Feb-2025 00:23:29 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:23
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(23): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(65): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 23
+[06-Feb-2025 19:53:36 Europe/Berlin] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\admin\panel.php:7) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 24
+[06-Feb-2025 19:53:39 Europe/Berlin] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\admin\panel.php:7) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 24
+[06-Feb-2025 19:53:46 Europe/Berlin] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\admin\panel.php:7) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 24
+[07-Feb-2025 00:24:53 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function logUserActivity() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 16
+[07-Feb-2025 00:25:03 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function logUserActivity() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 16
+[07-Feb-2025 00:25:23 Asia/Kolkata] PHP Warning:  Undefined global variable $_SESSION in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 5
+[07-Feb-2025 00:25:23 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 5
+[07-Feb-2025 00:25:23 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function logUserActivity() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php:9
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 9
+[07-Feb-2025 00:25:33 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function logUserActivity() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php:12
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 12
+[07-Feb-2025 00:38:25 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 289
+[07-Feb-2025 00:38:25 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 409
+[07-Feb-2025 00:38:25 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 431
+[07-Feb-2025 00:38:27 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 289
+[07-Feb-2025 00:38:27 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 409
+[07-Feb-2025 00:38:27 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 431
+[07-Feb-2025 00:39:43 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 289
+[07-Feb-2025 00:39:43 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 409
+[07-Feb-2025 00:39:43 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\admin\users\user-activity-log.php on line 431
+[07-Feb-2025 00:40:05 Asia/Kolkata] PHP Warning:  Undefined global variable $_SESSION in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_activity_logs.php on line 4
+[07-Feb-2025 00:40:05 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\admin\users\ajax_get_activity_logs.php on line 4

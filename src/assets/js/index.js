@@ -28,6 +28,7 @@ function getLocalStorageWithExpiry(key) {
 }
 
 // ============================= Modal Logic =============================
+
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.querySelector("[data-modal]");
     const modalCloseBtn = document.querySelector("[data-modal-close]");
@@ -104,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ============================= Subscription Logic =============================
+
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -128,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const submitButton = subscribeForm.querySelector('button[type="submit"]');
             submitButton.disabled = true; // Disable button at the start
 
-            const BASE_URL = '../../../app/controllers/subscribe.php'; // Define a base URL
+            const BASE_URL = '../../../app/controllers/subscribe.php';
 
             fetch(BASE_URL, {
                 method: 'POST',

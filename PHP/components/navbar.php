@@ -2,6 +2,7 @@
     header("Location: ../../index.php");
     exit();
 }
+
 $_SESSION['cart'] = $_SESSION['cart'] ?? [];
 $_SESSION['wishlist'] = $_SESSION['wishlist'] ?? [];
 $isLoggedIn = isset($_SESSION['user_id']);
