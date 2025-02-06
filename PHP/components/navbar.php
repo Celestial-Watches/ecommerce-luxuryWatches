@@ -651,28 +651,14 @@ $isLoggedIn = isset($_SESSION['user_id']);
                         <span class="count wish-count global-wish-counter">0</span>
                     </button>
 
-                    <div id="wishlist-drawer" class="cart-drawer">
-                        <div class="cart-drawer-content">
-                            <button id="wishlist-close-btn" class="cart-close-btn">✖</button>
-                            <div class="cart-header">
-                                <h2 class="cart-title">Your Wishlist</h2>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <button class="action-btn" id="cart-btn">
                         <ion-icon name="bag-handle-outline"></ion-icon>
                         <span class="count cart-count global-cart-counter" id="cart-count">0</span>
                     </button>
 
-                    <div id="cart-drawer" class="cart-drawer">
-                        <div class="cart-drawer-content">
-                            <button id="cart-close-btn" class="cart-close-btn">✖</button>
-                            <div class="cart-header">
-                                <h2 class="cart-title">Your Cart</h2>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </div>
 
@@ -851,7 +837,28 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
         </nav>
 
+        <!-- /*-----------------------------------*\
+           Drawers for cart and wishlist
+          \*-----------------------------------*/
+   -->
 
+        <div id="wishlist-drawer" class="cart-drawer">
+            <div class="cart-drawer-content">
+                <button id="wishlist-close-btn" class="cart-close-btn">✖</button>
+                <div class="cart-header">
+                    <h2 class="cart-title">Your Wishlist</h2>
+                </div>
+            </div>
+        </div>
+
+        <div id="cart-drawer" class="cart-drawer">
+            <div class="cart-drawer-content">
+                <button id="cart-close-btn" class="cart-close-btn">✖</button>
+                <div class="cart-header">
+                    <h2 class="cart-title">Your Cart</h2>
+                </div>
+            </div>
+        </div>
 
         <!-- /*-----------------------------------*\
             MOBILE NAV
@@ -890,26 +897,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <button class="action-btn profile-btn" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';" data-mobile-menu-open-btn>
                 <ion-icon name="person-outline"></ion-icon>
             </button>
-        </div>
-
-        <!-- Cart Drawer for Mobile -->
-        <div id="cart-drawer" class="cart-drawer">
-            <div class="cart-drawer-content">
-                <button id="cart-close-btn" class="cart-close-btn">✖</button>
-                <div class="cart-header">
-                    <h2 class="cart-title">Your Cart</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Wishlist Drawer for Mobile -->
-        <div id="wishlist-drawer" class="cart-drawer">
-            <div class="cart-drawer-content">
-                <button id="wishlist-close-btn" class="cart-close-btn">✖</button>
-                <div class="cart-header">
-                    <h2 class="cart-title">Your Wishlist</h2>
-                </div>
-            </div>
         </div>
 
 
@@ -1775,22 +1762,22 @@ $isLoggedIn = isset($_SESSION['user_id']);
             if (userId) {
                 const cart = getStorage(CART_BASE_KEY);
                 const wishlist = getStorage(WISHLIST_BASE_KEY);
-
             }
 
             // Get references to the drawers
             const cartDrawer = document.getElementById('cart-drawer');
             const wishlistDrawer = document.getElementById('wishlist-drawer');
 
-            // Handle both desktop and mobile buttons using querySelectorAll
-            document.getElementById('cart-btn, mobile-cart-btn').forEach(btn => {
+            // Handle both desktop and mobile cart buttons
+            document.querySelectorAll('#cart-btn, #mobile-cart-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     cartDrawer.style.right = '0';
                     renderDrawerContent(CART_KEY, cartDrawer);
                 });
             });
 
-            document.getElementById('wish-btn, mobile-wish-btn').forEach(btn => {
+            // Handle both desktop and mobile wishlist buttons
+            document.querySelectorAll('#wish-btn, #mobile-wish-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     wishlistDrawer.style.right = '0';
                     renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
