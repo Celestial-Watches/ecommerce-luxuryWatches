@@ -24,10 +24,10 @@ body{
   grid-template-columns: auto 1fr;
 }
 #sidebar {
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto; 
   box-sizing: border-box;
-  height: 100vh; /* Full viewport height */
-  width: 300px; /* Fixed width */
+  height: 100vh; 
+  width: 300px; 
   padding: 5px;
   background-color: black;
   border-right: 1px solid var(--line-clr);
@@ -39,18 +39,17 @@ body{
   font-size: 13px;
 }
 
-/* Optional: Customize scrollbar appearance */
 #sidebar::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px; 
 }
 
 #sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--line-clr); /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners */
+  background-color: var(--line-clr); 
+  border-radius: 10px; 
 }
 
 #sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accent-clr); /* Color on hover */
+  background-color: var(--accent-clr); 
 }
 
 #sidebar.close{
@@ -213,7 +212,6 @@ main p{
     padding: 0;
   }
 
-  
   #sidebar{
     overflow-y: hidden;
     height: 60px;
