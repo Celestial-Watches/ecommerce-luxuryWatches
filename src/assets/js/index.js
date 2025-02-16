@@ -170,20 +170,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ============================= Password Toggle =============================
 document.body.addEventListener("click", (event) => {
-    if (event.target.matches(".password-toggle-icon i")) {
-        const toggleIcon = event.target;
+    if (event.target.closest(".password-toggle-icon")) {
+        const toggleIcon = event.target.closest(".password-toggle-icon, .password-toggle").querySelector("i");
         const passwordField = toggleIcon.closest(".input-group").querySelector(".password-field");
 
         if (passwordField.type === "password") {
             passwordField.type = "text";
-            toggleIcon.classList.remove("fa-eye-slash");
-            toggleIcon.classList.add("fa-eye");
-            toggleIcon.parentNode.title = "Hide Password";
+            toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+            toggleIcon.closest(".password-toggle-icon").title = "Hide Password";
         } else {
             passwordField.type = "password";
-            toggleIcon.classList.remove("fa-eye");
-            toggleIcon.classList.add("fa-eye-slash");
-            toggleIcon.parentNode.title = "Show Password";
+            toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+            toggleIcon.closest(".password-toggle-icon").title = "Show Password";
         }
     }
 });

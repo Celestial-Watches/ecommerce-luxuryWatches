@@ -7,21 +7,19 @@ session_regenerate_id(true);
 ob_start();
 
 define('ALLOW_ACCESS', true);
-include 'panel.php'; 
-require_once '../app/config/conn.php';
+include '../panel.php'; 
+require_once '../../app/config/conn.php';
 
 
 if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header("Location: ../app/controllers/login.php"); 
-    exit();
-  }
-  
-
-if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
-    header("Location: /app/controllers/login.php");
+    header("Location: ../../app/controllers/login.php");
     exit();
 }
 
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
+    header("Location: ../../app/controllers/login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +32,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../src/assets/css/panel.css">
+    <link rel="stylesheet" href="../../src/assets/css/panel.css">
 
     <title>Product List</title>
     <style>
@@ -220,8 +218,8 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
         });
     </script>
     
-    <!-- <script src="../src/assets/js/panelNav.js" defer></script> -->
-    <script src="../src/assets/js/navigation.js" async></script>
+    <!-- <script src="../../src/assets/js/panelNav.js" defer></script> -->
+    <script src="../../src/assets/js/navigation.js" async></script>
 </body>
 
 </html>

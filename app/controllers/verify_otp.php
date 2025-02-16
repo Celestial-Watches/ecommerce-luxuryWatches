@@ -10,7 +10,7 @@ session_set_cookie_params([
     'samesite' => 'Strict'        // Protect against CSRF
 ]);
 
-session_start(); // Ensure session is started at the very beginning
+session_start(); 
 
 // Regenerate the session ID on every page refresh
 session_regenerate_id(true);
@@ -64,8 +64,8 @@ if (isset($_POST['resend'])) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'celestialwatches69@gmail.com'; // Your email
-        $mail->Password   = 'xvmjnggsmsnkavzt'; // Your email password or App Password
+        $mail->Username   = 'celestialwatches69@gmail.com'; 
+        $mail->Password   = 'xvmjnggsmsnkavzt'; 
         $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
@@ -116,7 +116,7 @@ if (isset($_POST['resend'])) {
         $mail->send();
 
 
-        $_SESSION['otp'] = $otp; // Store the new OTP in the session
+        $_SESSION['otp'] = $otp;
         $success_message = "A new OTP has been sent to your email.";
     } catch (Exception $e) {
         $errors[] = "Failed to send OTP email. Mailer Error: {$mail->ErrorInfo}";
@@ -139,10 +139,10 @@ if (isset($_POST['verify'])) {
         if ($input_otp == $_SESSION['otp']) {
             // OTP is correct, proceed to create the user
             require_once "../config/conn.php";
-            $email = $_SESSION['email']; // Get email from the session
-            $usernamee = $_SESSION['username']; // Get username from the session
-            $passwordHash = $_SESSION['password']; // Get hashed password from the session
-            $phone = $_SESSION['phone']; // Get phone number from the session
+            $email = $_SESSION['email'];
+            $usernamee = $_SESSION['username'];
+            $passwordHash = $_SESSION['password'];
+            $phone = $_SESSION['phone'];
 
             // Check if the user already exists
             $checkSql = "SELECT * FROM users WHERE email = ? OR username = ?";
@@ -151,14 +151,12 @@ if (isset($_POST['verify'])) {
                 mysqli_stmt_execute($checkStmt);
                 $result = mysqli_stmt_get_result($checkStmt);
 
-                if (mysqli_num_rows($result) == 0) { // Only insert if user does not exist
-
-                    // Insert the new user into the database
+                if (mysqli_num_rows($result) == 0) {
                     $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
                     if ($stmt = mysqli_prepare($conn, $sql)) {
                         mysqli_stmt_bind_param($stmt, "ssss", $usernamee, $email, $phone, $passwordHash);
                         if (mysqli_stmt_execute($stmt)) {
-                            $registration_successful = true; // Set to true on successful registration
+                            $registration_successful = true;
 
                             // Update status to 'YES'
                             $updateStatusSql = "UPDATE users SET status = 'YES' WHERE username = ?";
@@ -173,20 +171,20 @@ if (isset($_POST['verify'])) {
                             // Clear session data
                             unset($_SESSION['otp']);
                             unset($_SESSION['username']);
-                            unset($_SESSION['password']); // Clear the password from the session
-                            unset($_SESSION['phone']); // Clear the phone number from the session
-                            unset($_SESSION['otp_expiry']); // Clear the OTP expiry time from the session
+                            unset($_SESSION['password']); 
+                            unset($_SESSION['phone']); 
+                            unset($_SESSION['otp_expiry']); 
                             setcookie('SSIDU', '', time() - 3600, '/', '', false, true);
 
 
 
                             // Set user session
-                            $_SESSION['user'] = $usernamee; // Set user session
+                            $_SESSION['user'] = $usernamee; 
                             $_SESSION["user_id"] = $user['id'];
                             setcookie("loggedYes", "true", time() + 3600, "/", false, true);
                             $_SESSION['otp_verified'] = true;
-                            header("Location: ../../index.php"); // Redirect to index.php
-                            exit(); // Ensure no further code is executed
+                            header("Location: ../../index.php"); 
+                            exit(); 
                         } else {
                             $errors[] = "Something went wrong. Please try again later.";
                         }
@@ -210,7 +208,7 @@ $remaining_time = max(0, $otp_expiry_time - time());
 $minutes = floor($remaining_time / 60);
 $seconds = $remaining_time % 60;
 
-var_dump($_SESSION);
+
 ?>
 
 <!DOCTYPE html>

@@ -73,22 +73,12 @@ if ($search !== '') {
         $stmt->execute();
     }
 
-    // Prepare the search term for the query
     $searchTerm = '%' . sanitizeSearchTerm($search) . '%';
-
-    // Base SQL query with dynamic WHERE clause
     $sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ? OR brand LIKE ? OR year LIKE ? OR tags LIKE ?";
-
-    // Add ORDER BY clause based on sort option
     $sql .= " " . getSortOrder($sort);
-
-    // Add LIMIT and OFFSET for pagination
     $sql .= " LIMIT ? OFFSET ?";
-
-    // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
 
-    // Bind parameters dynamically based on conditions
     $params = [];
     $types = 'sssss'; 
 

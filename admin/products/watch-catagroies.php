@@ -4,7 +4,7 @@ session_regenerate_id(true);
 ob_start();
 
 define('ALLOW_ACCESS', true);
-include 'panel.php';
+include '../panel.php';
 
 if (
     !isset($_SESSION['user']) ||
@@ -13,11 +13,11 @@ if (
     $_SESSION['authenticated'] !== true ||
     $_SESSION['admin'] !== true
 ) {
-    header("Location: ../app/controllers/login.php");
+    header("Location: ../../app/controllers/login.php");
     exit();
 }
 
-require_once '../app/config/conn.php';
+require_once '../../app/config/conn.php';
 
 $categories = [];
 $catResult = $conn->query("SELECT product_category FROM products");
@@ -77,7 +77,7 @@ $result = $stmt->get_result();
     <title>Watch Categories</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../src/assets/css/panel.css">
+    <link rel="stylesheet" href="../../src/assets/css/panel.css">
     <style>
         .container {
             color: #000;
@@ -254,8 +254,8 @@ $result = $stmt->get_result();
         </div>
     </div>
 
-    <script type="text/javascript" src="../src/assets/js/panelNav.js" async></script>
-    <script type="text/javascript" src="../src/assets/js/navigation.js" async></script>
+    <script type="text/javascript" src="../../src/assets/js/panelNav.js" async></script>
+    <script type="text/javascript" src="../../src/assets/js/navigation.js" async></script>
     <?php
     $stmt->close();
     $conn->close();

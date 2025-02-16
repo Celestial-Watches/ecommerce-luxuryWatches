@@ -4,17 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const actionBtns = document.querySelectorAll('.has-menu-btn');
     const mobileNavigationMenu = document.querySelector('.mobile-navigation-menu');
-    const menuCloseBtns = document.querySelectorAll('.menu-close-btn'); // Declare menu close buttons
-    const accordionBtns = document.querySelectorAll('[data-accordion-btn]'); // Declare accordion buttons
+    const menuCloseBtns = document.querySelectorAll('.menu-close-btn'); 
+    const accordionBtns = document.querySelectorAll('[data-accordion-btn]'); 
+    let isMenuOpen = false; 
 
-    let isMenuOpen = false; // Flag to track menu state
-
-    // Toggle the menu on button click
     actionBtns.forEach(btn => {
         btn.addEventListener('click', (event) => {
             console.log("Action button clicked!");
             event.stopPropagation();
-            isMenuOpen = !isMenuOpen; // Toggle the flag
+            isMenuOpen = !isMenuOpen; 
             if (mobileNavigationMenu) {
                 mobileNavigationMenu.classList.toggle('menu-visible', isMenuOpen);
                 console.log('Menu button clicked, menu state:', isMenuOpen);
@@ -26,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuCloseBtns.forEach(btn => {
         btn.addEventListener('click', (event) => {
             event.stopPropagation();
-            isMenuOpen = false; // Update flag
+            isMenuOpen = false; 
             if (mobileNavigationMenu) {
                 mobileNavigationMenu.classList.remove('menu-visible');
             }
@@ -159,6 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Search input not found. Please check your HTML.');
     }
 });
+
+
+// Cart system starts
 
 document.addEventListener('DOMContentLoaded', () => {
     const cartBtn = document.getElementById('cart-btn');
@@ -491,7 +492,7 @@ function renderDrawerContent(key, drawer) {
                 setTimeout(() => window.location.href = '../../app/controllers/login.php', 5000);
                 return;
             }
-            window.location.href = '/checkout.php';
+            window.location.href = '/app/views/checkout.php';
         });
         content.appendChild(checkoutBtn);
     }

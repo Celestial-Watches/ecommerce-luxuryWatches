@@ -7,8 +7,6 @@ $suggestions = [];
 if (isset($_GET['search'])) {
     $search = trim($_GET['search']);
 
-
-    // Fetching product names from the 'name' column
     $stmt = $conn->prepare("
     SELECT name 
     FROM products 

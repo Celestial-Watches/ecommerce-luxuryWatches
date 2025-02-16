@@ -28,10 +28,8 @@ switch ($sort) {
         break;
 }
 
-// Add LIMIT and OFFSET for pagination
-$sql .= " LIMIT ? OFFSET ?";
 
-// Prepare and execute the SQL statement
+$sql .= " LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sql);
 
 // Bind parameters (adjust according to the query structure)

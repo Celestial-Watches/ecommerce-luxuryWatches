@@ -1,6 +1,5 @@
 <?php
 define('ALLOW_ACCESS', true);
-// // Set the session cookie with secure attributes
 session_set_cookie_params([
   'lifetime' => 86400,              // Session expires when the browser is closed
   'path' => '/',                // Available throughout the site
@@ -136,9 +135,8 @@ if (isset($_POST["login"])) {
             }
 
             // Check if user is admin
-            if ($user["role"] === "admin") { // Check if user is admin
-              $_SESSION["admin"] = true; // Set admin session
-              // Set session variables for admin
+            if ($user["role"] === "admin") {
+              $_SESSION["admin"] = true;
               $_SESSION["user"] = $usernamee;
               $_SESSION["user_id"] = $user['id'];
               $_SESSION["LAST_ACTIVITY"] = time();
@@ -239,9 +237,7 @@ if (isset($_POST["login"])) {
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.6);
-      /* Transparent dark background */
       display: none;
-      /* Hidden by default */
       justify-content: center;
       align-items: center;
       z-index: 9999;
@@ -328,7 +324,7 @@ if (isset($_POST["login"])) {
         <div class="input-group">
           <label for="password">Password</label>
           <input type="password" id="password" class="password-field" name="password">
-          <span class="password-toggle-icon" title="Show Passowrd"><i class="fas fa-eye-slash"></i></span>
+          <span class="password-toggle-icon" title="Show Passowrd"><i class="password-toggle fas fa-eye-slash"></i></span>
         </div>
         <div class="input-group remember-me-group">
           <input type="checkbox" id="remember" name="remember" value="1" class="rem" <?php echo (isset($_COOKIE['temp']) && $_COOKIE['temp'] === '1') ? 'checked' : ''; ?>>
@@ -352,13 +348,11 @@ if (isset($_POST["login"])) {
       if (username === '') {
         event.preventDefault();
 
-        // Show custom alert box
         var customAlert = document.getElementById('custom-alert');
-        customAlert.style.display = 'flex'; // Make it visible
+        customAlert.style.display = 'flex';
 
-        // Close the alert box when the OK button is clicked
         document.getElementById('alert-ok-btn').addEventListener('click', function() {
-          customAlert.style.display = 'none'; // Hide the alert box
+          customAlert.style.display = 'none';
         });
       }
     });

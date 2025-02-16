@@ -2,9 +2,8 @@
 session_start();
 require '../../app/config/conn.php';
 
-if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
-    http_response_code(403);
-    echo 'Unauthorized access.';
+if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || !isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true || $_SESSION['admin'] !== true) {
+    header("Location: ../../app/controllers/login.php");
     exit();
 }
 

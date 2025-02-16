@@ -1,121 +1,149 @@
 <?php
 session_start();
-
+require '../../vendor/autoload.php';
 include '../config/conn.php';
 
-
-$isLoggedIn = isset($_SESSION['user']) && is_array($_SESSION['user']);
+// Check if the user is logged in
+$isUserLoggedIn = isset($_SESSION["user"]) && isset($_SESSION["user_id"]);
 $userData = [];
 
-if ($isLoggedIn) {
-    $userId = mysqli_real_escape_string($conn, $_SESSION['user']); 
-    $query = "SELECT name, email FROM users WHERE id = '$userId'";
+if ($isUserLoggedIn) {
+    $userId = mysqli_real_escape_string($conn, $_SESSION["user_id"]);
+    $query = "SELECT username, email, password FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $query);
-
     if ($result && mysqli_num_rows($result) > 0) {
         $userData = mysqli_fetch_assoc($result);
-    } else {
-        $userData = [];
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
-    $name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
-    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-    $currentPassword = $_POST['current_password'];
-    $otpCurrent = $_POST['otp_current'];
-    $newPassword = $_POST['new_password'];
-    $otpNew = $_POST['otp_new'];
-
-    // Validate inputs and OTPs
-    $errors = [];
-    if (empty($name) || empty($email) || empty($currentPassword) || empty($otpCurrent) || empty($newPassword) || empty($otpNew)) {
-        $errors[] = "All fields are required.";
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $isUserLoggedIn) {
+    // CSRF Validation
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("CSRF token validation failed");
     }
+    
+    $name = mysqli_real_escape_string($conn, trim($_POST['name']));
+    $email = mysqli_real_escape_string($conn, trim($_POST['email']));
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Invalid email format.";
-    }
+    // If user clicked the "Send OTP" button for password change
+    if (isset($_POST['send_otp'])) {
+        $currentPassword = trim($_POST['current_password']);
+        if (empty($currentPassword)) {
+            $error = "Please enter your current password to send OTP";
+        } elseif (password_verify($currentPassword, $userData['password'])) {
+            // Generate OTP and set expiry (10 minutes)
+            $otp = rand(100000, 999999);
+            $_SESSION['password_update_otp'] = $otp;
+            $_SESSION['otp_expiry'] = time() + 600;
+            $_SESSION['password_update_otp_sent'] = true;
+            
+            // Send OTP using PHPMailer
+            $mail = new PHPMailer\PHPMailer\PHPMailer();
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'celestialwatches69@gmail.com';
+                $mail->Password   = 'xvmjnggsmsnkavzt';
+                $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = 465;
 
-    // Verify current password and OTP
-    $userId = mysqli_real_escape_string($conn, $_SESSION['user']['user_id']);
-    $query = "SELECT password, otp FROM users WHERE id = '$userId'";
-    $result = mysqli_query($conn, $query);
-    $user = mysqli_fetch_assoc($result);
-
-    if (!password_verify($currentPassword, $user['password'])) {
-        $errors[] = "Incorrect current password.";
-    }
-
-    if ($otpCurrent !== $user['otp']) {
-        $errors[] = "Incorrect OTP for current password.";
-    }
-
-    // If no errors, update the user data
-    if (empty($errors)) {
-        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-        $updateQuery = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
-        $stmt = mysqli_prepare($conn, $updateQuery);
-        mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $newPasswordHash, $userId);
-        if (mysqli_stmt_execute($stmt)) {
-            echo "Profile updated successfully.";
+                $mail->setFrom('celestialwatches69.com', 'Celestial Watches');
+                $mail->addAddress($userData['email']);
+                $mail->Subject = 'Your OTP for Password Change';
+                $mail->Body = "Your OTP is: $otp (Valid for 10 minutes)";
+                
+                $mail->send();
+                $messageInfo = "OTP sent to your email";
+            } catch (Exception $e) {
+                $error = "Failed to send OTP: {$mail->ErrorInfo}";
+            }
         } else {
-            echo "Error updating profile: " . mysqli_error($conn);
+            $error = "Incorrect current password";
         }
-        mysqli_stmt_close($stmt);
-    } else {
-        foreach ($errors as $error) {
-            echo "<div class='alert alert-danger'>$error</div>";
+    }
+    // If user clicked the "Save Changes" or "Update Password & Save Changes" button
+    elseif (isset($_POST['save_changes'])) {
+        // If an OTP has been sent, then user intends to update their password
+        if (isset($_SESSION['password_update_otp_sent'])) {
+            $enteredOtp = $_POST['otp'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+            if (empty($enteredOtp) || empty($newPassword)) {
+                $error = "Please enter OTP and new password to update password";
+            } elseif (time() > $_SESSION['otp_expiry']) {
+                $error = "OTP has expired. Please request a new one";
+                unset($_SESSION['password_update_otp'], $_SESSION['password_update_otp_sent'], $_SESSION['otp_expiry']);
+            } elseif ($enteredOtp != $_SESSION['password_update_otp']) {
+                $error = "Invalid OTP";
+            } else {
+                $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+                $updateQuery = "UPDATE users SET username = '$name', email = '$email', password = '$newPasswordHash' WHERE id = '$userId'";
+                if (mysqli_query($conn, $updateQuery)) {
+                    $messageInfo = "Profile and password updated successfully";
+                    unset($_SESSION['password_update_otp'], $_SESSION['password_update_otp_sent'], $_SESSION['otp_expiry']);
+                } else {
+                    $error = "Update failed: " . mysqli_error($conn);
+                }
+            }
+        } else {
+            // No password change desired; update only name and email.
+            $updateQuery = "UPDATE users SET username = '$name', email = '$email' WHERE id = '$userId'";
+            if (mysqli_query($conn, $updateQuery)) {
+                $messageInfo = "Profile updated successfully";
+            } else {
+                $error = "Update failed: " . mysqli_error($conn);
+            }
         }
     }
 }
-?>
 
+// Generate CSRF token
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Celestial Watches | Exclusivity in Every Tick</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
             background-color: #f5f6f8;
             margin: 0;
-            padding: 0;
+        }
+        .container {
+            margin: auto;
         }
         .settings {
             display: flex;
-            width: 100%;
             background: #fff;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 100vh;
         }
         .sidebar {
             width: 280px;
-            background-color: #f9fafb;
-            padding: 24px;
+            padding: 20px;
+            background: #f9fafb;
             border-right: 1px solid #e0e4e8;
             transition: transform 0.3s ease;
         }
-        .aligned {
+        .sidebar .aligned {
             display: flex;
             align-items: center;
         }
         .sidebar h2 {
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 18px;
+            margin-left: 10px;
             color: #333;
-            padding-left: 8px;
         }
         .sidebar h3 {
             font-size: 12px;
             color: #8a8f93;
-            margin-top: 40px;
-            margin-bottom: 12px;
-            padding-left: 8px;
+            margin: 30px 0 12px 0;
             text-transform: uppercase;
         }
         .menu {
@@ -136,20 +164,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             transition: background-color 0.3s;
             font-size: 15px;
         }
-        .menu li a .icon {
-            margin-right: 14px;
-            font-size: 18px;
-        }
-        .menu li a:hover {
-            background-color: #e5e9f0;
-        }
+        .menu li a:hover,
         .menu li a.active {
             background-color: #e5e9f0;
-            color: #007bff;
-            font-weight: bold;
         }
+        /* Content Styles */
         .content {
-            flex: 1;
             padding: 40px;
         }
         .content h3 {
@@ -160,19 +180,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             color: #666;
             margin-bottom: 20px;
         }
-        .profile-picture {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .profile-picture img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-right: 15px;
-        }
-        .profile-picture button {
-            margin-right: 10px;
+        form {
+            max-width: 600px;
+            margin: 0 auto;
         }
         form label {
             display: block;
@@ -186,179 +196,152 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        .integrated-accounts {
-            margin-top: 20px;
-        }
-        .integrated-accounts h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .account {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-        }
-        .account button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-        }
         .luxury-button {
             padding: 12px 30px;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             color: #fff;
-            background-color: #000000;
-            border: 2px solid #fff;
+            background-color: #000;
+            border: none;
             transition: all 0.3s ease;
             cursor: pointer;
+            margin-top: 20px;
         }
         .luxury-button:hover {
-            background-color: #fff;
-            color: #4c4c4c;
-            border-color: #4c4c4c;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            background-color: #333;
         }
-        .luxury-button:focus {
-            border-color: #ffbb00;
-            box-shadow: 0 0 0 3px rgba(255, 187, 0, 0.5);
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
         }
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
             .settings {
                 flex-direction: column;
             }
-            .sidebar {
-                width: 100%;
-                border-right: none;
-            }
-            .content {
-                padding: 20px;
-            }
-        }
-        @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
-                left: -280px;
                 top: 0;
-                height: 100vh;
+                left: 0;
+                height: 100%;
                 width: 280px;
-                padding: 20px;
-                z-index: 999;
+                transform: translateX(-100%);
+                z-index: 1000;
             }
-            .settings {
-                flex-direction: column;
-                padding-top: 60px;
+            .sidebar.active {
+                transform: translateX(0);
             }
             .content {
                 padding: 20px;
             }
-            .sidebar.open {
-                transform: translateX(280px);
-            }
-            .sidebar h2,
-            .sidebar h3 {
-                text-align: center;
-            }
-            .sidebar h3 {
-                margin-top: 20px;
-            }
+            /* Toggle button visible only on mobile */
             .toggle-sidebar {
                 display: block;
                 position: fixed;
                 top: 20px;
                 left: 20px;
                 background-color: #007bff;
-                color: white;
+                color: #fff;
                 border: none;
                 padding: 10px 15px;
                 border-radius: 4px;
-                cursor: pointer;
-                z-index: 1000;
+                z-index: 1100;
             }
-            .toggle-sidebar:focus {
-                outline: none;
-            }
-            .luxury-button {
-                font-size: 14px;
-                padding: 10px 25px;
+        }
+        @media (min-width: 769px) {
+            .toggle-sidebar {
+                display: none;
             }
         }
     </style>
 </head>
-
-
 <body>
+    <button class="toggle-sidebar" onclick="toggleSidebar()">Menu</button>
     
-    <div class="settings">
-        <div class="sidebar">
-            <span class="aligned"><a href="../../index.php" style="text-decoration: none;"><i class="ri-arrow-left-line"></i></a>
-                <h2>Settings</h2>
-            </span>
-            <ul class="menu">
-                <li><a href="#" class="active">Account</a></li>
-                <li><a href="#"> NFT Customisation</a></li>
-                <li><a href="#"> Sell and Exchange</a></li>
-                <li><a href="#"> Auction participation</a></li>
-                <li><a href="#"> Transaction History </a></li>
-                <li><a href="#"> Manage address </a></li>
-                <li><a href="#"> payment methods </a></li>
-            </ul>
-            <h3>SYSTEM</h3>
-            <ul class="menu">
-                <li><a href="#"> Notifications</a></li>
-                <li><a href="#">Preferences</a></li>
-            </ul>
-        </div>
-        <div class="content">
-            <h3>Account</h3>
-            <p>Real-time information and activities of your profile.</p>
-
-            <?php if ($isLoggedIn): ?>
-                <div class="profile-picture">
-                    <img src="assets/image/user.png" alt="Profile picture">
-                    <button class="luxury-button">Upload new picture</button>
-                    <button class="luxury-button">Delete</button>
+    <div class="container">
+        <div class="settings">
+            <div class="sidebar" id="sidebar">
+                <div class="aligned">
+                    <a href="../../index.php" style="text-decoration: none; color:rgb(165, 178, 181);">
+                        <i class="ri-arrow-left-line"></i>
+                    </a>
+                    <h2>Settings</h2>
                 </div>
+                <ul class="menu">
+                    <li><a href="#" class="active">Account</a></li>
+                    <li><a href="#">NFT Customisation</a></li>
+                    <li><a href="selling.php">Sell and Exchange</a></li>
+                    <li><a href="#">Auction Participation</a></li>
+                    <li><a href="#">Transaction History</a></li>
+                    <li><a href="#">Manage Address</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                </ul>
+                <h3>System</h3>
+                <ul class="menu">
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Preferences</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <h3>Account Settings</h3>
+                <?php if ($isUserLoggedIn): ?>
+                    <?php if (isset($messageInfo)): ?>
+                        <div class="alert alert-success"><?= $messageInfo ?></div>
+                    <?php endif; ?>
+                    <?php if (isset($error)): ?>
+                        <div class="alert alert-danger"><?= $error ?></div>
+                    <?php endif; ?>
 
-                <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-                    <div class="alert alert-success">Profile updated successfully.</div>
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                        
+                        <label>Name</label>
+                        <input type="text" name="name" value="<?= htmlspecialchars($userData['username']) ?>" required>
+                        
+                        <label>Email</label>
+                        <input type="email" name="email" value="<?= htmlspecialchars($userData['email']) ?>" required>
+                        
+                        <label>Current Password (for password change)</label>
+                        <input type="password" name="current_password" placeholder="Enter current password if changing password">
+                        
+                        <?php if (isset($_SESSION['password_update_otp_sent'])): ?>
+                            <label>OTP</label>
+                            <input type="text" name="otp" placeholder="Enter 6-digit OTP" pattern="\d{6}" required>
+                            
+                            <label>New Password</label>
+                            <input type="password" name="new_password" required>
+                            
+                            <button type="submit" name="save_changes" class="luxury-button">Update Password & Save Changes</button>
+                        <?php else: ?>
+                            <div style="display:flex; gap:10px; flex-wrap: wrap;">
+                                <button type="submit" name="send_otp" class="luxury-button">Send OTP</button>
+                                <button type="submit" name="save_changes" class="luxury-button">Save Profile Changes</button>
+                            </div>
+                        <?php endif; ?>
+                    </form>
+                <?php else: ?>
+                    <p>Please log in to view your account details.</p>
+                    <a href="../../app/controllers/login.php" class="luxury-button">Login</a>
+                    <a href="../../app/controllers/signin.php" class="luxury-button">Sign Up</a>
                 <?php endif; ?>
-
-                <form action="user-dashboard.php" method="post">
-                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Name" value="<?php echo htmlspecialchars($userData['name']); ?>">
-
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($userData['email']); ?>">
-
-                    <label>Current password</label>
-                    <input type="password" name="current_password" placeholder="Current password">
-
-                    <label>OTP for Current Password</label>
-                    <input type="text" name="otp_current" placeholder="Enter OTP">
-
-                    <label>New password</label>
-                    <input type="password" name="new_password" placeholder="New password">
-
-                    <label>OTP for New Password</label>
-                    <input type="text" name="otp_new" placeholder="Enter OTP">
-
-                    <button type="submit" name="update">Update</button>
-                </form>
-            <?php else: ?>
-                <p>Please log in to view your account details.</p>
-                <a href="../../app/controllers/login.php" class="luxury-button">Login</a>
-                <a href="../../app/controllers/signin.php" class="luxury-button">Sign Up</a>
-            <?php endif; ?>
+            </div>
         </div>
     </div>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+    </script>
 </body>
-
 </html>

@@ -9,6 +9,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 ?>
 
 <script>
+    var isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
     var userId = <?php echo $isLoggedIn ? json_encode($_SESSION['user_id']) : 'null'; ?>;
 </script>
 <!DOCTYPE html>
@@ -20,6 +21,18 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <title>Celestial Watches | Exclusivity in Every Tick</title>
     <script src="../../src/assets/js/scroll-animation.js" async></script>
     <style>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+        }
+
         #suggestions {
             overflow-y: auto;
             max-height: 200px;
@@ -892,7 +905,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
                 <div class="header-user-actions">
 
-                    <button class="action-btn profile-btn" title="Personal Dashboard" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';">
+                    <button class="action-btn profile-btn" title="Personal Dashboard" onclick="javascript:void(0); window.location.href='/app/views/user-dashboard.php';">
                         <ion-icon name="person-outline"></ion-icon>
                     </button>
 
@@ -1498,13 +1511,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
                     sessionStorage.removeItem(WISHLIST_KEY);
                 }
 
-                // Show "Add to Cart" and "Add to Wishlist" buttons
                 toggleAddToButtons(true);
             } else {
-                // Hide "Add to Cart" and "Add to Wishlist" buttons
                 toggleAddToButtons(false);
             }
         });
+
+        
     </script>
 
     <script src="../../src/assets/js/navbar.js"></script>

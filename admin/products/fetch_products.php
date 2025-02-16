@@ -1,14 +1,12 @@
 <?php
-
-  
-require_once '../app/config/conn.php';
+require_once '../../app/config/conn.php';
 
 // Get current page and search term from the AJAX request
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
 $limit = 5; // Number of products per page
-$offset = ($page - 1) * $limit; // Calculate offset
+$offset = ($page - 1) * $limit; 
 
 // Get total number of products that match the search term
 $totalQuery = "SELECT COUNT(*) as total FROM products WHERE name LIKE ?";
@@ -19,7 +17,7 @@ $stmtTotal->execute();
 $totalResult = $stmtTotal->get_result();
 $totalRow = $totalResult->fetch_assoc();
 $totalProducts = $totalRow['total'];
-$totalPages = ceil($totalProducts / $limit); // Calculate total pages
+$totalPages = ceil($totalProducts / $limit); 
 
 // Fetch products with pagination and search term
 $query = "SELECT id, product_category, name, price, description, brand, tags, stock, image_url 
@@ -33,7 +31,7 @@ $stmt->bind_param('s', $likeTerm);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Build the product table HTML
+// Build the product table
 $productTable = '<table class="table table-striped table-hover">
 <thead>
     <tr>

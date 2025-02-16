@@ -4,6 +4,36 @@ define('ALLOW_ACCESS', true);
 include '../../PHP/components/navbar.php';
 require_once '../config/conn.php';
 
+$productId = (int) $_GET['id'];
+$userId = $_SESSION['user_id'] ?? $_SESSION['guest_db_id'] ?? $_SESSION['guest_id'] ?? 0;
+
+$stmt = $conn->prepare("SELECT id, view FROM product_views WHERE user_id = ? AND product_id = ?");
+$stmt->bind_param("ii", $userId, $productId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $newViewCount = $row['view'] + 1;
+
+    $updateStmt = $conn->prepare("UPDATE product_views SET view = ? WHERE id = ?");
+    $updateStmt->bind_param("ii", $newViewCount, $row['id']);
+    $updateStmt->execute();
+    $updateStmt->close();
+
+    $productStmt = $conn->prepare("UPDATE products SET views = views + 1 WHERE id = ?");
+    $productStmt->bind_param("i", $productId);
+    $productStmt->execute();
+    $productStmt->close();
+} else {
+    $insertStmt = $conn->prepare("INSERT INTO product_views (user_id, product_id, view, created_at) VALUES (?, ?, 1, NOW())");
+    $insertStmt->bind_param("ii", $userId, $productId);
+    $insertStmt->execute();
+    $insertStmt->close();
+}
+
+$stmt->close();
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
@@ -46,17 +76,15 @@ if (isset($_GET['id'])) {
 
     $numericPrice = null;
 
-    // Check for "ON REQUEST"
     if (stripos($price, 'ON REQUEST') !== false) {
-        $numericPrice = null; // Indicate that the price is not available
+        $numericPrice = null; 
     } else {
-        // Check for "FROM" and extract numeric price
         if (stripos($price, 'FROM') !== false) {
             preg_match('/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i', $price, $matches);
-            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0; // Remove commas
+            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0; 
         } else {
             preg_match('/[0-9,]+(?:\.[0-9]{1,2})?/', $price, $matches);
-            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0; // Remove commas
+            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0; 
         }
     }
 }
@@ -687,7 +715,6 @@ if (isset($_GET['id'])) {
 
     <?php include '../../PHP/components/footer.php' ?>
 
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.faq-question').forEach(item => {
@@ -831,7 +858,7 @@ if (isset($_GET['id'])) {
                 ref_code: '<?= $ref_code ?>',
                 isOnRequest: <?= ($numericPrice === null) ? 'true' : 'false' ?>
             };
-            
+
 
             document.getElementById('wish-btn-details').addEventListener('click', () => {
                 addToWishlist(product);

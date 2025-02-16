@@ -4,7 +4,7 @@ session_regenerate_id(true);
 ob_start();
 
 define('ALLOW_ACCESS', true);
-include 'panel.php';
+include '../panel.php';
 
 if (
   !isset($_SESSION['user']) ||
@@ -13,11 +13,11 @@ if (
   $_SESSION['authenticated'] !== true ||
   $_SESSION['admin'] !== true
 ) {
-  header("Location: ../app/controllers/login.php");
+  header("Location: ../../app/controllers/login.php");
   exit();
 }
 
-require_once '../app/config/conn.php';
+require_once '../../app/config/conn.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
   echo "No product specified.";
@@ -176,49 +176,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Edit Product</title>
+  <title>Edit Watch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS for styling -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../src/assets/css/panel.css">
+  <link rel="stylesheet" href="../../src/assets/css/panel.css">
   <style>
     body {
       background-color: #fff;
       color: #000;
     }
+
     .containerEditProduct {
       max-width: 100%;
       margin: 20px auto;
       padding: 20px;
     }
+
     .card {
       margin-bottom: 20px;
     }
+
     .card-header {
-      background-color:rgb(0, 0, 0);
+      background-color: rgb(0, 0, 0);
       color: #fff;
       font-size: 1.2rem;
     }
-    /* Two-column layout for Product Information */
+
     .info-row {
       display: flex;
       flex-wrap: wrap;
     }
+
     .info-col {
       padding: 10px;
     }
+
     .info-main {
       flex: 0 0 66.66%;
       max-width: 66.66%;
     }
+
     .info-aside {
       flex: 0 0 33.33%;
       max-width: 33.33%;
       border-left: 1px solid #ddd;
       padding-left: 20px;
     }
+
+    .image-upload-box {
+      border: 2px dashed #ced4da;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      background: #f8f9fa;
+    }
+
     .img-preview {
       width: 100%;
       border: 1px solid #ddd;
@@ -226,24 +241,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       border-radius: 4px;
       background-color: #f8f8f8;
     }
+
     .img-preview img {
       width: 100%;
       height: auto;
       display: block;
     }
+
+    /* Grid design layout for Watch Details section */
+    .watch-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .watch-details-card {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .watch-details-card h6 {
+      border-bottom: 2px solid #000;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
+
 <body>
   <div class="containerEditProduct container-fluid">
-    <h2 class="text-center mb-4">Edit Product</h2>
-    <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
+    <h2 class="text-center mb-4">Edit Watch</h2>
+    <?php if (isset($error)) {
+      echo '<div class="alert alert-danger">' . $error . '</div>';
+    } ?>
     <form method="POST" action="">
-      <!-- Product Information Section with two-column layout -->
+      <!-- Product Information Section -->
       <div class="card">
         <div class="card-header">Product Information</div>
         <div class="card-body">
           <div class="info-row">
-            <!-- Main Information Column -->
+            <!-- Main Information -->
             <div class="info-col info-main">
               <div class="form-group">
                 <label for="image_url">Image URL</label>
@@ -303,8 +342,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
               </div>
             </div>
+
             <!-- Aside Column for Image Preview -->
-            <aside class="info-col info-aside">
+            <aside class="info-col info-aside image-upload-box">
               <h5>Image Preview</h5>
               <div class="img-preview" id="img_preview_container">
                 <?php if (!empty($product['image_url'])): ?>
@@ -317,114 +357,130 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
       </div>
+
+
       <!-- Product Details Section -->
       <div class="card">
-        <div class="card-header">Product Details</div>
+        <div class="card-header">Watch Details</div>
         <div class="card-body">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_brand">Details Brand</label>
-              <input type="text" class="form-control" id="details_brand" name="details_brand" value="<?php echo htmlspecialchars($details['brand']); ?>">
+          <div class="watch-details-grid">
+            <!-- Basic Info Card -->
+            <div class="watch-details-card">
+              <h6>Basic Info</h6>
+              <div class="form-group">
+                <label>Details Brand</label>
+                <input type="text" class="form-control" name="details_brand" value="<?= htmlspecialchars($details['brand']) ?>">
+              </div>
+              <div class="form-group">
+                <label>Model</label>
+                <input type="text" class="form-control" name="details_model" value="<?= htmlspecialchars($details['model']) ?>">
+              </div>
+              <div class="form-group">
+                <label>Reference</label>
+                <input type="text" class="form-control" name="details_reference" value="<?= htmlspecialchars($details['reference']) ?>">
+              </div>
             </div>
-            <div class="form-group col-md-6">
-              <label for="details_model">Model</label>
-              <input type="text" class="form-control" id="details_model" name="details_model" value="<?php echo htmlspecialchars($details['model']); ?>">
+            <!-- Design & Movement Card with Aside Layout -->
+            <div class="watch-details-card">
+              <h6>Design & Movement</h6>
+              <div class="d-flex">
+                <div class="flex-grow-1 pr-2">
+                  <div class="form-group">
+                    <label>Glass</label>
+                    <input type="text" class="form-control" name="details_glass" value="<?= htmlspecialchars($details['glass']) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Dial Numerals</label>
+                    <input type="text" class="form-control" name="details_dial_numerals" value="<?= htmlspecialchars($details['dial_numerals']) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Movement</label>
+                    <input type="text" class="form-control" name="details_movement" value="<?= htmlspecialchars($details['movement']) ?>">
+                  </div>
+                </div>
+                <aside class="border-left pl-2" style="min-width:150px;">
+                  <div class="form-group">
+                    <label>Water Resistance</label>
+                    <input type="text" class="form-control" name="details_water_resistance" value="<?= htmlspecialchars($details['water_resistance']) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Clasp Type</label>
+                    <input type="text" class="form-control" name="details_clasp_type" value="<?= htmlspecialchars($details['clasp_type']) ?>">
+                  </div>
+                </aside>
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_reference">Reference</label>
-              <input type="text" class="form-control" id="details_reference" name="details_reference" value="<?php echo htmlspecialchars($details['reference']); ?>">
+            <!-- Case & Strap Card -->
+            <div class="watch-details-card" style="grid-column: span 2;">
+              <h6>Case & Strap</h6>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label>Power Reserve</label>
+                  <input type="text" class="form-control" name="details_power_reserve" value="<?= htmlspecialchars($details['power_reserve']) ?>">
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Bracelet Color</label>
+                  <input type="text" class="form-control" name="details_bracelet_color" value="<?= htmlspecialchars($details['bracelet_color']) ?>">
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Gender</label>
+                  <input type="text" class="form-control" name="details_gender" value="<?= htmlspecialchars($details['gender']) ?>">
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Case Diameter</label>
+                  <input type="text" class="form-control" name="details_case_diameter" value="<?= htmlspecialchars($details['case_diameter']) ?>">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Case Material</label>
+                  <input type="text" class="form-control" name="details_case_material" value="<?= htmlspecialchars($details['case_material']) ?>">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Clasp Material</label>
+                  <input type="text" class="form-control" name="details_clasp_material" value="<?= htmlspecialchars($details['clasp_material']) ?>">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Bezel Material</label>
+                  <input type="text" class="form-control" name="details_bezel_material" value="<?= htmlspecialchars($details['bezel_material']) ?>">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Bracelet Material</label>
+                  <input type="text" class="form-control" name="details_bracelet_material" value="<?= htmlspecialchars($details['bracelet_material']) ?>">
+                </div>
+              </div>
             </div>
-            <div class="form-group col-md-6">
-              <label for="details_glass">Glass</label>
-              <input type="text" class="form-control" id="details_glass" name="details_glass" value="<?php echo htmlspecialchars($details['glass']); ?>">
+            <!-- Functions Card -->
+            <div class="watch-details-card" style="grid-column: span 2;">
+              <h6>Functions</h6>
+              <div class="form-group">
+                <textarea class="form-control" name="details_functions" rows="3"><?= htmlspecialchars($details['functions']) ?></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_dial_numerals">Dial Numerals</label>
-              <input type="text" class="form-control" id="details_dial_numerals" name="details_dial_numerals" value="<?php echo htmlspecialchars($details['dial_numerals']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_movement">Movement</label>
-              <input type="text" class="form-control" id="details_movement" name="details_movement" value="<?php echo htmlspecialchars($details['movement']); ?>">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_water_resistance">Water Resistance</label>
-              <input type="text" class="form-control" id="details_water_resistance" name="details_water_resistance" value="<?php echo htmlspecialchars($details['water_resistance']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_clasp_type">Clasp Type</label>
-              <input type="text" class="form-control" id="details_clasp_type" name="details_clasp_type" value="<?php echo htmlspecialchars($details['clasp_type']); ?>">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_power_reserve">Power Reserve</label>
-              <input type="text" class="form-control" id="details_power_reserve" name="details_power_reserve" value="<?php echo htmlspecialchars($details['power_reserve']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_bracelet_color">Bracelet Color</label>
-              <input type="text" class="form-control" id="details_bracelet_color" name="details_bracelet_color" value="<?php echo htmlspecialchars($details['bracelet_color']); ?>">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_gender">Gender</label>
-              <input type="text" class="form-control" id="details_gender" name="details_gender" value="<?php echo htmlspecialchars($details['gender']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_case_diameter">Case Diameter</label>
-              <input type="text" class="form-control" id="details_case_diameter" name="details_case_diameter" value="<?php echo htmlspecialchars($details['case_diameter']); ?>">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_case_material">Case Material</label>
-              <input type="text" class="form-control" id="details_case_material" name="details_case_material" value="<?php echo htmlspecialchars($details['case_material']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_clasp_material">Clasp Material</label>
-              <input type="text" class="form-control" id="details_clasp_material" name="details_clasp_material" value="<?php echo htmlspecialchars($details['clasp_material']); ?>">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="details_bezel_material">Bezel Material</label>
-              <input type="text" class="form-control" id="details_bezel_material" name="details_bezel_material" value="<?php echo htmlspecialchars($details['bezel_material']); ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="details_bracelet_material">Bracelet Material</label>
-              <input type="text" class="form-control" id="details_bracelet_material" name="details_bracelet_material" value="<?php echo htmlspecialchars($details['bracelet_material']); ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="details_functions">Functions</label>
-            <textarea class="form-control" id="details_functions" name="details_functions" rows="3"><?php echo htmlspecialchars($details['functions']); ?></textarea>
-          </div>
+          </div> 
         </div>
       </div>
-      <div class="text-right mb-2">
-        <a href="product-list.php" class="btn btn-secondary">Cancel</a>
-        <button type="submit" class="btn btn-primary bg-dark">Update Product</button>
-      </div>
-    </form>
   </div>
-  
+  <div class="text-right mb-2">
+    <a href="view-listing.php" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary bg-dark">Update Product</button>
+  </div>
+  </form>
+  </div>
+
   <!-- JavaScript to update image preview as the URL is edited -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="../src/assets/js/panelNav.js" async></script>
-  <script type="text/javascript" src="../src/assets/js/navigation.js" async></script>
+  <script type="text/javascript" src="../../src/assets/js/panelNav.js" async></script>
+  <script type="text/javascript" src="../../src/assets/js/navigation.js" async></script>
   <script>
     // When the image URL input changes, update the preview
     document.getElementById('image_url').addEventListener('input', function() {
       var url = this.value.trim();
       var imgPreview = document.getElementById('img_preview');
-      if(url) {
+      if (url) {
         imgPreview.src = url;
       } else {
         imgPreview.src = 'https://via.placeholder.com/300x200?text=No+Image';
@@ -432,4 +488,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
   </script>
 </body>
+
 </html>

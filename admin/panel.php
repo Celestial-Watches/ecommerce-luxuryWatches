@@ -75,9 +75,9 @@ if (!defined('ALLOW_ACCESS')) {
         </button>
         <ul class="sub-menu">
           <div>
-            <li><a href="/admin/view-listing.php">View Listings</a></li>
-            <li><a href="/admin/add-product.php">Add/Edit Listing</a></li>
-            <li><a href="/admin/watch-catagroies.php">Watch Categories</a></li>
+            <li><a href="/admin/products/view-listing.php">View Listings</a></li>
+            <li><a href="/admin/products/add-product.php">Add/Edit Listing</a></li>
+            <li><a href="/admin/products/watch-catagroies.php">Watch Categories</a></li>
             <li><a href="#">Rental/Lease Watches</a></li>
             <li><a href="#">NFT Customization Requests</a></li>
           </div>

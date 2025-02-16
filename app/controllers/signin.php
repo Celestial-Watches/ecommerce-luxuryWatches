@@ -168,12 +168,10 @@ if (isset($_POST["submit"])) {
       $mail->AltBody = "Your OTP code is: $otp";
 
       if ($mail->send()) {
-        // Optionally hash the username for added security
-        $hashedUsername = hash('sha256', $usernamee);  // Hash the username
-        // Set a cookie for the hashed username for 1 week
-        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true);  // Secure and HttpOnly flags enabled
-        $_SESSION['email'] = $email;  // Store email in the session
-        header("Location: verify_otp.php");  // Redirect to OTP verification page
+        $hashedUsername = hash('sha256', $usernamee);  
+        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true);  
+        $_SESSION['email'] = $email;  
+        header("Location: verify_otp.php");  
         exit();
       } else {
         $errors[] = "There was a problem sending the OTP. Please try again later.";
@@ -277,14 +275,14 @@ if (isset($_POST["submit"])) {
           <label for="password">Password</label>
           <input type="password" id="password" class="password-field" name="password" autocomplete="on">
           <span class="password-toggle-icon" title="Show Password">
-            <i class="fas fa-eye-slash" data-toggle="password"></i>
+            <i class="password-toggle fas fa-eye-slash" data-toggle="password"></i>
           </span>
         </div>
         <div class="input-group">
           <label for="confirm_password">Confirm Password</label>
           <input type="password" id="confirm_password" class="password-field" name="confirm_password" autocomplete="on">
           <span class="password-toggle-icon" title="Show Password">
-            <i class="fas fa-eye-slash" data-toggle="confirm_password"></i>
+            <i class="password-toggle fas fa-eye-slash" data-toggle="confirm_password"></i>
           </span>
         </div>
         <button type="submit" class="login-button" name="submit">Create Account</button>

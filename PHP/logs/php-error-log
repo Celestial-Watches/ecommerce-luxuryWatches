@@ -8585,3 +8585,476 @@ Stack trace:
 #0 D:\Marwadi university\Semester 5\PROJECT\admin\watch-catagroies.php(24): mysqli->query('SELECT DISTINCT...')
 #1 {main}
   thrown in D:\Marwadi university\Semester 5\PROJECT\admin\watch-catagroies.php on line 24
+[07-Feb-2025 18:07:13 Asia/Kolkata] PHP Warning:  Undefined array key "year" in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php on line 77
+[07-Feb-2025 18:07:13 Asia/Kolkata] PHP Warning:  Undefined array key "button_name" in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php on line 79
+[07-Feb-2025 18:07:13 Asia/Kolkata] PHP Warning:  Undefined array key "icon" in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php on line 80
+[07-Feb-2025 18:07:13 Asia/Kolkata] PHP Warning:  Undefined array key "stock" in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php on line 84
+[07-Feb-2025 18:07:13 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'sub_category' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php:88
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php(88): mysqli->prepare('UPDATE products...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\edit-product.php on line 88
+[08-Feb-2025 13:10:40 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:11:34 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:11:44 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:11:54 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:12:05 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:12:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:17
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(17): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 17
+[08-Feb-2025 13:12:28 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:7
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(7): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[08-Feb-2025 13:12:41 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:7
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(7): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[08-Feb-2025 13:12:52 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:7
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(7): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[08-Feb-2025 13:13:04 Asia/Kolkata] PHP Warning:  Undefined variable $result in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:13:04 Asia/Kolkata] PHP Warning:  Attempt to read property "num_rows" on null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:13:04 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:20
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(20): mysqli->prepare('INSERT INTO pro...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[08-Feb-2025 13:13:15 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:13:27 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:13:39 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:13:52 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:14:04 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:14:16 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'view' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:9
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(9): mysqli->prepare('SELECT id, view...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 9
+[08-Feb-2025 13:14:29 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:14:41 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:14:53 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:15:05 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:15:18 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:15:31 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:15:43 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:15:55 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:25
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(25): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 25
+[08-Feb-2025 13:16:18 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:33
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(33): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[08-Feb-2025 19:52:25 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 8
+[08-Feb-2025 19:52:25 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:37
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(37): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[08-Feb-2025 19:52:33 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 8
+[08-Feb-2025 19:52:33 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:37
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(37): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[08-Feb-2025 19:52:52 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:37
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(37): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[08-Feb-2025 19:53:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:37
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(37): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 37
+[08-Feb-2025 20:05:37 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:33
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(33): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[08-Feb-2025 20:11:06 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:33
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(33): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[08-Feb-2025 20:11:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:33
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(33): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 33
+[08-Feb-2025 20:12:01 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:32
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(32): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[08-Feb-2025 20:12:56 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:32
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(32): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[08-Feb-2025 20:14:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:32
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(32): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 32
+[08-Feb-2025 20:15:21 Asia/Kolkata] Invalid user_id: 0
+[08-Feb-2025 20:15:34 Asia/Kolkata] Invalid user_id: 0
+[08-Feb-2025 20:15:57 Asia/Kolkata] Invalid user_id: 0
+[08-Feb-2025 20:22:48 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 3
+[08-Feb-2025 20:22:48 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:23:22 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 3
+[08-Feb-2025 20:23:22 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:23:25 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 3
+[08-Feb-2025 20:23:25 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:24:46 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 3
+[08-Feb-2025 20:24:46 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:24:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:25:21 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:26:04 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php(30): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\actions.php on line 30
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 16
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 18
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $description in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 19
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 522
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 523
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 524
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 546
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 547
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 570
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 571
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 586
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 587
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 617
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 627
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 693
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 694
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 769
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 770
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 771
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 772
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 773
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 774
+[08-Feb-2025 20:27:07 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 775
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 16
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 18
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $description in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 19
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 522
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 523
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 524
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 546
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 547
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 570
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 571
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 586
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 587
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 617
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 627
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 693
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 694
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 769
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 770
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 771
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 772
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 773
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 774
+[08-Feb-2025 20:27:28 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 775
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 16
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 18
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $description in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 19
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 20
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 513
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 522
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 523
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 524
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 546
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $price in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 547
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 570
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 571
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 586
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 587
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 617
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $year in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 627
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 693
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 694
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $id in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 769
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $image in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 770
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $name in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 771
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $brand in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 772
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 773
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $ref_code in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 774
+[08-Feb-2025 20:27:32 Asia/Kolkata] PHP Warning:  Undefined variable $numericPrice in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 775
+[09-Feb-2025 11:59:54 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[09-Feb-2025 11:59:54 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:00:08 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[09-Feb-2025 12:00:08 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:00:09 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[09-Feb-2025 12:00:09 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:00:13 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:01:54 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:07:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:09:12 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[09-Feb-2025 12:11:09 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:41
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(41): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 41
+[09-Feb-2025 12:11:43 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:41
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(41): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 41
+[10-Feb-2025 11:37:57 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:37:57 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 11:38:08 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:38:08 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 11:38:17 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:38:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 11:38:47 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:38:47 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 11:38:49 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:38:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 11:39:03 Asia/Kolkata] PHP Warning:  Undefined array key "id" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 7
+[10-Feb-2025 11:39:03 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[10-Feb-2025 07:19:20 Europe/Berlin] PHP Warning:  include(panel.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\view-listing.php on line 10
+[10-Feb-2025 07:19:20 Europe/Berlin] PHP Warning:  include(): Failed opening 'panel.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\view-listing.php on line 10
+[10-Feb-2025 07:19:26 Europe/Berlin] PHP Warning:  include(panel.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 8
+[10-Feb-2025 07:19:26 Europe/Berlin] PHP Warning:  include(): Failed opening 'panel.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 8
+[10-Feb-2025 07:19:26 Europe/Berlin] PHP Warning:  require_once(D:\Marwadi university\Semester 5\PROJECT\admin\products/../app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 21
+[10-Feb-2025 07:19:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\admin\products/../app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 21
+[10-Feb-2025 07:19:45 Europe/Berlin] PHP Warning:  include(panel.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\view-listing.php on line 10
+[10-Feb-2025 07:19:45 Europe/Berlin] PHP Warning:  include(): Failed opening 'panel.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\view-listing.php on line 10
+[10-Feb-2025 07:19:49 Europe/Berlin] PHP Warning:  include(panel.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\edit-product.php on line 7
+[10-Feb-2025 07:19:49 Europe/Berlin] PHP Warning:  include(): Failed opening 'panel.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\edit-product.php on line 7
+[10-Feb-2025 07:22:23 Europe/Berlin] PHP Warning:  require_once(D:\Marwadi university\Semester 5\PROJECT\admin\products/../app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 21
+[10-Feb-2025 07:22:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\admin\products/../app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\products\add-product.php on line 21
+[10-Feb-2025 13:02:39 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8
+[10-Feb-2025 13:02:44 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(4): include('D:\\Marwadi univ...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8
+[10-Feb-2025 13:12:59 Asia/Kolkata] PHP Warning:  Undefined variable $user in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 185
+[10-Feb-2025 13:12:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 185
+[10-Feb-2025 13:13:14 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:55
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(55): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 55
+[10-Feb-2025 13:13:27 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:55
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(55): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 55
+[10-Feb-2025 13:14:19 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:55
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(55): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 55
+[10-Feb-2025 13:14:29 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:55
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(55): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 55
+[14-Feb-2025 11:50:06 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'name' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php:13
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php(13): mysqli_query(Object(mysqli), 'SELECT name, em...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 13
+[14-Feb-2025 11:50:20 Asia/Kolkata] PHP Warning:  Undefined array key "name" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 335
+[14-Feb-2025 11:50:39 Asia/Kolkata] PHP Warning:  Undefined array key "name" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 335
+[14-Feb-2025 11:51:14 Asia/Kolkata] PHP Warning:  Undefined array key "name" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 334
+[14-Feb-2025 11:51:48 Asia/Kolkata] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 39
+[14-Feb-2025 07:29:43 Europe/Berlin] PHP Warning:  require(/vendor/autoload.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 3
+[14-Feb-2025 07:29:43 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '/vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php:3
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 3
+[14-Feb-2025 12:00:02 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 22
+[14-Feb-2025 12:00:06 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 22
+[14-Feb-2025 12:00:10 Asia/Kolkata] PHP Warning:  Undefined array key "csrf_token" in D:\Marwadi university\Semester 5\PROJECT\app\views\user-dashboard.php on line 22
