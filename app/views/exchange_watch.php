@@ -27,184 +27,16 @@ include '../../PHP/components/navbar.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/src/assets/css/deskView.css" />
+  <link rel="stylesheet" href="/src/assets/css/deskView.css">
   <link rel="stylesheet" href="/src/libs/swiper/swiper-bundle.min.css">
   <link rel="stylesheet" href="/src/assets/css/google-header.css">
+  <link rel="stylesheet" href="assets/css//about-watch.css">
 
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    .form-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .form-container h2 {
-      margin-bottom: 20px;
-      font-weight: 500;
-      font-size: 20px;
-      width: 70%;
-      padding: 20px
-    }
-
-    .formBox {
-      background-color: #fff;
-      padding: 30px;
-    }
-
-    .form-row {
-      margin-bottom: 20px;
-    }
-
-    .form-labell {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 500;
-      font-size: 12px;
-    }
-
-    .required-star {
-      color: red;
-      margin-left: 2px;
-    }
-
-    .form-control input[type="text"],
-    .form-control input[type="search"],
-    .form-control select,
-    .form-control textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 0.95rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .form-control input[type="search"] {
-      border: none;
-      border-bottom: 1px solid #000;
-      width: 350px;
-      outline: none;
-    }
-
-    .form-control input[type="search"]::placeholder {
-      padding: 15px;
-    }
-
-    .form-control textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    /* Checkboxes & Radio Buttons */
-    .checkbox-group {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      padding: 10px;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .boxing {
-      border: 1px solid #ccc;
-      margin-bottom: 0 !important;
-      padding: 10px;
-      width: fit-content;
-    }
-
-    .box-select input[type="text"],
-    .box-select select {
-      border: 1px solid #BFBFBF;
-      border-radius: 0px;
-      font-family: 'Univers LT Std', sans-serif;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 14px;
-      color: #000;
-      width: 75%;
-      padding: 20px;
-    }
-
-    .checkbox-item label {
-      font-weight: 400;
-      cursor: pointer;
-    }
-
-    /* Price input with $ sign */
-    .price-input-container {
-      position: relative;
-    }
-
-    .price-input-container input {
-      padding-right: 40px;
-    }
-
-    .price-input-container::after {
-      content: "$";
-      position: absolute;
-      right: 110px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    /* Two-column grid */
-    .two-column-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .two-column-grid .grid-block {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .btn-submit {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #000;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .btn-submit:hover {
-      background: #333;
-    }
-
-    .ui-input-icon {
-      position: absolute;
-      color: #999;
-      transition: color 0.3s;
-    }
-
-    .ui-input-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .two-column-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -219,7 +51,7 @@ include '../../PHP/components/navbar.php';
           Select your watch that you want to exchange?
           <span class="required-star">*</span>
         </label>
-        <div class="form-control" style="display: flex; align-items: center;">
+        <div class="form-control" style="display: flex; align-items: center; ">
           <div class="ui-input-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <path
@@ -252,11 +84,11 @@ include '../../PHP/components/navbar.php';
             </label>
             <div class="form-control checkbox-group">
               <div class="checkbox-item">
-                <input type="checkbox" id="box-yes" name="original_box" value="yes" required />
+                <input type="checkbox" id="box-yes" name="original_box" value="yes" required onchange="onlyOne(this)" />
                 <label for="box-yes">Yes</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="box-no" name="original_box" value="no" required />
+                <input type="checkbox" id="box-no" name="original_box" value="no" required onchange="onlyOne(this)" />
                 <label for="box-no">No</label>
               </div>
             </div>
@@ -270,11 +102,11 @@ include '../../PHP/components/navbar.php';
             </label>
             <div class="form-control checkbox-group">
               <div class="checkbox-item">
-                <input type="checkbox" id="unworn-yes" name="unworn" value="yes" required />
+                <input type="checkbox" id="unworn-yes" name="unworn" value="yes" required onchange="onlyOne(this)" />
                 <label for="unworn-yes">Yes</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="unworn-no" name="unworn" value="no" required />
+                <input type="checkbox" id="unworn-no" name="unworn" value="no" required onchange="onlyOne(this)" />
                 <label for="unworn-no">No</label>
               </div>
             </div>
@@ -290,11 +122,11 @@ include '../../PHP/components/navbar.php';
             </label>
             <div class="form-control checkbox-group">
               <div class="checkbox-item">
-                <input type="checkbox" id="papers-yes" name="original_papers" value="yes" required />
+                <input type="checkbox" id="papers-yes" name="original_papers" value="yes" required onchange="onlyOne(this)" />
                 <label for="papers-yes">Yes</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="papers-no" name="original_papers" value="no" required />
+                <input type="checkbox" id="papers-no" name="original_papers" value="no" required onchange="onlyOne(this)" />
                 <label for="papers-no">No</label>
               </div>
             </div>
@@ -308,17 +140,26 @@ include '../../PHP/components/navbar.php';
             </label>
             <div class="form-control checkbox-group">
               <div class="checkbox-item">
-                <input type="checkbox" id="ww-yes" name="purchased_from_ww" value="yes" required />
+                <input type="checkbox" id="ww-yes" name="purchased_from_ww" value="yes" required onchange="onlyOne(this)" />
                 <label for="ww-yes">Yes</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="ww-no" name="purchased_from_ww" value="no" required />
+                <input type="checkbox" id="ww-no" name="purchased_from_ww" value="no" required onchange="onlyOne(this)" />
                 <label for="ww-no">No</label>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <script>
+        function onlyOne(checkbox) {
+          let group = document.getElementsByName(checkbox.name);
+          group.forEach((item) => {
+            if (item !== checkbox) item.checked = false;
+          });
+        }
+      </script>
 
       <!-- 4. Two columns: (How old is it? + How much are you expecting?) and (Condition + Production year) -->
       <div class="two-column-grid">

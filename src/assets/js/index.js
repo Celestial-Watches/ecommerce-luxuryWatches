@@ -186,6 +186,7 @@ document.body.addEventListener("click", (event) => {
     }
 });
 
+
 // ============================= Accessibility Enhancements =============================
 /**
  * Ensures modal and other interactive elements are accessible.

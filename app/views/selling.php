@@ -116,6 +116,7 @@ include '../../PHP/components/navbar.php';
 
     .checkboxes input[type="checkbox"] {
       margin-right: 0.5rem;
+      accent-color: #000;
     }
 
     /* Right column: steps and contact info */
