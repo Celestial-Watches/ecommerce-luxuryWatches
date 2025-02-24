@@ -350,11 +350,11 @@ session_start();
                 width: auto !important;
             }
 
-            .test-card-body p{
+            .test-card-body p {
                 font-size: 10px !important;
             }
 
-            .section-header h1{
+            .section-header h1 {
                 font-size: 30px !important;
             }
         }
@@ -982,9 +982,188 @@ session_start();
         <section class="membership-video">
 
             <div class="video-background">
-                <img src="	https://media.gq.com/photos/57ffacbfbcbaa8b0566b4c5e/16:9/w_2560%2Cc_limit/best-watches-patek-01.jpg" loading="lazy" class="video" alt="">
+                <img src="https://media.gq.com/photos/57ffacbfbcbaa8b0566b4c5e/16:9/w_2560%2Cc_limit/best-watches-patek-01.jpg" loading="lazy" class="video" alt="">
             </div>
         </section>
+
+        <section class="membership-form">
+            <!-- Registration Modal -->
+            <div class="membership-modal" id="registrationModal">
+                <div class="member-modal-content">
+                    <span class="member-close-modal">&times;</span>
+                    <div class="member-modal-header">
+                        <img src="/celestial-logo.png" alt="Celestial Watches" class="modal-logo" width="200px">
+                        <h2>Apply for Exclusive Membership</h2>
+                        <p>Step 1 of 2: Basic Information</p>
+                    </div>
+
+                    <form id="membershipForm" action="/app/models/membership-register.php" method="POST" class="elegant-form">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required pattern="[A-Za-z ]{3,}" title="Please enter a valid name (letters and spaces only)">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Contact Number</label>
+                            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}" title="Please enter a valid phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referralCode">Referral Code (if any)</label>
+                            <input type="text" id="referralCode" name="referralCode">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="background">Professional Background</label>
+                            <textarea id="background" name="background" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motivation">Why Join Our Membership?</label>
+                            <textarea id="motivation" name="motivation" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group terms-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a></label>
+                        </div>
+
+                        <button type="submit" class="member-modal-submit-btn">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+
+            <style>
+                .membership-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index: 1000;
+                }
+
+                .member-modal-content {
+                    background: #fff;
+                    margin: 5px auto;
+                    width: 600px;
+                    max-height: 100vh;
+                    border-radius: 8px;
+                    padding: 30px;
+                    position: relative;
+                    overflow-y: auto;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+
+                .member-modal-content::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .member-modal-header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                }
+
+                .member-modal-header h2 {
+                    font-family: 'Playfair Display', serif;
+                    color: #333;
+                    margin: 15px 0;
+                }
+
+                .elegant-form .form-group {
+                    margin-bottom: 20px;
+                }
+
+                .elegant-form label {
+                    display: flex;
+                    color: #666;
+                    font-weight: 500;
+                    gap: 5px;
+                    padding: 5px;
+                }
+
+                .terms-group {
+                    width: auto;
+                    display: ruby-text !important;
+                }
+
+                .terms-group input {
+                    width: auto;
+                }
+
+                .elegant-form input[type="text"],
+                .elegant-form input[type="email"],
+                .elegant-form input[type="tel"],
+                .elegant-form textarea {
+                    width: 100%;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    transition: border-color 0.3s;
+                }
+
+                .elegant-form input:focus,
+                .elegant-form textarea:focus {
+                    border-color: #007bff;
+                    outline: none;
+                }
+
+                .member-modal-submit-btn {
+                    background: #000;
+                    color: #fff;
+                    padding: 15px 30px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    width: 100%;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transition: background 0.3s;
+                }
+
+                .member-modal-submit-btn:hover {
+                    background: #333;
+                }
+
+                .member-close-modal {
+                    position: absolute;
+                    right: 25px;
+                    top: 15px;
+                    font-size: 28px;
+                    cursor: pointer;
+                }
+            </style>
+
+            <script>
+                // Modal Handling
+                document.querySelectorAll('.mem-cta-button, .mem-plan').forEach(button => {
+                    button.addEventListener('click', () => {
+                        document.getElementById('registrationModal').style.display = 'block';
+                    });
+                });
+
+                document.querySelector('.member-close-modal').addEventListener('click', () => {
+                    document.getElementById('registrationModal').style.display = 'none';
+                });
+
+                window.onclick = function(event) {
+                    if (event.target == document.getElementById('registrationModal')) {
+                        document.getElementById('registrationModal').style.display = 'none';
+                    }
+                }
+            </script>
+        </section>
+
 
         <?php include '../../PHP/components/footer.php' ?>
 

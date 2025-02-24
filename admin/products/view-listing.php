@@ -218,7 +218,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
         });
     </script>
     
-    <!-- <script src="../../src/assets/js/panelNav.js" defer></script> -->
+    <script src="../../src/assets/js/panelNav.js" defer></script>
     <script src="../../src/assets/js/navigation.js" async></script>
 </body>
 

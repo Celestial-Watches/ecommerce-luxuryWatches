@@ -593,10 +593,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
         .form-group {
             margin-bottom: 15px;
-            display: flex;
+            display: flex !important;
             flex-direction: column;
-            align-items: flex-start;
-
+            align-items: flex-start !important;
         }
 
 

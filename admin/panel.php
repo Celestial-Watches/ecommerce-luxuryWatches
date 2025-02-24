@@ -106,6 +106,29 @@ if (!defined('ALLOW_ACCESS')) {
         </ul>
       </li>
 
+
+      <!-- Membership Service -->
+
+      <li>
+        <button onclick=toggleSubMenu(this) class="dropdown-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="#e8eaed">
+            <path d="M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H4V5h16v14z" />
+            <circle cx="12" cy="10" r="3" />
+            <path d="M6 18c0-2.67 5.33-4 6-4s6 1.33 6 4v1H6v-1z" />
+          </svg>
+          <span class="noShow">Membership control</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+            <path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z" />
+          </svg>
+        </button>
+        <ul class="sub-menu">
+          <div>
+            <li><a href="membership/view-member.php">View Requests</a></li>
+            <li><a href="#">Application Details</a></li>
+          </div>
+        </ul>
+      </li>
+
       <!-- Watch Authentication Service -->
 
       <li>
@@ -329,4 +352,5 @@ if (!defined('ALLOW_ACCESS')) {
     </ul>
   </nav>
 </body>
+
 </html>

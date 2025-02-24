@@ -319,7 +319,7 @@ function getProductsByIds($productIds, $conn)
 
                                     // Initialize display price variable for this specific product
                                     $displayPrice = '';
-                                    $onRequestPrice = ''; // New variable for ON REQUEST price
+                                    $onRequestPrice = '';
 
                                     // Check if the price is "ON REQUEST"
                                     if (stripos($rawPrice, 'ON REQUEST') !== false) {
@@ -348,8 +348,8 @@ function getProductsByIds($productIds, $conn)
                                     <?php else: ?>
                                         <p class="featured-price" data-price-in-usd="<?= htmlspecialchars($priceValue) ?>"><?= $displayPrice ?></p>
                                     <?php endif; ?>
-                                    <button class="buy-button">View Details</button>
-
+                                    <button onclick="window.location.href='/app/views/details.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>'"
+                                        class="buy-button">View Details</button>
                                 </div>
                             <?php endforeach; ?>
                         </div>

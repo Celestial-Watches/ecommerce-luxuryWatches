@@ -9070,3 +9070,468 @@ Stack trace:
 [16-Feb-2025 21:15:49 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php:13) in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 8
 [16-Feb-2025 21:15:52 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php:13) in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 8
 [16-Feb-2025 21:16:09 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at D:\Marwadi university\Semester 5\PROJECT\PHP\components\navbar.php:13) in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 8
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:16 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:24:55 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[18-Feb-2025 10:26:08 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:17:50 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:18:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:19:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:34 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 12:21:38 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:14:12 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:16:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:28:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:32 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:30:36 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:04 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[23-Feb-2025 13:31:17 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:19 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:27 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:12:47 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:13:59 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:18 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:14:35 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Undefined variable $row in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:15:15 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php on line 351
+[24-Feb-2025 11:59:57 Asia/Kolkata] PHP Warning:  Undefined variable $sql in D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php on line 31
+[24-Feb-2025 11:59:57 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli::query(): Argument #1 ($query) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php(31): mysqli->query('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php on line 31
+[24-Feb-2025 12:02:50 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'ruchitdoshi62@gmail.com' for key 'email' in D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php:33
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php(33): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\membership-register.php on line 33
+[24-Feb-2025 12:05:13 Asia/Kolkata] Mailer Error: Could not access file: /celestial-logo.png
+[24-Feb-2025 22:05:35 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderPagination() in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php:329
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 329
+[24-Feb-2025 22:06:09 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:09 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:16 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:16 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:26 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:26 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:34 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 22:06:34 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29

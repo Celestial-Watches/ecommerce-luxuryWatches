@@ -205,7 +205,7 @@
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding 34mm</h3>
                             <p class="featured-price" data-price-in-usd="57154">$ 57,154</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=1'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -213,7 +213,7 @@
                             <hr>
                             <h3 class="featured-text">Jacob &amp; Co. High Complication Masterpieces Casino Tourbillon Baguette Diamonds Limited Edition 44mm</h3>
                             <p class="featured-price">ON REQUEST</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=2'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -221,7 +221,7 @@
                             <hr>
                             <h3 class="featured-text">Richard Mille RM67-02 Automatic Winding Extra-Thin &amp;quot;Mutaz Essa Barshim&amp;&quot;</h3>
                             <p class="featured-price" data-price-in-usd="324507">$ 324,507</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=3'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -229,7 +229,7 @@
                             <hr>
                             <h3 class="featured-text">Vacheron Constantin Overseas Self-winding 34.5mm</h3>
                             <p class="featured-price" data-price-in-usd="26836">$ 26,836</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=4'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -237,7 +237,7 @@
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Selfwinding Chronograph &amp;&quot;50th Anniversary&amp;&quot; 41mm</h3>
                             <p class="featured-price" data-price-in-usd="77365">$ 77,365</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=5'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -245,7 +245,7 @@
                             <hr>
                             <h3 class=" featured-text">Audemars Piguet Royal Oak 33mm"</h3>
                             <p class="featured-price" data-price-in-usd="33574">$ 33,574</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=6'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -253,7 +253,7 @@
                             <hr>
                             <h3 class="featured-text">Audemars Piguet Royal Oak Double Balance Wheel Openworked 41mm</h3>
                             <p class="featured-price show-from-text" data-price-in-usd="257135">FROM $ 257,135</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=7'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -261,7 +261,7 @@
                             <hr>
                             <h3 class="featured-text">Patek Philippe Nautilus 40mm</h3>
                             <p class="featured-price" data-price-in-usd="112174">$ 112,174</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=8'" class="buy-button">View Details</button>
                         </div>
                         <!--  -->
                         <div class="card">
@@ -269,7 +269,7 @@
                             <hr>
                             <h3 class=" featured-text">Richard Mille RM11-03 Automatic Flyback Chronograph McLaren Limited Edition"</h3>
                             <p class="featured-price" data-price-in-usd="364930">$ 364,930</p>
-                            <button class="buy-button">View Details</button>
+                            <button onclick="window.location.href='/app/views/details.php?id=9'" class="buy-button">View Details</button>
                         </div>
                     </div>
                 </div>
