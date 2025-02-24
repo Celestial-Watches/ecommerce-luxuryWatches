@@ -43,8 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         die("Error preparing statement: " . $conn->error);
     }
-
-    $conn->close();
 }
 
 function sendConfirmationEmail($toEmail, $name)
@@ -97,11 +95,13 @@ function sendConfirmationEmail($toEmail, $name)
         ";
 
         // Attach embedded image
-        $mail->addEmbeddedImage('/celestial-logo.png', 'logo_cid');
+        $mail->addEmbeddedImage('../../celestial-logo.png', 'logo_cid');
 
         $mail->send();
     } catch (Exception $e) {
         error_log('Mailer Error: ' . $mail->ErrorInfo);
     }
 }
+
+$conn->close();
 ?>

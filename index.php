@@ -101,9 +101,9 @@ if (isset($_SESSION['user'])) {
     $_SESSION['LAST_ACTIVITY'] = time();
 }
 
-// echo '<pre>';
-// print_r($_SESSION);  // Debugging: See what session data is set
-// echo '</pre>';
+echo '<pre>';
+print_r($_SESSION);  
+echo '</pre>';
 // throw new Exception('This is a test exception!');
 
 ?>
@@ -420,7 +420,7 @@ if (isset($_SESSION['user'])) {
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
-
+    
 
 </body>
 

@@ -14,6 +14,13 @@ date_default_timezone_set('Asia/Kolkata');
 session_start();
 ob_start();
 
+if (isset($_GET['return_to']) && !empty($_GET['return_to'])) {
+  $return_to = filter_var($_GET['return_to'], FILTER_SANITIZE_URL);
+  if (strpos($return_to, '/') === 0) {
+    $_SESSION['return_to'] = $return_to;
+  }
+}
+
 
 $usernamee = isset($_COOKIE['rem_username']) ? $_COOKIE['rem_username'] : '';
 
@@ -23,8 +30,12 @@ if (isset($_SESSION['user']) || isset($_COOKIE['SSIDU'])) {
     unset($_SESSION['user']);
     setcookie("SSIDU", "", time() - 3600, "/"); // Clear any stale cookies
   } else {
-    // Redirect logged-in users
-    header("Location: ../../index.php");
+    $redirectUrl = '../../index.php';
+    if (isset($_SESSION['return_to']) && !empty($_SESSION['return_to'])) {
+      $redirectUrl = $_SESSION['return_to'];
+      unset($_SESSION['return_to']);
+    }
+    header("Location: " . $redirectUrl);
     exit();
   }
 }
@@ -105,8 +116,6 @@ if (isset($_POST["login"])) {
           $description = 'User logged in successfully.';
 
           logUserActivity($userId, $activityType, $description);
-
-          // Redirect to index after auto-login
           header("Location: ../../index.php");
           exit();
         }
@@ -198,6 +207,9 @@ if (isset($_POST["login"])) {
 }
 
 
+// echo '<pre>';
+// print_r($_SESSION);  
+// echo '</pre>';
 
 ?>
 

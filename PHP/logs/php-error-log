@@ -9535,3 +9535,38 @@ Stack trace:
 [24-Feb-2025 22:06:26 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
 [24-Feb-2025 22:06:34 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
 [24-Feb-2025 22:06:34 Asia/Kolkata] PHP Notice:  Object of class mysqli could not be converted to int in D:\Marwadi university\Semester 5\PROJECT\admin\membership\view-member.php on line 29
+[24-Feb-2025 23:42:45 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function isSafeRedirectUrl() in D:\Marwadi university\Semester 5\PROJECT\app\controllers\login.php:189
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\login.php on line 189
+[24-Feb-2025 23:46:43 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8
+[24-Feb-2025 23:47:06 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\fetch_random_products.php(8): require_once('D:\\Marwadi univ...')
+#2 D:\Marwadi university\Semester 5\PROJECT\index.php(408): include('D:\\Marwadi univ...')
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8
+[24-Feb-2025 23:48:30 Asia/Kolkata] PHP Warning:  Undefined array key "user_id" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php on line 9
+[24-Feb-2025 23:48:30 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 00:16:34 Asia/Kolkata] Mailer Error: Could not access file: /celestial-logo.png
+[24-Feb-2025 20:01:21 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 14
+[25-Feb-2025 00:31:21 Asia/Kolkata] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 27
+[25-Feb-2025 00:31:21 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated when there is no active session in D:\Marwadi university\Semester 5\PROJECT\index.php on line 34
+[24-Feb-2025 20:01:23 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 14
+[25-Feb-2025 00:31:23 Asia/Kolkata] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 27
+[25-Feb-2025 00:31:23 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated when there is no active session in D:\Marwadi university\Semester 5\PROJECT\index.php on line 34
+[25-Feb-2025 00:31:41 Asia/Kolkata] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in D:\Marwadi university\Semester 5\PROJECT\index.php on line 15
+[25-Feb-2025 00:31:41 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 34
+[25-Feb-2025 00:32:25 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 32

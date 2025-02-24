@@ -843,11 +843,11 @@ $isLoggedIn = isset($_SESSION['user_id']);
                             </div>
 
                             <!-- Save Button -->
-                            <div class="btn-submit w-100">
+                            <!-- <div class="btn-submit w-100">
                                 <button class="btn btn-default w-100 text-uppercase set-curr-lang" id="saveSettingsBtn">
                                     Save These Settings
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </li>
 

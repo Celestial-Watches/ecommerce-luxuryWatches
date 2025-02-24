@@ -236,11 +236,6 @@ languageSelect.addEventListener('change', function(event) {
     selectLanguage(event.target.value); // Ensure this function is defined in your JS
 });
 
-// Reload the page when the save button is clicked
-const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-saveSettingsBtn.addEventListener('click', () => {
-    location.reload();
-});
 
 // Handle login
 document.querySelectorAll('.styled-login[href*="login"]').forEach(btn => {

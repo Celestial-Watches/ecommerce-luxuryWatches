@@ -66,7 +66,7 @@ function sendStatusEmail($application, $status)
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'celestialwatches69@gmail.com';
-        $mail->Password = 'xvmjnggsmsnkavzt';
+        $mail->Password = 'xvmjnggsmsnkavzt'; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
@@ -75,133 +75,322 @@ function sendStatusEmail($application, $status)
         $mail->addAddress($application['email']);
         $mail->isHTML(true);
 
-        // Set email content
-        $mail->Subject = ($status === 'approved') ? 'Membership Application Approved' : 'Membership Application Update';
+        // Embed the logo image
+        $logoPath = '../../celestial-logo.png'; 
+        $mail->addEmbeddedImage($logoPath, 'logo_cid');
 
-        $emailBody = '
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Celestial Watches Membership Notification</title>
-            <style>
-                .email-container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    font-family: Arial, sans-serif;
-                    line-height: 1.6;
-                    color: #333;
-                }
-                
-                .header {
-                    background: #002f6c;
-                    color: white;
-                    padding: 20px;
-                    text-align: center;
-                }
-                
-                .header img {
-                    max-width: 150px;
-                    margin-bottom: 10px;
-                }
-                
-                .content {
-                    background: #f8f9fa;
-                    padding: 25px;
-                    border-radius: 4px;
-                }
-                
-                .section {
-                    margin-bottom: 25px;
-                }
-                
-                .cta-button {
-                    display: inline-block;
-                    background: #007bff;
-                    color: white;
-                    padding: 12px 25px;
-                    text-decoration: none;
-                    border-radius: 4px;
-                    font-weight: bold;
-                    margin-top: 10px;
-                }
-                
-                .cta-button:hover {
-                    background: #0056b3;
-                }
-                
-                .footer {
-                    background: #333;
-                    color: white;
-                    padding: 15px;
-                    text-align: center;
-                    font-size: 0.9em;
-                    margin-top: 25px;
-                }
-                
-                .faq {
-                    margin-top: 20px;
-                    padding: 15px;
-                    background: #e9ecef;
-                    border-radius: 4px;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="email-container">
-                <div class="header">
-                    <img src="/celestial-logo.png" alt="Celestial Watches Logo">
-                    <h1>Membership Notification</h1>
-                </div>
-                
-                <div class="content">
-                    <div class="section">
-                        <h2>Dear ' . $application['full_name'] . '</h2>
-                        ' . ($status === 'approved' ? '
-                        <h3>Your Membership Has Been Approved!</h3>
-                        <p>Congratulations! We\'re delighted to welcome you as a member of Celestial Watches. Your exclusive benefits will be available immediately.</p>
-                        <a href="' . LOGIN_URL . '" class="cta-button">Activate Your Membership</a>
-                        ' : '
-                        <h3>Application Update</h3>
-                        <p>After careful review, we regret to inform you that your application wasn\'t approved at this time. We appreciate your interest in our community.</p>
-                        ') . '
-                    </div>
+        switch ($status) {
+            case 'approved':
+                $mail->Subject = 'Membership Application Approved';
+                $emailBody = '
+                <html>
+                <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Celestial Watches Membership Notification</title>
+                <style>
+                    .email-container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
                     
-                    <div class="section">
-                        <h3>Next Steps</h3>
-                        ' . ($status === 'approved' ? '
-                        <p>You will receive your personalized membership credentials in a separate email within 24 hours. Please review our <a href="' . BENEFITS_URL . '">Membership Benefits</a> for more details.</p>
-                        ' : '
-                        <p>We encourage you to reapply in the future. Consider exploring our <a href="' . STORE_URL . '">Luxury Collection</a> in the meantime.</p>
-                        ') . '
+                    .header {
+                        background: #002f6c;
+                        color: white;
+                        padding: 20px;
+                        text-align: center;
+                    }
+                    
+                    .header img {
+                        max-width: 150px;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .content {
+                        background: #f8f9fa;
+                        padding: 25px;
+                        border-radius: 4px;
+                    }
+                    
+                    .section {
+                        margin-bottom: 25px;
+                    }
+                    
+                    .cta-button {
+                        display: inline-block;
+                        background: #007bff;
+                        color: white;
+                        padding: 12px 25px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    
+                    .cta-button:hover {
+                        background: #0056b3;
+                    }
+                    
+                    .footer {
+                        background: #333;
+                        color: white;
+                        padding: 15px;
+                        text-align: center;
+                        font-size: 0.9em;
+                        margin-top: 25px;
+                    }
+                    
+                    .faq {
+                        margin-top: 20px;
+                        padding: 15px;
+                        background: #e9ecef;
+                        border-radius: 4px;
+                    }
+                </style>
+            </head>
+            <body>
+            <div class="email-container">
+                        <div class="header">
+                            <img src="cid:logo_cid" alt="Celestial Watches Logo">
+                            <h1>Membership Notification</h1>
+                        </div>
+                        <div class="content">
+                            <div class="section">
+                                <h2>Dear ' . htmlspecialchars($application['full_name']) . ',</h2>
+                                <h3>Your Membership Has Been Approved!</h3>
+                                <p>Congratulations! We\'re delighted to welcome you as a member of Celestial Watches. Your exclusive benefits are now available.</p>
+                                <a href="' . LOGIN_URL . '" class="cta-button">Activate Your Membership</a>
+                            </div>
+                            <div class="section">
+                                <h3>Next Steps</h3>
+                                <p>You will receive your personalized membership credentials in a separate email within 24 hours. Please review our <a href="' . BENEFITS_URL . '">Membership Benefits</a> for more details.</p>
+                            </div>
+                            <div class="faq">
+                                <h3>Frequently Asked Questions</h3>
+                                <p><strong>When will I receive my credentials?</strong><br>Your membership details will be sent within 24 hours.</p>
+                                <p><strong>Can I upgrade my membership?</strong><br>Yes, you can upgrade your membership at any time.</p>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <p>&copy; ' . date('Y') . ' Celestial Watches. All rights reserved.</p>
+                            <p>Follow us: 
+                                <a href="https://www.instagram.com/celestialwatches" target="_blank">Instagram</a> | 
+                                <a href="https://www.facebook.com/celestialwatches" target="_blank">Facebook</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="faq">
-                        <h3>Frequently Asked Questions</h3>
-                        <p><strong>When will I receive my credentials?</strong><br>
-                        ' . ($status === 'approved' ? 'Your membership details will be sent within 24 hours.' : 'Credentials are only provided to approved members.') . '</p>
-                        
-                        <p><strong>Can I reapply?</strong><br>
-                        ' . ($status === 'approved' ? 'Yes, you can upgrade your membership at any time.' : 'We accept reapplications after 6 months.') . '</p>
+                </body>
+                </html>';
+                break;
+
+            case 'rejected':
+                $mail->Subject = 'Membership Application Update';
+                $emailBody = '
+                <html>
+                <head>
+                    <style>
+                        .email-container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    
+                    .header {
+                        background: #002f6c;
+                        color: white;
+                        padding: 20px;
+                        text-align: center;
+                    }
+                    
+                    .header img {
+                        max-width: 150px;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .content {
+                        background: #f8f9fa;
+                        padding: 25px;
+                        border-radius: 4px;
+                    }
+                    
+                    .section {
+                        margin-bottom: 25px;
+                    }
+                    
+                    .cta-button {
+                        display: inline-block;
+                        background: #007bff;
+                        color: white;
+                        padding: 12px 25px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    
+                    .cta-button:hover {
+                        background: #0056b3;
+                    }
+                    
+                    .footer {
+                        background: #333;
+                        color: white;
+                        padding: 15px;
+                        text-align: center;
+                        font-size: 0.9em;
+                        margin-top: 25px;
+                    }
+                    
+                    .faq {
+                        margin-top: 20px;
+                        padding: 15px;
+                        background: #e9ecef;
+                        border-radius: 4px;
+                    }
+                    </style>
+                </head>
+                <body>
+                    <div class="email-container">
+                        <div class="header">
+                            <img src="cid:logo_cid" alt="Celestial Watches Logo">
+                            <h1>Membership Notification</h1>
+                        </div>
+                        <div class="content">
+                            <div class="section">
+                                <h2>Dear ' . htmlspecialchars($application['full_name']) . ',</h2>
+                                <h3>Application Update</h3>
+                                <p>After careful review, we regret to inform you that your application wasn\'t approved at this time. We appreciate your interest in our community.</p>
+                            </div>
+                            <div class="section">
+                                <h3>Next Steps</h3>
+                                <p>We encourage you to reapply in the future. Consider exploring our <a href="' . STORE_URL . '">Luxury Collection</a> in the meantime.</p>
+                            </div>
+                            <div class="faq">
+                                <h3>Frequently Asked Questions</h3>
+                                <p><strong>Can I reapply?</strong><br>We accept reapplications after 6 months.</p>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <p>&copy; ' . date('Y') . ' Celestial Watches. All rights reserved.</p>
+                            <p>Follow us: 
+                                <a href="https://www.instagram.com/celestialwatches" target="_blank">Instagram</a> | 
+                                <a href="https://www.facebook.com/celestialwatches" target="_blank">Facebook</a>
+                            </p>
+                        </div>
+                    </div>
+                </body>
+                </html>';
+                break;
+
+            case 'terminated':
+                $mail->Subject = 'Membership Termination Notice';
+                $emailBody = '
+                <html>
+                <head>
+                    <style>
+                        .email-container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    
+                    .header {
+                        background: #002f6c;
+                        color: white;
+                        padding: 20px;
+                        text-align: center;
+                    }
+                    
+                    .header img {
+                        max-width: 150px;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .content {
+                        background: #f8f9fa;
+                        padding: 25px;
+                        border-radius: 4px;
+                    }
+                    
+                    .section {
+                        margin-bottom: 25px;
+                    }
+                    
+                    .cta-button {
+                        display: inline-block;
+                        background: #007bff;
+                        color: white;
+                        padding: 12px 25px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    
+                    .cta-button:hover {
+                        background: #0056b3;
+                    }
+                    
+                    .footer {
+                        background: #333;
+                        color: white;
+                        padding: 15px;
+                        text-align: center;
+                        font-size: 0.9em;
+                        margin-top: 25px;
+                    }
+                    
+                    .faq {
+                        margin-top: 20px;
+                        padding: 15px;
+                        background: #e9ecef;
+                        border-radius: 4px;
+                    }
+                    </style>
+                </head>
+                <body>
+                    <div class="email-container">
+                        <div class="header">
+                            <img src="cid:logo_cid" alt="Celestial Watches Logo" width="200">
+                            <h1>Membership Notification</h1>
+                        </div>
+                        <div class="content">
+                            <div class="section">
+                            <h2>Dear ' . htmlspecialchars($application['full_name']) . ',</h2>
+                            <h3>Membership Termination</h3>
+                            <p>We regret to inform you that your membership with Celestial Watches has been terminated. If you have any questions, please contact our support team.</p>
+                        </div>
+                        <div class="section">
+                            <h3>Next Steps</h3>
+                            <p>Should you wish to reapply in the future, please review our <a href="' . BENEFITS_URL . '">membership policies</a>.</p>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <p>&copy; ' . date('Y') . ' Celestial Watches. All rights reserved.</p>
+                        <p>Follow us: 
+                            <a href="https://www.instagram.com/celestialwatches" target="_blank">Instagram</a> | 
+                            <a href="https://www.facebook.com/celestialwatches" target="_blank">Facebook</a>
+                        </p>
                     </div>
                 </div>
-                
-                <div class="footer">
-                    <p>&copy; ' . date('Y') . ' Celestial Watches. All rights reserved.</p>
-                    <p>Follow us: 
-                        <a href="https://www.instagram.com/celestialwatches" target="_blank">Instagram</a> | 
-                        <a href="https://www.facebook.com/celestialwatches" target="_blank">Facebook</a>
-                    </p>
-                </div>
-            </div>
-        </body>
-        </html>';
-
-        $mail->Body = $emailBody;
-        $mail->AltBody = strip_tags($emailBody);
-
-        $mail->send();
-    } catch (Exception $e) {
-        error_log('Mailer Error: ' . $mail->ErrorInfo);
+            </body>
+            </html>';
+            break;
     }
+
+    // Set email content
+    $mail->Body = $emailBody;
+
+    // Send email
+    $mail->send();
+} catch (Exception $e) {
+    error_log("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+}
 }

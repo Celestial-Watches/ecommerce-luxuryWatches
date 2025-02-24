@@ -255,17 +255,23 @@
     }
 
     function translateLanguage(lang) {
-        setTimeout(() => {
+        let attempts = 0;
+        const MAX_ATTEMPTS = 10;
+    
+        function applyLanguage() {
             const googleTranslateDropdown = document.querySelector('.goog-te-combo');
-            if (googleTranslateDropdown) {
+            if (googleTranslateDropdown && attempts < MAX_ATTEMPTS) {
                 googleTranslateDropdown.value = lang || "en";
-                googleTranslateDropdown.dispatchEvent(new Event('change'));
-                localStorage.setItem(STORAGE_KEY_LANGUAGE, lang);
-                localStorage.setItem(STORAGE_KEY_LANGUAGE_TIMESTAMP, Date.now());
+                googleTranslateDropdown.dispatchEvent(new Event('change', { bubbles: true }));
+            } else if (attempts < MAX_ATTEMPTS) {
+                setTimeout(applyLanguage, 100); 
+                attempts++;
             } else {
-                console.error('Google Translate dropdown not found.');
+                console.error("Google Translate dropdown not found.");
             }
-        }, 100);
+        }
+    
+        applyLanguage();
     }
 
     window.onload = function () {
@@ -283,7 +289,7 @@
         } else {
             localStorage.removeItem(STORAGE_KEY_LANGUAGE);
             localStorage.removeItem(STORAGE_KEY_LANGUAGE_TIMESTAMP);
-            document.getElementById('customLanguageSelect').value = 'en'; // Default to English
+            document.getElementById('customLanguageSelect').value = 'en'; 
         }
     };
 

@@ -1,6 +1,7 @@
 <?php
 define('ALLOW_ACCESS', true);
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -987,7 +988,7 @@ session_start();
         </section>
 
         <section class="membership-form">
-            <!-- Registration Modal -->
+            <!-- Membership Modal (Shown when logged in) -->
             <div class="membership-modal" id="registrationModal">
                 <div class="member-modal-content">
                     <span class="member-close-modal">&times;</span>
@@ -1038,7 +1039,23 @@ session_start();
                 </div>
             </div>
 
+            <!-- Login/Signup Modal (Shown when not logged in) -->
+            <div class="login-signup-modal" id="loginSignupModal">
+                <div class="login-signup-content">
+                    <span class="login-signup-close">&times;</span>
+                    <img src="/celestial-logo.png" alt="Celestial Watches" class="modal-logo" width="200px">
+                    <h2>Welcome</h2>
+                    <p>Please log in or sign up to continue</p>
+                    <div class="button-container">
+                        <a href="/app/controllers/login.php?return_to=<?php echo urlencode('/app/views/membership.php'); ?>" class="login-btn">Login</a>
+                        <a href="/app/controllers/signin.php" class="signup-btn">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+
+
             <style>
+                /* Membership Modal Styles */
                 .membership-modal {
                     display: none;
                     position: fixed;
@@ -1142,27 +1159,104 @@ session_start();
                     font-size: 28px;
                     cursor: pointer;
                 }
+
+                /* Login/Signup Modal Styles */
+                .login-signup-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index: 1100;
+                }
+
+                .login-signup-content {
+                    background: #fff;
+                    margin: 5px auto;
+                    width: 400px;
+                    border-radius: 8px;
+                    padding: 30px;
+                    position: relative;
+                    text-align: center;
+                }
+
+                .login-signup-close {
+                    position: absolute;
+                    right: 20px;
+                    top: 10px;
+                    font-size: 28px;
+                    cursor: pointer;
+                }
+
+                .button-container {
+                    margin-top: 20px;
+                }
+
+                .login-btn,
+                .signup-btn {
+                    display: inline-block;
+                    margin: 0 10px;
+                    padding: 12px 25px;
+                    border: 2px solid #000;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    color: #000;
+                    font-weight: bold;
+                    transition: background 0.3s, color 0.3s;
+                }
+
+                .login-btn:hover,
+                .signup-btn:hover {
+                    background: #000;
+                    color: #fff;
+                }
             </style>
 
             <script>
-                // Modal Handling
+                var isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+
+                function showMembershipModal() {
+                    document.getElementById('registrationModal').style.display = 'block';
+                }
+
+                function showLoginSignupModal() {
+                    document.getElementById('loginSignupModal').style.display = 'block';
+                }
+
                 document.querySelectorAll('.mem-cta-button, .mem-plan').forEach(button => {
                     button.addEventListener('click', () => {
-                        document.getElementById('registrationModal').style.display = 'block';
+                        if (isLoggedIn) {
+                            showMembershipModal();
+                        } else {
+                            showLoginSignupModal();
+                        }
                     });
                 });
 
+                // Close Membership Modal
                 document.querySelector('.member-close-modal').addEventListener('click', () => {
                     document.getElementById('registrationModal').style.display = 'none';
                 });
 
+                // Close Login/Signup Modal
+                document.querySelector('.login-signup-close').addEventListener('click', () => {
+                    document.getElementById('loginSignupModal').style.display = 'none';
+                });
+
+                // Close modals if clicking outside of them
                 window.onclick = function(event) {
                     if (event.target == document.getElementById('registrationModal')) {
                         document.getElementById('registrationModal').style.display = 'none';
                     }
+                    if (event.target == document.getElementById('loginSignupModal')) {
+                        document.getElementById('loginSignupModal').style.display = 'none';
+                    }
                 }
             </script>
         </section>
+
 
 
         <?php include '../../PHP/components/footer.php' ?>
