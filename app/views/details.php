@@ -1,38 +1,12 @@
 <?php
 session_start();
+ob_start();
 define('ALLOW_ACCESS', true);
-include '../../PHP/components/navbar.php';
 require_once '../config/conn.php';
 
 $productId = (int) $_GET['id'];
 $userId = $_SESSION['user_id'] ?? $_SESSION['guest_db_id'] ?? $_SESSION['guest_id'] ?? 0;
 
-$stmt = $conn->prepare("SELECT id, view FROM product_views WHERE user_id = ? AND product_id = ?");
-$stmt->bind_param("ii", $userId, $productId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $newViewCount = $row['view'] + 1;
-
-    $updateStmt = $conn->prepare("UPDATE product_views SET view = ? WHERE id = ?");
-    $updateStmt->bind_param("ii", $newViewCount, $row['id']);
-    $updateStmt->execute();
-    $updateStmt->close();
-
-    $productStmt = $conn->prepare("UPDATE products SET views = views + 1 WHERE id = ?");
-    $productStmt->bind_param("i", $productId);
-    $productStmt->execute();
-    $productStmt->close();
-} else {
-    $insertStmt = $conn->prepare("INSERT INTO product_views (user_id, product_id, view, created_at) VALUES (?, ?, 1, NOW())");
-    $insertStmt->bind_param("ii", $userId, $productId);
-    $insertStmt->execute();
-    $insertStmt->close();
-}
-
-$stmt->close();
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -41,56 +15,62 @@ if (isset($_GET['id'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $image = $row['image_url'];
-    $name = $row['name'];
-    $price = $row['price'];
-    $year = $row['year'];
-    $ref_code = $row['ref_code'];
-    $button_name = $row['button_name'];
-    $icon = $row['icon'];
-    $brand = $row['brand'];
-    $description = $row['description'];
 
-    // Get product details
+    $image = $row['image_url'] ?? '';
+    $name = $row['name'] ?? '';
+    $price = $row['price'] ?? '';
+    $year = $row['year'] ?? '';
+    $ref_code = $row['ref_code'] ?? '';
+    $button_name = $row['button_name'] ?? '';
+    $icon = $row['icon'] ?? '';
+    $brand = $row['brand'] ?? '';
+    $description = $row['description'] ?? '';
+
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    if (!empty($image) && !preg_match('/^https?:\/\//', $image)) {
+        $image = $protocol . $host . '/' . ltrim($image, '/');
+    }
+
+    // Get product details (remains unchanged)
     $stmt = $conn->prepare("SELECT * FROM product_details WHERE product_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result_details = $stmt->get_result();
-    $row_details = $result_details->fetch_assoc();
-    // $material = $row_details['material'];
-    // $glass = $row_details['glass'];
-    // $dial_numerals = $row_details['dial_numerals'];
-    // $movement = $row_details['movement'];
-    // $water_resistance = $row_details['water_resistance'];
-    // $clasp_type = $row_details['clasp_type'];
-    // $power_reserve = $row_details['power_reserve'];
-    // $bracelet_color = $row_details['bracelet_color'];
-    // $gender = $row_details['gender'];
-    // $case_diameter = $row_details['case_diameter'];
-    // $case_material = $row_details['case_material'];
-    // $clasp_material = $row_details['clasp_material'];
-    // $bezel_material = $row_details['bezel_material'];
-    // $bracelet_material = $row_details['bracelet_material'];
-    // $functions = $row_details['functions'];
+    $row_details = $result_details->fetch_assoc() ?: [];
+    $model = $row_details['model'] ?? '';
+    $glass = $row_details['glass'] ?? '';
+    $dial_numerals = $row_details['dial_numerals'] ?? '';
+    $movement = $row_details['movement'] ?? '';
+    $water_resistance = $row_details['water_resistance'] ?? '';
+    $clasp_type = $row_details['clasp_type'] ?? '';
+    $power_reserve = $row_details['power_reserve'] ?? '';
+    $bracelet_color = $row_details['bracelet_color'] ?? '';
+    $gender = $row_details['gender'] ?? '';
+    $case_diameter = $row_details['case_diameter'] ?? '';
+    $case_material = $row_details['case_material'] ?? '';
+    $clasp_material = $row_details['clasp_material'] ?? '';
+    $bezel_material = $row_details['bezel_material'] ?? '';
+    $bracelet_material = $row_details['bracelet_material'] ?? '';
+    $functions = $row_details['functions'] ?? '';
     $stmt->close();
 
     $numericPrice = null;
 
     if (stripos($price, 'ON REQUEST') !== false) {
-        $numericPrice = null; 
+        $numericPrice = null;
     } else {
         if (stripos($price, 'FROM') !== false) {
             preg_match('/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i', $price, $matches);
-            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0; 
+            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0;
         } else {
             preg_match('/[0-9,]+(?:\.[0-9]{1,2})?/', $price, $matches);
-            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0; 
+            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0;
         }
     }
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -370,8 +350,11 @@ if (isset($_GET['id'])) {
         }
 
         .details-heading {
-            font-family: 'Baskerville';
-            font-size: 32px;
+            font-family: 'Open Sans';
+            font-size: 21px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 25px;
             border-bottom: 1px solid #000;
             padding-bottom: 10px;
             margin-bottom: 20px;
@@ -384,11 +367,16 @@ if (isset($_GET['id'])) {
 
         .faq-question {
             padding: 15px 0;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
+            font-family: 'Open Sans';
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 18px;
+            text-transform: uppercase;
+            cursor: pointer;
         }
 
         .faq-answer {
@@ -403,7 +391,22 @@ if (isset($_GET['id'])) {
         }
 
         .faq-answer b {
+            color: black !important;
+            font-weight: 700;
+            font-family: 'Open Sans';
+            margin-right: 5px;
+            text-transform: capitalize;
+            font-size: 15px;
+            font-style: normal;
+            line-height: 21px;;
+        }
+
+        .faq-answer p {
+            font-size: 15px;
+            font-style: normal;
+            line-height: 25px;
             color: black;
+            font-family: sans-serif;
         }
 
         .share-container {
@@ -581,6 +584,7 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+    <?php include '../../PHP/components/navbar.php'; ?>
 
     <div class="detailsContainer">
         <div class="image-cont" style="background-color: white; position: relative;">
@@ -659,7 +663,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <div class="details-section">
-        <h2 class="details-heading">Details about the PRODUCT</h2>
+        <h2 class="details-heading">DETAILS ABOUT THE PRODUCT</h2>
 
         <div class="faq-item">
             <div class="faq-question">
@@ -667,28 +671,18 @@ if (isset($_GET['id'])) {
                 <span>+</span>
             </div>
             <div class="faq-answer">
-                <p> <b>Brand: </b><?php echo $brand; ?></p>
-                <p><b>Model: </b><?php echo $name; ?></p>
-                <p><b>Reference: </b><?php //echo $reference; 
-                                        ?></p>
-                <p><b>Glass: </b><?php //echo $glass; 
-                                    ?></p>
-                <p><b>Dial Numerals: </b><?php //echo $dial_numerals; 
-                                            ?></p>
-                <p><b>Movement: </b><?php //echo $movement; 
-                                    ?></p>
-                <p><b>Water Resistance: </b><?php //echo $water_resistance; 
-                                            ?> </p>
-                <p><b>Clasp Type: </b><?php //echo $clasp_type; 
-                                        ?></p>
-                <p><b>Power Reserve: </b><?php //echo $power_reserve; 
-                                            ?></p>
-                <p><b>Bracelet Color: </b><?php //echo $bracelet_color; 
-                                            ?></p>
-                <p><b>Gender: </b><?php //echo $gender; 
-                                    ?></p>
-                <p><b>Case Diameter: </b><?php //echo $case_diameter; 
-                                            ?></p>
+                <p><b>Brand: </b><?php echo $brand ?? ''; ?></p>
+                <p><b>Model: </b><?php echo $model ?? ''; ?></p>
+                <p><b>Reference: </b><?php echo $ref_code ?? ''; ?></p>
+                <p><b>Glass: </b><?php echo $glass ?? ''; ?></p>
+                <p><b>Dial Numerals: </b><?php echo $dial_numerals ?? ''; ?></p>
+                <p><b>Movement: </b><?php echo $movement ?? ''; ?></p>
+                <p><b>Water Resistance: </b><?php echo $water_resistance ?? ''; ?> </p>
+                <p><b>Clasp Type: </b><?php echo $clasp_type ?? ''; ?></p>
+                <p><b>Power Reserve: </b><?php echo $power_reserve ?? ''; ?></p>
+                <p><b>Bracelet Color: </b><?php echo $bracelet_color ?? ''; ?></p>
+                <p><b>Gender: </b><?php echo $gender ?? ''; ?></p>
+                <p><b>Case Diameter: </b><?php echo $case_diameter ?? ''; ?></p>
             </div>
         </div>
 
@@ -698,7 +692,10 @@ if (isset($_GET['id'])) {
                 <span>+</span>
             </div>
             <div class="faq-answer">
-                <p><?php echo $name; ?></p>
+                <p><b>Case Material: </b><?php echo $case_material ?? ''; ?></p>
+                <p><b>Clasp Material: </b><?php echo $clasp_material ?? ''; ?></p>
+                <p><b>Bezel Material: </b><?php echo $bezel_material ?? ''; ?></p>
+                <p><b>Bracelet Material: </b><?php echo $bracelet_material ?? ''; ?></p>
             </div>
         </div>
 
@@ -708,7 +705,7 @@ if (isset($_GET['id'])) {
                 <span>+</span>
             </div>
             <div class="faq-answer">
-                <p><?php echo $year; ?></p>
+                <p><?php echo $functions ?? ''; ?></p>
             </div>
         </div>
     </div>
@@ -774,7 +771,7 @@ if (isset($_GET['id'])) {
         document.addEventListener('DOMContentLoaded', function() {
             // Get current URL and product title without encoding
             const currentUrl = window.location.href;
-            const productTitle = '<?php echo $name; ?>';
+            const productTitle = "<?php echo $name; ?>";
             const productId = '<?php echo $id; ?>';
 
             // Create clean URL for sharing (replace with your production path)
@@ -848,29 +845,34 @@ if (isset($_GET['id'])) {
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
             const product = {
-                id: <?= $id ?>,
-                image: '<?= $image ?>',
-                name: '<?= $name ?>',
-                brand: '<?= $brand ?>',
-                numericPrice: <?= ($numericPrice !== null) ? $numericPrice : 'null' ?>,
-                ref_code: '<?= $ref_code ?>',
+                id: <?= json_encode($id) ?>,
+                image: <?= json_encode($image) ?>,
+                name: <?= json_encode($name) ?>,
+                brand: <?= json_encode($brand) ?>,
+                numericPrice: <?= ($numericPrice !== null) ? json_encode($numericPrice) : 'null' ?>,
+                ref_code: <?= json_encode($ref_code) ?>,
                 isOnRequest: <?= ($numericPrice === null) ? 'true' : 'false' ?>
             };
 
+            const wishBtn = document.getElementById('wish-btn-details');
+            if (wishBtn) {
+                wishBtn.addEventListener('click', () => {
+                    addToWishlist(product);
+                    renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
+                });
+            }
 
-            document.getElementById('wish-btn-details').addEventListener('click', () => {
-                addToWishlist(product);
-                renderDrawerContent(WISHLIST_KEY, wishlistDrawer);
-            });
-
-            document.getElementById('cart-btn-details').addEventListener('click', () => {
-                addToCart(product);
-                renderDrawerContent(CART_KEY, cartDrawer);
-            });
+            const cartBtn = document.getElementById('cart-btn-details');
+            if (cartBtn) {
+                cartBtn.addEventListener('click', () => {
+                    addToCart(product);
+                    renderDrawerContent(CART_KEY, cartDrawer);
+                });
+            }
         });
     </script>
+
 
 
 
@@ -881,3 +883,7 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>

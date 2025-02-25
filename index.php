@@ -101,9 +101,9 @@ if (isset($_SESSION['user'])) {
     $_SESSION['LAST_ACTIVITY'] = time();
 }
 
-echo '<pre>';
-print_r($_SESSION);  
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION);  
+// echo '</pre>';
 // throw new Exception('This is a test exception!');
 
 ?>
@@ -116,8 +116,6 @@ echo '</pre>';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Celestial Watches | Exclusivity in Every Tick</title>
 
-
-
     <!-- ============= IONICONS =============  -->
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
     <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
@@ -125,8 +123,6 @@ echo '</pre>';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 
     <!-- ============= JS =============  -->
     <script src="/src/assets/js/navigation.js" async></script>
@@ -136,8 +132,6 @@ echo '</pre>';
     <link rel="stylesheet" href="/src/assets/css/deskView.css" />
     <link rel="stylesheet" href="/src/libs/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/src/assets/css/google-header.css">
-
-
 
     <!-- ============= FONTS=============  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

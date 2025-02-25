@@ -61,6 +61,7 @@ $result = $stmt->get_result();
     <!-- ============= JS =============  -->
     <script src="../..//src/assets/js/navigation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="assets/js/filterModel.js"></script>
 
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
@@ -380,7 +381,8 @@ $result = $stmt->get_result();
         font-weight: 400;
     }
 
-    .product-price, .price {
+    .product-price,
+    .price {
         font-size: 17px !important;
         font-weight: 400 !important;
         font-family: 'Univers LT Std', sans-serif !important;
@@ -474,38 +476,19 @@ $result = $stmt->get_result();
 
 
     <div class="product__container">
-        <div style="
-            font-style: normal;
-            font-weight: 700;
-            font-size: 41px;
-            line-height: 49px;
-            text-transform: uppercase;
-            margin-top: 17px;
-            margin-bottom: 10px;
-            text-align: justify;
-            font-family: 'Poppins';">
+        <div style="font-size:41px; font-weight:700; text-transform:uppercase; margin-top:17px; margin-bottom:10px; font-family: 'Poppins';">
             <?php echo 'All Watches'; ?>
         </div>
-
-        <span style="text-align: left;
-            font-size: 15px;
-            font-weight: 400;
-            line-height: 21px;
-            padding-bottom: 20px;
-            font-family: 'Poppins';">
+        <span style="font-size:15px; font-weight:400; margin-bottom:20px; font-family: 'Poppins';">
             Browse thousands of luxury watches from the best and trendy brands around the world.
         </span>
-
         <div class="filter-head-container">
-            <!-- Results and Filter Button -->
             <div class="top-container">
                 <div class="results-count"><?php echo $totalProducts; ?> results</div>
-                <button class="filter-button">FILTER</button>
+                <button class="filter-button" onclick="openFilterModal()">FILTER</button>
             </div>
-
-            <!-- Filter grid layout -->
             <div class="filter-container">
-                <div class="filter-item">Gender</div>
+                <div class="filter-item" onclick="openFilterModal()">Gender</div>
                 <div class="filter-item">Bracelet Color</div>
                 <div class="filter-item">Case Material</div>
                 <div class="filter-item">Bracelet Material</div>
@@ -513,17 +496,13 @@ $result = $stmt->get_result();
                 <div class="filter-item">Bezel Material</div>
                 <div class="filter-item">Movement</div>
             </div>
-
-            <!-- Sort form -->
             <form method="GET" action="" class="sort-form">
-                <!-- Hidden field for category -->
                 <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
-
                 <label for="sort" class="sort-label">Sort by</label>
                 <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
-                    <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
-                    <option value="price_low_high" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_low_high') ? 'selected' : ''; ?>>Price: Low to High</option>
-                    <option value="price_high_low" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_high_low') ? 'selected' : ''; ?>>Price: High to Low</option>
+                    <option value="new_in" <?php echo ($sort == 'new_in') ? 'selected' : ''; ?>>New In</option>
+                    <option value="price_low_high" <?php echo ($sort == 'price_low_high') ? 'selected' : ''; ?>>Price: Low to High</option>
+                    <option value="price_high_low" <?php echo ($sort == 'price_high_low') ? 'selected' : ''; ?>>Price: High to Low</option>
                 </select>
             </form>
         </div>
@@ -630,16 +609,25 @@ $result = $stmt->get_result();
         </div>
     </div>
 
+
     <?php include '../../PHP/components/footer.php' ?>
 
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
+
+    <?php
+    include 'filterModule.php';
+    echo renderFilterModal($conn);
+    ?>
+
+
 </body>
 
 </html>
 
 <?php
+$stmt->close();
 $conn->close();
 ?>

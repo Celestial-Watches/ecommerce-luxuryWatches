@@ -9570,3 +9570,772 @@ Stack trace:
 [25-Feb-2025 00:31:41 Asia/Kolkata] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in D:\Marwadi university\Semester 5\PROJECT\index.php on line 15
 [25-Feb-2025 00:31:41 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 34
 [25-Feb-2025 00:32:25 Asia/Kolkata] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in D:\Marwadi university\Semester 5\PROJECT\index.php on line 32
+[25-Feb-2025 10:54:18 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(6): require_once('D:\\Marwadi univ...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8
+[25-Feb-2025 10:58:23 Asia/Kolkata] PHP Warning:  Undefined variable $user in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 183
+[25-Feb-2025 10:58:23 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 183
+[25-Feb-2025 11:02:48 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 11:02:53 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 11:03:04 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 11:03:13 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 11:04:10 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 11:05:59 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 13:01:35 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli_stmt::bind_param(): Argument #1 ($types) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:197
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(197): mysqli_stmt->bind_param('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 197
+[25-Feb-2025 13:08:12 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli_stmt::bind_param(): Argument #1 ($types) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:197
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(197): mysqli_stmt->bind_param('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 197
+[25-Feb-2025 13:11:46 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli_stmt::bind_param(): Argument #1 ($types) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:286
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(286): mysqli_stmt->bind_param('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 286
+[25-Feb-2025 13:11:48 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli_stmt::bind_param(): Argument #1 ($types) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:286
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(286): mysqli_stmt->bind_param('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 286
+[25-Feb-2025 08:52:34 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "{" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 75
+[25-Feb-2025 15:08:00 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "{" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 75
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 61
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 62
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 63
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 64
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 65
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 66
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 67
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 68
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 69
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 71
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 72
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 73
+[25-Feb-2025 19:38:10 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 74
+[25-Feb-2025 19:40:25 Asia/Kolkata] PHP Warning:  Undefined variable $user in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 182
+[25-Feb-2025 19:40:25 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\controllers\verify_otp.php on line 182
+[25-Feb-2025 19:56:50 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 19:57:13 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 19:57:16 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 19:57:29 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 19:58:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 19:58:03 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 20:00:23 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 61
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 62
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 63
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 64
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 65
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 66
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 67
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 68
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 69
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 71
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 72
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 73
+[25-Feb-2025 20:01:40 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 74
+[25-Feb-2025 20:02:14 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 20:13:47 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Column 'user_id' cannot be null in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:57
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(57): mysqli_stmt->execute()
+#1 D:\Marwadi university\Semester 5\PROJECT\app\controllers\logout.php(13): logUserActivity(NULL, 'logout', 'User logout suc...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 57
+[25-Feb-2025 20:15:57 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'numeric_price' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:23
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(23): mysqli->query('SELECT MIN(nume...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 23
+[25-Feb-2025 20:16:20 Asia/Kolkata] PHP Fatal error:  Uncaught ValueError: mysqli_stmt::bind_param(): Argument #1 ($types) cannot be empty in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:142
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(142): mysqli_stmt->bind_param('')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 142
+[25-Feb-2025 20:31:23 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:31:26 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:32:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:32:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 719
+[25-Feb-2025 20:35:20 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'p.numeric_price' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:123
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(123): mysqli->prepare('SELECT p.id AS ...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 123
+[25-Feb-2025 20:35:38 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:36:21 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:37:49 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:38:01 Asia/Kolkata] PHP Warning:  Undefined array key "p.id" in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 797
+[25-Feb-2025 20:41:22 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'p.created_at' in 'order clause' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:128
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(128): mysqli->prepare('SELECT id FROM ...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 128
+[25-Feb-2025 20:42:15 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:43:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:43:01 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'p.numeric_price' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:128
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(128): mysqli->prepare('SELECT p.id AS ...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 128
+[25-Feb-2025 20:43:09 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:43:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:43:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`celestial_watches`.`product_views`, CONSTRAINT `product_views_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)) in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php:31
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\details.php(31): mysqli_stmt->execute()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 31
+[25-Feb-2025 20:50:14 Asia/Kolkata] PHP Warning:  Undefined array key "material" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 20:51:23 Asia/Kolkata] PHP Warning:  Undefined array key "material" in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 20:51:23 Asia/Kolkata] PHP Warning:  Undefined variable $reference in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 672
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 61
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 62
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 63
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 64
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 65
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 66
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 67
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 68
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 69
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 71
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 72
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 73
+[25-Feb-2025 20:57:52 Asia/Kolkata] PHP Warning:  Undefined variable $reference in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 671
+[25-Feb-2025 20:58:08 Asia/Kolkata] PHP Warning:  Undefined variable $reference in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 671
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 59
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 60
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 61
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 62
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 63
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 64
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 65
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 66
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 67
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 68
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 69
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 70
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 71
+[25-Feb-2025 21:09:43 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\details.php on line 72
+[26-Feb-2025 01:38:14 Asia/Kolkata] PHP Warning:  include(filterModule.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 823
+[26-Feb-2025 01:38:14 Asia/Kolkata] PHP Warning:  include(): Failed opening 'filterModule.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 823
+[26-Feb-2025 01:38:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:824
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 824
+[26-Feb-2025 01:40:01 Asia/Kolkata] PHP Warning:  include(filterModule.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:40:01 Asia/Kolkata] PHP Warning:  include(): Failed opening 'filterModule.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:40:01 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:40:54 Asia/Kolkata] PHP Warning:  include(filterModule.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:40:54 Asia/Kolkata] PHP Warning:  include(): Failed opening 'filterModule.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:40:54 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:41:22 Asia/Kolkata] PHP Warning:  include(/app/views/filters.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:22 Asia/Kolkata] PHP Warning:  include(): Failed opening '/app/views/filters.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:41:28 Asia/Kolkata] PHP Warning:  include(/app/views/filters.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:28 Asia/Kolkata] PHP Warning:  include(): Failed opening '/app/views/filters.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:28 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:41:47 Asia/Kolkata] PHP Warning:  include(/app/models/filters.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:47 Asia/Kolkata] PHP Warning:  include(): Failed opening '/app/models/filters.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:41:47 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:42:22 Asia/Kolkata] PHP Warning:  include(app/models/filters.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:42:22 Asia/Kolkata] PHP Warning:  include(): Failed opening 'app/models/filters.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 636
+[26-Feb-2025 01:42:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function renderFilterModal() in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:637
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 637
+[26-Feb-2025 01:42:37 Asia/Kolkata] PHP Warning:  require(/app/config/conn.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php on line 4
+[26-Feb-2025 01:42:37 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Failed opening required '/app/config/conn.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php:4
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(636): include()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php on line 4
+[26-Feb-2025 01:42:55 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:43:35 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'limited_edition' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php:16
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(16): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(339): getDistinctValues(Object(mysqli), 'products', 'limited_edition')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(637): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php on line 16
+[26-Feb-2025 01:43:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'limited_edition' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php:16
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(16): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(339): getDistinctValues(Object(mysqli), 'products', 'limited_edition')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(637): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php on line 16
+[26-Feb-2025 01:44:40 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:45:26 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:46:28 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:47:07 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:47:33 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[26-Feb-2025 01:47:43 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'limited_edition' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php:16
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(16): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php(339): getDistinctValues(Object(mysqli), 'products', 'limited_edition')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(478): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\filters.php on line 16
+[26-Feb-2025 01:51:06 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:13
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(13): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(118): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(637): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 13
+[26-Feb-2025 01:52:08 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(357): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(637): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:52:41 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(357): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(614): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:52:59 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(357): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(614): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:53:14 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(357): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(617): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:53:26 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(357): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:54:34 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:57:48 Asia/Kolkata] PHP Warning:  Undefined array key 3 in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 328
+[26-Feb-2025 01:57:48 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:58:10 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:59:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:59:45 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 01:59:56 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:00:52 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(358): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:01:52 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(363): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:02:28 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(363): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:03:02 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(363): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:04:08 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(363): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:05:58 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(374): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:06:31 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(374): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:06:51 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(375): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:08:54 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(377): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:09:05 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(377): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:09:18 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(377): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:10:32 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(389): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:10:49 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(388): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:11:16 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(387): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:11:31 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(388): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:11:37 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(389): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:11:43 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(389): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:11:53 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(390): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:12:11 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(390): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:13:00 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(394): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:13:47 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(394): getDistinctValues(Object(mysqli), 'products', 'status')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:14:45 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'condition FROM products WHERE condition <> '' ORDER BY condition ASC' at line 1 in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(393): getDistinctValues(Object(mysqli), 'products', 'condition')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(622): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 02:15:49 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:19:25 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:19:40 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:19:49 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:20:00 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:20:15 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:20:51 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:21:47 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:21:55 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:23:09 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:23:44 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:23:54 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:25:13 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:25:23 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:26:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:27:17 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:29:03 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:32:03 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:32:13 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:32:24 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:34:48 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:34:52 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:35:03 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:35:07 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:35:47 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:35:55 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 02:38:16 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631

@@ -48,9 +48,9 @@ if ($result_details->num_rows === 1) {
 } else {
   // Initialize empty values if no details record exists.
   $details = [
-    'brand'             => '',
+    'brand'             => $product['brand'],
     'model'             => '',
-    'reference'         => '',
+    'reference'         => $product['ref_code'],
     'glass'             => '',
     'dial_numerals'     => '',
     'movement'          => '',
@@ -91,9 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     // --- Update product_details table ---
-    $details_brand             = trim($_POST['details_brand']);
+    $details_brand             = $product['brand'];
     $details_model             = trim($_POST['details_model']);
-    $details_reference         = trim($_POST['details_reference']);
+    $details_reference         = $product['ref_code'];
     $details_glass             = trim($_POST['details_glass']);
     $details_dial_numerals     = trim($_POST['details_dial_numerals']);
     $details_movement          = trim($_POST['details_movement']);

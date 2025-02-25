@@ -10,7 +10,7 @@ session_set_cookie_params([
     'samesite' => 'Strict'        // Protect against CSRF
 ]);
 
-session_start(); 
+session_start();
 
 // Regenerate the session ID on every page refresh
 session_regenerate_id(true);
@@ -57,15 +57,15 @@ if (isset($_POST['resend'])) {
     $_SESSION['otp_expiry'] = time() + 300; // 300 seconds = 5 minutes
 
     // Send OTP via email
-    require '../../vendor/autoload.php'; // Ensure PHPMailer is included
+    require '../../vendor/autoload.php';
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     try {
         // Server settings
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'celestialwatches69@gmail.com'; 
-        $mail->Password   = 'xvmjnggsmsnkavzt'; 
+        $mail->Username   = 'celestialwatches69@gmail.com';
+        $mail->Password   = 'xvmjnggsmsnkavzt';
         $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
@@ -137,7 +137,6 @@ if (isset($_POST['verify'])) {
     } else {
         // Check if the input OTP matches the stored OTP
         if ($input_otp == $_SESSION['otp']) {
-            // OTP is correct, proceed to create the user
             require_once "../config/conn.php";
             $email = $_SESSION['email'];
             $usernamee = $_SESSION['username'];
@@ -168,23 +167,35 @@ if (isset($_POST['verify'])) {
                                 $errors[] = "Failed to update status: " . mysqli_error($conn);
                             }
 
+                            $query = "SELECT id FROM users WHERE email = ? LIMIT 1";
+                            if ($selectStmt = mysqli_prepare($conn, $query)) {
+                                mysqli_stmt_bind_param($selectStmt, "s", $email);
+                                mysqli_stmt_execute($selectStmt);
+                                mysqli_stmt_bind_result($selectStmt, $user_id);
+                                mysqli_stmt_fetch($selectStmt);
+                                mysqli_stmt_close($selectStmt);
+                            } else {
+                                $errors[] = "Database preparation failed: " . mysqli_error($conn);
+                            }
+
                             // Clear session data
                             unset($_SESSION['otp']);
-                            unset($_SESSION['username']);
-                            unset($_SESSION['password']); 
-                            unset($_SESSION['phone']); 
-                            unset($_SESSION['otp_expiry']); 
+                            unset($_SESSION['password']);
+                            unset($_SESSION['phone']);
+                            unset($_SESSION['otp_expiry']);
                             setcookie('SSIDU', '', time() - 3600, '/', '', false, true);
 
-
-
                             // Set user session
-                            $_SESSION['user'] = $usernamee; 
-                            $_SESSION["user_id"] = $user['id'];
+                            $_SESSION["user"] = $_SESSION['username'];
+                            $_SESSION["user_id"] = $user_id;
+                            $_SESSION["LAST_ACTIVITY"] = time();
+                            $_SESSION["CREATED"] = time();
+                            $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+                            $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'];
                             setcookie("loggedYes", "true", time() + 3600, "/", false, true);
                             $_SESSION['otp_verified'] = true;
-                            header("Location: ../../index.php"); 
-                            exit(); 
+                            header("Location: ../../index.php");
+                            exit();
                         } else {
                             $errors[] = "Something went wrong. Please try again later.";
                         }
@@ -194,6 +205,7 @@ if (isset($_POST['verify'])) {
                 } else {
                     $errors[] = "User already exists. Please log in.";
                     header("Location: login.php");
+                    exit();
                 }
             }
         } else {
