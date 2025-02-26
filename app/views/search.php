@@ -8,42 +8,96 @@ include '../controllers/search-engine.php';
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
+$limit = 20;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
 
-$sql = "SELECT * FROM products";
+$filterKeys = [
+    'bracelet_color',
+    'case_material',
+    'bracelet_material',
+    'case_diameter',
+    'bezel_material',
+    'movement',
+    'year',
+    'price',
+    'power_reserve',
+    'glass',
+    'clasp_type',
+    'water_resistance',
+    'dial_numerals',
+    'clasp_material'
+];
 
-
-if ($category) { // If a category is set, apply the filter to the query
-    $sql .= " WHERE product_category = ?";
+// Initialize selected filters array
+$selectedFilters = [];
+foreach ($filterKeys as $key) {
+    if (isset($_GET[$key]) && $_GET[$key] !== '') {
+        $selectedFilters[$key] = $_GET[$key];
+    }
 }
 
-// Add ORDER BY clause based on the selected sort option
+// Build base WHERE clauses array
+$whereClauses = [];
+$params = [];
+$types = '';
+
+// Apply filters
+foreach ($selectedFilters as $key => $value) {
+    if (!empty($value)) {
+        $values = is_array($value) ? $value : explode(',', $value);
+        foreach ($values as $val) {
+            $whereClauses[] = "LOWER(TRIM(pd.$key)) = ?";
+            $params[] = strtolower(trim($val));
+            $types .= 's';
+        }
+    }
+}
+
+// Include category filter if set
+if ($category) {
+    $whereClauses[] = "product_category = ?";
+    $params[] = $category;
+    $types .= 's';
+}
+
+// Build the final SQL query
+$sql = "SELECT * FROM products p ";
+if (!empty($selectedFilters)) {
+    $sql .= "JOIN product_details pd ON p.id = pd.product_id ";
+}
+if (!empty($whereClauses)) {
+    $sql .= "WHERE " . implode(" AND ", $whereClauses) . " ";
+}
+
+// Add ORDER BY clause
 switch ($sort) {
     case 'new_in':
-        $sql .= " ORDER BY created_at DESC";
+        $sql .= "ORDER BY created_at DESC ";
         break;
     case 'price_low_high':
-        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 1 ELSE 0 END, 
-                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";
+        $sql .= "ORDER BY CASE WHEN price = 'ON REQUEST' THEN 1 ELSE 0 END, 
+                  CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC ";
         break;
     case 'price_high_low':
-        $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 0 ELSE 1 END, 
-                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC";
+        $sql .= "ORDER BY CASE WHEN price = 'ON REQUEST' THEN 0 ELSE 1 END, 
+                  CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC ";
         break;
 }
 
-// Add LIMIT and OFFSET for pagination (you need to define $limit and $page)
-$sql .= " LIMIT ? OFFSET ?";
+// Add pagination
+$sql .= "LIMIT ? OFFSET ?";
+$params[] = $limit;
+$params[] = $offset;
+$types .= 'ii';
 
+// Prepare and bind parameters
 $stmt = $conn->prepare($sql);
-
-if ($category) {
-    $stmt->bind_param("ssi", $category, $limit, $offset);
-} else {
-    $stmt->bind_param("ii", $limit, $offset);
-}
+$stmt->bind_param($types, ...$params);
 
 $stmt->execute();
 $sortresult = $stmt->get_result();
+
 
 ?>
 
@@ -64,6 +118,7 @@ $sortresult = $stmt->get_result();
     <!-- ============= JS =============  -->
     <script src="../../src/assets/js/navigation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="assets/js/filterModel.js"></script>
 
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="../../src/assets/css/deskView.css" loading="lazy" />
@@ -397,10 +452,10 @@ $sortresult = $stmt->get_result();
             font-weight: 400;
         }
 
-        .product-price {
+        .product-price,
+        .price {
             font-size: 17px !important;
-            font-weight: 400 !important;
-            line-height: 30px !important;
+            font-weight: 500 !important;
             font-family: 'Univers LT Std', sans-serif !important;
             color: #000 !important;
             margin-top: 8px !important;
@@ -503,33 +558,39 @@ $sortresult = $stmt->get_result();
             <?php endif; ?>
         </div>
 
-        <?php if ($search): ?> 
+        <?php if ($search): ?>
             <div class="filter-head-container">
-                <!-- Results and Filter Button -->
                 <div class="top-container">
-                    <div class="results-count"><?php echo $result->num_rows; ?> results</div>
-                    <button class="filter-button">FILTER</button>
+                <div class="results-count"><?php echo $result->num_rows; ?> results</div>
+                    <button class="filter-button" onclick="openFilterModal()">FILTER</button>
                 </div>
-
-                <!-- Filter grid layout -->
                 <div class="filter-container">
-                    <div class="filter-item">Gender</div>
-                    <div class="filter-item">Bracelet Color</div>
-                    <div class="filter-item">Case Material</div>
-                    <div class="filter-item">Bracelet Material</div>
-                    <div class="filter-item">Case Diameter</div>
-                    <div class="filter-item">Bezel Material</div>
-                    <div class="filter-item">Movement</div>
+                    <div class="filter-item" onclick="openFilterModal('gender')">Gender</div>
+                    <div class="filter-item" onclick="openFilterModal('bracelet_color')">Bracelet Color</div>
+                    <div class="filter-item" onclick="openFilterModal('case_material')">Case Material</div>
+                    <div class="filter-item" onclick="openFilterModal('bracelet_material')">Bracelet Material</div>
+                    <div class="filter-item" onclick="openFilterModal('case_diameter')">Case Diameter</div>
+                    <div class="filter-item" onclick="openFilterModal('bezel_material')">Bezel Material</div>
+                    <div class="filter-item" onclick="openFilterModal('movement')">Movement</div>
                 </div>
 
-                <!-- Sort form -->
+                <!-- Sort form that preserves current filters -->
                 <form method="GET" action="" class="sort-form">
-                    <!-- Retain the search term in the input field -->
-                    <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search..." />
-
-                    <!-- Hidden field for category/type instead of brand -->
-                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
-
+                    <?php
+                    // Output hidden fields for all current GET parameters except 'sort_by'
+                    foreach ($_GET as $key => $value) {
+                        if ($key == 'sort_by') {
+                            continue;
+                        }
+                        if (is_array($value)) {
+                            foreach ($value as $val) {
+                                echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($val) . '">';
+                            }
+                        } else {
+                            echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
+                        }
+                    }
+                    ?>
                     <label for="sort" class="sort-label">Sort by</label>
                     <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
                         <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
@@ -538,6 +599,8 @@ $sortresult = $stmt->get_result();
                     </select>
                 </form>
             </div>
+
+
             <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
                 <?php
 
@@ -594,10 +657,7 @@ $sortresult = $stmt->get_result();
                     echo '<p>No products found based on the search term or sorting criteria.</p>';
                 }
 
-                // Close the statement if it exists
-                if (isset($stmt)) {
-                    $stmt->close();
-                }
+
                 ?>
             </div>
 
@@ -626,10 +686,17 @@ $sortresult = $stmt->get_result();
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
     <script src="/src/assets/js/imagePreview.js"></script>
+    <?php
+    include '../models/filterModule.php';
+    echo renderFilterModal($conn);
+    ?>
 </body>
 
 </html>
 
 <?php
+if (isset($stmt)) {
+    $stmt->close();
+}
 $conn->close();
 ?>

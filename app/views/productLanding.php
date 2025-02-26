@@ -4,14 +4,120 @@ define('ALLOW_ACCESS', true);
 include '../config/conn.php';
 include '../controllers/search-engine.php';
 
+// Retrieve input parameters
 $category = isset($_GET['product_category']) ? $_GET['product_category'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-$sql = "SELECT * FROM products";
+// Pagination: set defaults and calculate offset
+$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
 
-if ($category) {
-    $sql .= " WHERE product_category = ?";
+// Define filter keys (all potential filter fields)
+$filterKeys = [
+    'gender',
+    'bracelet_color',
+    'case_material',
+    'bracelet_material',
+    'case_diameter',
+    'bezel_material',
+    'movement',
+    'brand',
+    'model',
+    'year',
+    'price',
+    'power_reserve',
+    'glass',
+    'clasp_type',
+    'water_resistance',
+    'dial_numerals',
+    'clasp_material'
+];
+
+// Define which fields are in the products table (and not in product_details)
+$fieldsInProducts = ['year', 'price'];
+
+// Initialize selected filters array
+$selectedFilters = [];
+foreach ($filterKeys as $key) {
+    if (isset($_GET[$key]) && $_GET[$key] !== '') {
+        $selectedFilters[$key] = $_GET[$key];
+    }
 }
+
+// Build base WHERE clauses array and join clauses
+$whereClauses = [];
+$joinClauses = [];
+
+// Category filter from products table
+if ($category) {
+    $whereClauses[] = "p.product_category = ?";
+}
+
+// Build filter conditions; note that we choose the alias based on whether the field belongs to products or product_details
+$filterConditions = [];
+
+foreach ($selectedFilters as $key => $value) {
+    if (!empty($value)) {
+        // Normalize the filter value to an array (handles both comma-separated strings and arrays)
+        if (is_array($value)) {
+            $values = [];
+            foreach ($value as $subValue) {
+                $parts = explode(',', $subValue);
+                foreach ($parts as $part) {
+                    $trimmed = trim($part);
+                    if ($trimmed !== '') {
+                        $values[] = $trimmed;
+                    }
+                }
+            }
+        } else {
+            $values = array_filter(array_map('trim', explode(',', $value)));
+        }
+
+        if (empty($values)) {
+            continue;
+        }
+
+        // Escape, lowercase, and trim each value
+        $escapedValues = array_map(function ($val) use ($conn) {
+            return "'" . mysqli_real_escape_string($conn, strtolower($val)) . "'";
+        }, $values);
+
+        // Determine alias: if the key is in products table then alias is 'p', else 'pd'
+        $alias = in_array($key, $fieldsInProducts) ? 'p' : 'pd';
+
+        // If we're filtering on a field from product_details, add the join clause if not already present.
+        if ($alias === 'pd' && !in_array("JOIN product_details pd ON p.id = pd.product_id", $joinClauses)) {
+            $joinClauses[] = "JOIN product_details pd ON p.id = pd.product_id";
+        }
+
+        // Create a condition using LOWER and TRIM on the appropriate alias
+        $filterConditions[] = "LOWER(TRIM({$alias}.$key)) IN (" . implode(",", $escapedValues) . ")";
+    }
+}
+
+// If any filter conditions exist, group them with OR
+if (!empty($filterConditions)) {
+    $whereClauses[] = "(" . implode(" OR ", $filterConditions) . ")";
+}
+
+// Build the final SQL query
+$sql = "SELECT * FROM products p " . implode(" ", $joinClauses);
+if (!empty($whereClauses)) {
+    $sql .= " WHERE " . implode(" AND ", $whereClauses);
+}
+
+// Log the SQL query for debugging
+error_log("SQL Query: " . $sql);
+
+// Count query for pagination (using the same WHERE conditions)
+$countSql = "SELECT COUNT(*) as total FROM products p " . implode(" ", $joinClauses);
+if (!empty($whereClauses)) {
+    $countSql .= " WHERE " . implode(" AND ", $whereClauses);
+}
+$countResult = $conn->query($countSql);
+$totalProducts = $countResult ? $countResult->fetch_assoc()['total'] : 0;
 
 // Sorting logic based on the sort type
 switch ($sort) {
@@ -20,29 +126,36 @@ switch ($sort) {
         break;
     case 'price_low_high':
         $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 1 ELSE 0 END, 
-                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";
+                  CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) ASC";
         break;
     case 'price_high_low':
         $sql .= " ORDER BY CASE WHEN price = 'ON REQUEST' THEN 0 ELSE 1 END, 
-                          CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC";
+                  CAST(REPLACE(REPLACE(price, ',', ''), '$', '') AS DECIMAL(10,2)) DESC";
         break;
 }
 
-
 $sql .= " LIMIT ? OFFSET ?";
+
 $stmt = $conn->prepare($sql);
 
-// Bind parameters (adjust according to the query structure)
+// Bind parameters. Currently, only the category filter is bound.
 if ($category) {
-    $stmt->bind_param("ssi", $category, $limit, $offset);
+    $stmt->bind_param("sii", $category, $limit, $offset);
 } else {
     $stmt->bind_param("ii", $limit, $offset);
 }
 
 $stmt->execute();
 $result = $stmt->get_result();
-?>
 
+// Calculate total pages for pagination
+$totalPages = ceil($totalProducts / $limit);
+
+
+$currentParams = $_GET;
+unset($currentParams['page']);
+$baseQueryString = http_build_query($currentParams);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -482,22 +595,38 @@ $result = $stmt->get_result();
         <span style="font-size:15px; font-weight:400; margin-bottom:20px; font-family: 'Poppins';">
             Browse thousands of luxury watches from the best and trendy brands around the world.
         </span>
+        
         <div class="filter-head-container">
             <div class="top-container">
                 <div class="results-count"><?php echo $totalProducts; ?> results</div>
                 <button class="filter-button" onclick="openFilterModal()">FILTER</button>
             </div>
             <div class="filter-container">
-                <div class="filter-item" onclick="openFilterModal()">Gender</div>
-                <div class="filter-item">Bracelet Color</div>
-                <div class="filter-item">Case Material</div>
-                <div class="filter-item">Bracelet Material</div>
-                <div class="filter-item">Case Diameter</div>
-                <div class="filter-item">Bezel Material</div>
-                <div class="filter-item">Movement</div>
+                <div class="filter-item" onclick="openFilterModal('gender')">Gender</div>
+                <div class="filter-item" onclick="openFilterModal('bracelet_color')">Bracelet Color</div>
+                <div class="filter-item" onclick="openFilterModal('case_material')">Case Material</div>
+                <div class="filter-item" onclick="openFilterModal('bracelet_material')">Bracelet Material</div>
+                <div class="filter-item" onclick="openFilterModal('case_diameter')">Case Diameter</div>
+                <div class="filter-item" onclick="openFilterModal('bezel_material')">Bezel Material</div>
+                <div class="filter-item" onclick="openFilterModal('movement')">Movement</div>
             </div>
+            <!-- Sorting form that preserves all current filters -->
             <form method="GET" action="" class="sort-form">
-                <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+                <?php
+                // Output hidden fields for all current GET parameters except for 'sort_by'
+                foreach ($_GET as $key => $value) {
+                    if ($key == 'sort_by') {
+                        continue;
+                    }
+                    if (is_array($value)) {
+                        foreach ($value as $val) {
+                            echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($val) . '">';
+                        }
+                    } else {
+                        echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
+                    }
+                }
+                ?>
                 <label for="sort" class="sort-label">Sort by</label>
                 <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
                     <option value="new_in" <?php echo ($sort == 'new_in') ? 'selected' : ''; ?>>New In</option>
@@ -506,16 +635,14 @@ $result = $stmt->get_result();
                 </select>
             </form>
         </div>
-
         <div class="search-results">
-            <?php if ($message): ?>
+            <?php if (isset($message) && $message): ?>
                 <p><?php echo $message; ?></p>
             <?php endif; ?>
         </div>
-
         <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
             <?php
-            // Display products only if the result set has products
+            // Display products only if there are any
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $image = $row['image_url'];
@@ -523,17 +650,15 @@ $result = $stmt->get_result();
                     $price = $row['price'];
                     $numericPrice = null;
 
-                    // Check for "ON REQUEST"
                     if (stripos($price, 'ON REQUEST') !== false) {
-                        $numericPrice = null; // Indicate that the price is not available
+                        $numericPrice = null;
                     } else {
-                        // Check for "FROM" and extract numeric price
                         if (stripos($price, 'FROM') !== false) {
                             preg_match('/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i', $price, $matches);
-                            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0; // Remove commas
+                            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0;
                         } else {
                             preg_match('/[0-9,]+(?:\.[0-9]{1,2})?/', $price, $matches);
-                            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0; // Remove commas
+                            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0;
                         }
                     }
 
@@ -581,13 +706,10 @@ $result = $stmt->get_result();
             <?php
                 }
             } else {
-                // If there are no results and a search was attempted, show the message
-                if ($search !== '') {
+                if (isset($search) && $search !== '') {
                     echo '<p>' . $message . '</p>';
                 }
             }
-
-            // Close the statement if it exists
             if (isset($stmt)) {
                 $stmt->close();
             }
@@ -596,38 +718,28 @@ $result = $stmt->get_result();
         <!-- Pagination -->
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">« Prev</a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $page - 1; ?>">« Prev</a>
             <?php endif; ?>
-
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $i; ?>" class="<?php echo ($i == $page ? 'active' : ''); ?>"><?php echo $i; ?></a>
             <?php endfor; ?>
-
             <?php if ($page < $totalPages): ?>
-                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next »</a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $page + 1; ?>">Next »</a>
             <?php endif; ?>
         </div>
     </div>
-
-
-    <?php include '../../PHP/components/footer.php' ?>
-
+    <?php include '../../PHP/components/footer.php'; ?>
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
     <script src="/src/assets/js/index.js" async></script>
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
-
     <?php
-    include 'filterModule.php';
+    include '../models/filterModule.php';
     echo renderFilterModal($conn);
     ?>
-
-
 </body>
 
 </html>
-
 <?php
-$stmt->close();
 $conn->close();
 ?>

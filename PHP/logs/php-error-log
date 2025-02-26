@@ -10339,3 +10339,384 @@ Stack trace:
 #0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
 #1 {main}
   thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 14:27:01 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 14:27:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 14:27:12 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 10:27:42 Europe/Berlin] PHP Warning:  require(D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 10:27:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 10:32:42 Europe/Berlin] PHP Warning:  require(D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 10:32:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 10:35:40 Europe/Berlin] PHP Warning:  require(D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 10:35:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\Marwadi university\Semester 5\PROJECT\app\views../config/paypal.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php:7
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 7
+[26-Feb-2025 16:28:08 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 16:29:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 16:29:26 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 16:36:58 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:631
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(631): mysqli_stmt->close()
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 631
+[26-Feb-2025 16:46:31 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: mysqli_real_escape_string() expects exactly 2 arguments, 1 given in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:32
+Stack trace:
+#0 [internal function]: mysqli_real_escape_string('A. Lange & S\xC3\xB6h...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(32): array_map('mysqli_real_esc...', Array)
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 32
+[26-Feb-2025 16:49:39 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'model' in 'where clause' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:49
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(49): mysqli->query('SELECT COUNT(*)...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 49
+[26-Feb-2025 16:53:34 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (pd.brand = 'A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 16:54:58 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 16:56:58 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 16:57:02 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.model IN ('Big Bang,Daytona')
+[26-Feb-2025 16:58:34 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.model IN ('Big Bang,Daytona')
+[26-Feb-2025 16:58:39 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 16:59:01 Asia/Kolkata] SQL Query: SELECT * FROM products p  WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 16:59:01 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'pd.brand' in 'where clause' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:69
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(69): mysqli->query('SELECT COUNT(*)...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 69
+[26-Feb-2025 16:59:09 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet')
+[26-Feb-2025 17:06:45 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne','Audemars Piguet')
+[26-Feb-2025 17:06:51 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:06:55 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:07:19 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne','Audemars Piguet','Breguet')
+[26-Feb-2025 17:07:34 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne') AND pd.model IN ('Big Bang','Daytona','Excalibur')
+[26-Feb-2025 17:13:35 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne') AND pd.model IN ('Big Bang','Daytona','Excalibur')
+[26-Feb-2025 17:14:02 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:14:13 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne') AND pd.model IN ('Daytona')
+[26-Feb-2025 17:23:47 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne') AND pd.model IN ('Daytona')
+[26-Feb-2025 17:23:50 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:23:58 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE pd.brand IN ('A. Lange & Söhne,Audemars Piguet') AND pd.model IN ('Daytona')
+[26-Feb-2025 17:24:59 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:25:06 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:25:09 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:25:16 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:25:22 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet')
+[26-Feb-2025 17:28:43 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet')
+[26-Feb-2025 17:28:47 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:28:58 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') AND LOWER(TRIM(pd.model)) IN ('big bang','daytona')
+[26-Feb-2025 17:29:17 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') AND LOWER(TRIM(pd.model)) IN ('big bang','daytona')
+[26-Feb-2025 17:31:57 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:32:35 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:32:40 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:32:47 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:32:48 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:32:53 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:32:54 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:32:56 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:38:32 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:38:47 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:39:02 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:39:10 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:39:29 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:40:07 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:40:10 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:40:11 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona'))
+[26-Feb-2025 17:40:13 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:41:14 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.case_material)) IN ('18-carat honeygold','pink gold 750/1000 (18 carats)') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.case_diameter)) IN ('42 mm','42mm') OR LOWER(TRIM(pd.bezel_material)) IN ('quartz tpt® and carbon tpt®','rhodium-finish white gold') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona') OR LOWER(TRIM(pd.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release') OR LOWER(TRIM(pd.water_resistance)) IN ('30mm','limited water resistance') OR LOWER(TRIM(pd.dial_numerals)) IN ('applied indices','arabic') OR LOWER(TRIM(pd.clasp_material)) IN ('rhodium-finish white gold','titanium'))
+[26-Feb-2025 17:41:14 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'pd.year' in 'where clause' in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php:100
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php(100): mysqli->query('SELECT COUNT(*)...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\productLanding.php on line 100
+[26-Feb-2025 17:43:46 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.case_material)) IN ('18-carat honeygold','pink gold 750/1000 (18 carats)') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.case_diameter)) IN ('42 mm','42mm') OR LOWER(TRIM(pd.bezel_material)) IN ('quartz tpt® and carbon tpt®','rhodium-finish white gold') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona') OR LOWER(TRIM(p.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release') OR LOWER(TRIM(pd.water_resistance)) IN ('30mm','limited water resistance') OR LOWER(TRIM(pd.dial_numerals)) IN ('applied indices','arabic') OR LOWER(TRIM(pd.clasp_material)) IN ('rhodium-finish white gold','titanium'))
+[26-Feb-2025 17:43:59 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:44:24 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:44:25 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.case_material)) IN ('18-carat honeygold','pink gold 750/1000 (18 carats)') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.case_diameter)) IN ('42 mm','42mm') OR LOWER(TRIM(pd.bezel_material)) IN ('quartz tpt® and carbon tpt®','rhodium-finish white gold') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona') OR LOWER(TRIM(p.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release') OR LOWER(TRIM(pd.water_resistance)) IN ('30mm','limited water resistance') OR LOWER(TRIM(pd.dial_numerals)) IN ('applied indices','arabic') OR LOWER(TRIM(pd.clasp_material)) IN ('rhodium-finish white gold','titanium'))
+[26-Feb-2025 17:46:49 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.case_material)) IN ('18-carat honeygold','pink gold 750/1000 (18 carats)') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.case_diameter)) IN ('42 mm','42mm') OR LOWER(TRIM(pd.bezel_material)) IN ('quartz tpt® and carbon tpt®','rhodium-finish white gold') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona') OR LOWER(TRIM(p.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release') OR LOWER(TRIM(pd.water_resistance)) IN ('30mm','limited water resistance') OR LOWER(TRIM(pd.dial_numerals)) IN ('applied indices','arabic') OR LOWER(TRIM(pd.clasp_material)) IN ('rhodium-finish white gold','titanium'))
+[26-Feb-2025 17:48:30 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.case_material)) IN ('18-carat honeygold','pink gold 750/1000 (18 carats)') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.case_diameter)) IN ('42 mm','42mm') OR LOWER(TRIM(pd.bezel_material)) IN ('quartz tpt® and carbon tpt®','rhodium-finish white gold') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet','blancpain') OR LOWER(TRIM(pd.model)) IN ('big bang','daytona') OR LOWER(TRIM(p.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release') OR LOWER(TRIM(pd.water_resistance)) IN ('30mm','limited water resistance') OR LOWER(TRIM(pd.dial_numerals)) IN ('applied indices','arabic') OR LOWER(TRIM(pd.clasp_material)) IN ('rhodium-finish white gold','titanium'))
+[26-Feb-2025 17:48:39 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.gender)) IN ('men/unisex') OR LOWER(TRIM(pd.bracelet_color)) IN ('black') OR LOWER(TRIM(pd.bracelet_material)) IN ('shiny black alligator-skin') OR LOWER(TRIM(pd.movement)) IN ('manual winding') OR LOWER(TRIM(p.year)) IN ('2023') OR LOWER(TRIM(pd.power_reserve)) IN ('50 hours') OR LOWER(TRIM(pd.glass)) IN ('anti-reflective and scratch-resistant sapphire crystal') OR LOWER(TRIM(pd.clasp_type)) IN ('deployment with push button release'))
+[26-Feb-2025 17:49:04 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:49:13 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:49:35 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:52:41 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:52:45 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:52:49 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:52:54 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:53:00 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:53:34 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:53:44 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 17:53:51 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:53:55 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:54:07 Asia/Kolkata] SQL Query: SELECT * FROM products p JOIN product_details pd ON p.id = pd.product_id WHERE (LOWER(TRIM(pd.brand)) IN ('a. lange & söhne','audemars piguet'))
+[26-Feb-2025 17:54:09 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 18:05:19 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY created_at DESC' at line 1 in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php:86
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php(86): mysqli->prepare('SELECT * FROM p...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 86
+[26-Feb-2025 18:06:10 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 694
+[26-Feb-2025 18:06:10 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(409): getDistinctValues(Object(mysqli), 'product_details', 'brand')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php(713): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 18:06:46 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 692
+[26-Feb-2025 18:06:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(409): getDistinctValues(Object(mysqli), 'product_details', 'brand')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php(711): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 18:06:53 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 692
+[26-Feb-2025 18:06:53 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(409): getDistinctValues(Object(mysqli), 'product_details', 'brand')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php(711): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 18:07:59 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 690
+[26-Feb-2025 18:08:25 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 690
+[26-Feb-2025 18:08:29 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 690
+[26-Feb-2025 18:08:31 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 690
+[26-Feb-2025 18:08:38 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 690
+[26-Feb-2025 18:19:26 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 688
+[26-Feb-2025 18:19:33 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 688
+[26-Feb-2025 18:20:37 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 688
+[26-Feb-2025 18:21:26 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 694
+[26-Feb-2025 18:21:26 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php:14
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(14): mysqli->query('SELECT DISTINCT...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php(417): getDistinctValues(Object(mysqli), 'product_details', 'brand')
+#2 D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php(713): renderFilterModal(Object(mysqli))
+#3 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\filterModule.php on line 14
+[26-Feb-2025 18:21:54 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 691
+[26-Feb-2025 18:25:17 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 18:29:09 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 18:29:14 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of variables must match the number of parameters in the prepared statement in D:\Marwadi university\Semester 5\PROJECT\app\views\search.php:102
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\search.php(102): mysqli_stmt->bind_param('ii', 20, 0)
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\search.php on line 102
+[26-Feb-2025 18:32:45 Asia/Kolkata] PHP Warning:  Undefined variable $total_products in D:\Marwadi university\Semester 5\PROJECT\app\views\search.php on line 564
+[26-Feb-2025 18:37:54 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 14:08:28 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file, expecting "elseif" or "else" or "endif" in D:\Marwadi university\Semester 5\PROJECT\app\views\search.php on line 707
+[26-Feb-2025 19:08:18 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 19:38:26 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 19:46:17 Asia/Kolkata] PHP Warning:  include(/PHP/components/navbar.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 130
+[26-Feb-2025 19:46:17 Asia/Kolkata] PHP Warning:  include(): Failed opening '/PHP/components/navbar.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 130
+[26-Feb-2025 19:46:17 Asia/Kolkata] PHP Warning:  include(/PHP/components/footer.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 169
+[26-Feb-2025 19:46:17 Asia/Kolkata] PHP Warning:  include(): Failed opening '/PHP/components/footer.php' for inclusion (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 169
+[26-Feb-2025 19:47:28 Asia/Kolkata] PHP Warning:  require_once(tcpdf/tcpdf.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 5
+[26-Feb-2025 19:47:28 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Failed opening required 'tcpdf/tcpdf.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php:5
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 5
+[26-Feb-2025 19:49:21 Asia/Kolkata] PHP Warning:  require_once(/vendor/autoload.php): Failed to open stream: No such file or directory in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 5
+[26-Feb-2025 19:49:21 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Failed opening required '/vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php:5
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 5
+[26-Feb-2025 20:23:49 Asia/Kolkata] PHP Warning:  Undefined variable $pdf in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:23:49 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function writeHTML() on null in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php:409
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:24:15 Asia/Kolkata] PHP Warning:  Undefined variable $pdf in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:24:15 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function writeHTML() on null in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php:409
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:24:22 Asia/Kolkata] PHP Warning:  Undefined variable $pdf in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:24:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to a member function writeHTML() on null in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php:409
+Stack trace:
+#0 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 409
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17365
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18186
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18484
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18186
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18484
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17365
+[26-Feb-2025 20:26:01 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17365
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18186
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18484
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18186
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 18484
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17365
+[26-Feb-2025 20:26:33 Asia/Kolkata] PHP Warning:  Undefined array key 0 in D:\Marwadi university\Semester 5\PROJECT\vendor\tecnickcom\tcpdf\tcpdf.php on line 17733
+[26-Feb-2025 20:48:39 Asia/Kolkata] PHP Fatal error:  Uncaught Symfony\Component\Process\Exception\ProcessFailedException: The command ""C:\Program Files\nodejs\\node.EXE" "D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src/../bin/browser.cjs" "{""url"":""file:\/\/C:\\Users\\ruchit\\AppData\\Local\\Temp\\164795876-0736470001740583119\\index.html"",""action"":""pdf"",""options"":{""args"":[""--no-sandbox""],""viewport"":{""width"":800,""height"":600},""displayHeaderFooter"":false,""format"":""A4""}}"" failed.
+
+Exit Code: 1(General error)
+
+Working directory: D:\Marwadi university\Semester 5\PROJECT\app\models
+
+Output:
+================
+
+
+Error Output:
+================
+node:internal/modules/cjs/loader:1225
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'puppeteer'
+Require stack:
+- D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\bin\browser.cjs
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at callChrome (D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\bin\browser.cjs:70:28)
+    at Object.<anonymous> (D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\bin\browser.cjs:441:5)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'D:\\Marwadi university\\Semester 5\\PROJECT\\vendor\\spatie\\browsershot\\bin\\browser.cjs'
+  ]
+}
+
+Node.js v20.18.0
+ in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php:1115
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php(710): Spatie\Browsershot\Browsershot->callBrowser(Array)
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php(180): Spatie\Browsershot\Browsershot->pdf()
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php on line 1115
+[26-Feb-2025 20:54:40 Asia/Kolkata] PHP Fatal error:  Uncaught Symfony\Component\Process\Exception\ProcessFailedException: The command ""C:\Program Files\nodejs\\node.EXE" "D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src/../bin/browser.cjs" "{""url"":""file:\/\/C:\\Users\\ruchit\\AppData\\Local\\Temp\\1554908383-0892212001740583449\\index.html"",""action"":""pdf"",""options"":{""args"":[""--no-sandbox""],""viewport"":{""width"":800,""height"":600},""displayHeaderFooter"":false,""format"":""A4""}}"" failed.
+
+Exit Code: 1(General error)
+
+Working directory: D:\Marwadi university\Semester 5\PROJECT\app\models
+
+Output:
+================
+
+
+Error Output:
+================
+TimeoutError: Navigation timeout of 30000 ms exceeded
+    at new Deferred (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:60:34)
+    at Deferred.create (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:21:16)
+    at new LifecycleWatcher (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\LifecycleWatcher.js:69:60)
+    at CdpFrame.goto (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\Frame.js:148:29)
+    at CdpFrame.<anonymous> (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\decorators.js:109:27)
+    at CdpPage.goto (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\api\Page.js:574:43)
+    at callChrome (D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\bin\browser.cjs:293:37)
+ in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php:1115
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php(710): Spatie\Browsershot\Browsershot->callBrowser(Array)
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php(203): Spatie\Browsershot\Browsershot->pdf()
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php on line 1115
+[26-Feb-2025 20:57:22 Asia/Kolkata] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in D:\Marwadi university\Semester 5\PROJECT\vendor\symfony\process\Pipes\WindowsPipes.php on line 145
+[26-Feb-2025 21:06:02 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 21:06:29 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 21:06:59 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 21:07:04 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 21:07:25 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 21:10:19 Asia/Kolkata] PHP Fatal error:  Uncaught Symfony\Component\Process\Exception\ProcessFailedException: The command ""C:\Program Files\nodejs\\node.EXE" "D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src/../bin/browser.cjs" "{""url"":""file:\/\/C:\\Users\\ruchit\\AppData\\Local\\Temp\\1165973214-0632379001740584388\\index.html"",""action"":""pdf"",""options"":{""args"":[""--no-sandbox""],""viewport"":{""width"":800,""height"":600},""displayHeaderFooter"":false,""format"":""A4""}}"" failed.
+
+Exit Code: 1(General error)
+
+Working directory: D:\Marwadi university\Semester 5\PROJECT\app\models
+
+Output:
+================
+
+
+Error Output:
+================
+TimeoutError: Navigation timeout of 30000 ms exceeded
+    at new Deferred (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:60:34)
+    at Deferred.create (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:21:16)
+    at new LifecycleWatcher (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\LifecycleWatcher.js:69:60)
+    at CdpFrame.goto (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\Frame.js:148:29)
+    at CdpFrame.<anonymous> (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\util\decorators.js:109:27)
+    at CdpPage.goto (D:\Marwadi university\Semester 5\PROJECT\node_modules\puppeteer-core\lib\cjs\puppeteer\api\Page.js:574:43)
+    at callChrome (D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\bin\browser.cjs:293:37)
+ in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php:1115
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php(710): Spatie\Browsershot\Browsershot->callBrowser(Array)
+#1 D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php(203): Spatie\Browsershot\Browsershot->pdf()
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\vendor\spatie\browsershot\src\Browsershot.php on line 1115
+[26-Feb-2025 21:14:14 Asia/Kolkata] PHP Warning:  file_get_contents(http://localhost:3000/app/views/assets/image/m126500ln-0001.png): Failed to open stream: HTTP request failed! in D:\Marwadi university\Semester 5\PROJECT\app\models\generateInvoice.php on line 52
+[26-Feb-2025 21:14:16 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 21:21:12 Asia/Kolkata] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in D:\Marwadi university\Semester 5\PROJECT\vendor\symfony\process\Pipes\WindowsPipes.php on line 145
+[26-Feb-2025 21:34:22 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 22:52:03 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 22:52:11 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[26-Feb-2025 23:18:20 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:01:27 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:01:37 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:04:08 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[26-Feb-2025 19:36:30 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 851
+[27-Feb-2025 00:07:03 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:13:44 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 00:16:50 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:16:59 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:22:11 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 00:25:37 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'total' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php:18
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php(18): mysqli_query(Object(mysqli), 'SELECT transact...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php on line 18
+[27-Feb-2025 00:26:03 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php:18
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php(18): mysqli_query(Object(mysqli), 'SELECT transact...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\views\transaction.php on line 18
+[27-Feb-2025 00:28:47 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 00:34:40 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 00:37:54 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 01:00:22 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 01:09:05 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 01:10:11 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 01:18:56 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 01:36:04 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698

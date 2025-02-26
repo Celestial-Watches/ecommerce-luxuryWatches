@@ -98,10 +98,12 @@ if (!defined('ALLOW_ACCESS')) {
         </button>
         <ul class="sub-menu">
           <div>
-            <li><a href="#">View Orders</a></li>
-            <li><a href="#">Payment History</a></li>
-            <li><a href="#">Auction Management</a></li>
-            <li><a href="#">Refund/Cancellation Requests</a></li>
+            <li><a href="order/view_order.php">View Orders</a></li>
+            <li><a href="order/payment-history.php">Payment History</a></li>
+            <li><a href="order/refund-cancellations.php">Refund/Cancellation Requests</a></li>
+            <li><a href="order/order-fulfillment.php">Order Processing &amp; Fulfillment</a></li>
+            <li><a href="order/order-reports.php">Order Reports &amp; Analytics</a></li>
+            <li><a href="order/customer-communications.php">Customer Communications</a></li>
           </div>
         </ul>
       </li>

@@ -8,12 +8,68 @@ include '../controllers/search-engine.php';
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
 
-$limit = 20; // Set pagination limit 
+$limit = 20;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
-
 $sql = "SELECT * FROM products WHERE brand = ?";
 
+$filterKeys = [
+    'bracelet_color',
+    'case_material',
+    'bracelet_material',
+    'case_diameter',
+    'bezel_material',
+    'movement',
+    'year',
+    'price',
+    'power_reserve',
+    'glass',
+    'clasp_type',
+    'water_resistance',
+    'dial_numerals',
+    'clasp_material'
+];
+
+// Initialize selected filters array
+$selectedFilters = [];
+foreach ($filterKeys as $key) {
+    if (isset($_GET[$key]) && $_GET[$key] !== '') {
+        $selectedFilters[$key] = $_GET[$key];
+    }
+}
+
+// Build base WHERE clauses array and join clauses
+$whereClauses = ["brand = ?"];
+$joinClauses = [];
+
+// Apply filters
+foreach ($selectedFilters as $key => $value) {
+    if (!empty($value)) {
+        // Normalize and escape values
+        $values = is_array($value) ? $value : explode(',', $value);
+        $escapedValues = array_map(function ($val) use ($conn) {
+            return "'" . mysqli_real_escape_string($conn, strtolower(trim($val))) . "'";
+        }, $values);
+
+
+        // Determine alias and add join if necessary
+        $alias = 'pd';
+        if (!in_array("JOIN product_details pd ON p.id = pd.product_id", $joinClauses)) {
+            $joinClauses[] = "JOIN product_details pd ON p.id = pd.product_id";
+        }
+
+        // Create condition
+        $whereClauses[] = "LOWER(TRIM({$alias}.$key)) IN (" . implode(",", $escapedValues) . ")";
+    }
+}
+
+// Build the final SQL query
+$sql = "SELECT * FROM products p " . implode(" ", $joinClauses);
+if (!empty($whereClauses)) {
+    $sql .= " WHERE " . implode(" AND ", $whereClauses);
+}
+
+// Add ORDER BY clause based on the selected sort option
 switch ($sort) {
     case 'new_in':
         $sql .= " ORDER BY created_at DESC";
@@ -28,9 +84,10 @@ switch ($sort) {
         break;
 }
 
-$sql .= " LIMIT ? OFFSET ?"; // Add LIMIT and OFFSET for pagination
+// Add LIMIT and OFFSET for pagination
+$sql .= " LIMIT ? OFFSET ?";
 
-// Prepare and execute the SQL statement with brand parameter, limit, and offset
+// Prepare and execute the SQL statement
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sii", $brand, $limit, $offset);
 $stmt->execute();
@@ -66,6 +123,7 @@ $total_pages = ceil($total_products / $limit);
     <!-- ============= JS =============  -->
     <script src="../..//src/assets/js/navigation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="assets/js/filterModel.js"></script>
 
     <!-- ============= CSS =============  -->
     <link rel="stylesheet" href="../..//src/assets/css/deskView.css" loading="lazy" />
@@ -149,6 +207,13 @@ $total_pages = ceil($total_products / $limit);
         height: 10px;
         display: inline-block;
         margin-right: 8px;
+    }
+
+    .price{
+        font-weight: 500 !important;
+        font-size: 17px !important;
+        margin: 0 !important;
+        line-height: 0 !important;
     }
 
     .sort-form {
@@ -510,26 +575,37 @@ $total_pages = ceil($total_products / $limit);
         ?>
 
         <div class="filter-head-container">
-            <!-- Results and Filter Button -->
             <div class="top-container">
                 <div class="results-count"><?php echo $total_products; ?> results</div>
-                <button class="filter-button">FILTER</button>
+                <button class="filter-button" onclick="openFilterModal()">FILTER</button>
             </div>
-
-            <!-- Filter grid layout -->
             <div class="filter-container">
-                <div class="filter-item">Gender</div>
-                <div class="filter-item">Bracelet Color</div>
-                <div class="filter-item">Case Material</div>
-                <div class="filter-item">Bracelet Material</div>
-                <div class="filter-item">Case Diameter</div>
-                <div class="filter-item">Bezel Material</div>
-                <div class="filter-item">Movement</div>
+                <div class="filter-item" onclick="openFilterModal('gender')">Gender</div>
+                <div class="filter-item" onclick="openFilterModal('bracelet_color')">Bracelet Color</div>
+                <div class="filter-item" onclick="openFilterModal('case_material')">Case Material</div>
+                <div class="filter-item" onclick="openFilterModal('bracelet_material')">Bracelet Material</div>
+                <div class="filter-item" onclick="openFilterModal('case_diameter')">Case Diameter</div>
+                <div class="filter-item" onclick="openFilterModal('bezel_material')">Bezel Material</div>
+                <div class="filter-item" onclick="openFilterModal('movement')">Movement</div>
             </div>
 
-            <!-- Sort form -->
+            <!-- Sort form that preserves current filters -->
             <form method="GET" action="" class="sort-form">
-                <input type="hidden" name="brand" value="<?php echo htmlspecialchars($brand); ?>">
+                <?php
+                // Output hidden fields for all current GET parameters except 'sort_by'
+                foreach ($_GET as $key => $value) {
+                    if ($key == 'sort_by') {
+                        continue;
+                    }
+                    if (is_array($value)) {
+                        foreach ($value as $val) {
+                            echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($val) . '">';
+                        }
+                    } else {
+                        echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
+                    }
+                }
+                ?>
                 <label for="sort" class="sort-label">Sort by</label>
                 <select name="sort_by" id="sort" class="sort-dropdown" onchange="this.form.submit()">
                     <option value="new_in" <?php echo (isset($_GET['sort_by']) && $_GET['sort_by'] == 'new_in') ? 'selected' : ''; ?>>New In</option>
@@ -538,7 +614,6 @@ $total_pages = ceil($total_products / $limit);
                 </select>
             </form>
         </div>
-
 
         <div class="product-grid <?php echo ($result && $result->num_rows <= 4) ? 'single-row' : ''; ?>">
             <?php
@@ -552,15 +627,14 @@ $total_pages = ceil($total_products / $limit);
 
                     // Check for "ON REQUEST"
                     if (stripos($price, 'ON REQUEST') !== false) {
-                        $numericPrice = null; // Indicate that the price is not available
+                        $numericPrice = null;
                     } else {
-                        // Check for "FROM" and extract numeric price
                         if (stripos($price, 'FROM') !== false) {
                             preg_match('/FROM\s*([0-9,]+(?:\.[0-9]{1,2})?)/i', $price, $matches);
-                            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0; // Remove commas
+                            $numericPrice = isset($matches[1]) ? str_replace(',', '', $matches[1]) : 0;
                         } else {
                             preg_match('/[0-9,]+(?:\.[0-9]{1,2})?/', $price, $matches);
-                            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0; // Remove commas
+                            $numericPrice = isset($matches[0]) ? str_replace(',', '', $matches[0]) : 0;
                         }
                     }
 
@@ -611,29 +685,26 @@ $total_pages = ceil($total_products / $limit);
                 echo '<p class="coming-soon">Coming soon</p>';
             }
 
-            if (isset($stmt)) {
-                $stmt->close();
-            }
-            $conn->close();
+
             ?>
         </div>
         <!-- Pagination -->
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $page - 1; ?>">« Prev</a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $page - 1; ?>">« Prev</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $i; ?>" class="<?php echo ($i == $page ? 'active' : ''); ?>"><?php echo $i; ?></a>
             <?php endfor; ?>
 
             <?php if ($page < $total_pages): ?>
-                <a href="?brand=<?php echo urlencode($brand); ?>&sort_by=<?php echo urlencode($sort); ?>&page=<?php echo $page + 1; ?>">Next »</a>
+                <a href="?<?php echo $baseQueryString; ?>&page=<?php echo $page + 1; ?>">Next »</a>
             <?php endif; ?>
         </div>
     </div>
 
-    <?php include '../../PHP/components/footer.php' ?>
+    <?php include '../../PHP/components/footer.php'; ?>
 
     <!-- JS files -->
     <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
@@ -641,7 +712,17 @@ $total_pages = ceil($total_products / $limit);
     <script src="/src/assets/js/currency-language.js" async></script>
     <script src="/src/assets/js/cookie-monitor.js" async></script>
     <script src="/src/assets/js/imagePreview.js" async></script>
-
+    <?php
+    include '../models/filterModule.php';
+    echo renderFilterModal($conn);
+    ?>
 </body>
 
 </html>
+
+<?php
+if (isset($stmt)) {
+    $stmt->close();
+}
+$conn->close();
+?>

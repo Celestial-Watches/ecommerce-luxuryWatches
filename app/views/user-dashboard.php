@@ -282,7 +282,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     <li><a href="#">NFT Customisation</a></li>
                     <li><a href="selling.php">Sell and Exchange</a></li>
                     <li><a href="#">Auction Participation</a></li>
-                    <li><a href="#">Transaction History</a></li>
+                    <li><a href="transaction.php">Transaction History</a></li>
                     <li><a href="#">Manage Address</a></li>
                     <li><a href="#">Payment Methods</a></li>
                 </ul>

@@ -18,6 +18,9 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Component\\Process\\' => 26,
+            'Spatie\\TemporaryDirectory\\' => 26,
+            'Spatie\\Browsershot\\' => 19,
         ),
         'P' => 
         array (
@@ -47,6 +50,18 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
+        ),
+        'Spatie\\TemporaryDirectory\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/temporary-directory/src',
+        ),
+        'Spatie\\Browsershot\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/browsershot/src',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -68,8 +83,52 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'CurlClient' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/CurlClient.php',
+        'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+        'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
+        'Shippo' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Shippo.php',
+        'Shippo_Address' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Address.php',
+        'Shippo_ApiConnectionError' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/ApiConnectionError.php',
+        'Shippo_ApiError' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/ApiError.php',
+        'Shippo_ApiRequestor' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/ApiRequestor.php',
+        'Shippo_ApiResource' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/ApiResource.php',
+        'Shippo_AttachedObject' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/AttachedObject.php',
+        'Shippo_AuthenticationError' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/AuthenticationError.php',
+        'Shippo_Batch' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Batch.php',
+        'Shippo_CarrierAccount' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/CarrierAccount.php',
+        'Shippo_CustomsDeclaration' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/CustomsDeclaration.php',
+        'Shippo_CustomsItem' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/CustomsItem.php',
+        'Shippo_Error' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Error.php',
+        'Shippo_InvalidRequestError' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/InvalidRequestError.php',
+        'Shippo_List' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/List.php',
+        'Shippo_Manifest' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Manifest.php',
+        'Shippo_Object' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Object.php',
+        'Shippo_Order' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Order.php',
+        'Shippo_Parcel' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Parcel.php',
+        'Shippo_Pickup' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Pickup.php',
+        'Shippo_Rate' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Rate.php',
+        'Shippo_RateLimitError' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/RateLimitError.php',
+        'Shippo_Refund' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Refund.php',
+        'Shippo_Shipment' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Shipment.php',
+        'Shippo_SingletonApiResource' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/SingletonApiResource.php',
+        'Shippo_Track' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Track.php',
+        'Shippo_Transaction' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Transaction.php',
+        'Shippo_Util' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Util.php',
+        'Shippo_Util_Set' => __DIR__ . '/..' . '/shippo/shippo-php/lib/Shippo/Util/Set.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
+        'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
+        'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',
+        'TCPDF_COLORS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_colors.php',
+        'TCPDF_FILTERS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_filters.php',
+        'TCPDF_FONTS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_fonts.php',
+        'TCPDF_FONT_DATA' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_font_data.php',
+        'TCPDF_IMAGES' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_images.php',
+        'TCPDF_IMPORT' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_import.php',
+        'TCPDF_PARSER' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_parser.php',
+        'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );

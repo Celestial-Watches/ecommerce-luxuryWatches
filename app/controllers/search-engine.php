@@ -59,7 +59,7 @@ function getSortOrder($sort) {
 // Search logic
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? $_GET['category'] : '';
-$limit = 20; // Set the number of products per page
+$limit = 20; 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 $sort = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'new_in';
