@@ -4,6 +4,7 @@
         "vlucas/phpdotenv": "^5.6",
         "tecnickcom/tcpdf": "^6.8",
         "spatie/browsershot": "^5.0",
-        "shippo/shippo-php": "1.*"
+        "shippo/shippo-php": "1.*",
+        "sybio/gif-creator": "*"
     }
 }

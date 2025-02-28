@@ -39,11 +39,14 @@ $order_status = strtolower($transaction['order_status']);
 if ($payment_status === 'success') {
   $activeStep = 2;
 }
-if ($order_status === 'shipped' || $order_status === 'in transit') {
+if ($order_status === 'shipped') {
   $activeStep = 3;
+} elseif ($order_status === 'in_transit') {
+  $activeStep = 3; 
 } elseif ($order_status === 'completed' || $order_status === 'delivered') {
   $activeStep = 4;
 }
+
 
 // Define the timeline steps
 $timelineSteps = [
@@ -441,7 +444,7 @@ $timelineSteps = [
           <div class="tracking-info" style="margin-top: 20px;">
             <h4>Tracking Details</h4>
             <p>Tracking Number: <?= $transaction['tracking_number'] ?></p>
-            <a href="../controllers/tracking.php?= $transaction['tracking_number'] ?>"
+            <a href="../controllers/tracking.php?tracking_number=<?= urlencode($transaction['tracking_number']) ?>"
               class="tracking-link">
               View Live Tracking
             </a>

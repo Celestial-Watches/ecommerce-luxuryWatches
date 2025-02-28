@@ -1,5 +1,6 @@
 <?php
 require_once '../config/conn.php';
+require_once 'GifCreator.php'; 
 
 $tracking_number = $_GET['tracking_number'] ?? '';
 
@@ -9,28 +10,30 @@ $stmt = $conn->prepare("SELECT t.*, u.email FROM transactions t
   WHERE tracking_number = ?");
 $stmt->bind_param("s", $tracking_number);
 $stmt->execute();
-$transaction = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
+$transaction = $result->fetch_assoc();
+
+if (!$transaction) {
+    die("Transaction not found for tracking number: " . htmlspecialchars($tracking_number));
+}
 
 $details = json_decode($transaction['details'], true);
 
-// Fetch customer location details from details JSON
+// Customer location details (with defaults)
 $customerLocation = $details['customer'] ?? [];
 $customerCity    = $customerLocation['city']    ?? 'Rajkot';
 $customerState   = $customerLocation['state']   ?? 'Gujarat';
 $customerCountry = $customerLocation['country'] ?? 'India';
 
-// Seller location is fixed: Delhi, India
+// Seller location (fixed)
 $sellerCity    = 'Delhi';
-$sellerState   = 'Delhi';
 $sellerCountry = 'India';
 
-// Build addresses for directions API
+// Build addresses (for directions API)
 $customerAddress = "{$customerCity}, {$customerState}, {$customerCountry}";
 $sellerAddress   = "{$sellerCity}, {$sellerCountry}";
 
 // --- Get Fake Coordinates --- //
-// This function returns preset coordinates for known cities. 
-// You can update it to use a geocoding API if needed.
 function getFakeCoords($city) {
     $locations = [
         'Rajkot' => ['lat' => 22.3039, 'lng' => 70.8022, 'zoom' => 12],
@@ -40,31 +43,21 @@ function getFakeCoords($city) {
     return $locations[$city] ?? ['lat' => 20.5937, 'lng' => 78.9629, 'zoom' => 5];
 }
 
-// Get coordinates for customer and seller
 $customerCoords = getFakeCoords($customerCity);
 $sellerCoords   = getFakeCoords($sellerCity);
 
-// Compute center point for the static map (using the midpoint)
+// Compute map center (midpoint between seller and customer)
 $centerLat = ($customerCoords['lat'] + $sellerCoords['lat']) / 2;
 $centerLng = ($customerCoords['lng'] + $sellerCoords['lng']) / 2;
 
-// --- cURL Directions API integration (server-side) --- //
-// Use seller as origin and customer as destination.
-$origin      = $sellerAddress;
-$destination = $customerAddress;
-
-// Define departure and arrival times (Unix timestamps)
-$departure_time = time();
-$arrival_time   = time() + 3600; // example: one hour later
-
-// Build the URL with query parameters
+// --- cURL Directions API integration ---
 $queryParams = http_build_query([
-    'arrival_time'               => $arrival_time,
-    'departure_time'             => $departure_time,
+    'arrival_time'               => time() + 3600,
+    'departure_time'             => time(),
     'alternatives'               => 'true',
     'avoid'                      => 'highways',
-    'destination'                => $destination,
-    'origin'                     => $origin,
+    'destination'                => $customerAddress,
+    'origin'                     => $sellerAddress,
     'units'                      => 'metric',
     'waypoints'                  => '', 
     'language'                   => 'en',
@@ -73,36 +66,143 @@ $queryParams = http_build_query([
     'traffic_model'              => 'pessimistic',
     'transit_mode'               => 'train|tram|subway',
     'transit_routing_preference' => 'less_walking',
-    'key'                        => 'AlzaSy4xmvFtL3iwhqNg9BXk4xDtdddr8wOmGHK',
+    'key'                        => 'AlzaSy4xmvFtL3iwhqNg9BXk4xDtdddr8wOmGHK', // Replace with your gomaps.pro API key
 ]);
 
-$url = 'https://maps.gomaps.pro/maps/api/directions/json?' . $queryParams;
+$directionsURL = 'https://maps.gomaps.pro/maps/api/directions/json?' . $queryParams;
 
 $curl = curl_init();
 curl_setopt_array($curl, [
-    CURLOPT_URL            => $url,
+    CURLOPT_URL            => $directionsURL,
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING       => '',
-    CURLOPT_MAXREDIRS      => 10,
     CURLOPT_TIMEOUT        => 10,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST  => 'GET',
 ]);
-
 $directions_response = curl_exec($curl);
 if (curl_errno($curl)) {
-    $directions_error = curl_error($curl);
+    die("Directions API error: " . curl_error($curl));
 }
 curl_close($curl);
 
 $directions_data = json_decode($directions_response, true);
+
+// --- Decode Polyline --- //
+function decodePolyline($encoded) {
+    $points = [];
+    $index = 0;
+    $lat = 0;
+    $lng = 0;
+    $len = strlen($encoded);
+
+    while ($index < $len) {
+        $shift = 0;
+        $result = 0;
+        do {
+            $b = ord($encoded[$index++]) - 63;
+            $result |= (($b & 0x1f) << $shift);
+            $shift += 5;
+        } while ($b >= 0x20);
+        $dlat = (($result & 1) ? ~($result >> 1) : ($result >> 1));
+        $lat += $dlat;
+
+        $shift = 0;
+        $result = 0;
+        do {
+            $b = ord($encoded[$index++]) - 63;
+            $result |= (($b & 0x1f) << $shift);
+            $shift += 5;
+        } while ($b >= 0x20);
+        $dlng = (($result & 1) ? ~($result >> 1) : ($result >> 1));
+        $lng += $dlng;
+
+        $points[] = ['lat' => $lat * 1e-5, 'lng' => $lng * 1e-5];
+    }
+    return $points;
+}
+
+$routePoints = [];
+if (isset($directions_data['routes'][0]['overview_polyline']['points'])) {
+    $encodedPolyline = $directions_data['routes'][0]['overview_polyline']['points'];
+    $routePoints = decodePolyline($encodedPolyline);
+} else {
+    // Fallback: linear interpolation between seller and customer (10 steps)
+    $steps = 10;
+    for ($i = 0; $i <= $steps; $i++) {
+         $lat = $sellerCoords['lat'] + ($customerCoords['lat'] - $sellerCoords['lat']) * ($i / $steps);
+         $lng = $sellerCoords['lng'] + ($customerCoords['lng'] - $sellerCoords['lng']) * ($i / $steps);
+         $routePoints[] = ['lat' => $lat, 'lng' => $lng];
+    }
+}
+
+// --- Generate Animated GIF Frames using gomaps Static API and cURL --- //
+$frames = [];
+$delays = []; // Delay (in 1/100th of a second) for each frame
+$apiKey = 'AlzaSy4xmvFtL3iwhqNg9BXk4xDtdddr8wOmGHK'; // Replace with your gomaps.pro API key
+$baseURL = 'https://maps.gomaps.pro/maps/api/staticmap';
+$zoom = 6;
+$size = '600x400';
+
+// Fixed markers for seller and customer
+$fixedMarkers = "markers={$sellerCoords['lat']},{$sellerCoords['lng']}|{$customerCoords['lat']},{$customerCoords['lng']}";
+
+// Optionally include the route path if available
+$pathParam = isset($encodedPolyline) ? "path=enc:$encodedPolyline" : "";
+
+foreach ($routePoints as $point) {
+    // Truck marker with a custom icon (ensure truck_icon.png is accessible on your server)
+    $truckMarker = "markers=icon:truck_icon.png|{$point['lat']},{$point['lng']}";
+
+    $queryParams = http_build_query([
+         'center' => "{$centerLat},{$centerLng}",
+         'zoom'   => $zoom,
+         'size'   => $size,
+         'key'    => $apiKey
+    ]);
+    
+    // Build the full URL (concatenate extra parameters manually)
+    $url = $baseURL . "?" . $queryParams . "&" . $fixedMarkers;
+    if (!empty($pathParam)) {
+        $url .= "&" . $pathParam;
+    }
+    $url .= "&" . $truckMarker;
+    
+    // Fetch the image via cURL
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $imageData = curl_exec($ch);
+    curl_close($ch);
+    
+    if ($imageData) {
+        $frames[] = $imageData;
+        $delays[] = 10; // 10 = 100ms delay per frame (adjust as needed)
+    }
+}
+
+if (empty($frames)) {
+    die("No frames were generated for the animation.");
+}
+
+// --- Create Animated GIF Using a Pure PHP GIF Encoder (GifCreator) --- //
+// Instantiate GifCreator, pass frames and delays, and set loop count (0 = infinite loop)
+$gc = new GifCreator();
+$gc->create($frames, $delays, 0);
+$gifBinary = $gc->getGif();
+
+// Output the animated GIF
+header('Content-Type: image/gif');
+echo $gifBinary;
 ?>
+
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Live Tracking</title>
-    <style>
+<link rel="stylesheet" 
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+        crossorigin=""></script>
+
+    <head>
+        <title>Live Tracking</title>
+        <style>
         #gomap { 
             height: 600px; 
             width: 100%;
@@ -134,17 +234,9 @@ $directions_data = json_decode($directions_response, true);
         <div id="gomap">
             <!-- Static map with markers for seller and customer -->
             <img src="https://maps.gomaps.pro/maps/api/staticmap?center=<?= $centerLat ?>,<?= $centerLng ?>&zoom=6&size=600x400&markers=<?= $sellerCoords['lat'] ?>,<?= $sellerCoords['lng'] ?>|<?= $customerCoords['lat'] ?>,<?= $customerCoords['lng'] ?>&key=AlzaSy4xmvFtL3iwhqNg9BXk4xDtdddr8wOmGHK" 
-                 alt="Map">
-        </div>
-        <div class="directions">
-            <h2>Directions Data</h2>
-            <?php if (isset($directions_error)): ?>
-                <p>Error fetching directions: <?= htmlspecialchars($directions_error) ?></p>
-            <?php else: ?>
-                <!-- You can further process this JSON to show steps, distance, etc. -->
-                <pre><?= htmlspecialchars(json_encode($directions_data, JSON_PRETTY_PRINT)) ?></pre>
-            <?php endif; ?>
+            alt="Map">
         </div>
     </div>
 </body>
 </html>
+
