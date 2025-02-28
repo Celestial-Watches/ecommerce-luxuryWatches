@@ -2,7 +2,7 @@
 chdir(dirname(__FILE__));
 require_once '../config/conn.php';
 
-// Update status from paid to shipped (simulate shipping after 2 minutes)
+// Update from paid to shipped (simulate after 2 minutes)
 $conn->query("UPDATE transactions 
   SET order_status = 'shipped', 
       tracking_number = CONCAT('TRK', UPPER(SUBSTRING(MD5(RAND()), 1, 10))),
@@ -11,26 +11,26 @@ $conn->query("UPDATE transactions
     AND order_status = 'pending' 
     AND created_at <= NOW() - INTERVAL 2 MINUTE");
 
-// Update status from shipped to in_transit (simulate after 5 minutes)
+// Update from shipped to in_transit (simulate after 2 minutes)
 $conn->query("UPDATE transactions 
   SET order_status = 'in_transit',
       in_transit_at = NOW() 
   WHERE order_status = 'shipped' 
-    AND shipped_at <= NOW() - INTERVAL 5 MINUTE");
+    AND shipped_at <= NOW() - INTERVAL 2 MINUTE");
 
-// Update status from in_transit to out_for_delivery (simulate after 2 hours)
+// Update from in_transit to out_for_delivery (simulate after 2 minutes)
 $conn->query("UPDATE transactions 
   SET order_status = 'out_for_delivery',
       out_for_delivery_at = NOW() 
   WHERE order_status = 'in_transit' 
-    AND in_transit_at <= NOW() - INTERVAL 2 HOUR");
+    AND in_transit_at <= NOW() - INTERVAL 2 MINUTE");
 
-// Update status from out_for_delivery to delivered (simulate after 1 hour)
+// Update from out_for_delivery to delivered (simulate after 2 minutes)
 $conn->query("UPDATE transactions 
   SET order_status = 'delivered',
       delivered_at = NOW() 
   WHERE order_status = 'out_for_delivery' 
-    AND out_for_delivery_at <= NOW() - INTERVAL 1 HOUR");
+    AND out_for_delivery_at <= NOW() - INTERVAL 2 MINUTE");
 
 // Send shipping confirmation emails for newly shipped orders
 $results = $conn->query("

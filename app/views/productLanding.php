@@ -595,7 +595,7 @@ $baseQueryString = http_build_query($currentParams);
         <span style="font-size:15px; font-weight:400; margin-bottom:20px; font-family: 'Poppins';">
             Browse thousands of luxury watches from the best and trendy brands around the world.
         </span>
-        
+
         <div class="filter-head-container">
             <div class="top-container">
                 <div class="results-count"><?php echo $totalProducts; ?> results</div>
@@ -695,7 +695,7 @@ $baseQueryString = http_build_query($currentParams);
                                     </div>
                                 </div>
                                 <div class="product-button">
-                                    <button type="submit" class="cta-button">
+                                    <button type="button" class="cta-button" onclick="window.location.href='details.php?id=<?php echo $row['id']; ?>'">
                                         <i style="padding: 2%;" class="<?php echo $icon; ?>"></i>
                                         <?php echo $button_name; ?>
                                     </button>
