@@ -10720,3 +10720,141 @@ Stack trace:
 [27-Feb-2025 01:10:11 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
 [27-Feb-2025 01:18:56 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
 [27-Feb-2025 01:36:04 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 10:53:40 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 11:07:20 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 11:41:12 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 12:49:26 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 13:03:51 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 13:19:50 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 13:29:31 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 13:43:17 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 13:43:21 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 14:03:34 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 17:39:15 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 17:49:12 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:16:03 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:31:34 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:32:49 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:41:35 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:41:39 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:41:43 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:45:20 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:45:28 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:47:31 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'transaction_data' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php(30): mysqli->prepare('INSERT INTO tra...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 30
+[27-Feb-2025 18:48:10 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'transaction_data' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php(30): mysqli->prepare('INSERT INTO tra...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 30
+[27-Feb-2025 18:57:14 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 18:58:17 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'transaction_data' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php(30): mysqli->prepare('INSERT INTO tra...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 30
+[27-Feb-2025 19:03:06 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 19:04:27 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'transaction_data' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php(30): mysqli->prepare('INSERT INTO tra...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 30
+[27-Feb-2025 19:41:03 Asia/Kolkata] PHP Warning:  Undefined array key "user_id" in D:\Marwadi university\Semester 5\PROJECT\app\views\checkout.php on line 11
+[27-Feb-2025 19:41:08 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 19:41:18 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 19:41:24 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 19:42:40 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php:30
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php(30): mysqli->prepare('INSERT INTO tra...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 30
+[27-Feb-2025 15:14:44 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 15:16:55 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 19:52:22 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 15:22:50 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 15:25:04 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 15:25:34 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 15:25:39 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 15:25:49 Europe/Berlin] PHP Warning:  Undefined array key "total" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\payment_processor.php on line 61
+[27-Feb-2025 20:01:02 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:09:10 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:18:42 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:18:57 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:32:24 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[27-Feb-2025 20:36:45 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:36:52 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:36:57 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 20:43:48 Asia/Kolkata] PHP Warning:  Undefined variable $currencySymbols in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 346
+[27-Feb-2025 20:43:48 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 346
+[27-Feb-2025 20:43:48 Asia/Kolkata] PHP Warning:  Undefined variable $currencySymbols in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 355
+[27-Feb-2025 20:43:48 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 355
+[27-Feb-2025 20:47:07 Asia/Kolkata] PHP Warning:  Undefined variable $currencySymbols in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 346
+[27-Feb-2025 20:47:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 346
+[27-Feb-2025 20:47:07 Asia/Kolkata] PHP Warning:  Undefined variable $currencySymbols in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 355
+[27-Feb-2025 20:47:07 Asia/Kolkata] PHP Warning:  Trying to access array offset on value of type null in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 355
+[27-Feb-2025 21:05:21 Asia/Kolkata] PHP Warning:  Undefined array key "subtotal_amount" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 356
+[27-Feb-2025 21:06:36 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 21:07:30 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067065082...', 30, '{"cart":[{"id":...', '56900356.69', '1743.18', '9483102.25', '60445.60', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:0...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:13:43 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067102307...', 30, '{"cart":[{"id":...', '56900356.69', '1743.18', '9483102.25', '60445.60', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:1...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:15:22 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067112248...', 30, '{"cart":[{"id":...', '62168746.83', '1743.18', '9483102.25', '0.00', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:1...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:15:23 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067112381...', 30, '{"cart":[{"id":...', '5418578238.71', '1743.18', '9483102.25', '0.00', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:1...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:15:25 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067112559...', 30, '{"cart":[{"id":...', '472278944423.37', '1743.18', '9483102.25', '0.00', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:1...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:15:26 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php:71
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php(71): mysqli_stmt->bind_param('sisddddssssss', 'TXN174067112654...', 30, '{"cart":[{"id":...', '41163454972785....', '1743.18', '9483102.25', '0.00', '52683901.40', 'inr', 'pending', 'credit_card', '', 'success', '2025-02-27 21:1...')
+#1 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\controllers\saveTransaction.php on line 71
+[27-Feb-2025 21:17:49 Asia/Kolkata] PHP Warning:  Undefined array key "checkoutSubtotal" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 359
+[27-Feb-2025 21:17:49 Asia/Kolkata] PHP Warning:  Undefined array key "checkoutDiscount" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 360
+[27-Feb-2025 21:17:49 Asia/Kolkata] PHP Warning:  Undefined array key "checkoutShipping" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 361
+[27-Feb-2025 21:17:49 Asia/Kolkata] PHP Warning:  Undefined array key "checkoutTax" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 362
+[27-Feb-2025 21:25:05 Asia/Kolkata] PHP Warning:  Undefined array key "subtotal_amount" in D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php on line 350
+[27-Feb-2025 21:37:13 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 22:11:36 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 22:21:15 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[27-Feb-2025 22:25:45 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[28-Feb-2025 02:50:52 Asia/Kolkata] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in D:\Marwadi university\Semester 5\PROJECT\app\views\manageAddress.php on line 505
+[28-Feb-2025 02:50:52 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[28-Feb-2025 02:51:03 Asia/Kolkata] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in D:\Marwadi university\Semester 5\PROJECT\app\views\manageAddress.php on line 505
+[28-Feb-2025 02:51:03 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[28-Feb-2025 02:51:04 Asia/Kolkata] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in D:\Marwadi university\Semester 5\PROJECT\app\views\manageAddress.php on line 505
+[28-Feb-2025 02:51:04 Asia/Kolkata] PHP Fatal error:  Cannot redeclare logUserActivity() (previously declared in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:50) in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 58
+[28-Feb-2025 03:47:03 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[28-Feb-2025 05:37:41 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 58
+[28-Feb-2025 05:37:41 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 83
+[28-Feb-2025 05:41:22 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[28-Feb-2025 05:45:23 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 58
+[28-Feb-2025 05:45:23 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 78
+[28-Feb-2025 05:49:17 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 52
+[28-Feb-2025 05:49:17 Asia/Kolkata] PHP Warning:  Undefined array key "shipment_status" in D:\Marwadi university\Semester 5\PROJECT\app\controllers\tracking.php on line 86
+[28-Feb-2025 05:52:45 Asia/Kolkata] SQL Query: SELECT * FROM products p 
+[28-Feb-2025 06:03:41 Asia/Kolkata] PHP Warning:  Undefined variable $baseQueryString in D:\Marwadi university\Semester 5\PROJECT\app\views\brands.php on line 698
+[28-Feb-2025 11:31:21 Asia/Kolkata] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php:8
+Stack trace:
+#0 D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'celestial_watch...')
+#1 D:\Marwadi university\Semester 5\PROJECT\app\views\order-tracking.php(4): require_once('D:\\Marwadi univ...')
+#2 {main}
+  thrown in D:\Marwadi university\Semester 5\PROJECT\app\config\conn.php on line 8

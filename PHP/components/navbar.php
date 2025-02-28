@@ -904,9 +904,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
                 <div class="header-user-actions">
 
-                    <button class="action-btn profile-btn" title="Personal Dashboard" onclick="javascript:void(0); window.location.href='/app/views/user-dashboard.php';">
+                    <a class="action-btn profile-btn" title="Personal Dashboard" href='/app/views/user-dashboard.php'>
                         <ion-icon name="person-outline"></ion-icon>
-                    </button>
+                    </a>
 
 
 
@@ -1151,9 +1151,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
             <!-- Homepage -->
 
-            <button class="action-btn" onclick="window.location.href ='http://localhost:3000/index.php';">
+            <a class="action-btn" href='/index.php'>
                 <ion-icon name="home-outline"></ion-icon>
-            </button>
+            </a>
 
             <!-- wishlist -->
 
@@ -1164,9 +1164,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
             <!-- Profile -->
 
-            <button class="action-btn profile-btn" onclick="javascript:void(0); window.location.href='http://localhost:3000/app/views/user-dashboard.php';" data-mobile-menu-open-btn>
+            <a class="action-btn profile-btn" href='/app/views/user-dashboard.php' data-mobile-menu-open-btn>
                 <ion-icon name="person-outline"></ion-icon>
-            </button>
+            </a>
         </div>
 
 
@@ -1188,9 +1188,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
                 </li>
 
                 <li class="menu-category">
-                    <button class="accordion-menu" data-accordion-btn onclick="window.location.href ='http://localhost:3000/app/views/about-us.php';">
+                    <a class="accordion-menu" data-accordion-btn href='/app/views/about-us.php'>
                         <p class="menu-title">About Us</p>
-                    </button>
+                    </a>
                 </li>
 
                 <li class="menu-category">

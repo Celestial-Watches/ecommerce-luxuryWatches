@@ -3,6 +3,16 @@ session_start();
 define('ALLOW_ACCESS', true);
 require_once '../config/conn.php';
 
+$currencySymbols = [
+  'usd' => '$',
+  'eur' => '€',
+  'inr' => '₹',
+  'gbp' => '£',
+  'jpy' => '¥',
+  'aud' => 'A$',
+  'cny' => '¥',
+];
+
 if (!isset($_GET['transaction_id']) || !isset($_SESSION['user_id'])) {
   header('Location: /index.php');
   exit;
@@ -22,13 +32,16 @@ $details = json_decode($transaction['details'], true);
 
 // Determine active timeline step based on order_status.
 // Map: pending/processing = step 1, shipped = step 2, in transit = step 3, completed/delivered = step 4.
-$status = strtolower($transaction['order_status']);
 $activeStep = 1;
-if ($status === 'shipped') {
+$payment_status = strtolower($transaction['payment_status']);
+$order_status = strtolower($transaction['order_status']);
+
+if ($payment_status === 'success') {
   $activeStep = 2;
-} elseif ($status === 'in transit') {
+}
+if ($order_status === 'shipped' || $order_status === 'in transit') {
   $activeStep = 3;
-} elseif ($status === 'completed' || $status === 'delivered') {
+} elseif ($order_status === 'completed' || $order_status === 'delivered') {
   $activeStep = 4;
 }
 
@@ -83,7 +96,7 @@ $timelineSteps = [
       padding: 40px 20px;
     }
 
-    a{
+    a {
       text-decoration: none;
       color: inherit;
     }
@@ -292,6 +305,45 @@ $timelineSteps = [
 <body>
   <?php include '../../PHP/components/navbar.php'; ?>
 
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+  </div>
+
+  <style>
+    #loading-spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #007bff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
   <div class="tracking-page-container">
     <!-- Header -->
     <div class="order-header">
@@ -339,8 +391,16 @@ $timelineSteps = [
                   <img src="<?= htmlspecialchars($item['image']) ?>" alt="Product Image" style="width:60px; height:60px; object-fit: cover; border-radius: 4px;">
                 <?php endif; ?>
                 <div>
-                  <p> <a href="details.php?id=<?= urlencode($item['id']) ?>"><strong><?= htmlspecialchars($item['name']); ?></strong></a></p>
-                  <p><?= htmlspecialchars($item['quantity']); ?> x $<?= htmlspecialchars($item['numericPrice']); ?></p>
+                  <p><a href="details.php?id=<?= urlencode($item['id']) ?>"><strong><?= htmlspecialchars($item['name']); ?></strong></a></p>
+                  <p>
+                    <?= htmlspecialchars($item['quantity']); ?> x
+                    <?= htmlspecialchars($currencySymbols[strtolower($transaction['currency'])]) . ' ' . number_format(
+                      ($item['quantity'] <= 1)
+                        ? $transaction['subtotal_amount']
+                        : ($transaction['total_amount'] / $item['quantity']),
+                      2
+                    ); ?>
+                  </p>
                 </div>
               </div>
             </div>
@@ -348,6 +408,8 @@ $timelineSteps = [
           <div class="order-summary">
             <p><span>Payment Status:</span> <strong><?= htmlspecialchars($transaction['payment_status']); ?></strong></p>
             <p><span>Order Status:</span> <strong><?= htmlspecialchars($transaction['order_status']); ?></strong></p>
+            <p><span>Tax:</span> <strong><?= htmlspecialchars($currencySymbols[strtolower($transaction['currency'])]) . ' ' . number_format($transaction['tax_amount'] ?? 0, 2); ?></strong></p>
+            <p><span>Total Amount:</span> <strong><?= htmlspecialchars($currencySymbols[strtolower($transaction['currency'])]) . ' ' . number_format($transaction['total_amount'], 2); ?></strong></p>
             <p><span>Order Date:</span> <strong><?= htmlspecialchars($transaction['created_at']); ?></strong></p>
           </div>
         </div>
@@ -375,6 +437,17 @@ $timelineSteps = [
           <?php endforeach; ?>
         </ul>
 
+        <?php if (!empty($transaction['tracking_number'])): ?>
+          <div class="tracking-info" style="margin-top: 20px;">
+            <h4>Tracking Details</h4>
+            <p>Tracking Number: <?= $transaction['tracking_number'] ?></p>
+            <a href="../controllers/tracking.php?= $transaction['tracking_number'] ?>"
+              class="tracking-link">
+              View Live Tracking
+            </a>
+          </div>
+        <?php endif; ?>
+
         <!-- Download Invoice Button -->
         <a class="download-invoice-btn" href="/app/models/generateInvoice.php?transaction_id=<?= urlencode($transaction_id); ?>">
           Download Invoice
@@ -391,6 +464,35 @@ $timelineSteps = [
   <script src="/src/assets/js/currency-language.js" async></script>
   <script src="/src/assets/js/cookie-monitor.js" async></script>
   <script src="/src/assets/js/imagePreview.js" async></script>
+  <script>
+    document.querySelector('.download-invoice-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Show the loading spinner
+      document.getElementById('loading-spinner').style.display = 'flex';
+
+      const transactionId = '<?= urlencode($transaction_id); ?>';
+      fetch(`/app/models/generateInvoice.php?transaction_id=${transactionId}`)
+        .then(response => response.blob())
+        .then(blob => {
+          // Hide the loading spinner
+          document.getElementById('loading-spinner').style.display = 'none';
+
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = `Invoice_${transactionId}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+        })
+        .catch(() => {
+          showNotification('Failed to download invoice.', true);
+          document.getElementById('loading-spinner').style.display = 'none';
+        });
+    });
+  </script>
 </body>
 
 </html>

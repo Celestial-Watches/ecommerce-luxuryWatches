@@ -12,6 +12,13 @@ $userId = mysqli_real_escape_string($conn, $_SESSION['user_id']);
 $query = "SELECT username, email, phone FROM users WHERE id = '$userId'";
 $result = mysqli_query($conn, $query);
 $userData = mysqli_fetch_assoc($result);
+
+$defaultAddress = null;
+$addressQuery = "SELECT * FROM addresses WHERE user_id = '$userId' LIMIT 1";
+$addressResult = mysqli_query($conn, $addressQuery);
+if ($addressResult && mysqli_num_rows($addressResult) > 0) {
+  $defaultAddress = mysqli_fetch_assoc($addressResult);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +62,33 @@ $userData = mysqli_fetch_assoc($result);
       flex-direction: column;
       text-align: center;
       padding: 20px;
+    }
+
+    .saved-address-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .saved-address-btn {
+      background: none;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .saved-address-btn:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .saved-address-btn i {
+      font-size: 1.1rem;
     }
 
     /* Container with Left Nav, Center Form & Right Summary */
@@ -267,6 +301,45 @@ $userData = mysqli_fetch_assoc($result);
 
 <body>
   <?php include '../../PHP/components/navbar.php'; ?>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+  </div>
+
+  <style>
+    #loading-spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #007bff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
   <div class="checkout-container">
     <!-- This container will show the empty cart message if no items exist -->
     <div id="empty-cart" style="display: none;">
@@ -279,25 +352,26 @@ $userData = mysqli_fetch_assoc($result);
         <ul>
           <li data-step="1" class="active">
             1. Shipping Information
-            <span class="tooltip">Enter your name, address & contact details.</span>
+            <span class="tooltip">Enter your name, address &amp; contact details.</span>
           </li>
           <li data-step="2">
             2. Billing &amp; Payment
-            <span class="tooltip">Provide billing info & choose payment method.</span>
+            <span class="tooltip">Provide billing info &amp; choose payment method.</span>
           </li>
           <li data-step="3">
             3. Order Review &amp; Discounts
-            <span class="tooltip">Apply promo codes & add order notes.</span>
+            <span class="tooltip">Apply promo codes &amp; add order notes.</span>
           </li>
           <li data-step="4">
             4. Confirmation &amp; Completion
-            <span class="tooltip">Final confirmation & tracking details.</span>
+            <span class="tooltip">Final confirmation &amp; tracking details.</span>
           </li>
         </ul>
       </nav>
       <!-- Center Multi–Step Form -->
       <div class="checkout-content">
-        <form id="multiStepForm">
+        <!-- Note the novalidate attribute -->
+        <form id="multiStepForm" novalidate>
           <!-- Step 1: Shipping Information -->
           <div class="step active" id="step-1">
             <h2 style="margin-bottom: 10px;">Shipping Information</h2>
@@ -323,10 +397,18 @@ $userData = mysqli_fetch_assoc($result);
               <label for="company">Company Name (optional)</label>
               <input type="text" id="company" name="company" placeholder="Your company name">
             </div>
+            <?php if ($defaultAddress): ?>
+              <div class="saved-address-container">
+                <button type="button" class="saved-address-btn" id="useSavedAddress">
+                  <i class="fas fa-map-marker-alt"></i>
+                  Use Saved Address
+                </button>
+              </div>
+            <?php endif; ?>
             <!-- Dynamic Location Fields: Country, State, City -->
             <div class="form-group">
               <label for="country">Country</label>
-              <!-- Note: For demonstration, a few options with ISO codes are hard-coded -->
+              <!-- Hard-coded options (make sure these match your saved data) -->
               <select id="country" name="country" required>
                 <option value="">Select Country</option>
                 <option value="United States" data-code="US">United States</option>
@@ -417,7 +499,7 @@ $userData = mysqli_fetch_assoc($result);
                 </div>
                 <div class="form-group">
                   <label for="cvc">CVC</label>
-                  <input type="text" id="cvc" name="cvc" placeholder="123">
+                  <input type="text" maxlength="3" id="cvc" name="cvc" placeholder="123">
                 </div>
               </div>
             </div>
@@ -485,389 +567,663 @@ $userData = mysqli_fetch_assoc($result);
         </div>
       </aside>
     </div>
-
-    <?php include '../../PHP/components/footer.php'; ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-
-        let maxStepAllowed = 1;
-        // Function to validate and show steps (same as previous logic)
-        function validateStep(stepNumber) {
-          const step = document.getElementById('step-' + stepNumber);
-          const requiredElements = step.querySelectorAll('input[required], select[required], textarea[required]');
-          let valid = true;
-          requiredElements.forEach(input => {
-            if (!input.checkValidity()) {
-              input.reportValidity();
-              valid = false;
-            }
-          });
-          return valid;
-        }
-
-        function showStep(stepNumber) {
-          document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-          document.getElementById('step-' + stepNumber).classList.add('active');
-          document.querySelectorAll('.checkout-nav li').forEach(item => {
-            item.classList.toggle('active', item.getAttribute('data-step') === stepNumber.toString());
-          });
-        }
-        document.querySelectorAll('.checkout-nav li').forEach(item => {
-          item.addEventListener('click', () => {
-            const step = parseInt(item.getAttribute('data-step'));
-            if (step <= maxStepAllowed) {
-              showStep(step);
-            } else {
-              alert('Please complete previous steps first.');
-            }
-          });
-        });
-        document.getElementById('next-1').addEventListener('click', () => {
-          if (!validateStep(1)) return;
-          maxStepAllowed = Math.max(maxStepAllowed, 2);
-          showStep(2);
-        });
-        document.getElementById('back-2').addEventListener('click', () => showStep(1));
-        document.getElementById('next-2').addEventListener('click', () => {
-          if (!validateStep(2)) return;
-          maxStepAllowed = Math.max(maxStepAllowed, 3);
-          showStep(3);
-        });
-        document.getElementById('back-3').addEventListener('click', () => showStep(2));
-        document.getElementById('next-3').addEventListener('click', () => {
-          if (!validateStep(3)) return;
-          maxStepAllowed = Math.max(maxStepAllowed, 4);
-          showStep(4);
-        });
-        document.getElementById('back-4').addEventListener('click', () => showStep(3));
-
-        // Toggle billing address and credit card fields
-        const sameAsShipping = document.getElementById('same_as_shipping');
-        const billingSection = document.getElementById('billing-section');
-        sameAsShipping.addEventListener('change', () => {
-          billingSection.style.display = sameAsShipping.checked ? 'none' : 'block';
-        });
-        const paymentMethod = document.getElementById('payment_method');
-        const creditCardFields = document.getElementById('credit_card_fields');
-        paymentMethod.addEventListener('change', () => {
-          creditCardFields.style.display = paymentMethod.value === 'credit_card' ? 'block' : 'none';
-        });
+  </div>
 
 
-        // --- Dynamic Location API Integration ---
+  <?php include '../../PHP/components/footer.php'; ?>
+
+  <script src="/src/assets/js/currency-language.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /**********************
+       * Global Variables for Tax & Shipping
+       **********************/
+      let currentTaxRate = 0;
+      let currentShippingCost = 0;
+      let isUsingSavedAddress = false;
+      window.savedAddress = <?php echo json_encode($defaultAddress); ?>;
+
+      /**********************
+       * Helper Functions
+       **********************/
+
+      // Convert USD to current currency without formatting
+      function convertUsdToCurrent(usdAmount) {
+        return usdAmount * getCurrentRate();
+      }
+
+      // Recalculate and update all totals and displayed prices
+      function updateTotal() {
+        const cartItems = getStorage('<?= CART_KEY ?>') || [];
+        const subtotalUSD = cartItems.reduce((acc, item) => acc + (item.numericPrice * item.quantity), 0);
+        const discountUSD = parseFloat(document.getElementById('checkoutDiscount').dataset.usd || 0);
+        const shippingUSD = currentShippingCost;
+        const taxUSD = subtotalUSD * currentTaxRate;
+        const totalConverted = subtotalUSD - discountUSD + shippingUSD + taxUSD;
+
+        // Update displayed values with formatted prices
+        document.getElementById('checkoutSubtotal').textContent = convertAndFormatPrice(subtotalUSD);
+        document.getElementById('checkoutDiscount').textContent = `-${convertAndFormatPrice(discountUSD)}`;
+        document.getElementById('checkoutShipping').textContent = convertAndFormatPrice(shippingUSD);
+        document.getElementById('checkoutTax').textContent = convertAndFormatPrice(taxUSD);
+        document.getElementById('checkoutTotal').textContent = convertAndFormatPrice(totalConverted);
+      }
+
+      
+
+      // Enhanced address handling with async/await
+      async function applySavedAddress() {
+        if (!savedAddress) return;
+
+        isUsingSavedAddress = true;
         const countrySelect = document.getElementById('country');
         const stateSelect = document.getElementById('state');
         const citySelect = document.getElementById('city');
-        const zipInput = document.getElementById('zip');
 
-        // When country changes, fetch states from CountriesNow API
-        countrySelect.addEventListener('change', () => {
-          const countryName = countrySelect.value;
-          // Reset state & city dropdowns
-          stateSelect.innerHTML = '<option value="">Select State</option>';
-          stateSelect.disabled = true;
-          citySelect.innerHTML = '<option value="">Select City</option>';
-          citySelect.disabled = true;
-          if (!countryName) return;
-          fetch('https://countriesnow.space/api/v0.1/countries/states', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                country: countryName
-              })
-            })
-            .then(res => res.json())
-            .then(data => {
-              if (data.error) {
-                showNotification('States not found for ' + countryName, true);
-              } else {
-                data.data.states.forEach(state => {
-                  const option = document.createElement('option');
-                  option.value = state.name;
-                  option.textContent = state.name;
-                  stateSelect.appendChild(option);
-                });
-                stateSelect.disabled = false;
-              }
-            })
-            .catch(err => {
-              console.error(err);
-              showNotification('Error fetching states.', true);
-            });
+        // Set country and wait for states to load
+        countrySelect.value = savedAddress.country;
+        await new Promise(resolve => {
+          countrySelect.dispatchEvent(new Event('change'));
+          setTimeout(resolve, 1000); // Allow time for API response
         });
 
-        // When state changes, fetch cities from CountriesNow API
-        stateSelect.addEventListener('change', () => {
-          const countryName = countrySelect.value;
-          const stateName = stateSelect.value;
-          citySelect.innerHTML = '<option value="">Select City</option>';
-          citySelect.disabled = true;
-          if (!stateName) return;
-          fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                country: countryName,
-                state: stateName
-              })
-            })
-            .then(res => res.json())
-            .then(data => {
-              if (data.error) {
-                showNotification('Cities not found for ' + stateName, true);
-              } else {
-                data.data.forEach(city => {
-                  const option = document.createElement('option');
-                  option.value = city;
-                  option.textContent = city;
-                  citySelect.appendChild(option);
-                });
-                citySelect.disabled = false;
-              }
-            })
-            .catch(err => {
-              console.error(err);
-              showNotification('Error fetching cities.', true);
-            });
-        });
+        // Set state and wait for cities to load
+        if (savedAddress.state) {
+          stateSelect.value = savedAddress.state;
+          await new Promise(resolve => {
+            stateSelect.dispatchEvent(new Event('change'));
+            setTimeout(resolve, 1000); // Allow time for API response
+          });
+        }
 
-        // When ZIP code is entered, attempt to auto-fill state and city using Zippopotam.us
-        zipInput.addEventListener('blur', () => {
-          const zipCode = zipInput.value.trim();
-          if (!zipCode) return;
-          // Get the ISO country code from the selected country option
-          const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-          const countryCode = selectedOption.getAttribute('data-code');
-          if (!countryCode) return;
-          fetch('https://api.zippopotam.us/' + countryCode + '/' + zipCode)
-            .then(res => {
-              if (!res.ok) throw new Error('No data for ZIP code');
-              return res.json();
-            })
-            .then(data => {
-              const place = data.places[0];
-              if (place['state'] && stateSelect.options.length > 1) {
-                for (let i = 0; i < stateSelect.options.length; i++) {
-                  if (stateSelect.options[i].textContent.toLowerCase() === place['state'].toLowerCase()) {
-                    stateSelect.selectedIndex = i;
-                    stateSelect.dispatchEvent(new Event('change'));
-                    break;
-                  }
+        // Set city
+        if (savedAddress.city) {
+          citySelect.value = savedAddress.city;
+        }
+
+        // Set remaining fields
+        document.getElementById('address').value = savedAddress.address1 +
+          (savedAddress.address2 ? ', ' + savedAddress.address2 : '');
+        document.getElementById('zip').value = savedAddress.zip;
+
+        // Temporarily disable zip code lookup
+        setTimeout(() => {
+          isUsingSavedAddress = false;
+        }, 3000);
+      }
+
+
+      /**********************
+       * Save/Load Form Data (with Summary)
+       **********************/
+      function saveFormData() {
+        const formData = {};
+        document.querySelectorAll('#multiStepForm input, #multiStepForm select, #multiStepForm textarea').forEach(el => {
+          formData[el.id] = (el.type === 'checkbox') ? el.checked : el.value;
+        });
+        const activeStep = document.querySelector('.step.active');
+        if (activeStep) {
+          formData.currentStep = activeStep.id.split('-')[1];
+        }
+        // Save current summary values
+        formData.discount = parseFloat(document.getElementById('checkoutDiscount').textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        formData.shipping = parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        formData.tax = parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        localStorage.setItem('checkoutFormData', JSON.stringify(formData));
+      }
+
+      function loadFormData() {
+        const storedData = localStorage.getItem('checkoutFormData');
+        if (storedData) {
+          try {
+            const formData = JSON.parse(storedData);
+            document.querySelectorAll('#multiStepForm input, #multiStepForm select, #multiStepForm textarea')
+              .forEach(el => {
+                if (el.type === 'checkbox') {
+                  el.checked = (formData[el.id] !== undefined) ? formData[el.id] : false;
+                } else {
+                  el.value = (formData[el.id] !== undefined) ? formData[el.id] : '';
                 }
-              }
-              if (place['place name'] && citySelect.options.length > 1) {
-                setTimeout(() => {
-                  for (let i = 0; i < citySelect.options.length; i++) {
-                    if (citySelect.options[i].textContent.toLowerCase() === place['place name'].toLowerCase()) {
-                      citySelect.selectedIndex = i;
-                      break;
-                    }
-                  }
-                }, 500);
-              }
-            })
-            .catch(err => {
-              console.error(err);
-              // ZIP code lookup failure is non-critical
-            });
-        });
+              });
 
-        const cartItemss = getStorage('<?= CART_KEY ?>') || [];
-        console.log('Cart Items:', cartItemss);
-
-        // Get references to the containers
-        const checkoutWrapper = document.getElementById('checkout-wrapper');
-        const emptyCartMessage = document.getElementById('empty-cart');
-
-        // Check if the cart is empty
-        if (cartItemss.length === 0) {
-          if (checkoutWrapper) checkoutWrapper.style.display = 'none';
-          if (emptyCartMessage) emptyCartMessage.style.display = 'block';
-        } else {
-          if (emptyCartMessage) emptyCartMessage.style.display = 'none';
-          if (checkoutWrapper) checkoutWrapper.style.display = 'grid';
-        }
-
-        // Dynamic Product Summary (using your original cart logic)
-        const cartItems = getStorage('<?= CART_KEY ?>') || [];
-        const checkoutItems = document.getElementById('checkoutItems');
-        let subtotal = 0;
-        checkoutItems.innerHTML = cartItems.map(item => {
-          const itemTotal = item.numericPrice * item.quantity;
-          subtotal += itemTotal;
-          return `
-          <div class="checkout-item">
-            <img src="${item.image}" alt="${item.name}">
-            <div class="items-details">
-              <h3>${item.brand} ${item.name}</h3>
-              <p>Ref: ${item.ref_code}</p>
-              <p>${convertAndFormatPrice(item.numericPrice)} × ${item.quantity}</p>
-            </div>
-          </div>
-        `;
-        }).join('');
-
-        document.getElementById('checkoutSubtotal').textContent = convertAndFormatPrice(subtotal);
-        const shippingCost = 5;
-        document.getElementById('checkoutShipping').textContent = convertAndFormatPrice(shippingCost);
-        let discount = 0;
-        document.getElementById('checkoutDiscount').textContent = '-' + convertAndFormatPrice(discount);
-        let tax = 0.08 * (subtotal - discount);
-        document.getElementById('checkoutTax').textContent = convertAndFormatPrice(tax);
-        let total = subtotal - discount + shippingCost + tax;
-        document.getElementById('checkoutTotal').textContent = convertAndFormatPrice(total);
-
-        // Coupon Application
-        document.getElementById('applyCoupon').addEventListener('click', () => {
-          const couponInput = document.getElementById('promo_code').value.trim();
-          if (couponInput === 'SAVE10') {
-            discount = subtotal * 0.10;
-            document.getElementById('checkoutDiscount').textContent = '-' + convertAndFormatPrice(discount);
-            tax = 0.08 * (subtotal - discount);
-            document.getElementById('checkoutTax').textContent = convertAndFormatPrice(tax);
-            total = subtotal - discount + shippingCost + tax;
-            document.getElementById('checkoutTotal').textContent = convertAndFormatPrice(total);
-            showNotification('Coupon applied successfully!');
-          } else {
-            showNotification('Invalid coupon code.', true);
-          }
-        });
-
-        // Prevent Enter from triggering form submission if not in a textarea
-        document.getElementById('multiStepForm').addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-            const activeStep = document.querySelector('.step.active');
-            if (activeStep && activeStep.id !== 'step-4') {
-              e.preventDefault();
-              const nextButton = activeStep.querySelector('button[id^="next-"]');
-              if (nextButton) {
-                nextButton.click();
-              }
+            // Restore active step if saved
+            if (formData.currentStep) {
+              showStep(formData.currentStep);
             }
-          }
-        });
 
-        // Final form submission – Fake Payment Gateway Integration
-        document.getElementById('multiStepForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          const formData = {
-            cart: getStorage('<?= CART_KEY ?>'),
-            customer: {
-              firstName: document.getElementById('first_name').value,
-              lastName: document.getElementById('last_name').value,
-              email: document.getElementById('email').value,
-              phone: document.getElementById('phone').value,
-              company: document.getElementById('company').value,
-              country: document.getElementById('country').value,
-              state: document.getElementById('state').value,
-              city: document.getElementById('city').value,
-              address: document.getElementById('address').value,
-              zip: document.getElementById('zip').value,
-              coupon: document.getElementById('promo_code').value,
-              orderNotes: document.getElementById('order_notes').value,
-              billing: {
-                sameAsShipping: document.getElementById('same_as_shipping').checked,
-                address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
-                city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
-                zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
-                country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
-              },
-              paymentMethod: document.getElementById('payment_method').value
+            if (formData.discount !== undefined) {
+              document.getElementById('checkoutDiscount').textContent = '-' + convertAndFormatPrice(formData.discount);
             }
-          };
-
-          // Simulate payment processing delay
-          const cardNumber = document.getElementById('card_number').value.trim();
-          setTimeout(() => {
-            if (cardNumber === "4242424242424242") {
-              const fakeTransactionId = "TXN" + Date.now();
-              // Call backend to save transaction details and remove from wishlist if needed.
-              fetch('/app/controllers/saveTransaction.php', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    transactionData: formData,
-                    transaction_id: fakeTransactionId,
-                    payment_status: 'success'
-                  })
-                })
-                .then(res => res.json())
-                .then(response => {
-                  if (response.success) {
-                    setStorage('<?= CART_KEY ?>', []);
-                    // Redirect to order tracking page
-                    window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
-                  } else {
-                    alert('Error saving transaction. Please try again.');
-                  }
-                });
+            // Instead of restoring shipping/tax values directly, check if a country is selected.
+            if (document.getElementById('country').value) {
+              // Recalculate shipping/tax based on country selection.
+              const selectedOption = document.getElementById('country').options[document.getElementById('country').selectedIndex];
+              const countryCode = selectedOption.getAttribute('data-code');
+              if (countryCode) {
+                calculateShippingAndTax(countryCode);
+              } else {
+                currentShippingCost = 0;
+                currentTaxRate = 0;
+                document.getElementById('checkoutShipping').textContent = convertAndFormatPrice(0);
+                document.getElementById('checkoutTax').textContent = convertAndFormatPrice(0);
+              }
             } else {
-              alert("Payment failed. Please check your card details.");
+              // No country selected, force shipping and tax to 0.
+              currentShippingCost = 0;
+              currentTaxRate = 0;
+              document.getElementById('checkoutShipping').textContent = convertAndFormatPrice(0);
+              document.getElementById('checkoutTax').textContent = convertAndFormatPrice(0);
             }
-          }, 1000);
-        });
+            updateTotal();
 
-        const checkoutShipping = document.getElementById('checkoutShipping');
-        const checkoutTax = document.getElementById('checkoutTax');
-        const checkoutTotal = document.getElementById('checkoutTotal');
-
-        // Function to calculate shipping and tax rates
-        function calculateShippingAndTax(countryCode) {
-          let shippingCost = 0;
-          let taxRate = 0;
-
-          switch (countryCode) {
-            case 'US':
-              shippingCost = 5;
-              taxRate = 0.07;
-              break;
-            case 'GB':
-              shippingCost = 10;
-              taxRate = 0.20;
-              break;
-            case 'CH':
-              shippingCost = 15;
-              taxRate = 0.08;
-              break;
-            case 'IN':
-              shippingCost = 20;
-              taxRate = 0.18;
-              break;
-            default:
-              shippingCost = 25;
-              taxRate = 0.10;
+          } catch (e) {
+            console.error("Error loading form data", e);
+            localStorage.removeItem('checkoutFormData');
           }
-
-          checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
-          const subtotal = parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, ""));
-          const discount = parseFloat(document.getElementById('checkoutDiscount').textContent.replace(/[^0-9.-]+/g, ""));
-          const tax = taxRate * (subtotal - discount);
-          checkoutTax.textContent = convertAndFormatPrice(tax);
-          const total = subtotal - discount + shippingCost + tax;
-          checkoutTotal.textContent = convertAndFormatPrice(total);
         }
+      }
 
-        countrySelect.addEventListener('change', () => {
-          const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-          const countryCode = selectedOption.getAttribute('data-code');
-          if (countryCode) {
-            calculateShippingAndTax(countryCode);
+      /**********************
+       * Luhn Algorithm & Expiry Check
+       **********************/
+      function luhnCheck(cardNumber) {
+        let sum = 0,
+          shouldDouble = false;
+        for (let i = cardNumber.length - 1; i >= 0; i--) {
+          let digit = parseInt(cardNumber.charAt(i), 10);
+          if (shouldDouble) {
+            digit *= 2;
+            if (digit > 9) digit -= 9;
+          }
+          sum += digit;
+          shouldDouble = !shouldDouble;
+        }
+        return sum % 10 === 0;
+      }
+
+      function isValidExpiry(expDate) {
+        if (!expDate) return false;
+        let [year, month] = expDate.split('-').map(Number);
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+        if (year < currentYear) return false;
+        if (year === currentYear && month < currentMonth) return false;
+        return true;
+      }
+
+      /**********************
+       * Form Navigation
+       **********************/
+      let maxStepAllowed = 1;
+
+      function validateStep(stepNumber) {
+        const step = document.getElementById('step-' + stepNumber);
+        const requiredElements = step.querySelectorAll('input[required], select[required], textarea[required]');
+        let valid = true;
+        requiredElements.forEach(input => {
+          if (!input.checkValidity()) {
+            input.reportValidity();
+            valid = false;
+          }
+        });
+        return valid;
+      }
+
+      function showStep(stepNumber) {
+        document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+        document.getElementById('step-' + stepNumber).classList.add('active');
+        document.querySelectorAll('.checkout-nav li').forEach(item => {
+          item.classList.toggle('active', item.getAttribute('data-step') === stepNumber.toString());
+        });
+        saveFormData();
+      }
+      document.querySelectorAll('.checkout-nav li').forEach(item => {
+        item.addEventListener('click', () => {
+          const step = parseInt(item.getAttribute('data-step'));
+          if (step <= maxStepAllowed) {
+            showStep(step);
+          } else {
+            showNotification('Please complete previous steps first.');
           }
         });
       });
-    </script>
-    <!-- Additional JS Files -->
-    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
-    <script src="/src/assets/js/index.js" async></script>
-    <script src="/src/assets/js/currency-language.js" async></script>
-    <script src="/src/assets/js/cookie-monitor.js" async></script>
-    <script src="/src/assets/js/imagePreview.js" async></script>
+      document.getElementById('next-1').addEventListener('click', () => {
+        if (!validateStep(1)) return;
+        maxStepAllowed = Math.max(maxStepAllowed, 2);
+        showStep(2);
+      });
+      document.getElementById('back-2').addEventListener('click', () => showStep(1));
+      document.getElementById('next-2').addEventListener('click', () => {
+        if (!validateStep(2)) return;
+        maxStepAllowed = Math.max(maxStepAllowed, 3);
+        showStep(3);
+      });
+      document.getElementById('back-3').addEventListener('click', () => showStep(2));
+      document.getElementById('next-3').addEventListener('click', () => {
+        if (!validateStep(3)) return;
+        maxStepAllowed = Math.max(maxStepAllowed, 4);
+        showStep(4);
+      });
+      document.getElementById('back-4').addEventListener('click', () => showStep(3));
+
+      /**********************
+       * Toggle Fields
+       **********************/
+      const sameAsShipping = document.getElementById('same_as_shipping');
+      const billingSection = document.getElementById('billing-section');
+      sameAsShipping.addEventListener('change', () => {
+        billingSection.style.display = sameAsShipping.checked ? 'none' : 'block';
+        saveFormData();
+      });
+      const paymentMethod = document.getElementById('payment_method');
+      const creditCardFields = document.getElementById('credit_card_fields');
+      paymentMethod.addEventListener('change', () => {
+        creditCardFields.style.display = paymentMethod.value === 'credit_card' ? 'block' : 'none';
+        saveFormData();
+      });
+
+      /**********************
+       * Dynamic Location API Integration
+       **********************/
+      const countrySelect = document.getElementById('country');
+      const stateSelect = document.getElementById('state');
+      const citySelect = document.getElementById('city');
+      const zipInput = document.getElementById('zip');
+
+      countrySelect.addEventListener('change', () => {
+        const countryName = countrySelect.value;
+        stateSelect.innerHTML = '<option value="">Select State</option>';
+        stateSelect.disabled = true;
+        citySelect.innerHTML = '<option value="">Select City</option>';
+        citySelect.disabled = true;
+        if (!countryName) return;
+        fetch('https://countriesnow.space/api/v0.1/countries/states', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              country: countryName
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.error) {
+              showNotification('States not found for ' + countryName, true);
+            } else {
+              data.data.states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.name;
+                option.textContent = state.name;
+                stateSelect.appendChild(option);
+              });
+              stateSelect.disabled = false;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            showNotification('Error fetching states.', true);
+          });
+      });
+
+      stateSelect.addEventListener('change', () => {
+        const countryName = countrySelect.value;
+        const stateName = stateSelect.value;
+        citySelect.innerHTML = '<option value="">Select City</option>';
+        citySelect.disabled = true;
+        if (!stateName) return;
+        fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              country: countryName,
+              state: stateName
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.error) {
+              showNotification('Cities not found for ' + stateName, true);
+            } else {
+              data.data.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+              });
+              citySelect.disabled = false;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            showNotification('Error fetching cities.', true);
+          });
+      });
+
+      
+
+      /**********************
+       * Cart & Order Summary Logic
+       **********************/
+      // Retrieve cart items using a literal key for consistency
+      const cartItemss = getStorage('<?= CART_KEY ?>') || [];
+      console.log('Cart Items:', cartItemss);
+      const checkoutWrapper = document.getElementById('checkout-wrapper');
+      const emptyCartMessage = document.getElementById('empty-cart');
+      if (cartItemss.length === 0) {
+        if (checkoutWrapper) checkoutWrapper.style.display = 'none';
+        if (emptyCartMessage) emptyCartMessage.style.display = 'block';
+      } else {
+        if (emptyCartMessage) emptyCartMessage.style.display = 'none';
+        if (checkoutWrapper) checkoutWrapper.style.display = 'grid';
+      }
+      const checkoutItems = document.getElementById('checkoutItems');
+      let subtotal = 0;
+      checkoutItems.innerHTML = cartItemss.map(item => {
+        const itemTotal = item.numericPrice * item.quantity;
+        subtotal += itemTotal;
+        return `
+      <div class="checkout-item">
+      <img src="${item.image}" alt="${item.name}">
+      <div class="items-details">
+        <h3>${item.brand} ${item.name}</h3>
+        <p>Ref: ${item.ref_code}</p>
+        <p>${item.quantity} x ${convertAndFormatPrice(item.numericPrice)}</p>
+        <input type="hidden" class="item-quantity" data-id="${item.id}" value="${item.quantity}" min="1">
+      </div>
+    </div>
+  `;
+      }).join('');
+      document.getElementById('checkoutSubtotal').textContent = convertAndFormatPrice(subtotal);
+
+
+      // If no country is selected, force shipping and tax to 0
+      if (document.getElementById('country').value === '') {
+        currentShippingCost = 0;
+        currentTaxRate = 0;
+        document.getElementById('checkoutShipping').textContent = convertAndFormatPrice(0);
+        document.getElementById('checkoutTax').textContent = convertAndFormatPrice(0);
+        document.getElementById('checkoutDiscount').textContent = '-' + convertAndFormatPrice(0);
+        updateTotal();
+      }
+
+      /**********************
+       * Coupon Application
+       **********************/
+      document.getElementById('applyCoupon').addEventListener('click', () => {
+        const couponInput = document.getElementById('promo_code').value.trim();
+        const cartItems = getStorage('<?= CART_KEY ?>') || [];
+        if (couponInput === 'SAVE10') {
+          const subtotalUSD = cartItems.reduce((acc, item) => acc + (item.numericPrice * item.quantity), 0);
+          const discountUSD = subtotalUSD * 0.10; // 10% discount
+          document.getElementById('checkoutDiscount').dataset.usd = discountUSD;
+          document.getElementById('checkoutDiscount').textContent = `-${convertAndFormatPrice(discountUSD)}`;
+          showNotification('Coupon applied successfully!');
+          updateTotal();
+          saveFormData();
+        } else {
+          showNotification('Invalid coupon code.', true);
+        }
+      });
+
+      /**********************
+       * Prevent Enter Key from Submitting Form Early
+       **********************/
+      document.getElementById('multiStepForm').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+          const activeStep = document.querySelector('.step.active');
+          if (activeStep && activeStep.id !== 'step-4') {
+            e.preventDefault();
+            const nextButton = activeStep.querySelector('button[id^="next-"]');
+            if (nextButton) {
+              nextButton.click();
+            }
+          }
+        }
+      });
+
+      /**********************
+       * Credit Card Input Formatting
+       **********************/
+      const cardNumberInput = document.getElementById('card_number');
+      if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', (e) => {
+          let value = e.target.value;
+          value = value.replace(/\D/g, '');
+          value = value.substring(0, 16);
+          const parts = [];
+          for (let i = 0; i < value.length; i += 4) {
+            parts.push(value.substring(i, i + 4));
+          }
+          e.target.value = parts.join(' ');
+        });
+      }
+
+      /**********************
+       * Final Form Submission – Payment Verification & Order Confirmation
+       **********************/
+      document.getElementById('multiStepForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveFormData();
+
+        // Show the loading spinner
+        document.getElementById('loading-spinner').style.display = 'flex';
+
+        const checkoutTotalElement = document.getElementById('checkoutTotal');
+
+        // Extract the numeric value from the element's text content
+        const totalConverted = parseFloat(checkoutTotalElement.textContent.replace(/[^0-9.-]+/g, ""));
+
+        // Update the element's text content using your conversion/formatting function
+        checkoutTotalElement.textContent = convertAndFormatPrice(totalConverted);
+
+
+        // Gather form data
+        const formData = {
+          cart: getStorage(CART_KEY),
+          customer: {
+            firstName: document.getElementById('first_name').value,
+            lastName: document.getElementById('last_name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            company: document.getElementById('company').value,
+            country: document.getElementById('country').value,
+            state: document.getElementById('state').value,
+            city: document.getElementById('city').value,
+            address: document.getElementById('address').value,
+            zip: document.getElementById('zip').value,
+            coupon: document.getElementById('promo_code').value,
+            orderNotes: document.getElementById('order_notes').value,
+            billing: {
+              sameAsShipping: document.getElementById('same_as_shipping').checked,
+              address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
+              city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
+              zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
+              country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
+            },
+            paymentMethod: document.getElementById('payment_method').value
+          },
+          total_amount: totalConverted,
+          checkoutSubtotal: parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutShipping: parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutTax: parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutDiscount: parseFloat(document.getElementById('checkoutDiscount').dataset.usd) || 0,
+          currency: getCurrentCurrency()
+        };
+
+        if (formData.customer.paymentMethod === 'credit_card') {
+          const rawCardNumber = document.getElementById('card_number').value;
+          const cardNumber = rawCardNumber.replace(/\s+/g, '');
+          const expDate = document.getElementById('exp_date').value;
+          const cvc = document.getElementById('cvc').value.trim();
+          if (cardNumber.length !== 16) {
+            showNotification('Card number must be 16 digits.', true);
+            return;
+          }
+          if (!luhnCheck(cardNumber)) {
+            showNotification('Invalid credit card number.', true);
+            return;
+          }
+          if (!isValidExpiry(expDate)) {
+            showNotification('Credit card is expired or expiry date is invalid.', true);
+            return;
+          }
+          if (!/^\d{3}$/.test(cvc)) {
+            showNotification('CVC must be 3 digits.', true);
+            return;
+          }
+          formData.customer.cardNumber = cardNumber;
+          formData.customer.expDate = expDate;
+          formData.customer.cvc = cvc;
+        }
+
+        setTimeout(() => {
+          if (formData.customer.paymentMethod === 'credit_card' && formData.customer.cardNumber === "4242424242424242") {
+            const fakeTransactionId = "TXN" + Date.now();
+            fetch('/app/controllers/saveTransaction.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  transactionData: formData,
+                  transaction_id: fakeTransactionId,
+                  payment_status: 'success'
+                })
+              })
+              .then(res => res.json())
+              .then(response => {
+                if (response.success) {
+                  document.getElementById('loading-spinner').style.display = 'none';
+                  fetch('/app/controllers/payment_processor.php', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        transactionData: formData,
+                        paymentToken: "dummy_token",
+                        transaction_id: fakeTransactionId
+                      })
+                    })
+                    .then(emailRes => emailRes.json())
+                    .then(emailResponse => {
+                      if (emailResponse.success) {
+                        setStorage('<?= CART_KEY ?>', []);
+                        localStorage.removeItem('checkoutFormData');
+                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                        document.getElementById('loading-spinner').style.display = 'none';
+                      } else {
+                        showNotification('Order processed but failed to send confirmation email.', true);
+                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                        document.getElementById('loading-spinner').style.display = 'none';
+                      }
+                    });
+                } else {
+                  showNotification('Error saving transaction. Please try again.', true);
+                }
+              });
+          } else if (formData.customer.paymentMethod !== 'credit_card') {
+            showNotification('Payment method not supported yet.', true);
+            document.getElementById('loading-spinner').style.display = 'none';
+          } else {
+            showNotification('Payment failed. Please check your card details.', true);
+            document.getElementById('loading-spinner').style.display = 'none';
+          }
+        }, 1000);
+      });
+
+
+      /**********************
+       * Shipping & Tax Calculation (Using Global Tax Rate)
+       **********************/
+      const checkoutShipping = document.getElementById('checkoutShipping');
+      const checkoutTax = document.getElementById('checkoutTax');
+      const checkoutTotal = document.getElementById('checkoutTotal');
+
+      function calculateShippingAndTax(countryCode) {
+        let shippingCost = 0;
+        let taxRate = 0;
+        switch (countryCode) {
+          case 'US':
+            shippingCost = 5;
+            taxRate = 0.07;
+            break;
+          case 'GB':
+            shippingCost = 10;
+            taxRate = 0.20;
+            break;
+          case 'CH':
+            shippingCost = 15;
+            taxRate = 0.08;
+            break;
+          case 'IN':
+            shippingCost = 20;
+            taxRate = 0.18;
+            break;
+          default:
+            shippingCost = 0;
+            taxRate = 0;
+            break;
+        }
+        currentShippingCost = shippingCost;
+        currentTaxRate = taxRate;
+        checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
+        updateTotal();
+      }
+      countrySelect.addEventListener('change', () => {
+        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+        const countryCode = selectedOption.getAttribute('data-code');
+        if (countryCode) {
+          calculateShippingAndTax(countryCode);
+        }
+      });
+
+      /**********************
+       * Persist form data on every input change & initial load
+       **********************/
+      document.getElementById('multiStepForm').addEventListener('input', saveFormData);
+      loadFormData();
+
+      document.querySelectorAll('.item-quantity').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const itemId = e.target.dataset.id;
+          const newQuantity = parseInt(e.target.value);
+          if (newQuantity < 1) {
+            e.target.value = 1;
+            return;
+          }
+
+          // Update the cart item quantity
+          const cartItems = getStorage('<?= CART_KEY ?>') || [];
+          const itemIndex = cartItems.findIndex(item => item.id === itemId);
+          if (itemIndex !== -1) {
+            cartItems[itemIndex].quantity = newQuantity;
+            setStorage('<?= CART_KEY ?>', cartItems);
+            updateTotal();
+          }
+        });
+      });
+
+      const useSavedBtn = document.getElementById('useSavedAddress');
+      if (useSavedBtn) {
+        useSavedBtn.addEventListener('click', applySavedAddress);
+      }
+    });
+  </script>
+
+
+  <!-- Additional JS Files -->
+
+  <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+  <script src="/src/assets/js/index.js" async></script>
+  <script src="/src/assets/js/currency-language.js" async></script>
+  <script src="/src/assets/js/cookie-monitor.js" async></script>
+  <script src="/src/assets/js/imagePreview.js" async></script>
 </body>
 
 </html>

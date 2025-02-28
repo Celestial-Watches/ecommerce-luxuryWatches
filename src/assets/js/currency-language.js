@@ -299,4 +299,40 @@
             translateHeader.style.display = 'none';
         }
     }
+
+    function getCurrentCurrency() {
+        const savedCurrencyData = localStorage.getItem('selectedCurrencyData');
+        if (savedCurrencyData) {
+            const decryptedData = decryptData(savedCurrencyData);
+            return decryptedData.currency;
+        }
+        return 'usd'; // Default currency
+    }
+
+    function getCurrentRate() {
+        const rates = JSON.parse(localStorage.getItem('conversionRates')) || { USD: 1 };
+        const currency = getCurrentCurrency().toUpperCase();
+        return rates[currency] || 1;
+    }
+
+    function convertAndFormatPrice(usdPrice) {
+        if (usdPrice === null || isNaN(usdPrice)) {
+            return 'ON REQUEST';
+        }
+
+        const currency = getCurrentCurrency();
+        const rate = getCurrentRate();
+        const convertedPrice = usdPrice * rate;
+        const symbol = currencySymbols[currency.toLowerCase()] || '$';
+
+        return symbol + ' ' + new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(convertedPrice);
+    }
+
+    window.getCurrentCurrency = getCurrentCurrency;
+    window.getCurrentRate = getCurrentRate;
+    window.convertAndFormatPrice = convertAndFormatPrice;
+    window.currencySymbols = currencySymbols;
 })();

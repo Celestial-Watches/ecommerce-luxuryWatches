@@ -60,193 +60,190 @@ if ($result) {
 
 
     <style>
-        /* Container */
-        .TranContainer {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .TranContainer h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 40px;
-            font-weight: 600;
-            color: #222;
-        }
-
-        /* Filter Dropdown */
-        .filter-TranContainer {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .filter-TranContainer select {
-            padding: 12px 20px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #f9f9f9;
-            outline: none;
-            transition: border-color 0.3s ease;
-            appearance: none;
-        }
-
-        .filter-TranContainer select:focus {
-            border-color: #ff6666;
-        }
-
-        /* Cards Grid */
-        .transaction-cardTranss {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* Card Styling */
-        .cardTrans {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .cardTrans:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .cardTrans-header {
-            background: linear-gradient(135deg, #ff6666, #ff9a9e);
-            padding: 20px;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cardTrans-header h3 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: 600;
-        }
-
-        .cardTrans-header span {
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .cardTrans-body {
-            padding: 20px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .cardTrans-body p {
-            margin-bottom: 12px;
-            font-size: 16px;
-            color: #555;
-        }
-
-        .cardTrans-footer {
-            padding: 15px 20px;
-            display: flex;
-            justify-content: flex-end;
-            background: #fafafa;
-        }
-
-        .Transbtn {
-            padding: 10px 20px;
-            background: #222;
-            color: #fff;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: background 0.3s ease;
-        }
-
-        .Transbtn:hover {
-            background: #444;
-        }
-
-        @media (max-width: 768px) {
-            .TranContainer h1 {
-                font-size: 32px;
-            }
-
-            .cardTrans-header h3 {
-                font-size: 20px;
-            }
-
-            .cardTrans-body p {
-                font-size: 14px;
-            }
-        }
-    </style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Container */
+    .TranContainer {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .TranContainer h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+      font-weight: 600;
+      color: #222;
+    }
+    
+    /* Filter Dropdown */
+    .filter-TranContainer {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .filter-TranContainer select {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .filter-TranContainer select:focus {
+      border-color: #a29bfe;
+    }
+    
+    /* Cards Grid */
+    .transaction-cardTranss {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    /* Card Styling */
+    .cardTrans {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cardTrans:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+    .cardTrans-header {
+      padding: 20px;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .cardTrans-header h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+    .cardTrans-header span {
+      font-size: 14px;
+      color: #777;
+    }
+    .cardTrans-body {
+      padding: 20px;
+    }
+    .cardTrans-body p {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #555;
+    }
+    .cardTrans-footer {
+      padding: 15px 20px;
+      background: #fafafa;
+      display: flex;
+      justify-content: flex-end;
+      border-top: 1px solid #e0e0e0;
+    }
+    .Transbtn {
+      padding: 10px 20px;
+      background: #222;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: background 0.3s ease;
+    }
+    .Transbtn:hover {
+      background: #444;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .TranContainer h1 {
+        font-size: 28px;
+      }
+      .cardTrans-header h3 {
+        font-size: 18px;
+      }
+      .cardTrans-body p {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <?php include '../../PHP/components/navbar.php'; ?>
-    <div class="TranContainer">
-        <h1>Transaction History</h1>
-        <div class="filter-TranContainer">
-            <select id="order-filter">
-                <option value="">All Orders</option>
-                <option value="pending">Pending</option>
-                <option value="processing">Processing</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-            </select>
-        </div>
-        <?php if (empty($transactions)): ?>
-            <p style="text-align:center; font-size: 18px;">You haven't made any purchases yet.</p>
-        <?php else: ?>
-            <div class="transaction-cardTranss" id="transactionCardTranss">
-                <?php foreach ($transactions as $tx): ?>
-                    <div class="cardTrans" data-status="<?= htmlspecialchars(strtolower($tx['order_status'])) ?>">
-                        <div class="cardTrans-header">
-                            <h3>Order #<?= htmlspecialchars($tx['transaction_id']) ?></h3>
-                            <span><?= date("d M Y", strtotime($tx['created_at'])) ?></span>
-                        </div>
-                        <div class="cardTrans-body">
-                            <p><strong>Total:</strong> $<?= number_format($tx['total_amount'], 2) ?></p>
-                            <p><strong>Status:</strong> <?= htmlspecialchars($tx['order_status']) ?></p>
-                        </div>
-                        <div class="cardTrans-footer">
-                            <a class="Transbtn" href="order-tracking.php?transaction_id=<?= urlencode($tx['transaction_id']) ?>">Track Order</a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+  <?php include '../../PHP/components/navbar.php'; ?>
+  <div class="TranContainer">
+    <h1>Transaction History</h1>
+    <div class="filter-TranContainer">
+      <select id="order-filter">
+        <option value="">All Orders</option>
+        <option value="pending">Pending</option>
+        <option value="processing">Processing</option>
+        <option value="completed">Completed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
     </div>
-    <?php include '../../PHP/components/footer.php'; ?>
+    <?php if (empty($transactions)): ?>
+      <p style="text-align:center; font-size: 18px;">You haven't made any purchases yet.</p>
+    <?php else: ?>
+      <div class="transaction-cardTranss" id="transactionCardTranss">
+        <?php foreach ($transactions as $tx): ?>
+          <div class="cardTrans" data-status="<?= htmlspecialchars(strtolower($tx['order_status'])) ?>">
+            <div class="cardTrans-header">
+              <h3>Order #<?= htmlspecialchars($tx['transaction_id']) ?></h3>
+              <span><?= date("d M Y", strtotime($tx['created_at'])) ?></span>
+            </div>
+            <div class="cardTrans-body">
+              <p><strong>Total:</strong> $<?= number_format($tx['total_amount'], 2) ?></p>
+              <p><strong>Status:</strong> <?= htmlspecialchars($tx['order_status']) ?></p>
+            </div>
+            <div class="cardTrans-footer">
+              <a class="Transbtn" href="order-tracking.php?transaction_id=<?= urlencode($tx['transaction_id']) ?>">Track Order</a>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+  </div>
+  <?php include '../../PHP/components/footer.php'; ?>
 
-    <script>
-        // Filter orders by order_status
-        document.getElementById('order-filter').addEventListener('change', function() {
-            var selectedStatus = this.value;
-            var cards = document.querySelectorAll('.transaction-cardTranss .cardTrans');
-            cards.forEach(function(card) {
-                if (!selectedStatus || card.getAttribute('data-status') === selectedStatus) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
-    <!-- Additional JS Files -->
-    <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
-    <script src="/src/assets/js/index.js" async></script>
-    <script src="/src/assets/js/currency-language.js" async></script>
-    <script src="/src/assets/js/cookie-monitor.js" async></script>
-    <script src="/src/assets/js/imagePreview.js" async></script>
+  <script>
+    // Filter orders by order_status
+    document.getElementById('order-filter').addEventListener('change', function() {
+      var selectedStatus = this.value;
+      var cards = document.querySelectorAll('.transaction-cardTranss .cardTrans');
+      cards.forEach(function(card) {
+        if (!selectedStatus || card.getAttribute('data-status') === selectedStatus) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  <!-- Additional JS Files -->
+  <script src="/src/libs/swiper/swiper-bundle.min.js" async></script>
+  <script src="/src/assets/js/index.js" async></script>
+  <script src="/src/assets/js/currency-language.js" async></script>
+  <script src="/src/assets/js/cookie-monitor.js" async></script>
+  <script src="/src/assets/js/imagePreview.js" async></script>
 </body>
-
 </html>
