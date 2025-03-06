@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tracking_number = mysqli_real_escape_string($conn, $_POST['tracking_number']);
 
     // Update the tracking number and update order_status to 'shipped'
-    $query = "UPDATE transactions SET tracking_number = '$tracking_number', order_status = 'completed' WHERE transaction_id = '$transaction_id'";
+    $query = "UPDATE transactionss SET tracking_number = '$tracking_number', order_status = 'completed' WHERE transaction_id = '$transaction_id'";
     if (mysqli_query($conn, $query)) {
         echo json_encode(['success' => true]);
         exit();

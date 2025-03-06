@@ -16,7 +16,7 @@ if (!isset($_GET['transaction_id']) || empty($_GET['transaction_id'])) {
 }
 $transaction_id = mysqli_real_escape_string($conn, $_GET['transaction_id']);
 $query = "SELECT t.*, u.username AS customer_name, u.email AS customer_email 
-          FROM transactions t 
+          FROM transactionss t 
           LEFT JOIN users u ON t.user_id = u.id 
           WHERE t.transaction_id = '$transaction_id'";
 $result = mysqli_query($conn, $query);
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newStatus = mysqli_real_escape_string($conn, $_POST['order_status'] ?? $transaction['order_status']);
     $adminNote = mysqli_real_escape_string($conn, $_POST['admin_note'] ?? '');
     
-    $updateQuery = "UPDATE transactions SET order_status = '$newStatus'";
+    $updateQuery = "UPDATE transactionss SET order_status = '$newStatus'";
     // Optionally, you might want to store the admin note in the details JSON or in a separate column.
     if (!empty($adminNote)) {
         $updateQuery .= ", details = JSON_SET(details, '$.admin_note', '$adminNote')";

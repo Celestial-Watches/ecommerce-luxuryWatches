@@ -15,7 +15,7 @@ if (!isset($_GET['transaction_id']) || empty($_GET['transaction_id'])) {
     die("Transaction ID missing.");
 }
 $transaction_id = mysqli_real_escape_string($conn, $_GET['transaction_id']);
-$query = "SELECT transaction_id, tracking_number, order_status, created_at FROM transactions WHERE transaction_id = '$transaction_id'";
+$query = "SELECT transaction_id, tracking_number, order_status, created_at FROM transactionss WHERE transaction_id = '$transaction_id'";
 $result = mysqli_query($conn, $query);
 if (!$result || mysqli_num_rows($result) == 0) {
     die("Transaction not found.");

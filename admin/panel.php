@@ -98,12 +98,12 @@ if (!defined('ALLOW_ACCESS')) {
         </button>
         <ul class="sub-menu">
           <div>
-            <li><a href="order/view_order.php">View Orders</a></li>
-            <li><a href="order/payment-history.php">Payment History</a></li>
-            <li><a href="order/refund-cancellations.php">Refund/Cancellation Requests</a></li>
-            <li><a href="order/order-fulfillment.php">Order Processing &amp; Fulfillment</a></li>
-            <li><a href="order/order-reports.php">Order Reports &amp; Analytics</a></li>
-            <li><a href="order/customer-communications.php">Customer Communications</a></li>
+            <li><a href="/admin/order/view_order.php">View Orders</a></li>
+            <li><a href="/admin/order/payment-history.php">Payment History</a></li>
+            <li><a href="/admin/order/refund-cancellations.php">Refund/Cancellation Requests</a></li>
+            <li><a href="/admin/order/order-fulfillment.php">Order Processing &amp; Fulfillment</a></li>
+            <li><a href="/admin/order/order-reports.php">Order Reports &amp; Analytics</a></li>
+            <li><a href="/admin/order/customer-communications.php">Customer Communications</a></li>
           </div>
         </ul>
       </li>
@@ -125,7 +125,7 @@ if (!defined('ALLOW_ACCESS')) {
         </button>
         <ul class="sub-menu">
           <div>
-            <li><a href="membership/view-member.php">View Requests</a></li>
+            <li><a href="/admin/membership/view-member.php">View Requests</a></li>
             <li><a href="#">Application Details</a></li>
           </div>
         </ul>
@@ -188,6 +188,27 @@ if (!defined('ALLOW_ACCESS')) {
         <ul class="sub-menu">
           <div>
             <li><a href="#">Manage Participations</a></li>
+            <li><a href="#">Track Resell Conditions</a></li>
+            <li><a href="#">Set Resell Prices</a></li>
+          </div>
+        </ul>
+      </li>
+
+      <!-- Sell & Exchange Program -->
+
+      <li>
+        <button onclick=toggleSubMenu(this) class="dropdown-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" fill="#e8eaed">
+            <path d="M12 2a10 10 0 00-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zm1 16h-2v-2h2v2zm0-4h-2V7h2v7z" />
+          </svg>
+          <span class="noShow">Sell & Exchange Program</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+            <path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z" />
+          </svg>
+        </button>
+        <ul class="sub-menu">
+          <div>
+            <li><a href="sell-exchange/admin_requests.php">View Stock Requests</a></li>
             <li><a href="#">Track Resell Conditions</a></li>
             <li><a href="#">Set Resell Prices</a></li>
           </div>

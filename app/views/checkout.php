@@ -3,6 +3,7 @@ session_start();
 define('ALLOW_ACCESS', true);
 if (!isset($_SESSION['user_id'])) {
   header('Location: /index.php');
+  exit;
 }
 define('CART_KEY', 'cart_items');
 
@@ -14,11 +15,14 @@ $result = mysqli_query($conn, $query);
 $userData = mysqli_fetch_assoc($result);
 
 $defaultAddress = null;
-$addressQuery = "SELECT * FROM addresses WHERE user_id = '$userId' LIMIT 1";
+$addressQuery = "SELECT * FROM address WHERE user_id = '$userId' LIMIT 1";
 $addressResult = mysqli_query($conn, $addressQuery);
 if ($addressResult && mysqli_num_rows($addressResult) > 0) {
   $defaultAddress = mysqli_fetch_assoc($addressResult);
 }
+
+// Check if net banking OTP verification was successful
+$netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netbank_otp_verified'] === true;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +40,8 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
   <!-- JS Libraries -->
   <script src="/src/assets/js/navigation.js" async></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/src/assets/css/deskView.css" />
   <link rel="stylesheet" href="/src/libs/swiper/swiper-bundle.min.css">
@@ -370,6 +376,11 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
       </nav>
       <!-- Center Multi–Step Form -->
       <div class="checkout-content">
+        <?php if ($netbankVerified): ?>
+          <div class="alert alert-success">
+            Net Banking OTP verified successfully. You can now apply coupons or write notes.
+          </div>
+        <?php endif; ?>
         <!-- Note the novalidate attribute -->
         <form id="multiStepForm" novalidate>
           <!-- Step 1: Shipping Information -->
@@ -485,8 +496,12 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
               <select id="payment_method" name="payment_method" required>
                 <option value="">Select Payment Method</option>
                 <option value="credit_card">Credit/Debit Card</option>
+                <option value="net_banking">Net Banking</option>
               </select>
             </div>
+
+
+            <!-- Credit/Debit Card Fields -->
             <div id="credit_card_fields" style="display: none;">
               <div class="form-group">
                 <label for="card_number">Card Number</label>
@@ -503,6 +518,48 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
                 </div>
               </div>
             </div>
+
+            <!-- Net Banking Fields -->
+
+            <div id="net_banking_fields" style="display: none;">
+              <input type="hidden" id="netbank_otp_verified" name="netbank_otp_verified" value="<?= $netbankVerified ? '1' : '0' ?>">
+              <div class="form-group">
+                <label for="net_bank">Select Bank</label>
+                <select id="net_bank" name="net_bank" required>
+                  <option value="">Select Bank</option>
+                  <option value="HDFC Bank - Mumbai">HDFC Bank - Mumbai</option>
+                  <option value="ICICI Bank - Delhi">ICICI Bank - Delhi</option>
+                  <option value="SBI Bank - Bangalore">SBI Bank - Bangalore</option>
+                  <option value="Axis Bank - Kolkata">Axis Bank - Kolkata</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="net_user">User ID</label>
+                <input type="text" id="net_user" name="net_user" placeholder="Enter your net banking user ID" required>
+              </div>
+              <div class="form-group">
+                <label for="net_pass">Password</label>
+                <input type="password" id="net_pass" name="net_pass" placeholder="Enter your net banking password" required>
+              </div>
+              <div class="form-group">
+                <label for="net_email">Registered Email</label>
+                <input type="email" id="net_email" name="net_email" placeholder="your-email@example.com" required>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn" id="send_netbank_otp">Proceed to OTP</button>
+              </div>
+              <!-- OTP Section for Net Banking -->
+              <div id="net_banking_otp_section" style="display: none; margin-top: 10px;">
+                <div class="form-group">
+                  <label for="net_otp">Enter OTP</label>
+                  <input type="text" id="net_otp" name="net_otp" placeholder="Enter OTP" required>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn" id="verify_netbank_otp">Verify & Confirm Payment</button>
+                </div>
+              </div>
+            </div>
+
             <div class="form-actions">
               <button type="button" class="btn" id="back-2">Back</button>
               <button type="button" class="btn" id="next-2">Next</button>
@@ -610,7 +667,7 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
         document.getElementById('checkoutTotal').textContent = convertAndFormatPrice(totalConverted);
       }
 
-      
+
 
       // Enhanced address handling with async/await
       async function applySavedAddress() {
@@ -818,10 +875,90 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
         saveFormData();
       });
       const paymentMethod = document.getElementById('payment_method');
-      const creditCardFields = document.getElementById('credit_card_fields');
-      paymentMethod.addEventListener('change', () => {
-        creditCardFields.style.display = paymentMethod.value === 'credit_card' ? 'block' : 'none';
+      // Toggle payment fields based on selection
+      document.getElementById('payment_method').addEventListener('change', function() {
+        const method = this.value;
+        if (method === 'credit_card') {
+          document.getElementById('credit_card_fields').style.display = 'block';
+          document.getElementById('net_banking_fields').style.display = 'none';
+        } else if (method === 'net_banking') {
+          document.getElementById('credit_card_fields').style.display = 'none';
+          document.getElementById('net_banking_fields').style.display = 'block';
+        } else {
+          document.getElementById('credit_card_fields').style.display = 'none';
+          document.getElementById('net_banking_fields').style.display = 'none';
+        }
         saveFormData();
+      });
+
+
+      // When "Proceed to OTP" is clicked for net banking
+      document.getElementById('send_netbank_otp').addEventListener('click', function() {
+        // Validate net banking fields (simple example)
+        const bank = document.getElementById('net_bank').value;
+        const netUser = document.getElementById('net_user').value.trim();
+        const netPass = document.getElementById('net_pass').value.trim();
+        const netEmail = document.getElementById('net_email').value.trim();
+        if (!bank || !netUser || !netPass || !netEmail) {
+          showNotification("Please fill in all net banking fields.");
+          return;
+        }
+
+        // Show loading or processing message
+        document.getElementById('net_banking_otp_section').style.display = 'none';
+
+        // Send net banking details to PHP script to simulate sending OTP
+        $.ajax({
+          url: "/app/controllers/send_netbank_otp.php",
+          type: "POST",
+          data: {
+            net_bank: bank,
+            net_user: netUser,
+            net_pass: netPass,
+            net_email: netEmail
+          },
+          success: function(response) {
+            if (response.trim() === "OTP_SENT") {
+              document.getElementById('net_banking_otp_section').style.display = 'block';
+              showNotification("An OTP has been sent to your registered email.");
+            } else {
+              showNotification("Error: " + response);
+            }
+          },
+          error: function() {
+            showNotification("An error occurred while sending OTP.");
+          }
+        });
+      });
+
+      // When "Verify & Confirm Payment" is clicked for net banking
+      document.getElementById('verify_netbank_otp').addEventListener('click', function() {
+        const netOtp = document.getElementById('net_otp').value.trim();
+        if (!netOtp) {
+          showNotification("Please enter the OTP.");
+          return;
+        }
+        $.ajax({
+          url: "/app/controllers/verify_netbank_otp.php",
+          type: "POST",
+          data: {
+            net_otp: netOtp
+          },
+          success: function(response) {
+            if (response.trim() === "OTP_VERIFIED") {
+              showNotification("OTP verified successfully!");
+              document.getElementById('netbank_otp_verified').value = '1';
+              document.getElementById('net_banking_otp_section').style.display = 'none';
+              // Enable proceeding to next step
+              maxStepAllowed = Math.max(maxStepAllowed, 3);
+            } else {
+              showNotification("Invalid OTP. Please try again.");
+            }
+          },
+          error: function() {
+            showNotification("An error occurred while verifying OTP.");
+          }
+        });
       });
 
       /**********************
@@ -904,7 +1041,7 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
           });
       });
 
-      
+
 
       /**********************
        * Cart & Order Summary Logic
@@ -1007,212 +1144,223 @@ if ($addressResult && mysqli_num_rows($addressResult) > 0) {
        * Final Form Submission – Payment Verification & Order Confirmation
        **********************/
       document.getElementById('multiStepForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveFormData();
+          e.preventDefault();
+          saveFormData();
 
-        // Show the loading spinner
-        document.getElementById('loading-spinner').style.display = 'flex';
+          // Show the loading spinner
+          document.getElementById('loading-spinner').style.display = 'flex';
 
-        const checkoutTotalElement = document.getElementById('checkoutTotal');
+          const paymentMethod = document.getElementById('payment_method').value;
+          const otpVerified = document.getElementById('netbank_otp_verified').value === '1';
 
-        // Extract the numeric value from the element's text content
-        const totalConverted = parseFloat(checkoutTotalElement.textContent.replace(/[^0-9.-]+/g, ""));
+          // Validate payment method specific requirements
+          if (paymentMethod === 'net_banking' && !otpVerified) {
+            showNotification('Please complete Net Banking OTP verification.', true);
+            document.getElementById('loading-spinner').style.display = 'none';
+            return;
+          }
 
-        // Update the element's text content using your conversion/formatting function
-        checkoutTotalElement.textContent = convertAndFormatPrice(totalConverted);
+          const checkoutTotalElement = document.getElementById('checkoutTotal');
+
+          // Extract the numeric value from the element's text content
+          const totalConverted = parseFloat(checkoutTotalElement.textContent.replace(/[^0-9.-]+/g, ""));
+
+          // Update the element's text content using your conversion/formatting function
+          checkoutTotalElement.textContent = convertAndFormatPrice(totalConverted);
 
 
-        // Gather form data
-        const formData = {
-          cart: getStorage(CART_KEY),
-          customer: {
-            firstName: document.getElementById('first_name').value,
-            lastName: document.getElementById('last_name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            company: document.getElementById('company').value,
-            country: document.getElementById('country').value,
-            state: document.getElementById('state').value,
-            city: document.getElementById('city').value,
-            address: document.getElementById('address').value,
-            zip: document.getElementById('zip').value,
-            coupon: document.getElementById('promo_code').value,
-            orderNotes: document.getElementById('order_notes').value,
-            billing: {
-              sameAsShipping: document.getElementById('same_as_shipping').checked,
-              address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
-              city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
-              zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
-              country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
+          // Gather form data
+          const formData = {
+            cart: getStorage(CART_KEY),
+            customer: {
+              firstName: document.getElementById('first_name').value,
+              lastName: document.getElementById('last_name').value,
+              email: document.getElementById('email').value,
+              phone: document.getElementById('phone').value,
+              company: document.getElementById('company').value,
+              country: document.getElementById('country').value,
+              state: document.getElementById('state').value,
+              city: document.getElementById('city').value,
+              address: document.getElementById('address').value,
+              zip: document.getElementById('zip').value,
+              coupon: document.getElementById('promo_code').value,
+              orderNotes: document.getElementById('order_notes').value,
+              billing: {
+                sameAsShipping: document.getElementById('same_as_shipping').checked,
+                address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
+                city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
+                zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
+                country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
+              },
+              paymentMethod: document.getElementById('payment_method').value
             },
-            paymentMethod: document.getElementById('payment_method').value
-          },
-          total_amount: totalConverted,
-          checkoutSubtotal: parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, "")),
-          checkoutShipping: parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")),
-          checkoutTax: parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")),
-          checkoutDiscount: parseFloat(document.getElementById('checkoutDiscount').dataset.usd) || 0,
-          currency: getCurrentCurrency()
-        };
+            total_amount: totalConverted,
+            checkoutSubtotal: parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, "")),
+            checkoutShipping: parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")),
+            checkoutTax: parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")),
+            checkoutDiscount: parseFloat(document.getElementById('checkoutDiscount').dataset.usd) || 0,
+            currency: getCurrentCurrency(),
+            paymentMethod: paymentMethod,
+            netbankOTPVerified: otpVerified
+          };
 
-        if (formData.customer.paymentMethod === 'credit_card') {
-          const rawCardNumber = document.getElementById('card_number').value;
-          const cardNumber = rawCardNumber.replace(/\s+/g, '');
-          const expDate = document.getElementById('exp_date').value;
-          const cvc = document.getElementById('cvc').value.trim();
-          if (cardNumber.length !== 16) {
-            showNotification('Card number must be 16 digits.', true);
-            return;
+          if (formData.customer.paymentMethod === 'credit_card') {
+            const rawCardNumber = document.getElementById('card_number').value;
+            const cardNumber = rawCardNumber.replace(/\s+/g, '');
+            const expDate = document.getElementById('exp_date').value;
+            const cvc = document.getElementById('cvc').value.trim();
+            if (cardNumber.length !== 16) {
+              showNotification('Card number must be 16 digits.', true);
+              return;
+            }
+            if (!luhnCheck(cardNumber)) {
+              showNotification('Invalid credit card number.', true);
+              return;
+            }
+            if (!isValidExpiry(expDate)) {
+              showNotification('Credit card is expired or expiry date is invalid.', true);
+              return;
+            }
+            if (!/^\d{3}$/.test(cvc)) {
+              showNotification('CVC must be 3 digits.', true);
+              return;
+            }
+            formData.customer.cardNumber = cardNumber;
+            formData.customer.expDate = expDate;
+            formData.customer.cvc = cvc;
           }
-          if (!luhnCheck(cardNumber)) {
-            showNotification('Invalid credit card number.', true);
-            return;
-          }
-          if (!isValidExpiry(expDate)) {
-            showNotification('Credit card is expired or expiry date is invalid.', true);
-            return;
-          }
-          if (!/^\d{3}$/.test(cvc)) {
-            showNotification('CVC must be 3 digits.', true);
-            return;
-          }
-          formData.customer.cardNumber = cardNumber;
-          formData.customer.expDate = expDate;
-          formData.customer.cvc = cvc;
-        }
 
-        setTimeout(() => {
-          if (formData.customer.paymentMethod === 'credit_card' && formData.customer.cardNumber === "4242424242424242") {
-            const fakeTransactionId = "TXN" + Date.now();
-            fetch('/app/controllers/saveTransaction.php', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  transactionData: formData,
-                  transaction_id: fakeTransactionId,
-                  payment_status: 'success'
+          setTimeout(() => {
+            if ((paymentMethod === 'credit_card' && formData.customer.cardNumber === "4242424242424242") ||
+            (paymentMethod === 'net_banking' && otpVerified)) {
+              const fakeTransactionId = "TXN" + Date.now();
+              fetch('/app/controllers/saveTransaction.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    transactionData: formData,
+                    transaction_id: fakeTransactionId,
+                    payment_status: 'success'
+                  })
                 })
-              })
-              .then(res => res.json())
-              .then(response => {
-                if (response.success) {
-                  document.getElementById('loading-spinner').style.display = 'none';
-                  fetch('/app/controllers/payment_processor.php', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        transactionData: formData,
-                        paymentToken: "dummy_token",
-                        transaction_id: fakeTransactionId
+                .then(res => res.json())
+                .then(response => {
+                  if (response.success) {
+                    fetch('/app/controllers/payment_processor.php', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                          transactionData: formData,
+                          paymentToken: "dummy_token",
+                          transaction_id: fakeTransactionId
+                        })
                       })
-                    })
-                    .then(emailRes => emailRes.json())
-                    .then(emailResponse => {
-                      if (emailResponse.success) {
-                        setStorage('<?= CART_KEY ?>', []);
-                        localStorage.removeItem('checkoutFormData');
-                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
-                        document.getElementById('loading-spinner').style.display = 'none';
-                      } else {
-                        showNotification('Order processed but failed to send confirmation email.', true);
-                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
-                        document.getElementById('loading-spinner').style.display = 'none';
-                      }
-                    });
-                } else {
-                  showNotification('Error saving transaction. Please try again.', true);
-                }
-              });
-          } else if (formData.customer.paymentMethod !== 'credit_card') {
-            showNotification('Payment method not supported yet.', true);
-            document.getElementById('loading-spinner').style.display = 'none';
-          } else {
-            showNotification('Payment failed. Please check your card details.', true);
-            document.getElementById('loading-spinner').style.display = 'none';
-          }
-        }, 1000);
+                      .then(emailRes => emailRes.json())
+                      .then(emailResponse => {
+                        if (emailResponse.success) {
+                          setStorage('<?= CART_KEY ?>', []);
+                          localStorage.removeItem('checkoutFormData');
+                          window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                          document.getElementById('loading-spinner').style.display = 'none';
+                        } else {
+                          showNotification('Order processed but failed to send confirmation email.', true);
+                          window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                          document.getElementById('loading-spinner').style.display = 'none';
+                        }
+                      });
+                  } else {
+                    showNotification('Error saving transaction. Please try again.', true);
+                  }
+                });
+            } else if (formData.customer.paymentMethod !== 'credit_card' || formData.customer.paymentMethod !== 'net_banking') {
+              showNotification('Payment method not supported yet.', true);
+              document.getElementById('loading-spinner').style.display = 'none';
+            } else {
+              showNotification('Payment failed. Please check your card details.', true);
+              document.getElementById('loading-spinner').style.display = 'none';
+            }
+          }, 1000);
       });
 
 
-      /**********************
-       * Shipping & Tax Calculation (Using Global Tax Rate)
-       **********************/
-      const checkoutShipping = document.getElementById('checkoutShipping');
-      const checkoutTax = document.getElementById('checkoutTax');
-      const checkoutTotal = document.getElementById('checkoutTotal');
+    /**********************
+     * Shipping & Tax Calculation (Using Global Tax Rate)
+     **********************/
+    const checkoutShipping = document.getElementById('checkoutShipping');
+    const checkoutTax = document.getElementById('checkoutTax');
+    const checkoutTotal = document.getElementById('checkoutTotal');
 
-      function calculateShippingAndTax(countryCode) {
-        let shippingCost = 0;
-        let taxRate = 0;
-        switch (countryCode) {
-          case 'US':
-            shippingCost = 5;
-            taxRate = 0.07;
-            break;
-          case 'GB':
-            shippingCost = 10;
-            taxRate = 0.20;
-            break;
-          case 'CH':
-            shippingCost = 15;
-            taxRate = 0.08;
-            break;
-          case 'IN':
-            shippingCost = 20;
-            taxRate = 0.18;
-            break;
-          default:
-            shippingCost = 0;
-            taxRate = 0;
-            break;
-        }
-        currentShippingCost = shippingCost;
-        currentTaxRate = taxRate;
-        checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
-        updateTotal();
+    function calculateShippingAndTax(countryCode) {
+      let shippingCost = 0;
+      let taxRate = 0;
+      switch (countryCode) {
+        case 'US':
+          shippingCost = 5;
+          taxRate = 0.07;
+          break;
+        case 'GB':
+          shippingCost = 10;
+          taxRate = 0.20;
+          break;
+        case 'CH':
+          shippingCost = 15;
+          taxRate = 0.08;
+          break;
+        case 'IN':
+          shippingCost = 20;
+          taxRate = 0.18;
+          break;
+        default:
+          shippingCost = 0;
+          taxRate = 0;
+          break;
       }
-      countrySelect.addEventListener('change', () => {
-        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-        const countryCode = selectedOption.getAttribute('data-code');
-        if (countryCode) {
-          calculateShippingAndTax(countryCode);
+      currentShippingCost = shippingCost;
+      currentTaxRate = taxRate;
+      checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
+      updateTotal();
+    }
+    countrySelect.addEventListener('change', () => {
+      const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+      const countryCode = selectedOption.getAttribute('data-code');
+      if (countryCode) {
+        calculateShippingAndTax(countryCode);
+      }
+    });
+
+    /**********************
+     * Persist form data on every input change & initial load
+     **********************/
+    document.getElementById('multiStepForm').addEventListener('input', saveFormData); loadFormData();
+
+    document.querySelectorAll('.item-quantity').forEach(input => {
+      input.addEventListener('change', (e) => {
+        const itemId = e.target.dataset.id;
+        const newQuantity = parseInt(e.target.value);
+        if (newQuantity < 1) {
+          e.target.value = 1;
+          return;
+        }
+
+        // Update the cart item quantity
+        const cartItems = getStorage('<?= CART_KEY ?>') || [];
+        const itemIndex = cartItems.findIndex(item => item.id === itemId);
+        if (itemIndex !== -1) {
+          cartItems[itemIndex].quantity = newQuantity;
+          setStorage('<?= CART_KEY ?>', cartItems);
+          updateTotal();
         }
       });
+    });
 
-      /**********************
-       * Persist form data on every input change & initial load
-       **********************/
-      document.getElementById('multiStepForm').addEventListener('input', saveFormData);
-      loadFormData();
-
-      document.querySelectorAll('.item-quantity').forEach(input => {
-        input.addEventListener('change', (e) => {
-          const itemId = e.target.dataset.id;
-          const newQuantity = parseInt(e.target.value);
-          if (newQuantity < 1) {
-            e.target.value = 1;
-            return;
-          }
-
-          // Update the cart item quantity
-          const cartItems = getStorage('<?= CART_KEY ?>') || [];
-          const itemIndex = cartItems.findIndex(item => item.id === itemId);
-          if (itemIndex !== -1) {
-            cartItems[itemIndex].quantity = newQuantity;
-            setStorage('<?= CART_KEY ?>', cartItems);
-            updateTotal();
-          }
-        });
-      });
-
-      const useSavedBtn = document.getElementById('useSavedAddress');
-      if (useSavedBtn) {
-        useSavedBtn.addEventListener('click', applySavedAddress);
-      }
+    const useSavedBtn = document.getElementById('useSavedAddress');
+    if (useSavedBtn) {
+      useSavedBtn.addEventListener('click', applySavedAddress);
+    }
     });
   </script>
 

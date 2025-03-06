@@ -18,7 +18,7 @@ if (!isset($_GET['transaction_id']) || !isset($_SESSION['user_id'])) {
   exit;
 }
 $transaction_id = $_GET['transaction_id'];
-$stmt = $conn->prepare("SELECT * FROM transactions WHERE transaction_id = ? AND user_id = ?");
+$stmt = $conn->prepare("SELECT * FROM transactionss WHERE transaction_id = ? AND user_id = ?");
 $user_id = $_SESSION['user_id'] ?? 0;
 $stmt->bind_param("si", $transaction_id, $user_id);
 $stmt->execute();

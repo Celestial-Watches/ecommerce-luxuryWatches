@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <body>
           <div class='container'>
             <div class='header'>
-              <img src='/celestial-logo.png' alt='Celestial Watches'>
+              <img src='cid:logo_cid' alt='Celestial Watches'>
             </div>
             <div class='content'>
               <h1>Thank You for Your Order, {$customerName}!</h1>
@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $mail->Body    = $mailBody;
         $mail->AltBody = "Thank you for your order, {$customerName}! Order ID: {$transactionId}, Order Date: {$orderDate}, Total: {$currencySymbol}{$grandTotal}. Shipping Address: {$address}. For details, please visit our website.";
-
+        $mail->addEmbeddedImage('../../celestial-logo.png', 'logo_cid');
         $mail->send();
     } catch (Exception $e) {
         error_log("Email sending failed: {$mail->ErrorInfo}");

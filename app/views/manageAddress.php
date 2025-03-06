@@ -10,7 +10,7 @@ $userId = $_SESSION['user_id'] ?? null;
 $userAddresses = [];
 if ($isUserLoggedIn) {
     $userIdEscaped = mysqli_real_escape_string($conn, $userId);
-    $query = "SELECT * FROM addresses WHERE user_id = '$userIdEscaped'";
+    $query = "SELECT * FROM address WHERE user_id = '$userIdEscaped'";
     $result = mysqli_query($conn, $query);
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {

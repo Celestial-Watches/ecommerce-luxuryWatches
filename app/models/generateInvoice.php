@@ -22,7 +22,7 @@ if (!isset($_GET['transaction_id'])) {
 $transaction_id = $_GET['transaction_id'];
 $user_id = $_SESSION['user_id'] ?? 0;
 
-$stmt = $conn->prepare("SELECT * FROM transactions WHERE transaction_id = ? AND user_id = ?");
+$stmt = $conn->prepare("SELECT * FROM transactionss WHERE transaction_id = ? AND user_id = ?");
 $stmt->bind_param("si", $transaction_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -106,7 +106,7 @@ $billing_phone = isset($customer["phone"]) ? $customer["phone"] : "N/A";
 
 // --- Payment Method ---
 $payment_method  = isset($customer["paymentMethod"]) ? $customer["paymentMethod"] : "N/A";
-$payment_display = ($payment_method === "credit_card") ? "Credit/Debit Card" : ucfirst($payment_method);
+$payment_display = ($payment_method === "credit_card") ? "Credit/Debit Card" : (($payment_method === "net_banking") ? "Net Banking" : ucfirst($payment_method));
 
 // Build the complete HTML invoice with print-friendly design
 $html = '

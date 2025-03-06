@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 $userId = mysqli_real_escape_string($conn, $_SESSION["user_id"]);
 
 // Query transaction history for this user
-$query = "SELECT transaction_id, created_at, total_amount, order_status, payment_status FROM transactions WHERE user_id = '$userId' ORDER BY created_at DESC";
+$query = "SELECT transaction_id, created_at, total_amount, order_status, payment_status FROM transactionss WHERE user_id = '$userId' ORDER BY created_at DESC";
 $result = mysqli_query($conn, $query);
 $transactions = [];
 if ($result) {

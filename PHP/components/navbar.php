@@ -1096,9 +1096,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
                         <a href="../../app/views/blogs.php" class="menu-title">Blog</a>
                     </li>
 
-                    <li class="menu-category">
+                    <!-- <li class="menu-category">
                         <a href="#" class="menu-title">Hot Offers</a>
-                    </li>
+                    </li> -->
 
 
                 </ul>
@@ -1336,9 +1336,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
                     <a href="../../app/views/blogs.php" class="menu-title">Blog</a>
                 </li>
 
-                <li class="menu-category">
+                <!-- <li class="menu-category">
                     <a href="#" class="menu-title">Hot Offers</a>
-                </li>
+                </li> -->
 
                 <?php
                 // Check if the user is logged in (session or cookie) and OTP is verified

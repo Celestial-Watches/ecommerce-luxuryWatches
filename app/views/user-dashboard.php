@@ -16,6 +16,7 @@ if ($isUserLoggedIn) {
     }
 }
 
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $isUserLoggedIn) {
     // CSRF Validation
@@ -372,7 +373,8 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         <!-- Additional system items -->
         <h3>System</h3>
         <ul class="nav-menu">
-            <li><a href="#">Notifications</a></li>
+            <li><a href="my_requests.php">My Stock Requests</a></li>
+            <li><a href="notification.php">Notifications</a></li>
             <li><a href="#">Preferences</a></li>
         </ul>
     </div>

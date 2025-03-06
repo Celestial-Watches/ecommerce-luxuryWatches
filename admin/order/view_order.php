@@ -24,7 +24,7 @@ $query = "SELECT
             t.created_at, 
             u.username AS customer_name, 
             u.email AS customer_email 
-          FROM transactions t 
+          FROM transactionss t 
           LEFT JOIN users u ON t.user_id = u.id 
           ORDER BY t.created_at DESC";
 $result = mysqli_query($conn, $query);

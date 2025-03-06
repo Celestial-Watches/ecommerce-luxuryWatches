@@ -71,7 +71,7 @@ if (isset($_POST['resend'])) {
 
         // Recipients
         $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
-        $mail->addAddress($_SESSION['email']); // Use the email stored in the session
+        $mail->addAddress($_SESSION['email']); 
 
         // Content
         $mail->isHTML(true);

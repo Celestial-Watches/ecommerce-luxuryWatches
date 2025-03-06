@@ -31,18 +31,18 @@ $action = $_GET['action'] ?? '';
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if ($id && in_array($action, ['approve', 'reject', 'terminate'])) {
-    $stmt = $conn->prepare("SELECT * FROM membership_applications WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM membership_application WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $application = $stmt->get_result()->fetch_assoc();
 
     if ($action === 'terminate') {
-        $stmtDel = $conn->prepare("DELETE FROM membership_applications WHERE id = ?");
+        $stmtDel = $conn->prepare("DELETE FROM membership_application WHERE id = ?");
         $stmtDel->bind_param("i", $id);
         $stmtDel->execute();
         $status = 'terminated';
     } else {
-        $stmtUp = $conn->prepare("UPDATE membership_applications 
+        $stmtUp = $conn->prepare("UPDATE membership_application 
                                   SET status = ?, reviewed_at = NOW() 
                                   WHERE id = ?");
         $status = ($action === 'approve') ? 'approved' : 'rejected';

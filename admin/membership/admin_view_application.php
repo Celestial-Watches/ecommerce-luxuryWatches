@@ -19,7 +19,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true ||
 require_once '../../app/config/conn.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$stmt = $conn->prepare("SELECT * FROM membership_applications WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM membership_application WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $application = $stmt->get_result()->fetch_assoc();

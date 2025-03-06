@@ -63,7 +63,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     require_once '../../app/config/conn.php';
 
     // Fetch applications
-    $stmt = $conn->prepare("SELECT * FROM membership_applications 
+    $stmt = $conn->prepare("SELECT * FROM membership_application 
                             WHERE full_name LIKE ? OR email LIKE ?
                             ORDER BY created_at DESC 
                             LIMIT ? OFFSET ?");
@@ -72,7 +72,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     $applications = $stmt->get_result();
 
     // Calculate pagination data
-    $stmtCount = $conn->prepare("SELECT COUNT(*) AS total FROM membership_applications 
+    $stmtCount = $conn->prepare("SELECT COUNT(*) AS total FROM membership_application 
                                  WHERE full_name LIKE ? OR email LIKE ?");
     $likes = "%{$searchQuery}%";
     $stmtCount->bind_param("ss", $likes, $likes);
@@ -102,7 +102,7 @@ $offset = ($page - 1) * $perPage;
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
 $search = "%{$searchQuery}%";
 
-$stmt = $conn->prepare("SELECT * FROM membership_applications 
+$stmt = $conn->prepare("SELECT * FROM membership_application 
                         WHERE full_name LIKE ? OR email LIKE ?
                         ORDER BY created_at DESC 
                         LIMIT ? OFFSET ?");
@@ -110,7 +110,7 @@ $stmt->bind_param("ssii", $search, $search, $perPage, $offset);
 $stmt->execute();
 $applications = $stmt->get_result();
 
-$stmtCount = $conn->prepare("SELECT COUNT(*) AS total FROM membership_applications 
+$stmtCount = $conn->prepare("SELECT COUNT(*) AS total FROM membership_application 
                              WHERE full_name LIKE ? OR email LIKE ?");
 $likes = "%{$searchQuery}%";
 $stmtCount->bind_param("ss", $likes, $likes);

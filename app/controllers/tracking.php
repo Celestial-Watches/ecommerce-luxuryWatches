@@ -4,7 +4,7 @@ require_once '../config/conn.php';
 $tracking_number = $_GET['tracking_number'] ?? '';
 
 // Get transaction and details
-$stmt = $conn->prepare("SELECT t.*, u.email FROM transactions t
+$stmt = $conn->prepare("SELECT t.*, u.email FROM transactionss t
   JOIN users u ON t.user_id = u.id
   WHERE tracking_number = ?");
 $stmt->bind_param("s", $tracking_number);

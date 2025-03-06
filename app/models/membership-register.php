@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Use prepared statements for secure data insertion
-    $stmt = $conn->prepare("INSERT INTO membership_applications 
+    $stmt = $conn->prepare("INSERT INTO membership_application 
         (full_name, email, phone, referral_code, background, motivation, status, created_at)
         VALUES (?, ?, ?, ?, ?, ?, 'pending', NOW())");
 

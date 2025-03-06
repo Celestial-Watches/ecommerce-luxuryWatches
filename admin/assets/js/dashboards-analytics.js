@@ -358,75 +358,72 @@
   // Profit Report Line Chart
   // --------------------------------------------------------------------
   const profileReportChartEl = document.querySelector('#profileReportChart');
-const profileReportChartConfig = {
+  const profileReportChartConfig = {
     chart: {
-        height: 80,
-        type: 'line',
-        toolbar: { show: false },
-        dropShadow: {
-            enabled: true,
-            top: 10,
-            left: 5,
-            blur: 3,
-            color: '#ffbc00', // Your warning color
-            opacity: 0.15
-        },
-        sparkline: { enabled: true }
+      height: 80,
+      type: 'line',
+      toolbar: { show: false },
+      dropShadow: {
+        enabled: true,
+        top: 10,
+        left: 5,
+        blur: 3,
+        color: '#ffbc00', // Your warning color
+        opacity: 0.15
+      },
+      sparkline: { enabled: true }
     },
     grid: { show: false, padding: { right: 8 } },
     colors: ['#ffbc00'],
     dataLabels: { enabled: false },
     stroke: { width: 5, curve: 'smooth' },
     series: [{
-        name: 'Sales', // Label the data
-        data: [85000, 86000, 89000, 92000, 94000, 120000] // Example monthly sales data
+      name: 'Sales', // Label the data
+      data: [85000, 86000, 89000, 92000, 94000, 120000] // Example monthly sales data
     }],
     xaxis: {
-        categories: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'], // Replace with real dates
-        show: false,
-        lines: { show: false },
-        labels: { show: false },
-        axisBorder: { show: false }
+      categories: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'], // Replace with real dates
+      show: false,
+      lines: { show: false },
+      labels: { show: false },
+      axisBorder: { show: false }
     },
     yaxis: { show: false }
-};
+  };
 
-if (profileReportChartEl !== null) {
+  if (profileReportChartEl !== null) {
     const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
     profileReportChart.render();
-}
+  }
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
-  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-    orderChartConfig = {
+  // Order Statistics Chart - Dynamic
+  function initOrderStatisticsChart() {
+    const chartOrderStatistics = document.querySelector('#orderStatisticsChart');
+    if (!chartOrderStatistics || !orderStats) return;
+
+    const labels = orderStats.map(stat => stat.payment_method);
+    const series = orderStats.map(stat => stat.total_orders);
+
+    const orderChartConfig = {
       chart: {
         height: 165,
         width: 130,
         type: 'donut'
       },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
+      labels: labels,
+      series: series,
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
-        colors: cardColor
+        colors: config.colors.white
       },
       dataLabels: {
-        enabled: false,
-        formatter: function (val, opt) {
-          return parseInt(val) + '%';
-        }
+        enabled: false
       },
       legend: {
         show: false
-      },
-      grid: {
-        padding: {
-          top: 0,
-          bottom: 0,
-          right: 15
-        }
       },
       plotOptions: {
         pie: {
@@ -440,20 +437,16 @@ if (profileReportChartEl !== null) {
                 color: headingColor,
                 offsetY: -15,
                 formatter: function (val) {
-                  return parseInt(val) + '%';
+                  return val;
                 }
-              },
-              name: {
-                offsetY: 20,
-                fontFamily: 'Public Sans'
               },
               total: {
                 show: true,
                 fontSize: '0.8125rem',
                 color: axisColor,
-                label: 'Weekly',
+                label: 'Total Orders',
                 formatter: function (w) {
-                  return '38%';
+                  return series.reduce((a, b) => a + b, 0);
                 }
               }
             }
@@ -461,109 +454,72 @@ if (profileReportChartEl !== null) {
         }
       }
     };
-  if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
-    const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-    statisticsChart.render();
+
+    new ApexCharts(chartOrderStatistics, orderChartConfig).render();
   }
 
   // Income Chart - Area chart
   // --------------------------------------------------------------------
-  const incomeChartEl = document.querySelector('#incomeChart'),
-    incomeChartConfig = {
-      series: [
-        {
-          data: [24, 21, 30, 22, 42, 26, 35, 29]
-        }
-      ],
+  // Income Chart - Dynamic
+  function initIncomeChart() {
+    const incomeChartEl = document.querySelector('#incomeChart');
+    if (!incomeChartEl) return;
+
+    // Process income data
+    const dates = incomeData.map(item => new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+    const amounts = incomeData.map(item => item.amount);
+
+    const incomeChartConfig = {
+      series: [{
+        name: 'Revenue',
+        data: amounts
+      }],
       chart: {
         height: 215,
-        parentHeightOffset: 0,
-        parentWidthOffset: 0,
-        toolbar: {
-          show: false
-        },
-        type: 'area'
+        type: 'area',
+        toolbar: { show: false }
       },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 2,
-        curve: 'smooth'
-      },
-      legend: {
-        show: false
-      },
-      markers: {
-        size: 6,
-        colors: 'transparent',
-        strokeColors: 'transparent',
-        strokeWidth: 4,
-        discrete: [
-          {
-            fillColor: config.colors.white,
-            seriesIndex: 0,
-            dataPointIndex: 7,
-            strokeColor: config.colors.primary,
-            strokeWidth: 2,
-            size: 6,
-            radius: 8
-          }
-        ],
-        hover: {
-          size: 7
-        }
-      },
+      dataLabels: { enabled: false },
+      stroke: { curve: 'smooth', width: 2 },
       colors: [config.colors.primary],
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: shadeColor,
-          shadeIntensity: 0.6,
-          opacityFrom: 0.5,
-          opacityTo: 0.25,
-          stops: [0, 95, 100]
-        }
-      },
-      grid: {
-        borderColor: borderColor,
-        strokeDashArray: 3,
-        padding: {
-          top: -20,
-          bottom: -8,
-          left: -10,
-          right: 8
-        }
-      },
       xaxis: {
-        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
+        categories: dates,
         labels: {
-          show: true,
-          style: {
-            fontSize: '13px',
-            colors: axisColor
-          }
+          style: { colors: axisColor }
         }
       },
       yaxis: {
         labels: {
-          show: false
-        },
-        min: 10,
-        max: 50,
-        tickAmount: 4
+          style: { colors: axisColor },
+          formatter: function (value) {
+            return '$' + value.toLocaleString();
+          }
+        }
+      },
+      tooltip: {
+        x: { format: 'dd MMM yyyy' },
+        y: {
+          formatter: function (value) {
+            return '$' + value.toLocaleString();
+          }
+        }
       }
     };
-  if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
-    const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
-    incomeChart.render();
+
+    new ApexCharts(incomeChartEl, incomeChartConfig).render();
   }
+
+  function initDynamicCharts() {
+    if (orderStats && orderStats.length > 0) {
+      initOrderStatisticsChart();
+    }
+    
+    if (incomeData && incomeData.length > 0) {
+      initIncomeChart();
+    }
+  }
+
+  
 
   // Expenses Mini Chart - Radial Chart
   // --------------------------------------------------------------------

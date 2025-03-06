@@ -42,10 +42,12 @@ $subtotal_amount = number_format($subtotal_amount, 2, '.', '');
 $order_status    = 'pending';
 $payment_method  = isset($transactionData['customer']['paymentMethod'])
     ? $transactionData['customer']['paymentMethod'] : '';
-$tracking_number = isset($transactionData['trackingNumber']) ? $transactionData['trackingNumber'] : '';
+
+// Generate tracking number
+$tracking_number = 'TRK' . strtoupper(substr(md5(rand()), 0, 10));
 
 // Prepare an INSERT statement that includes all desired fields.
-$stmt = $conn->prepare("INSERT INTO transactions 
+$stmt = $conn->prepare("INSERT INTO transactionss 
     (transaction_id, user_id, details, total_amount, shipping_cost, tax_amount, discount_amount, subtotal_amount, currency, order_status, payment_method, tracking_number, payment_status, created_at) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if (!$stmt) {
