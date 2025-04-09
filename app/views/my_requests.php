@@ -138,20 +138,27 @@ function processMessage($message, $user_id, $request_id, $conn)
 {
     $messageLower = strtolower($message);
 
-    // Example: if user references "request #123"
+    // 1. Greetings detection
+    if (preg_match('/\b(hi|hello|hey|good morning|good afternoon|good evening)\b/i', $messageLower)) {
+        return "Hello! How can I assist you with your watch inquiries today?";
+    }
+
+    // 2. Product questions: warranty, features, and more
+    if (preg_match('/\b(warranty|waterproof|material|size|color|features|specs|specifications)\b/i', $messageLower)) {
+        return "Our watches come with a two-year warranty, are built with premium materials, and offer features like waterproofing and multiple design options. For detailed specifications, please visit our product page or ask a specific question.";
+    }
+
+    // 3. Check for specific request number reference e.g. "request #123"
     if (preg_match('/request #(\d+)/i', $message, $matches)) {
         $reqNum = (int)$matches[1];
-        $stmt = $conn->prepare("
-            SELECT status FROM requestss
-            WHERE id = ? AND user_id = ?
-        ");
+        $stmt = $conn->prepare("SELECT status FROM requestss WHERE id = ? AND user_id = ?");
         $stmt->bind_param('ii', $reqNum, $user_id);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_assoc();
         return $res ? "Request #$reqNum status: " . $res['status'] : "Request #$reqNum not found.";
     }
 
-    // Basic FAQ
+    // 4. Basic FAQ mapping for common questions
     $faq = [
         'evaluation' => [
             'keywords' => ['evaluation', 'time', 'long', 'how long'],
@@ -174,9 +181,10 @@ function processMessage($message, $user_id, $request_id, $conn)
         }
     }
 
-    // Default fallback
+    // 5. Default fallback response
     return $message ? "Thanks for your message. We'll connect you with an agent soon." : "";
 }
+
 
 /*******************************************
  * FETCH REQUESTS & CHAT
@@ -223,8 +231,8 @@ if ($currentRequestId) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ICONS & FONTS -->
-    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
-    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">

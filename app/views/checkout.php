@@ -32,8 +32,9 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luxury Watches | Checkout</title>
   <!-- IONICONS -->
-  <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
-  <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -568,6 +569,7 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
           <!-- Step 3: Order Review & Discounts -->
           <div class="step" id="step-3">
             <h2 style="margin-bottom: 10px;">Order Review &amp; Discounts</h2>
+
             <div class="form-group">
               <label for="promo_code">Promo Code / Gift Card</label>
               <div style="display: flex; gap: 1rem;">
@@ -575,6 +577,13 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
                 <button type="button" class="btn" id="applyCoupon">Apply</button>
               </div>
             </div>
+
+            <!-- New Offers Field -->
+            <div class="form-group view-offers" style="margin-top: 1rem;">
+              <label for="offersList">View Offers</label>
+              <ul id="offersList" style="list-style: none; padding: 0; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; margin-top: 0.5rem;"></ul>
+            </div>
+
             <div class="form-group">
               <label for="order_notes">Order Notes (optional)</label>
               <textarea id="order_notes" name="order_notes" rows="4" placeholder="Any special instructions for your order"></textarea>
@@ -584,6 +593,7 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
               <button type="button" class="btn" id="next-3">Next</button>
             </div>
           </div>
+
           <!-- Step 4: Confirmation & Completion -->
           <div class="step" id="step-4">
             <h2 style="margin-bottom: 10px;">Confirmation &amp; Completion</h2>
@@ -631,6 +641,42 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
 
   <script src="/src/assets/js/currency-language.js"></script>
   <script>
+    function fetchOffersByPaymentMethod(paymentMethod) {
+      const url = '/app/models/get_offers.php?paymentMethod=' + encodeURIComponent(paymentMethod);
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const offersList = document.getElementById('offersList');
+          offersList.innerHTML = '';
+
+          if (data && Array.isArray(data) && data.length > 0) {
+            data.forEach(offer => {
+              const li = document.createElement('li');
+              li.style.padding = '0.5rem';
+              li.style.borderBottom = '1px solid #ddd';
+              li.textContent = `${offer.discount_name} - ${offer.discount_percentage}% off`;
+              offersList.appendChild(li);
+            });
+          } else {
+            offersList.innerHTML = '<li style="padding: 0.5rem;">No offers available.</li>';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching offers:', error);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const paymentSelect = document.getElementById('payment_method');
+      if (paymentSelect) {
+        fetchOffersByPaymentMethod(paymentSelect.value);
+        paymentSelect.addEventListener('change', function() {
+          fetchOffersByPaymentMethod(this.value);
+        });
+      }
+    });
+
+
     document.addEventListener('DOMContentLoaded', () => {
 
       /**********************
@@ -817,10 +863,12 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
 
       function validateStep(stepNumber) {
         const step = document.getElementById('step-' + stepNumber);
-        const requiredElements = step.querySelectorAll('input[required], select[required], textarea[required]');
+        // Only validate elements that are visible (and not disabled)
+        const requiredElements = Array.from(step.querySelectorAll('input[required]:not(:disabled), select[required]:not(:disabled), textarea[required]:not(:disabled)'));
         let valid = true;
         requiredElements.forEach(input => {
-          if (!input.checkValidity()) {
+          // Check if the field is visible
+          if (input.offsetParent !== null && !input.checkValidity()) {
             input.reportValidity();
             valid = false;
           }
@@ -854,6 +902,44 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
       document.getElementById('back-2').addEventListener('click', () => showStep(1));
       document.getElementById('next-2').addEventListener('click', () => {
         if (!validateStep(2)) return;
+
+        const paymentMethod = document.getElementById('payment_method').value;
+        if (!paymentMethod) {
+          showNotification('Please select a payment method.', true);
+          return;
+        }
+
+        // Validate credit card fields if selected
+        if (paymentMethod === 'credit_card') {
+          const cardNumber = document.getElementById('card_number').value.replace(/\s+/g, '');
+          const expDate = document.getElementById('exp_date').value;
+          const cvc = document.getElementById('cvc').value.trim();
+          if (cardNumber.length !== 16 || !luhnCheck(cardNumber)) {
+            showNotification('Invalid credit card number.', true);
+            return;
+          }
+          if (!isValidExpiry(expDate)) {
+            showNotification('Credit card is expired or expiry date is invalid.', true);
+            return;
+          }
+          if (!/^\d{3}$/.test(cvc)) {
+            showNotification('CVC must be 3 digits.', true);
+            return;
+          }
+        }
+
+        // Validate net banking fields if selected
+        if (paymentMethod === 'net_banking') {
+          const netUser = document.getElementById('net_user').value.trim();
+          const netPass = document.getElementById('net_pass').value.trim();
+          const netEmail = document.getElementById('net_email').value.trim();
+          if (!netUser || !netPass || !netEmail) {
+            showNotification("Please fill in all net banking fields.", true);
+            return;
+          }
+        }
+
+        // Proceed to step 3
         maxStepAllowed = Math.max(maxStepAllowed, 3);
         showStep(3);
       });
@@ -878,15 +964,34 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
       // Toggle payment fields based on selection
       document.getElementById('payment_method').addEventListener('change', function() {
         const method = this.value;
+        const creditCardFields = document.getElementById('credit_card_fields');
+        const netBankingFields = document.getElementById('net_banking_fields');
+
         if (method === 'credit_card') {
-          document.getElementById('credit_card_fields').style.display = 'block';
-          document.getElementById('net_banking_fields').style.display = 'none';
+          creditCardFields.style.display = 'block';
+          netBankingFields.style.display = 'none';
+          // Disable net banking required fields
+          netBankingFields.querySelectorAll('input, select, textarea').forEach(el => {
+            el.disabled = true;
+          });
+          // Ensure credit card fields are enabled
+          creditCardFields.querySelectorAll('input, select, textarea').forEach(el => {
+            el.disabled = false;
+          });
         } else if (method === 'net_banking') {
-          document.getElementById('credit_card_fields').style.display = 'none';
-          document.getElementById('net_banking_fields').style.display = 'block';
+          creditCardFields.style.display = 'none';
+          netBankingFields.style.display = 'block';
+          // Disable credit card required fields
+          creditCardFields.querySelectorAll('input, select, textarea').forEach(el => {
+            el.disabled = true;
+          });
+          // Ensure net banking fields are enabled
+          netBankingFields.querySelectorAll('input, select, textarea').forEach(el => {
+            el.disabled = false;
+          });
         } else {
-          document.getElementById('credit_card_fields').style.display = 'none';
-          document.getElementById('net_banking_fields').style.display = 'none';
+          creditCardFields.style.display = 'none';
+          netBankingFields.style.display = 'none';
         }
         saveFormData();
       });
@@ -1144,223 +1249,224 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
        * Final Form Submission – Payment Verification & Order Confirmation
        **********************/
       document.getElementById('multiStepForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          saveFormData();
+        e.preventDefault();
+        saveFormData();
 
-          // Show the loading spinner
-          document.getElementById('loading-spinner').style.display = 'flex';
+        // Show the loading spinner
+        document.getElementById('loading-spinner').style.display = 'flex';
 
-          const paymentMethod = document.getElementById('payment_method').value;
-          const otpVerified = document.getElementById('netbank_otp_verified').value === '1';
+        const paymentMethod = document.getElementById('payment_method').value;
+        const otpVerified = document.getElementById('netbank_otp_verified').value === '1';
 
-          // Validate payment method specific requirements
-          if (paymentMethod === 'net_banking' && !otpVerified) {
-            showNotification('Please complete Net Banking OTP verification.', true);
-            document.getElementById('loading-spinner').style.display = 'none';
-            return;
-          }
-
-          const checkoutTotalElement = document.getElementById('checkoutTotal');
-
-          // Extract the numeric value from the element's text content
-          const totalConverted = parseFloat(checkoutTotalElement.textContent.replace(/[^0-9.-]+/g, ""));
-
-          // Update the element's text content using your conversion/formatting function
-          checkoutTotalElement.textContent = convertAndFormatPrice(totalConverted);
-
-
-          // Gather form data
-          const formData = {
-            cart: getStorage(CART_KEY),
-            customer: {
-              firstName: document.getElementById('first_name').value,
-              lastName: document.getElementById('last_name').value,
-              email: document.getElementById('email').value,
-              phone: document.getElementById('phone').value,
-              company: document.getElementById('company').value,
-              country: document.getElementById('country').value,
-              state: document.getElementById('state').value,
-              city: document.getElementById('city').value,
-              address: document.getElementById('address').value,
-              zip: document.getElementById('zip').value,
-              coupon: document.getElementById('promo_code').value,
-              orderNotes: document.getElementById('order_notes').value,
-              billing: {
-                sameAsShipping: document.getElementById('same_as_shipping').checked,
-                address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
-                city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
-                zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
-                country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
-              },
-              paymentMethod: document.getElementById('payment_method').value
-            },
-            total_amount: totalConverted,
-            checkoutSubtotal: parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, "")),
-            checkoutShipping: parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")),
-            checkoutTax: parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")),
-            checkoutDiscount: parseFloat(document.getElementById('checkoutDiscount').dataset.usd) || 0,
-            currency: getCurrentCurrency(),
-            paymentMethod: paymentMethod,
-            netbankOTPVerified: otpVerified
-          };
-
-          if (formData.customer.paymentMethod === 'credit_card') {
-            const rawCardNumber = document.getElementById('card_number').value;
-            const cardNumber = rawCardNumber.replace(/\s+/g, '');
-            const expDate = document.getElementById('exp_date').value;
-            const cvc = document.getElementById('cvc').value.trim();
-            if (cardNumber.length !== 16) {
-              showNotification('Card number must be 16 digits.', true);
-              return;
-            }
-            if (!luhnCheck(cardNumber)) {
-              showNotification('Invalid credit card number.', true);
-              return;
-            }
-            if (!isValidExpiry(expDate)) {
-              showNotification('Credit card is expired or expiry date is invalid.', true);
-              return;
-            }
-            if (!/^\d{3}$/.test(cvc)) {
-              showNotification('CVC must be 3 digits.', true);
-              return;
-            }
-            formData.customer.cardNumber = cardNumber;
-            formData.customer.expDate = expDate;
-            formData.customer.cvc = cvc;
-          }
-
-          setTimeout(() => {
-            if ((paymentMethod === 'credit_card' && formData.customer.cardNumber === "4242424242424242") ||
-            (paymentMethod === 'net_banking' && otpVerified)) {
-              const fakeTransactionId = "TXN" + Date.now();
-              fetch('/app/controllers/saveTransaction.php', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    transactionData: formData,
-                    transaction_id: fakeTransactionId,
-                    payment_status: 'success'
-                  })
-                })
-                .then(res => res.json())
-                .then(response => {
-                  if (response.success) {
-                    fetch('/app/controllers/payment_processor.php', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                          transactionData: formData,
-                          paymentToken: "dummy_token",
-                          transaction_id: fakeTransactionId
-                        })
-                      })
-                      .then(emailRes => emailRes.json())
-                      .then(emailResponse => {
-                        if (emailResponse.success) {
-                          setStorage('<?= CART_KEY ?>', []);
-                          localStorage.removeItem('checkoutFormData');
-                          window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
-                          document.getElementById('loading-spinner').style.display = 'none';
-                        } else {
-                          showNotification('Order processed but failed to send confirmation email.', true);
-                          window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
-                          document.getElementById('loading-spinner').style.display = 'none';
-                        }
-                      });
-                  } else {
-                    showNotification('Error saving transaction. Please try again.', true);
-                  }
-                });
-            } else if (formData.customer.paymentMethod !== 'credit_card' || formData.customer.paymentMethod !== 'net_banking') {
-              showNotification('Payment method not supported yet.', true);
-              document.getElementById('loading-spinner').style.display = 'none';
-            } else {
-              showNotification('Payment failed. Please check your card details.', true);
-              document.getElementById('loading-spinner').style.display = 'none';
-            }
-          }, 1000);
-      });
-
-
-    /**********************
-     * Shipping & Tax Calculation (Using Global Tax Rate)
-     **********************/
-    const checkoutShipping = document.getElementById('checkoutShipping');
-    const checkoutTax = document.getElementById('checkoutTax');
-    const checkoutTotal = document.getElementById('checkoutTotal');
-
-    function calculateShippingAndTax(countryCode) {
-      let shippingCost = 0;
-      let taxRate = 0;
-      switch (countryCode) {
-        case 'US':
-          shippingCost = 5;
-          taxRate = 0.07;
-          break;
-        case 'GB':
-          shippingCost = 10;
-          taxRate = 0.20;
-          break;
-        case 'CH':
-          shippingCost = 15;
-          taxRate = 0.08;
-          break;
-        case 'IN':
-          shippingCost = 20;
-          taxRate = 0.18;
-          break;
-        default:
-          shippingCost = 0;
-          taxRate = 0;
-          break;
-      }
-      currentShippingCost = shippingCost;
-      currentTaxRate = taxRate;
-      checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
-      updateTotal();
-    }
-    countrySelect.addEventListener('change', () => {
-      const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-      const countryCode = selectedOption.getAttribute('data-code');
-      if (countryCode) {
-        calculateShippingAndTax(countryCode);
-      }
-    });
-
-    /**********************
-     * Persist form data on every input change & initial load
-     **********************/
-    document.getElementById('multiStepForm').addEventListener('input', saveFormData); loadFormData();
-
-    document.querySelectorAll('.item-quantity').forEach(input => {
-      input.addEventListener('change', (e) => {
-        const itemId = e.target.dataset.id;
-        const newQuantity = parseInt(e.target.value);
-        if (newQuantity < 1) {
-          e.target.value = 1;
+        // Validate payment method specific requirements
+        if (paymentMethod === 'net_banking' && !otpVerified) {
+          showNotification('Please complete Net Banking OTP verification.', true);
+          document.getElementById('loading-spinner').style.display = 'none';
           return;
         }
 
-        // Update the cart item quantity
-        const cartItems = getStorage('<?= CART_KEY ?>') || [];
-        const itemIndex = cartItems.findIndex(item => item.id === itemId);
-        if (itemIndex !== -1) {
-          cartItems[itemIndex].quantity = newQuantity;
-          setStorage('<?= CART_KEY ?>', cartItems);
-          updateTotal();
+        const checkoutTotalElement = document.getElementById('checkoutTotal');
+
+        // Extract the numeric value from the element's text content
+        const totalConverted = parseFloat(checkoutTotalElement.textContent.replace(/[^0-9.-]+/g, ""));
+
+        // Update the element's text content using your conversion/formatting function
+        checkoutTotalElement.textContent = convertAndFormatPrice(totalConverted);
+
+
+        // Gather form data
+        const formData = {
+          cart: getStorage(CART_KEY),
+          customer: {
+            firstName: document.getElementById('first_name').value,
+            lastName: document.getElementById('last_name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            company: document.getElementById('company').value,
+            country: document.getElementById('country').value,
+            state: document.getElementById('state').value,
+            city: document.getElementById('city').value,
+            address: document.getElementById('address').value,
+            zip: document.getElementById('zip').value,
+            coupon: document.getElementById('promo_code').value,
+            orderNotes: document.getElementById('order_notes').value,
+            billing: {
+              sameAsShipping: document.getElementById('same_as_shipping').checked,
+              address: document.getElementById('billing_address') ? document.getElementById('billing_address').value : '',
+              city: document.getElementById('billing_city') ? document.getElementById('billing_city').value : '',
+              zip: document.getElementById('billing_zip') ? document.getElementById('billing_zip').value : '',
+              country: document.getElementById('billing_country') ? document.getElementById('billing_country').value : ''
+            },
+            paymentMethod: document.getElementById('payment_method').value
+          },
+          total_amount: totalConverted,
+          checkoutSubtotal: parseFloat(document.getElementById('checkoutSubtotal').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutShipping: parseFloat(document.getElementById('checkoutShipping').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutTax: parseFloat(document.getElementById('checkoutTax').textContent.replace(/[^0-9.-]+/g, "")),
+          checkoutDiscount: parseFloat(document.getElementById('checkoutDiscount').dataset.usd) || 0,
+          currency: getCurrentCurrency(),
+          paymentMethod: paymentMethod,
+          netbankOTPVerified: otpVerified
+        };
+
+        if (formData.customer.paymentMethod === 'credit_card') {
+          const rawCardNumber = document.getElementById('card_number').value;
+          const cardNumber = rawCardNumber.replace(/\s+/g, '');
+          const expDate = document.getElementById('exp_date').value;
+          const cvc = document.getElementById('cvc').value.trim();
+          if (cardNumber.length !== 16) {
+            showNotification('Card number must be 16 digits.', true);
+            return;
+          }
+          if (!luhnCheck(cardNumber)) {
+            showNotification('Invalid credit card number.', true);
+            return;
+          }
+          if (!isValidExpiry(expDate)) {
+            showNotification('Credit card is expired or expiry date is invalid.', true);
+            return;
+          }
+          if (!/^\d{3}$/.test(cvc)) {
+            showNotification('CVC must be 3 digits.', true);
+            return;
+          }
+          formData.customer.cardNumber = cardNumber;
+          formData.customer.expDate = expDate;
+          formData.customer.cvc = cvc;
+        }
+
+        setTimeout(() => {
+          if ((paymentMethod === 'credit_card' && formData.customer.cardNumber === "4242424242424242") ||
+            (paymentMethod === 'net_banking' && otpVerified)) {
+            const fakeTransactionId = "TXN" + Date.now();
+            fetch('/app/controllers/saveTransaction.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  transactionData: formData,
+                  transaction_id: fakeTransactionId,
+                  payment_status: 'success'
+                })
+              })
+              .then(res => res.json())
+              .then(response => {
+                if (response.success) {
+                  fetch('/app/controllers/payment_processor.php', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        transactionData: formData,
+                        paymentToken: "dummy_token",
+                        transaction_id: fakeTransactionId
+                      })
+                    })
+                    .then(emailRes => emailRes.json())
+                    .then(emailResponse => {
+                      if (emailResponse.success) {
+                        setStorage('<?= CART_KEY ?>', []);
+                        localStorage.removeItem('checkoutFormData');
+                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                        document.getElementById('loading-spinner').style.display = 'none';
+                      } else {
+                        showNotification('Order processed but failed to send confirmation email.', true);
+                        window.location.href = 'order-tracking.php?transaction_id=' + fakeTransactionId;
+                        document.getElementById('loading-spinner').style.display = 'none';
+                      }
+                    });
+                } else {
+                  showNotification('Error saving transaction. Please try again.', true);
+                }
+              });
+          } else if (formData.customer.paymentMethod !== 'credit_card' || formData.customer.paymentMethod !== 'net_banking') {
+            showNotification('Payment method not supported yet.', true);
+            document.getElementById('loading-spinner').style.display = 'none';
+          } else {
+            showNotification('Payment failed. Please check your card details.', true);
+            document.getElementById('loading-spinner').style.display = 'none';
+          }
+        }, 1000);
+      });
+
+
+      /**********************
+       * Shipping & Tax Calculation (Using Global Tax Rate)
+       **********************/
+      const checkoutShipping = document.getElementById('checkoutShipping');
+      const checkoutTax = document.getElementById('checkoutTax');
+      const checkoutTotal = document.getElementById('checkoutTotal');
+
+      function calculateShippingAndTax(countryCode) {
+        let shippingCost = 0;
+        let taxRate = 0;
+        switch (countryCode) {
+          case 'US':
+            shippingCost = 5;
+            taxRate = 0.07;
+            break;
+          case 'GB':
+            shippingCost = 10;
+            taxRate = 0.20;
+            break;
+          case 'CH':
+            shippingCost = 15;
+            taxRate = 0.08;
+            break;
+          case 'IN':
+            shippingCost = 20;
+            taxRate = 0.18;
+            break;
+          default:
+            shippingCost = 0;
+            taxRate = 0;
+            break;
+        }
+        currentShippingCost = shippingCost;
+        currentTaxRate = taxRate;
+        checkoutShipping.textContent = convertAndFormatPrice(shippingCost);
+        updateTotal();
+      }
+      countrySelect.addEventListener('change', () => {
+        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+        const countryCode = selectedOption.getAttribute('data-code');
+        if (countryCode) {
+          calculateShippingAndTax(countryCode);
         }
       });
-    });
 
-    const useSavedBtn = document.getElementById('useSavedAddress');
-    if (useSavedBtn) {
-      useSavedBtn.addEventListener('click', applySavedAddress);
-    }
+      /**********************
+       * Persist form data on every input change & initial load
+       **********************/
+      document.getElementById('multiStepForm').addEventListener('input', saveFormData);
+      loadFormData();
+
+      document.querySelectorAll('.item-quantity').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const itemId = e.target.dataset.id;
+          const newQuantity = parseInt(e.target.value);
+          if (newQuantity < 1) {
+            e.target.value = 1;
+            return;
+          }
+
+          // Update the cart item quantity
+          const cartItems = getStorage('<?= CART_KEY ?>') || [];
+          const itemIndex = cartItems.findIndex(item => item.id === itemId);
+          if (itemIndex !== -1) {
+            cartItems[itemIndex].quantity = newQuantity;
+            setStorage('<?= CART_KEY ?>', cartItems);
+            updateTotal();
+          }
+        });
+      });
+
+      const useSavedBtn = document.getElementById('useSavedAddress');
+      if (useSavedBtn) {
+        useSavedBtn.addEventListener('click', applySavedAddress);
+      }
     });
   </script>
 

@@ -209,9 +209,9 @@ if (!defined('ALLOW_ACCESS')) {
         <ul class="sub-menu">
           <div>
             <li><a href="sell-exchange/admin_requests.php">View Stock Requests</a></li>
-            <li><a href="#">Track Resell Conditions</a></li>
-            <li><a href="#">Set Resell Prices</a></li>
-          </div>
+            <li><a href="/admin/sell-exchange/price-valuation.php">Price Valuation</a></li>
+            <li><a href="sell-exchange/verification.php">Verification Requests</a></li>
+            <li><a href="sell-exchange/analytics.php">Analytics & Reports</a></li>
         </ul>
       </li>
 
@@ -252,7 +252,7 @@ if (!defined('ALLOW_ACCESS')) {
           <div>
             <li><a href="#">Manage Auctions</a></li>
             <li><a href="#">Online Events</a></li>
-            <li><a href="#">Coupons & Discounts</a></li>
+            <li><a href="event-promotion/admin_offers.php">Coupons & Discounts</a></li>
             <li><a href="add-blogs.php">Blogs</a></li>
           </div>
         </ul>

@@ -13,7 +13,7 @@ session_set_cookie_params([
 
 // Set additional secure session parameters
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1); 
+ini_set('session.cookie_secure', 1);
 ini_set('session.cookie_samesite', 'Strict');
 
 // Initialize session and buffer output
@@ -168,10 +168,10 @@ if (isset($_POST["submit"])) {
       $mail->AltBody = "Your OTP code is: $otp";
 
       if ($mail->send()) {
-        $hashedUsername = hash('sha256', $usernamee);  
-        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true);  
-        $_SESSION['email'] = $email;  
-        header("Location: verify_otp.php");  
+        $hashedUsername = hash('sha256', $usernamee);
+        setcookie("SSIDU", $hashedUsername, time() + (86400 * 7), "/", "", false, true);
+        $_SESSION['email'] = $email;
+        header("Location: verify_otp.php");
         exit();
       } else {
         $errors[] = "There was a problem sending the OTP. Please try again later.";
@@ -196,8 +196,9 @@ if (isset($_POST["submit"])) {
   <link rel="preload" href="../../src/assets/js/otp-verify-function.js" as="script">
 
   <!-- ============= IONICONS =============  -->
-  <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons.esm.js" type="module"></script>
   <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- ============= CSS =============  -->
@@ -225,6 +226,41 @@ if (isset($_POST["submit"])) {
   <style>
     .logg-button {
       display: none;
+    }
+
+    .password-feedback {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 5px;
+      width: 300px;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .password-feedback ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+
+    .password-feedback li.invalid {
+      color: red;
+    }
+
+    .password-feedback li.valid {
+      color: green;
+    }
+
+    .strength-meter {
+      height: 10px;
+      width: 0%;
+      background-color: red;
+      transition: width 0.3s, background-color 0.3s;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -277,6 +313,17 @@ if (isset($_POST["submit"])) {
           <span class="password-toggle-icon" title="Show Password">
             <i class="password-toggle fas fa-eye-slash" data-toggle="password"></i>
           </span>
+          <!-- Password feedback popup -->
+          <div id="password-feedback" class="password-feedback" style="display: none;">
+            <ul>
+              <li id="length" class="invalid">At least 8 characters</li>
+              <li id="uppercase" class="invalid">At least one uppercase letter</li>
+              <li id="lowercase" class="invalid">At least one lowercase letter</li>
+              <li id="number" class="invalid">At least one number</li>
+              <li id="special" class="invalid">At least one special character (@$!%*?&)</li>
+            </ul>
+            <div id="strength-meter" class="strength-meter"></div>
+          </div>
         </div>
         <div class="input-group">
           <label for="confirm_password">Confirm Password</label>
@@ -297,12 +344,67 @@ if (isset($_POST["submit"])) {
   </div>
 
   <?php include '../../PHP/components/footer.php' ?>
-  
+
   <?php
   // End output buffering and flush the output
   ob_end_flush();
   ?>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const passwordInput = document.getElementById('password');
+      const feedback = document.getElementById('password-feedback');
+      const strengthMeter = document.getElementById('strength-meter');
+
+      // Show/hide feedback popup
+      passwordInput.addEventListener('focus', () => {
+        feedback.style.display = 'block';
+      });
+      passwordInput.addEventListener('blur', () => {
+        feedback.style.display = 'none';
+      });
+
+      // Update feedback as user types
+      passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        let score = 0;
+
+        // Check each criteria
+        const lengthCriteria = password.length >= 8;
+        const uppercaseCriteria = /[A-Z]/.test(password);
+        const lowercaseCriteria = /[a-z]/.test(password);
+        const numberCriteria = /\d/.test(password);
+        const specialCriteria = /[@$!%*?&]/.test(password);
+
+        // Update list items (turn red or green)
+        document.getElementById('length').className = lengthCriteria ? 'valid' : 'invalid';
+        document.getElementById('uppercase').className = uppercaseCriteria ? 'valid' : 'invalid';
+        document.getElementById('lowercase').className = lowercaseCriteria ? 'valid' : 'invalid';
+        document.getElementById('number').className = numberCriteria ? 'valid' : 'invalid';
+        document.getElementById('special').className = specialCriteria ? 'valid' : 'invalid';
+
+        // Calculate strength score
+        score += lengthCriteria ? 1 : 0;
+        score += uppercaseCriteria ? 1 : 0;
+        score += lowercaseCriteria ? 1 : 0;
+        score += numberCriteria ? 1 : 0;
+        score += specialCriteria ? 1 : 0;
+
+        // Update the strength meter width
+        let meterWidth = (score / 5) * 100;
+        strengthMeter.style.width = meterWidth + '%';
+
+        // Update meter color based on score
+        if (score <= 2) {
+          strengthMeter.style.backgroundColor = 'red';
+        } else if (score === 3) {
+          strengthMeter.style.backgroundColor = 'orange';
+        } else if (score >= 4) {
+          strengthMeter.style.backgroundColor = 'green';
+        }
+      });
+    });
+  </script>
 
 
   <!-- ============= JS =============  -->

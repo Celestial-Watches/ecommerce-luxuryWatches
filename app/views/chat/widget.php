@@ -37,8 +37,8 @@ if ($currentRequestId) {
     <link rel="stylesheet" href="/src/assets/css/deskView.css">
     <link rel="stylesheet" href="/src/assets/css/stock-request.css">
     <!-- Icons & Fonts -->
-    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" type="module"></script>
-    <script src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js" nomodule></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
     <style>
         /* Custom styles for chat widget */
         .chat-widget-container { border: 1px solid #ccc; padding: 10px; max-width: 500px; margin: 0 auto; }
