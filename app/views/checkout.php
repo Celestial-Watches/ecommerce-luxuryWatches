@@ -303,6 +303,89 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
         top: 0;
       }
     }
+
+    .offer-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      width: 650px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      transition: box-shadow 0.3s ease;
+      margin: 10px 0;
+    }
+
+    .offer-card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .offer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .offer-percentage {
+      color: #28a745;
+      font-weight: 600;
+      font-size: 1rem;
+      background-color: #e6f4ea;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .copy-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #0056b3;
+    }
+
+    .offer-description {
+      margin-bottom: 0.3rem;
+      color: #333;
+    }
+
+    .toggle-btn {
+      color: #007bff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .offer-code {
+      background: #f1f3f5;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+
+    .offer-expiry {
+      margin-top: 0.25rem;
+      color: #6c757d;
+      font-size: 0.8rem;
+    }
+
+    .offers-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
   </style>
 </head>
 
@@ -566,6 +649,7 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
               <button type="button" class="btn" id="next-2">Next</button>
             </div>
           </div>
+
           <!-- Step 3: Order Review & Discounts -->
           <div class="step" id="step-3">
             <h2 style="margin-bottom: 10px;">Order Review &amp; Discounts</h2>
@@ -578,10 +662,14 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
               </div>
             </div>
 
-            <!-- New Offers Field -->
-            <div class="form-group view-offers" style="margin-top: 1rem;">
-              <label for="offersList">View Offers</label>
-              <ul id="offersList" style="list-style: none; padding: 0; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; margin-top: 0.5rem;"></ul>
+            <!-- Offers Section -->
+            <div class="offers-section">
+              <div class="offers-header" style="cursor: pointer; border-radius: 4px;">
+                <h3 style="margin: 10px 0px; font-size:15px;">View Offers ▼</h3>
+              </div>
+              <div id="offersContainer" style="display: none; margin-top: 0.5rem;">
+                <div id="offersList" class="offers-grid" style="display: grid; gap: 1rem;"></div>
+              </div>
             </div>
 
             <div class="form-group">
@@ -641,37 +729,113 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
 
   <script src="/src/assets/js/currency-language.js"></script>
   <script>
-    function fetchOffersByPaymentMethod(paymentMethod) {
-      const url = '/app/models/get_offers.php?paymentMethod=' + encodeURIComponent(paymentMethod);
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const offersList = document.getElementById('offersList');
-          offersList.innerHTML = '';
-
-          if (data && Array.isArray(data) && data.length > 0) {
-            data.forEach(offer => {
-              const li = document.createElement('li');
-              li.style.padding = '0.5rem';
-              li.style.borderBottom = '1px solid #ddd';
-              li.textContent = `${offer.discount_name} - ${offer.discount_percentage}% off`;
-              offersList.appendChild(li);
-            });
-          } else {
-            offersList.innerHTML = '<li style="padding: 0.5rem;">No offers available.</li>';
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching offers:', error);
-        });
-    }
+    let availableOffers = [];
 
     document.addEventListener('DOMContentLoaded', function() {
       const paymentSelect = document.getElementById('payment_method');
+      const offersHeader = document.querySelector('.offers-header');
+      const offersContainer = document.getElementById('offersContainer');
+      let offersLoaded = false;
+
+      // Toggle offers visibility
+      offersHeader.addEventListener('click', function() {
+        const isVisible = offersContainer.style.display === 'block';
+        offersContainer.style.display = isVisible ? 'none' : 'block';
+        this.querySelector('h3').innerHTML = isVisible ? 'View Offers ▼' : 'Hide Offers ▲';
+
+        if (!isVisible && !offersLoaded) {
+          fetchOffersByPaymentMethod(paymentSelect.value);
+          offersLoaded = true;
+        }
+      });
+
+      function fetchOffersByPaymentMethod(paymentMethod) {
+        const url = '/app/models/get_offers.php?paymentMethod=' + encodeURIComponent(paymentMethod);
+
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            availableOffers = data;
+            const offersList = document.getElementById('offersList');
+            offersList.innerHTML = '';
+
+            if (data && Array.isArray(data) && data.length > 0) {
+              data.forEach(offer => {
+                const offerCard = document.createElement('div');
+                offerCard.className = 'offer-card';
+                offerCard.innerHTML = `
+                <div class="offer-header">
+                  <div class="offer-percentage">${offer.discount_percentage}% OFF</div>
+                  <button type="button" class="copy-btn" data-code="${offer.discount_code}">Copy Code</button>
+                </div>
+
+                <div class="offer-description" style="
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                ">
+                  ${offer.description}
+                </div>
+
+                <span class="toggle-btn" style="color: #007bff; cursor: pointer; font-size: 0.9rem;">Show more</span>
+
+                <div style="margin-top: 0.5rem;">
+                  <span class="offer-code">${offer.discount_code}</span>
+                </div>
+
+                ${offer.end_date ? `
+                  <div class="offer-expiry" style="margin-top: 0.5rem; color: #6c757d; font-size: 0.9rem;">
+                    Valid until: ${new Date(offer.end_date).toLocaleDateString()}
+                  </div>
+                ` : ''}
+              `;
+                offersList.appendChild(offerCard);
+
+                // Add toggle behavior right here
+                const toggleBtn = offerCard.querySelector('.toggle-btn');
+                const desc = offerCard.querySelector('.offer-description');
+
+                toggleBtn.addEventListener('click', function() {
+                  const isExpanded = desc.style.webkitLineClamp === 'unset';
+                  desc.style.webkitLineClamp = isExpanded ? '2' : 'unset';
+                  desc.style.overflow = isExpanded ? 'hidden' : 'visible';
+                  toggleBtn.textContent = isExpanded ? 'Show more' : 'Show less';
+                });
+              });
+            } else {
+              offersList.innerHTML = '<div class="no-offers">No offers available for this payment method.</div>';
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching offers:', error);
+            offersList.innerHTML = '<div class="error-message">Error loading offers. Please try again later.</div>';
+          });
+      }
+
+      // Handle copy code button clicks
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('copy-btn')) {
+          e.preventDefault(); 
+          e.stopPropagation();
+          const code = e.target.dataset.code;
+          navigator.clipboard.writeText(code).then(() => {
+            showNotification('Code copied to clipboard: ' + code);
+          }).catch(err => {
+            console.error('Failed to copy code:', err);
+            showNotification('Failed to copy code. Please try manually.');
+          });
+        }
+      });
+
+      // Auto-fetch offers when payment method changes
       if (paymentSelect) {
-        fetchOffersByPaymentMethod(paymentSelect.value);
         paymentSelect.addEventListener('change', function() {
-          fetchOffersByPaymentMethod(this.value);
+          offersLoaded = false;
+          if (offersContainer.style.display === 'block') {
+            fetchOffersByPaymentMethod(this.value);
+          }
         });
       }
     });
@@ -1197,18 +1361,45 @@ $netbankVerified = isset($_SESSION['netbank_otp_verified']) && $_SESSION['netban
        * Coupon Application
        **********************/
       document.getElementById('applyCoupon').addEventListener('click', () => {
-        const couponInput = document.getElementById('promo_code').value.trim();
+        const couponInput = document.getElementById('promo_code').value.trim().toUpperCase();
         const cartItems = getStorage('<?= CART_KEY ?>') || [];
-        if (couponInput === 'SAVE10') {
+
+        if (!couponInput) {
+          showNotification('Please enter a coupon code.', true);
+          return;
+        }
+
+        if (cartItems.length === 0) {
+          showNotification('Your cart is empty.', true);
+          return;
+        }
+
+        // Ensure there are available offers fetched from the API
+        if (!availableOffers || availableOffers.length === 0) {
+          showNotification('No offers available at this time.', true);
+          return;
+        }
+
+        // Look for the coupon (case-insensitive) and ensure it’s not expired (if an end_date is set)
+        const matchedOffer = availableOffers.find(offer =>
+          offer.discount_code.toUpperCase() === couponInput &&
+          (!offer.end_date || new Date(offer.end_date) >= new Date())
+        );
+
+        if (matchedOffer) {
+          const discountPercent = parseFloat(matchedOffer.discount_percentage) || 0;
           const subtotalUSD = cartItems.reduce((acc, item) => acc + (item.numericPrice * item.quantity), 0);
-          const discountUSD = subtotalUSD * 0.10; // 10% discount
+          const discountUSD = subtotalUSD * (discountPercent / 100);
+
+          // Save discount info to the DOM element for later recalculations
           document.getElementById('checkoutDiscount').dataset.usd = discountUSD;
           document.getElementById('checkoutDiscount').textContent = `-${convertAndFormatPrice(discountUSD)}`;
-          showNotification('Coupon applied successfully!');
+
+          showNotification(`Coupon "${matchedOffer.discount_code}" applied for ${discountPercent}% off!`);
           updateTotal();
           saveFormData();
         } else {
-          showNotification('Invalid coupon code.', true);
+          showNotification('Invalid or expired coupon code.', true);
         }
       });
 

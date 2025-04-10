@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 $paymentMethod = isset($_GET['paymentMethod']) ? trim($_GET['paymentMethod']) : '';
 
-// If no payment method is provided, return an empty result.
 if (empty($paymentMethod)) {
     echo json_encode([]);
     exit;
@@ -14,40 +13,42 @@ $password = "";
 
 try {
     $pdo = new PDO($dsn, $username, $password);
-    // Throw exceptions on errors.
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // For credit_card, we want to check if either 'credit_card' or 'debit_card'
+    $sql = "
+        SELECT 
+            dn.discount_code,
+            dn.discount_name,
+            dn.discount_percentage,
+            dn.description,
+            dn.end_date,
+            GROUP_CONCAT(apm.method_name SEPARATOR ', ') AS payment_methods
+        FROM discount_name dn
+        LEFT JOIN applicable_payment_methods apm 
+            ON FIND_IN_SET(apm.method_id, dn.applicable_payment_methods)
+        WHERE 
+            (dn.applicable_payment_methods LIKE '%$paymentMethod%'
+            OR :paymentMethod = 'credit_debit_card' AND 
+               (dn.applicable_payment_methods LIKE '%credit_card%' 
+                OR dn.applicable_payment_methods LIKE '%debit_card%'))
+            AND dn.active_status = 1
+            AND (dn.start_date IS NULL OR dn.start_date <= CURDATE())
+            AND (dn.end_date IS NULL OR dn.end_date >= CURDATE())
+        GROUP BY dn.id
+    ";
+
+    $stmt = $pdo->prepare($sql);
+    
+    // Handle credit/debit card combination
     if ($paymentMethod === 'credit_card') {
-        $sql = "
-            SELECT discount_name, discount_percentage 
-            FROM discount_name 
-            WHERE 
-              (FIND_IN_SET('credit_card', applicable_payment_methods) 
-               OR FIND_IN_SET('debit_card', applicable_payment_methods))
-              AND active_status = 1
-            //   AND (start_date IS NULL OR start_date <= CURDATE())
-            //   AND (end_date IS NULL OR end_date >= CURDATE())
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([':paymentMethod' => 'credit_debit_card']);
     } else {
-        // For other methods use the provided parameter.
-        $sql = "
-            SELECT discount_name, discount_percentage 
-            FROM discount_name 
-            WHERE 
-              FIND_IN_SET(:paymentMethod, applicable_payment_methods)
-              AND active_status = 1
-            //   AND (start_date IS NULL OR start_date <= CURDATE())
-            //   AND (end_date IS NULL OR end_date >= CURDATE())
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['paymentMethod' => $paymentMethod]);
+        $stmt->execute([':paymentMethod' => $paymentMethod]);
     }
 
     $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($offers);
+
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Failed to fetch offers: ' . $e->getMessage()]);
