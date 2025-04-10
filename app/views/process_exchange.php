@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $sql = "INSERT INTO requestss 
       (user_id, exchange_watch, original_box, unworn, original_papers, purchased_from_ww, watch_age, expected_price, request_condition, production_year, additional_info, buy_watch) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      
+
   $stmt = $conn->prepare($sql);
   if (!$stmt) {
     die("Prepare failed: " . $conn->error);
@@ -70,17 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require '../../vendor/autoload.php';
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'celestialwatches69@gmail.com';
-        $mail->Password   = 'xvmjnggsmsnkavzt';
-        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = 465;
+      // Server settings
+      $mail->isSMTP();
+      $mail->Host       = 'smtp.gmail.com';
+      $mail->SMTPAuth   = true;
+      $mail->Username   = 'celestialwatches69@gmail.com';
+      $mail->Password   = 'xvmjnggsmsnkavzt';
+      $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+      $mail->Port       = 465;
 
-        // Recipients
-        $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
+      // Recipients
+      $mail->setFrom('celestialwatches69@gmail.com', 'Celestial Watches');
       $mail->addAddress($email);
 
       // Content
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $mail->AltBody = 'Dear Customer, Thank you for submitting your request. Your request has been received and is currently under consideration. We will update you as soon as possible. Best Regards, The Customer Support Team';
 
       $mail->send();
-      
+
       header("Location: my_requests.php");
       exit();
     } catch (Exception $e) {
@@ -131,4 +131,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
   echo "Invalid request method.";
 }
-?>
