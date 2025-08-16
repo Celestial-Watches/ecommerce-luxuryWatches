@@ -2,7 +2,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "node-fetch": "^2.7.0",
-    "puppeteer": "^24.3.0"
+    "puppeteer": "^24.9.0"
   },
   "name": "project",
   "version": "1.0.0",
